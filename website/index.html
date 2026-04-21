@@ -29,8 +29,8 @@
       --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
       --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-      --stage-w: min(1120px, 92vw);
-      --stage-h: min(640px, 60vh);
+      --stage-w: min(1380px, 94vw);
+      --stage-h: min(800px, 76vh);
     }
 
     * { box-sizing: border-box; }
@@ -140,32 +140,37 @@
       background: var(--bg);
     }
 
-    /* Menubar (inside the desktop area, top) */
+    /* Menubar (inside the desktop area, top) — slim; icon sits between avatar and clock */
     .menubar {
-      position: absolute; top: 0; left: 0; right: 0; height: 26px;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(15,17,21,0.06);
+      position: absolute; top: 0; left: 0; right: 0; height: 28px;
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(20px) saturate(1.2);
+      border-bottom: 1px solid rgba(15,17,21,0.08);
       display: flex; align-items: center; justify-content: flex-end;
-      padding: 0 12px 0 14px; gap: 14px;
-      font-size: 11px; color: var(--ink-2);
+      padding: 0 14px; gap: 14px;
+      font-size: 11.5px; color: var(--ink-2);
       opacity: 0; transition: opacity 500ms ease;
       z-index: 50;
     }
     .menubar.visible { opacity: 1; }
-    .menubar .clock { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+    .menubar .clock {
+      font-variant-numeric: tabular-nums; letter-spacing: 0.02em; font-weight: 500;
+      min-width: 56px; text-align: right;  /* stable width across "9:42 AM" / "6:17 PM" */
+    }
     .menubar .avatar {
-      width: 17px; height: 17px; border-radius: 50%;
+      width: 18px; height: 18px; border-radius: 50%;
       background: linear-gradient(135deg, #ffd27a, #e8a87c);
       color: var(--ink); font-size: 10px; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
       opacity: 0; transition: opacity 400ms ease;
     }
     .menubar .avatar.visible { opacity: 1; }
+    /* Reserve space for the absolute-positioned docked icon so menubar flex flows correctly */
+    .menubar .icon-slot { width: 22px; height: 22px; flex-shrink: 0; }
 
     /* Wallpaper + sliding content container */
     .desk-layer {
-      position: absolute; inset: 26px 0 0 0;
+      position: absolute; inset: 28px 0 0 0;
       transition: transform 700ms cubic-bezier(.7,0,.2,1), opacity 500ms ease;
       will-change: transform, opacity;
     }
@@ -192,11 +197,11 @@
     .icon {
       position: absolute;
       z-index: 80;
-      width: 160px; height: 160px;
+      width: 120px; height: 120px;
       left: 50%; top: 50%;
       transform: translate(-50%, -50%) scale(0.6);
       opacity: 0;
-      filter: drop-shadow(0 16px 40px rgba(15,17,21,0.28));
+      filter: drop-shadow(0 14px 32px rgba(15,17,21,0.24));
       transition:
         transform 900ms cubic-bezier(.22,.9,.28,1.2),
         opacity 700ms ease,
@@ -207,28 +212,41 @@
         filter 900ms ease;
     }
     .icon.drop-in { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    /* docked inside the stage menubar, top-right of stage */
+    /* docked: real macOS menubar size — 22px artwork, sitting between avatar and clock.
+       Layout math: stage_right - [14 padding + 56 clock + 14 gap + 11 half-icon] = 95px from right. */
     .icon.docked {
-      width: 30px; height: 30px;
-      left: calc(100% - 28px);
-      top: 16px;
+      width: 22px; height: 22px;
+      left: calc(100% - 95px);
+      top: 14px;                /* center of 28px menubar */
       transform: translate(-50%, -50%) scale(1);
-      filter: drop-shadow(0 2px 6px rgba(15,17,21,0.25));
+      filter: drop-shadow(0 1px 2px rgba(15,17,21,0.45));
+      opacity: 1;
     }
+    /* "instant" mode — drops all transitions, used by skipToEnd */
+    .icon.instant { transition: none !important; }
     .icon .icon-bg { fill: #0f1115; }
-    .icon .icon-path { stroke: #f6d89a; stroke-width: 6; fill: none; stroke-linecap: round; }
-    .icon .icon-dots circle { fill: var(--accent-soft); }
+    .icon .icon-stroke { stroke: #f6d89a; stroke-width: 9; fill: none; stroke-linecap: round; }
     .icon .icon-dot-live { fill: var(--accent); }
+    /* ring is a large-size detail; hide when docked since it won't read at 22px */
+    .icon .icon-ring { fill: none; stroke: var(--accent); stroke-width: 3; opacity: 0.45; }
+    .icon.docked .icon-ring { display: none; }
+    /* at docked size, the stroke swoosh is too fine to read; hide it and let the dot carry */
+    .icon.docked .icon-stroke { display: none; }
+    /* Amber dot becomes the recognizable "Trace" mark at small size — off-center top-right */
+    .icon.docked .icon-dot-live { r: 22; cx: 66px; cy: 34px; }
 
-    /* Subtle breathing glow on the live dot */
-    .icon.blink .icon-dot-live {
-      animation: blink 2.4s ease-in-out infinite;
-      transform-origin: 78px 30px;
-    }
+    /* Subtle breathing on the live dot */
+    .icon.blink .icon-dot-live { animation: blink 2.4s ease-in-out infinite; }
+    .icon.blink .icon-ring    { animation: ring-breathe 2.4s ease-in-out infinite; }
     @keyframes blink {
-      0%, 100% { opacity: 1; filter: none; }
-      50% { opacity: 0.45; }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
     }
+    @keyframes ring-breathe {
+      0%, 100% { opacity: 0; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.15); }
+    }
+    .icon svg { overflow: visible; }
 
     /* Pulse when capture arrives */
     .icon.pulse .icon-bg { animation: iconPulse 700ms ease-out; }
@@ -237,29 +255,37 @@
       30% { fill: var(--accent); }
       100% { fill: #0f1115; }
     }
-    .icon.pulse .icon-dot-live {
-      animation: dotFlare 700ms ease-out;
-    }
+    .icon.pulse .icon-dot-live { animation: dotFlare 700ms ease-out; }
     @keyframes dotFlare {
-      0% { r: 6; }
-      30% { r: 10; }
-      100% { r: 6; }
+      0% { r: 14; }
+      30% { r: 22; }
+      100% { r: 14; }
+    }
+    /* Docked state has a bigger resting r — pulse must scale up FROM that, not shrink */
+    .icon.docked.pulse .icon-dot-live { animation: dotFlareDocked 700ms ease-out; }
+    @keyframes dotFlareDocked {
+      0% { r: 22; }
+      30% { r: 34; }
+      100% { r: 22; }
     }
 
+    /* Badge: tiny pill that peeks from the icon's top-right without crossing the stage corner.
+       Sized and positioned so its rightmost pixel is still ≥ 16px from the stage edge. */
     .icon-badge {
       position: absolute;
-      top: -5px; right: -5px;
-      min-width: 17px; height: 17px;
-      padding: 0 5px;
+      top: -3px; right: -3px;
+      min-width: 13px; height: 13px;
+      padding: 0 3px;
       border-radius: 999px;
       background: var(--accent);
       color: white;
-      font-size: 10.5px; font-weight: 700;
+      font-size: 8.5px; font-weight: 700; letter-spacing: -0.02em;
       display: flex; align-items: center; justify-content: center;
       transform: scale(0); opacity: 0;
       transition: transform 260ms cubic-bezier(.3,1.4,.5,1), opacity 200ms ease;
-      box-shadow: 0 0 0 2px var(--bg), 0 2px 6px rgba(217,138,43,0.5);
+      box-shadow: 0 0 0 1.5px rgba(255,255,255,0.9), 0 1px 3px rgba(217,138,43,0.5);
       z-index: 90;
+      line-height: 1;
     }
     .icon-badge.visible { transform: scale(1); opacity: 1; }
     .icon-badge.bump { animation: bump 380ms cubic-bezier(.3,1.4,.5,1); }
@@ -293,7 +319,7 @@
     .window .traffic span { width: 10px; height: 10px; border-radius: 50%; background: #e6e3db; }
 
     /* Claude */
-    .win-claude { width: 420px; height: 230px; left: 10%; top: 26%; }
+    .win-claude { width: 520px; height: 290px; left: 12%; top: 22%; }
     .win-claude .brand-dot { width: 13px; height: 13px; border-radius: 4px; background: var(--claude); }
     .win-claude .chat-area {
       padding: 20px 18px 14px; height: calc(100% - 30px);
@@ -326,7 +352,7 @@
     .send-btn.press { transform: scale(0.9); box-shadow: 0 0 0 6px rgba(201,100,66,0.2); }
 
     /* ChatGPT (on desktop 2) */
-    .win-gpt { width: 440px; height: 270px; left: 8%; top: 20%; }
+    .win-gpt { width: 540px; height: 330px; left: 10%; top: 18%; }
     .win-gpt .brand-dot { width: 13px; height: 13px; border-radius: 50%; background: var(--gpt); }
     .win-gpt .chat-area {
       padding: 18px; height: calc(100% - 30px);
@@ -345,8 +371,8 @@
 
     /* VS Code (pull reveal) */
     .win-code {
-      width: 460px; height: 180px;
-      left: 50%; top: 58%;
+      width: 560px; height: 220px;
+      left: 46%; top: 56%;
       transform: translate(-50%, 20px) scale(0.96);
       background: var(--code);
       color: #e5e5f0;
@@ -401,8 +427,8 @@
     /* ---------- Quick-look panel ---------- */
     .quicklook {
       position: absolute;
-      top: 38px; right: 10px;
-      width: 320px;
+      top: 40px; right: 18px;   /* sits below the menubar, aligned with the icon */
+      width: 360px;
       background: rgba(255,255,255,0.98);
       border: 1px solid rgba(15,17,21,0.08);
       border-radius: 12px;
@@ -413,6 +439,19 @@
       transform: translateY(-8px) scale(0.96);
       transition: opacity 320ms ease, transform 360ms cubic-bezier(.22,.9,.28,1.12);
       z-index: 85;
+    }
+    /* Tail pointing up-right toward the docked icon. Panel sits at right:18, icon center at
+       ~95px from stage right → tail needs to be at (95 - 18 - 6) = ~71px from panel right. */
+    .quicklook::before {
+      content: "";
+      position: absolute;
+      top: -6px; right: 71px;
+      width: 12px; height: 12px;
+      background: rgba(255,255,255,0.98);
+      border-top: 1px solid rgba(15,17,21,0.08);
+      border-left: 1px solid rgba(15,17,21,0.08);
+      transform: rotate(45deg);
+      border-top-left-radius: 2px;
     }
     .quicklook.visible { opacity: 1; transform: translateY(0) scale(1); }
     .ql-label {
@@ -600,21 +639,23 @@
           </div>
 
           <!-- Menubar (persistent — does NOT slide with apps) -->
+          <!-- Visual order right-to-left: clock, icon-slot, avatar. Icon docks into the slot. -->
           <div class="menubar" id="menubar">
             <div class="avatar" id="avatar">M</div>
+            <div class="icon-slot" aria-hidden="true"></div>
             <div class="clock" id="clock">9:42 AM</div>
           </div>
 
           <!-- Trace icon (persistent — does NOT slide with apps) -->
           <div class="icon" id="traceIcon">
             <svg viewBox="0 0 100 100" width="100%" height="100%">
-              <rect class="icon-bg" x="0" y="0" width="100" height="100" rx="22" />
-              <path class="icon-path" d="M 22 70 C 35 70, 40 40, 55 40 S 78 62, 78 30" />
-              <g class="icon-dots">
-                <circle cx="22" cy="70" r="4.5" />
-                <circle cx="55" cy="40" r="4.5" />
-              </g>
-              <circle class="icon-dot-live" cx="78" cy="30" r="6" />
+              <rect class="icon-bg" x="0" y="0" width="100" height="100" rx="24" />
+              <!-- simple swooshing trace from bottom-left to top-right -->
+              <path class="icon-stroke" d="M 22 76 Q 42 38, 74 26" />
+              <!-- breathing ring around the live dot -->
+              <circle class="icon-ring" cx="74" cy="26" r="16" />
+              <!-- the bright "live" signal -->
+              <circle class="icon-dot-live" cx="74" cy="26" r="14" />
             </svg>
             <div class="icon-badge" id="iconBadge">1</div>
           </div>
@@ -730,10 +771,15 @@
 
     function skipToEnd() {
       sequenceSkipped = true;
-      // Short-circuit the sequence by jumping to a clean end state.
-      $('traceIcon').classList.remove('drop-in');
-      $('traceIcon').classList.add('docked', 'blink');
-      $('traceIcon').style.opacity = 1;
+      const icon = $('traceIcon');
+      // suspend transitions while we snap into the end state
+      icon.classList.add('instant');
+      icon.classList.remove('drop-in');
+      icon.classList.add('docked');
+      void icon.offsetWidth; // reflow
+      icon.classList.remove('instant');
+      icon.classList.add('blink');
+
       $('menubar').classList.add('visible');
       $('avatar').classList.add('visible');
       $('clock').textContent = '6:17 PM';
