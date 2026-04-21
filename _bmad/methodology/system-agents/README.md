@@ -1,12 +1,12 @@
 ---
 name: System agents — Context Cloud workers
-description: The nine background workers that observe, protect, and route Double Slash sessions. Run in the desktop client + hosted backend. Coexist with local agents; enforce the same FISH vocabulary without user invocation.
+description: The nine background workers that observe, protect, and route Duble Slash sessions. Run in the desktop client + hosted backend. Coexist with local agents; enforce the same FISH vocabulary without user invocation.
 type: agent-roster
 ---
 
 # System agents — background workers in the Context Cloud
 
-System agents are **not** the `//` agents a user invokes inside their AI tool. Those are [local agents](../local-agents/README.md). System agents are the **always-on workers** that make Double Slash trustworthy, multiplayer-capable, and long-horizon — the parts of the product the user doesn't type into.
+System agents are **not** the `//` agents a user invokes inside their AI tool. Those are [local agents](../local-agents/README.md). System agents are the **always-on workers** that make Duble Slash trustworthy, multiplayer-capable, and long-horizon — the parts of the product the user doesn't type into.
 
 They share one design rule: **transparent, narratable, overridable.** Users see what each agent did (audit log), can veto any action, can disable any agent without breaking the rest. System agents are not black boxes — they are visible workers in a glass kitchen.
 
@@ -16,7 +16,7 @@ They share one design rule: **transparent, narratable, overridable.** Users see 
 
 | Agent scope | Runtime |
 |---|---|
-| **Personal** | The Double Slash desktop client on the user's machine. Operates on the user's data only. Privacy-first, local-by-default. |
+| **Personal** | The Duble Slash desktop client on the user's machine. Operates on the user's data only. Privacy-first, local-by-default. |
 | **System** (team-scope) | The hosted backend / Context Cloud, available starting V1. Operates on the team graph. Subject to team policies. Audit-logged. |
 
 The same agent can start as personal-scope (OSS launch, no multiplayer) and gain a system-scope tier at V1 — e.g., Capture runs on each user's device (personal) and also feeds the Context Cloud index (system).
@@ -95,7 +95,7 @@ Each agent gets a full section below.
 
 **OSS-launch footprint:**
 - Runs entirely on-device.
-- Diff preview is the UX; no Double Slash backend involved.
+- Diff preview is the UX; no Duble Slash backend involved.
 
 ### 3.3 Sync agent
 
@@ -252,7 +252,7 @@ System agents do not invent new vocabulary. They operate on the same cards the l
 
 ### 4.3 Observable in the glass kitchen
 
-Every system-agent action is visible somewhere in the Double Slash UI:
+Every system-agent action is visible somewhere in the Duble Slash UI:
 - Capture → capture indicator + session timeline.
 - Redaction → pre-push preview.
 - Sync → sync queue + conflict dialog.
@@ -321,4 +321,4 @@ OSS launch ships with **just Capture + Redaction** because those are the integri
 - FISH spec → [`../fish/README.md`](../fish/README.md)
 - Transitions + handoff contract → [`../fish/transitions-and-handoffs.md`](../fish/transitions-and-handoffs.md)
 - Product brief (source of agent list + milestones) → [`../../planning-artifacts/brief-collab-capture-layer.md`](../../planning-artifacts/brief-collab-capture-layer.md)
-- Technical stack → [`../../docs/technical-research-double-slash-stack.md`](../../docs/technical-research-double-slash-stack.md)
+- Technical stack → [`../../docs/technical-research-duble-slash-stack.md`](../../docs/technical-research-duble-slash-stack.md)

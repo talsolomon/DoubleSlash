@@ -6,9 +6,9 @@ type: agent-roster
 
 # Local agents — the `//` personas
 
-**These are the OSS drop.** When a user installs Double Slash's free agent bundle into Claude Desktop / Cursor / ChatGPT Desktop, what they get is this folder's four agents: Explorer, Solidifier, Builder, Shipper. Typing `//` in any of those tools switches the tool into one of them.
+**These are the OSS drop.** When a user installs Duble Slash's free agent bundle into Claude Desktop / Cursor / ChatGPT Desktop, what they get is this folder's four agents: Explorer, Solidifier, Builder, Shipper. Typing `//` in any of those tools switches the tool into one of them.
 
-Local agents are **foreground personas**. They are not background workers. They run inside the user's existing AI tool by sitting in its memory / instruction layer. No separate process, no Double Slash account required — just a prompt contract + tool restrictions + a handoff format.
+Local agents are **foreground personas**. They are not background workers. They run inside the user's existing AI tool by sitting in its memory / instruction layer. No separate process, no Duble Slash account required — just a prompt contract + tool restrictions + a handoff format.
 
 > Looking for the **background workers** (Capture, Redaction, Sync, etc.)? Those are [system agents](../system-agents/README.md). They coexist with local agents but serve a different purpose.
 

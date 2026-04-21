@@ -1,12 +1,12 @@
 ---
-name: Double Slash Methodology — folder index
+name: Duble Slash Methodology — folder index
 description: Top-level index for the FISH methodology, local agents (run inside the user's AI tool), and system agents (run in Context Cloud). This is the moat.
 type: methodology-index
 ---
 
-# Double Slash Methodology
+# Duble Slash Methodology
 
-> **This folder is the moat.** Everything else in Double Slash — the capture layer, the Context Cloud, the cross-tool handoff, the pricing model — serves a single purpose: *giving humans who work with AI a method that doesn't break under them*. The method is FISH. The agents in this folder are what enact it.
+> **This folder is the moat.** Everything else in Duble Slash — the capture layer, the Context Cloud, the cross-tool handoff, the pricing model — serves a single purpose: *giving humans who work with AI a method that doesn't break under them*. The method is FISH. The agents in this folder are what enact it.
 
 ---
 
@@ -39,7 +39,7 @@ _bmad/methodology/
 |---|---|---|---|---|
 | **Methodology** (`fish/`) | The spec — phases, archetypes, steps, methods, contracts. | Documents. Everyone reads it. | n/a | Day 1 |
 | **Local agents** (`local-agents/`) | Four phase-shaped personas the user's AI tool adopts when they type `//`. | Inside Claude Desktop / Cursor / ChatGPT Desktop (as memory/instructions). | User, via `//{phase}` | OSS launch |
-| **System agents** (`system-agents/`) | Background workers in the Context Cloud that observe, protect, and route between tools and teammates. | Double Slash desktop client + hosted backend. | Continuously; no user invocation. | Capture + Redaction → OSS launch; rest → V1 |
+| **System agents** (`system-agents/`) | Background workers in the Context Cloud that observe, protect, and route between tools and teammates. | Duble Slash desktop client + hosted backend. | Continuously; no user invocation. | Capture + Redaction → OSS launch; rest → V1 |
 
 **Local and system agents are complementary, not redundant.** While the user talks to the Explorer inside Claude, the Capture agent is recording the session, the Redaction agent is gating any push, and the Sync agent (V1) is syndicating the result to teammates. FISH is the shared vocabulary that lets all of them cooperate without stepping on each other.
 
@@ -47,12 +47,12 @@ _bmad/methodology/
 
 ## How to read this folder
 
-- **New to Double Slash / FISH:** start at [`fish/README.md`](./fish/README.md).
+- **New to Duble Slash / FISH:** start at [`fish/README.md`](./fish/README.md).
 - **"Why should I care as a designer using AI?":** [`fish/human-ai-collaboration.md`](./fish/human-ai-collaboration.md). This is the 5-minute pitch.
 - **"What do I actually *do* in each phase?":** [`fish/phases-and-methods.md`](./fish/phases-and-methods.md).
 - **"Show me a real example":** [`fish/use-cases.md`](./fish/use-cases.md).
 - **Installing the `//` agents:** [`local-agents/README.md`](./local-agents/README.md).
-- **Building / reviewing Double Slash's background workers:** [`system-agents/README.md`](./system-agents/README.md).
+- **Building / reviewing Duble Slash's background workers:** [`system-agents/README.md`](./system-agents/README.md).
 
 ---
 

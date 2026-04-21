@@ -1,5 +1,5 @@
 -- =============================================================================
--- Double Slash — Rollback the bootstrap-users.sql attempt.
+-- Duble Slash — Rollback the bootstrap-users.sql attempt.
 -- Run this in Supabase SQL editor (Dashboard → SQL → New query → paste → Run).
 -- Wipes the malformed auth rows so you can recreate via the Dashboard UI.
 -- =============================================================================

@@ -1,4 +1,4 @@
-# Double Slash — Website Hero Concept
+# Duble Slash — Website Hero Concept
 
 **Status:** Concept draft
 **Author:** Tal (originated), storyboarded with Claude
@@ -8,7 +8,7 @@
 
 ## The big idea
 
-The landing page *performs* Double Slash instead of describing it. A single cinematic sequence demonstrates the capture → handoff → pull loop in ~20 seconds, using a "desktop within a desktop" device that mirrors how the app actually sits in a user's menubar.
+The landing page *performs* Duble Slash instead of describing it. A single cinematic sequence demonstrates the capture → handoff → pull loop in ~20 seconds, using a "desktop within a desktop" device that mirrors how the app actually sits in a user's menubar.
 
 The hero replaces the traditional "headline + screenshot + CTA" pattern with a live demo you don't have to start. By the time the animation settles, the viewer has seen the product work across two people and two AI tools — no explanation required.
 
@@ -17,13 +17,13 @@ The hero replaces the traditional "headline + screenshot + CTA" pattern with a l
 ## Narrative beats (three acts)
 
 ### Act 1 — Capture
-A user asks Claude for something on their desktop. They hit Enter. Double Slash captures silently.
+A user asks Claude for something on their desktop. They hit Enter. Duble Slash captures silently.
 
 ### Act 2 — Handoff
-The camera flies through the Double Slash menubar icon into a *different person's* desktop, where they're using a different AI tool (GPT / Perplexity / Cursor). The Double Slash icon there blinks; a counter ticks up.
+The camera flies through the Duble Slash menubar icon into a *different person's* desktop, where they're using a different AI tool (GPT / Perplexity / Cursor). The Duble Slash icon there blinks; a counter ticks up.
 
 ### Act 3 — Pull
-The second user clicks their Double Slash icon. A panel reveals what landed: which projects updated, which tasks/branches changed. They click **Pull** — and continue the work seamlessly on their machine.
+The second user clicks their Duble Slash icon. A panel reveals what landed: which projects updated, which tasks/branches changed. They click **Pull** — and continue the work seamlessly on their machine.
 
 ---
 
@@ -38,7 +38,7 @@ Each frame shows **what's on screen**, **what animates**, **approximate duration
 - **Intent:** Create anticipation. The emptiness is the hook — something is about to happen.
 
 ### Frame 2 — Icon drop
-- **Screen:** The Double Slash app icon fades/scales in at center, ~30% of viewport height. Large, confident.
+- **Screen:** The Duble Slash app icon fades/scales in at center, ~30% of viewport height. Large, confident.
 - **Motion:** Soft ease-out scale from 0.8 → 1.0 with a faint breath (subtle pulse).
 - **Duration:** ~1.0s
 - **Intent:** "Here's the thing. Remember this shape."
@@ -51,10 +51,10 @@ Each frame shows **what's on screen**, **what animates**, **approximate duration
 - **Key detail:** As the icon docks, a very faint menubar strip materializes along the top — just enough to establish the viewer is now looking at "a desktop."
 
 ### Frame 4 — Desktop establishes
-- **Screen:** The page transforms into a stylized desktop. Wallpaper, dock hint, menubar with Double Slash icon top-right showing a soft slow blink (1s on, 1s off).
+- **Screen:** The page transforms into a stylized desktop. Wallpaper, dock hint, menubar with Duble Slash icon top-right showing a soft slow blink (1s on, 1s off).
 - **Motion:** Subtle parallax on wallpaper. Icon blinks silently.
 - **Duration:** ~1.2s
-- **Intent:** "Double Slash is here, working, while you do other things."
+- **Intent:** "Duble Slash is here, working, while you do other things."
 
 ### Frame 5 — Claude appears
 - **Screen:** A Claude chat window fades in on the desktop, center-left. Cursor is in the input.
@@ -69,7 +69,7 @@ Each frame shows **what's on screen**, **what animates**, **approximate duration
 - **Intent:** Show a *real* piece of work, not a toy prompt. Make it feel like a Monday morning.
 
 ### Frame 7 — Enter + capture flash
-- **Screen:** The "Enter" key visualizes (or the Send button pulses). A thin line of light travels from the chat window up to the Double Slash icon in the top-right.
+- **Screen:** The "Enter" key visualizes (or the Send button pulses). A thin line of light travels from the chat window up to the Duble Slash icon in the top-right.
 - **Motion:** Line traces the path in ~0.4s. Icon gives a single bright pulse when the signal arrives.
 - **Duration:** ~0.6s
 - **Intent:** "That just got captured — effortlessly, in the background."
@@ -82,19 +82,19 @@ Each frame shows **what's on screen**, **what animates**, **approximate duration
 - **Comprehension cue:** As we emerge on the other side, the wallpaper is clearly *different* (different color, different dock arrangement, maybe a family photo instead of abstract art). The menubar clock shows a different timezone. **This is a different person.**
 
 ### Frame 9 — Second desktop lands
-- **Screen:** New desktop. Different wallpaper. A ChatGPT (or Perplexity, or Cursor) window is already open. Double Slash icon top-right.
+- **Screen:** New desktop. Different wallpaper. A ChatGPT (or Perplexity, or Cursor) window is already open. Duble Slash icon top-right.
 - **Motion:** Brief settle, no movement for 0.3s to let the viewer clock the change.
 - **Duration:** ~0.8s
-- **Intent:** "Your teammate works somewhere else, in a different tool. Double Slash doesn't care."
+- **Intent:** "Your teammate works somewhere else, in a different tool. Duble Slash doesn't care."
 
 ### Frame 10 — Blink + counter tick
-- **Screen:** The Double Slash icon blinks with slightly more urgency. A small badge appears: **"1"** → ticks to **"2"** → **"3"** as more captures land.
+- **Screen:** The Duble Slash icon blinks with slightly more urgency. A small badge appears: **"1"** → ticks to **"2"** → **"3"** as more captures land.
 - **Motion:** Badge scales in with each increment; subtle haptic-feel bounce.
 - **Duration:** ~1.5s
 - **Intent:** "Work is arriving. Ambient, not interruptive."
 
 ### Frame 11 — Click the icon
-- **Screen:** A stylized cursor moves to the Double Slash icon and clicks.
+- **Screen:** A stylized cursor moves to the Duble Slash icon and clicks.
 - **Motion:** Cursor travel ~0.5s, click pulse.
 - **Duration:** ~0.7s
 - **Intent:** User-initiated reveal. Agency returns to the viewer.
@@ -120,7 +120,7 @@ Each frame shows **what's on screen**, **what animates**, **approximate duration
 - **Intent:** This is where late arrivals and second-time visitors live. The animation can replay on demand; the page is functional without it.
 - **Proposed copy (placeholder, not final):**
   - **Headline:** *Your AI work, wherever you left it.*
-  - **Sub:** *Double Slash captures what you do across Claude, GPT, and Cursor — and brings it to the machine you're working on now.*
+  - **Sub:** *Duble Slash captures what you do across Claude, GPT, and Cursor — and brings it to the machine you're working on now.*
   - **Primary CTA:** Download for Mac
   - **Secondary:** View on GitHub
 
@@ -159,7 +159,7 @@ Each frame shows **what's on screen**, **what animates**, **approximate duration
 
 - A short, **silent**, cinematic hero.
 - A design language where the **menubar icon** is the persistent anchor across the whole site (nav, footer, loading states can all reuse it).
-- A story that positions Double Slash as **cross-tool and cross-person**, not a single-user utility. This is a strategic choice — it leans into the team/handoff angle, not just personal capture.
+- A story that positions Duble Slash as **cross-tool and cross-person**, not a single-user utility. This is a strategic choice — it leans into the team/handoff angle, not just personal capture.
 
 If any of those commitments are wrong for launch positioning, the concept needs rework before build.
 
@@ -176,22 +176,22 @@ If any of those commitments are wrong for launch positioning, the concept needs 
 **How to apply:**
 - Stylized, not screenshotted. Each tool gets a simplified window with its signature color and logo mark. Don't copy current UI pixel-for-pixel — it will date fast and look creepy.
 - Rotate which tools appear on each desktop so no single vendor dominates.
-- Footer disclaimer: "Claude, ChatGPT, Cursor, and Perplexity are trademarks of their respective owners. Double Slash is not affiliated with or endorsed by any of them."
+- Footer disclaimer: "Claude, ChatGPT, Cursor, and Perplexity are trademarks of their respective owners. Duble Slash is not affiliated with or endorsed by any of them."
 - If any vendor objects later, swap for stylized stand-ins — but don't preemptively neuter the demo.
 
 ### 2. Teammate story (collaboration), not continuity
 
-**Decision:** The second desktop is a **different person**. Double Slash's landing positions it as a team capture/handoff layer. Solo continuity (same user, different machine) is a real use case but not what the hero sells.
+**Decision:** The second desktop is a **different person**. Duble Slash's landing positions it as a team capture/handoff layer. Solo continuity (same user, different machine) is a real use case but not what the hero sells.
 
 **Why:** Three reasons.
 - **Original intent:** Your wording — *"goes to another person's computer"* — was explicitly a different person. Trust the first instinct.
 - **The magic is the handoff.** Solo capture is valuable but not viscerally demo-able in 14 seconds. "Work moves between people without friction" is the visually striking story.
-- **It matches pricing.** Double Slash is $12/seat above 5 (from project memory). That pricing only makes sense if the story is team software. A continuity-only pitch undersells the model.
+- **It matches pricing.** Duble Slash is $12/seat above 5 (from project memory). That pricing only makes sense if the story is team software. A continuity-only pitch undersells the model.
 
 **How to apply:**
 - Second desktop must read unambiguously as another person: different wallpaper, different dock, different timezone clock, subtle name/avatar in the menubar.
 - Headline (Frame 14): *"Your team's AI work, wherever you pick it up."*
-  Sub: *"Double Slash captures what your team does across Claude, ChatGPT, and Cursor — and lands it on the machine you're working on now."*
+  Sub: *"Duble Slash captures what your team does across Claude, ChatGPT, and Cursor — and lands it on the machine you're working on now."*
 - Solo use is not hidden; it's just not the hero. Belongs in a "Also works solo" section below the fold.
 - **Watch for regression:** if the broader product positioning shifts toward solo-first, this hero needs to shift with it. Flag to PM/founders before any repositioning.
 
@@ -214,7 +214,7 @@ If any of those commitments are wrong for launch positioning, the concept needs 
 **Why:** First-time visitors need the magic. Returning visitors are usually there to convert, find a link, or re-read copy — an animation they've seen becomes friction. A cookie is cheap; returner tolerance is not.
 
 **How to apply:**
-- Cookie name: `doubleslash_hero_seen`, 30-day expiry. After 30 days, autoplay again — product story may have evolved, and the memory refresh is worth one replay.
+- Cookie name: `dubleslash_hero_seen`, 30-day expiry. After 30 days, autoplay again — product story may have evolved, and the memory refresh is worth one replay.
 - Replay pill is always visible on the resting state, not just for returners. First-time viewers may want to rewatch.
 - **Skip intro** (from the accessibility rules) remains available during first-visit playback — autoplay ≠ forced watch.
 - Analytics: track `hero_completed`, `hero_skipped`, `hero_replayed`. If skip rate exceeds ~35% among first-time visitors, the animation is too long — cut frames.
@@ -226,7 +226,7 @@ If any of those commitments are wrong for launch positioning, the concept needs 
 **Frame 14 resting state:**
 
 - **Headline:** *Your team's AI work, wherever you pick it up.*
-- **Sub:** *Double Slash captures what your team does across Claude, ChatGPT, and Cursor — and lands it on the machine you're working on now.*
+- **Sub:** *Duble Slash captures what your team does across Claude, ChatGPT, and Cursor — and lands it on the machine you're working on now.*
 - **Primary CTA:** Download for Mac
 - **Secondary CTA:** View on GitHub
 

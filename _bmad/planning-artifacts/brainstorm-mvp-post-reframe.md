@@ -4,7 +4,7 @@
 **Facilitator:** John (PM agent)
 **Status:** Paused mid-converge — awaiting user's 3–4 picks from A–P.
 
-> Recovered from Claude session `dba432d7-0a97-4141-b8d0-f2e469974be9` (folder renamed from `collab` → `doubleslash`; the session transcript was preserved in `~/.claude/projects/`).
+> Recovered from Claude session `dba432d7-0a97-4141-b8d0-f2e469974be9` (folder renamed from `collab` → `dubleslash`; the session transcript was preserved in `~/.claude/projects/`).
 
 ---
 
@@ -24,11 +24,11 @@ The MVP story pivoted in the prior session. Naming it back cleanly:
 3. **Step 5's permission ask.** Not a "DMG install" problem — it gets its own popup during install, with strong explainer copy. OpenClaw / Accomplish set precedent for apps taking full ownership.
 4. **Redaction.** Tal flagged it's not yet designed. "Need to think how to keep it super safe and easy to use."
 5. **Multi-user flow.** Second-priority. Single-user install is flow #1.
-6. **`//` gesture is locked.** It's the best idea from the previous round — consent-per-session, mirrors the brand, teachable in one sentence. During install, we update the local LLM's memory so it knows `//` is operating Double Slash.
+6. **`//` gesture is locked.** It's the best idea from the previous round — consent-per-session, mirrors the brand, teachable in one sentence. During install, we update the local LLM's memory so it knows `//` is operating Duble Slash.
 
 ---
 
-## 2. Stashed note for `technical-research-double-slash-stack.md`
+## 2. Stashed note for `technical-research-duble-slash-stack.md`
 
 From the paused session (couldn't write due to folder rename) — now added to the doc:
 
@@ -61,9 +61,9 @@ From the paused session (couldn't write due to folder rename) — now added to t
 ## 4. Round 2 — Constraints removed (wild)
 
 - **J.** **Agents negotiate peer-to-peer.** My capture agent finds your planning agent in the same shared session and they coordinate *silently*: "you're on the bigger-known axis, I'll narrate, you decide." FISH as a multi-agent protocol, not a UI.
-- **K.** **`//` auto-propagates to new tools.** Install a new AI app next week — Double Slash detects it, writes the `//` handler into its memory without user action. 1Password-style auto-everywhere.
+- **K.** **`//` auto-propagates to new tools.** Install a new AI app next week — Duble Slash detects it, writes the `//` handler into its memory without user action. 1Password-style auto-everywhere.
 - **L.** **Retroactive trust (sandbox mode).** Flip a switch: nothing leaves the laptop. Work a full day. *After*, see exactly what *would have* been pushed, approve or discard retroactively. Trust earned in reverse.
-- **M.** **FISH as open standard.** Other AI tools adopt `//` + FISH phases because their users demand it. Double Slash owns the canonical spec the way Figma owns "Play" and Apple owns "swipe up."
+- **M.** **FISH as open standard.** Other AI tools adopt `//` + FISH phases because their users demand it. Duble Slash owns the canonical spec the way Figma owns "Play" and Apple owns "swipe up."
 
 ## 5. Round 3 — Analogies
 

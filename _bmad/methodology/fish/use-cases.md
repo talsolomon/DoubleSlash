@@ -111,7 +111,7 @@ confidence_to_advance: 1.0
 Released: tooltip-csv-export-2026-04-21
 Artifact: components/ExportButton.tsx (1 line)
 Redactions: none
-Approver: tal@doubleslash.sh (solo)
+Approver: tal@dubleslash.sh (solo)
 Hash: sha256:…
 ```
 
@@ -288,7 +288,7 @@ Hash: sha256:…
 
 ### Context
 
-Double Slash's own V1 roadmap. The killer demo is Sarah (designer, Claude) handing off to Marcus (developer, VS Code) via the Context Cloud. Nothing like this exists in our product yet. We need to build the full cross-tool handoff surface.
+Duble Slash's own V1 roadmap. The killer demo is Sarah (designer, Claude) handing off to Marcus (developer, VS Code) via the Context Cloud. Nothing like this exists in our product yet. We need to build the full cross-tool handoff surface.
 
 ### Sigil + archetype
 

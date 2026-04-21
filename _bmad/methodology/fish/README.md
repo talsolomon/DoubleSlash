@@ -1,6 +1,6 @@
 ---
 name: FISH Methodology — overview
-description: The canonical FISH spec. Defines axes, archetypes (Nemo/Tuna/Salmon/Willie), phases (head/left body/right body/tail), and the archetype × phase intensity matrix. Binding reference for all Double Slash agents.
+description: The canonical FISH spec. Defines axes, archetypes (Nemo/Tuna/Salmon/Willie), phases (head/left body/right body/tail), and the archetype × phase intensity matrix. Binding reference for all Duble Slash agents.
 type: methodology-spec
 ---
 

@@ -1,15 +1,15 @@
-# Double Slash
+# Duble Slash
 
 Logo: **Double//Slash**, or **//**.
 
-Working directory: `~/Documents/doubleslash`. Prior working names: Collab → Trace → Double Slash.
+Working directory: `~/Documents/dubleslash`. Prior working names: Collab → Trace → Duble Slash.
 
 ## Project layout
 
 | Folder        | What it is                                | Vercel project        | Production URL                              |
 |---------------|-------------------------------------------|-----------------------|---------------------------------------------|
-| [website/](website/)    | Public marketing site (the Hero stage)    | `doubleslash-website` *(rename pending)* | https://website-rouge-three-68.vercel.app |
-| [tasks/](tasks/)        | Internal task board for Tal + Shenhav     | `doubleslash-tasks` *(rename pending)*   | https://tasks-seven-zeta.vercel.app       |
+| [website/](website/)    | Public marketing site (the Hero stage)    | `dubleslash-website` *(rename pending)* | https://website-rouge-three-68.vercel.app |
+| [tasks/](tasks/)        | Internal task board for Tal + Shenhav     | `dubleslash-tasks` *(rename pending)*   | https://tasks-seven-zeta.vercel.app       |
 | [supabase/](supabase/)  | DB schema + seed for the task board       | —                     | —                                           |
 | [_bmad/](_bmad/)        | Planning, PRD, UX, research artifacts     | —                     | —                                           |
 

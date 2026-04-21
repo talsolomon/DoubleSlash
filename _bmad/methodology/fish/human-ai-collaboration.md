@@ -1,6 +1,6 @@
 ---
 name: FISH × Human-AI collaboration — the moat
-description: How FISH turns AI tools from eager-but-directionless assistants into phase-shaped collaborators. The specific value Double Slash gives designers who have already started working with AI.
+description: How FISH turns AI tools from eager-but-directionless assistants into phase-shaped collaborators. The specific value Duble Slash gives designers who have already started working with AI.
 type: methodology-spec
 ---
 
@@ -8,12 +8,12 @@ type: methodology-spec
 
 **If you read one file in this folder, read this one.**
 
-Double Slash's strategic bet is that *methodology is distribution*: the reason a designer installs Double Slash is not "it captures my sessions" — it's **"it makes the AI I already use finally work the way I was trained to work."**
+Duble Slash's strategic bet is that *methodology is distribution*: the reason a designer installs Duble Slash is not "it captures my sessions" — it's **"it makes the AI I already use finally work the way I was trained to work."**
 
 This doc is the case for that bet. It names:
 1. Why AI tools, used well, still fail designers.
 2. What FISH specifically adds.
-3. What Double Slash specifically layers on top of FISH.
+3. What Duble Slash specifically layers on top of FISH.
 4. The design principles every FISH agent obeys to protect the human.
 
 ---
@@ -63,11 +63,11 @@ None of these require a new tool. They require a **method the AI can read and en
 
 ---
 
-## 3. Where Double Slash specifically wins
+## 3. Where Duble Slash specifically wins
 
-FISH is an open methodology — anyone can adopt it. **Double Slash's competitive moat** is that we make FISH operable *across tools, across sessions, and across teammates* without making you switch tools.
+FISH is an open methodology — anyone can adopt it. **Duble Slash's competitive moat** is that we make FISH operable *across tools, across sessions, and across teammates* without making you switch tools.
 
-| Double Slash feature | What it unlocks |
+| Duble Slash feature | What it unlocks |
 |---|---|
 | **`//` invocation in any AI tool** (OSS launch) | One gesture gets you into the right-phase agent without leaving Claude / Cursor / ChatGPT. No tool-switching tax. |
 | **Capture agent** (OSS launch) | Every FISH session is recorded with its sigil, phase, and handoffs — so your "yesterday" is never lost, even if you closed the tab. |
@@ -89,19 +89,19 @@ Concrete wins, organized by persona:
 
 ### Designer (IC)
 - **Before:** 7 Claude chats a day, all titled "Untitled." Monday's research lost by Thursday.
-- **With Double Slash + FISH:** one card per problem, sigil stamped, four handoffs, full thread recoverable — still inside Claude. No new tool to learn, no Notion-filling ritual.
+- **With Duble Slash + FISH:** one card per problem, sigil stamped, four handoffs, full thread recoverable — still inside Claude. No new tool to learn, no Notion-filling ritual.
 
 ### Design lead
 - **Before:** You don't know what your team is doing inside their AI tools. "How's the onboarding redesign?" → vague answers.
-- **With Double Slash + FISH:** your team's cards carry sigils and phases. The Digest agent (V1.5) shows "3 Willies in Solidify, 2 Nemos ready to Ship." You see the *shape* of the team's work without reading every chat.
+- **With Duble Slash + FISH:** your team's cards carry sigils and phases. The Digest agent (V1.5) shows "3 Willies in Solidify, 2 Nemos ready to Ship." You see the *shape* of the team's work without reading every chat.
 
 ### Designer ↔ developer
 - **Before:** Handoff = a Figma link + Slack paragraph. The developer re-interprets intent; the designer re-explains. Intent loss is where most implementation bugs actually originate.
-- **With Double Slash + FISH:** the Solidifier's `locked` list *is* the acceptance criteria. The Builder consumes it directly. Re-interpretation shrinks to translation.
+- **With Duble Slash + FISH:** the Solidifier's `locked` list *is* the acceptance criteria. The Builder consumes it directly. Re-interpretation shrinks to translation.
 
 ### New joiner
 - **Before:** two weeks of Slack scroll + "ask the old-timer."
-- **With Double Slash + FISH:** Context Bundler (V1) hands them a pack of recent Tuna and Willie handoffs, archetype-tagged. They see the shape of the product's in-flight work, not a wall of messages.
+- **With Duble Slash + FISH:** Context Bundler (V1) hands them a pack of recent Tuna and Willie handoffs, archetype-tagged. They see the shape of the product's in-flight work, not a wall of messages.
 
 ---
 

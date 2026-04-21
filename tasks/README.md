@@ -1,9 +1,9 @@
-# Task Board (`doubleslash-tasks`) — setup & deploy
+# Task Board (`dubleslash-tasks`) — setup & deploy
 
 Live, shared task board for Tal + Shenhav. Supabase for data + auth + realtime. Vercel for hosting.
 
 **Live URL (production):** https://tasks-seven-zeta.vercel.app
-*(will become `doubleslash-tasks.vercel.app` after the Vercel rename in step 3)*
+*(will become `dubleslash-tasks.vercel.app` after the Vercel rename in step 3)*
 
 ## Two layers of safety
 
@@ -41,7 +41,7 @@ Sign in with `talsolomon21@gmail.com` and the password you set in `bootstrap-use
 The project is already deployed (`talsolomon21-gmailcoms-projects/tasks`). Two settings to fix in the [Vercel dashboard](https://vercel.com/talsolomon21-gmailcoms-projects/tasks/settings):
 
 1. **Settings → Deployment Protection → Vercel Authentication** → set to **Disabled** (or "Only Preview Deployments"). Without this change, Tal and Shenhav both hit a 401 SSO wall before they ever see the gate page. Safety is preserved by the Supabase magic-link + RLS combo above.
-2. **Settings → General → Project Name** → rename `tasks` → `doubleslash-tasks` so it's distinguishable from the marketing site project (`website` → `doubleslash-website`). The production URL becomes `https://doubleslash-tasks.vercel.app`. Add that to Supabase redirect URLs (step 1.4) after rename.
+2. **Settings → General → Project Name** → rename `tasks` → `dubleslash-tasks` so it's distinguishable from the marketing site project (`website` → `dubleslash-website`). The production URL becomes `https://dubleslash-tasks.vercel.app`. Add that to Supabase redirect URLs (step 1.4) after rename.
 
 **Redeploy after future code changes:**
 ```bash

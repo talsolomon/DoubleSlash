@@ -176,7 +176,7 @@ If a user is working on two cards in the same Claude / Cursor / ChatGPT session:
 In V1, `<FISH-handoff>` is the **primary mechanism** for cross-teammate pickup:
 
 - Sarah's Solidifier emits a handoff.
-- Marcus's Builder reads it in his tool (Double Slash sync'd it there via the Handoff agent).
+- Marcus's Builder reads it in his tool (Duble Slash sync'd it there via the Handoff agent).
 - Marcus's Builder confirms sigil, reviews `locked`, and proceeds — or hands back to Sarah's Solidifier with a `to: solidifier` reverse transition.
 
 V1 adds three optional handoff fields:

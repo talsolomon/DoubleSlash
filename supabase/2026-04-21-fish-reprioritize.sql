@@ -1,5 +1,5 @@
 -- =============================================================================
--- Double Slash — FISH-first reprioritization patch
+-- Duble Slash — FISH-first reprioritization patch
 -- Date: 2026-04-21
 -- Context: Tal reframed the MVP — FISH is the critical path; PRD rewrite demoted.
 -- Run this in the Supabase SQL editor (Dashboard → SQL → New query → paste → Run).
@@ -48,7 +48,7 @@ insert into public.tasks (id, title, group_id, owner_id, status_id, priority_id,
 values ('FISH-003',
         'Spec the // install bundle for Claude Desktop / Cursor / ChatGPT Desktop',
         'methodology', 'tal', 'todo', 'p0', date '2026-05-12',
-        'Per-tool install plumbing — Claude (CLAUDE.md), Cursor (.cursorrules), ChatGPT Desktop (Custom Instructions). See technical-research-double-slash-stack.md (capture invocation subsection). Depends on FISH-002.',
+        'Per-tool install plumbing — Claude (CLAUDE.md), Cursor (.cursorrules), ChatGPT Desktop (Custom Instructions). See technical-research-duble-slash-stack.md (capture invocation subsection). Depends on FISH-002.',
         '', 30)
 on conflict (id) do update
   set title       = excluded.title,

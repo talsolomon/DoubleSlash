@@ -1,9 +1,9 @@
-# PRD — Double Slash OSS Launch (Milestone 1)
+# PRD — Duble Slash OSS Launch (Milestone 1)
 
 **Status:** Draft v1.1
 **Version:** 1.1
 **Date:** 2026-04-20
-**Project:** Double Slash (logo: Double//Slash, or //). Prior working names: Collab → Trace → Double Slash.
+**Project:** Duble Slash (logo: Double//Slash, or //). Prior working names: Collab → Trace → Duble Slash.
 **Target ship:** 6 weeks from kickoff (~early June 2026)
 **Authors:** Tal + Shenhav (co-founders)
 
@@ -12,8 +12,8 @@
 
 **Upstream docs:**
 - Brief: [`brief-collab-capture-layer.md`](brief-collab-capture-layer.md)
-- UX: [`ux-design-double-slash-oss-launch.md`](ux-design-double-slash-oss-launch.md)
-- Tech research: [`../docs/technical-research-double-slash-stack.md`](../docs/technical-research-double-slash-stack.md)
+- UX: [`ux-design-duble-slash-oss-launch.md`](ux-design-duble-slash-oss-launch.md)
+- Tech research: [`../docs/technical-research-duble-slash-stack.md`](../docs/technical-research-duble-slash-stack.md)
 - Market research: [`../docs/market-research-collab-capture-layer.md`](../docs/market-research-collab-capture-layer.md)
 - Legal / license: [`../docs/domain-research-oss-license-governance.md`](../docs/domain-research-oss-license-governance.md) · [`../docs/domain-research-capture-legality.md`](../docs/domain-research-capture-legality.md)
 
@@ -21,7 +21,7 @@
 
 ## 1. Overview
 
-Double Slash OSS Launch ships a **macOS-only, single-player, local-first desktop client** plus a **browser extension** that captures the user's AI work across Claude, Cursor, ChatGPT, Perplexity, and any OpenAI/Anthropic-API-compatible tool. All captured data stays on the user's device, encrypted with a key under the user's control. The product is released under **FSL-1.1-Apache-2.0**, with a public GitHub repo, a CLA-backed contribution flow, and a marketing site that leads with the integrity narrative.
+Duble Slash OSS Launch ships a **macOS-only, single-player, local-first desktop client** plus a **browser extension** that captures the user's AI work across Claude, Cursor, ChatGPT, Perplexity, and any OpenAI/Anthropic-API-compatible tool. All captured data stays on the user's device, encrypted with a key under the user's control. The product is released under **FSL-1.1-Apache-2.0**, with a public GitHub repo, a CLA-backed contribution flow, and a marketing site that leads with the integrity narrative.
 
 This milestone is **not** the V1 collaboration product. V1 (Milestone 2, ~4–5 months later) is the full surface: multiplayer team graph, push/branch/diff across tools, cross-platform native clients (macOS + Windows + Linux), Slack/Teams/email integrations, Linear-like task view + GitHub-like push-history UI, hosted backend + hardened self-host, and 15-min full-access trial. This milestone's job is narrower and earlier: (a) ship the capture substrate V1 depends on, (b) earn trust in public, (c) build a contributor community, (d) collect the first 1,000 GitHub stars.
 
@@ -72,14 +72,14 @@ Design + dev teams in 2026 use 5–10 AI tools per person across roles — a des
 
 **Persona: *Senior IC* using 3+ AI tools daily**
 
-- **US-01** As a Senior IC, I want to install Double Slash by dragging a `.dmg` to Applications, so that I can try it without committing to an account or cloud signup.
-- **US-02** As a Senior IC, I want Double Slash to show me exactly what it's capturing in real-time, so that I can trust it's not doing anything I didn't agree to.
+- **US-01** As a Senior IC, I want to install Duble Slash by dragging a `.dmg` to Applications, so that I can try it without committing to an account or cloud signup.
+- **US-02** As a Senior IC, I want Duble Slash to show me exactly what it's capturing in real-time, so that I can trust it's not doing anything I didn't agree to.
 - **US-03** As a Senior IC, I want to see all my AI sessions from today across every tool in one timeline, so that I can retrace my thinking without opening 5 apps.
 - **US-04** As a Senior IC, I want to delete any captured session permanently with one click, so that I stay in control of what exists on my disk.
 - **US-05** As a Senior IC, I want to pause all capture instantly from the menubar, so that I can handle sensitive work without re-configuring anything.
-- **US-06** As a Senior IC, I want to see that "nothing has left this device" in plain language, so that I can show a security-conscious colleague and recommend Double Slash to them.
+- **US-06** As a Senior IC, I want to see that "nothing has left this device" in plain language, so that I can show a security-conscious colleague and recommend Duble Slash to them.
 
-**Persona: *Privacy-skeptical dev* evaluating Double Slash**
+**Persona: *Privacy-skeptical dev* evaluating Duble Slash**
 
 - **US-07** As a privacy-skeptical dev, I want to read the source code on GitHub before installing, so that I can audit what the capture agents actually do.
 - **US-08** As a privacy-skeptical dev, I want telemetry to be opt-in with plain-English copy, so that I don't have to hunt for a setting to disable it.
@@ -89,17 +89,17 @@ Design + dev teams in 2026 use 5–10 AI tools per person across roles — a des
 
 - **US-10** As a Team Lead, I want the redaction preview to show me what *would* leave my device if pushed, so that when v1 multiplayer ships I already trust the redaction model.
 
-**Persona: *Senior IC evaluating Double Slash for their design + dev team***
+**Persona: *Senior IC evaluating Duble Slash for their design + dev team***
 
-- **US-11** As a Senior IC evaluating Double Slash to recommend to my team, I want the welcome copy, empty state, and redaction-preview view to make the V1 cross-tool handoff story legible (without overclaiming what's live), so that I can show a teammate and have them understand where this is going before V1 ships.
-- **US-12** As a designer on a mixed design+dev team, I want Double Slash to capture my Claude Design / Figma AI / ChatGPT sessions today on a single timeline, so that when V1 ships my developer teammate can pick them up in VS Code without either of us changing our workflow to get there.
+- **US-11** As a Senior IC evaluating Duble Slash to recommend to my team, I want the welcome copy, empty state, and redaction-preview view to make the V1 cross-tool handoff story legible (without overclaiming what's live), so that I can show a teammate and have them understand where this is going before V1 ships.
+- **US-12** As a designer on a mixed design+dev team, I want Duble Slash to capture my Claude Design / Figma AI / ChatGPT sessions today on a single timeline, so that when V1 ships my developer teammate can pick them up in VS Code without either of us changing our workflow to get there.
 
 ## 6. Functional Requirements
 
 ### 6.1 Install & first-run
 
 - **REQ-001** The macOS client SHALL ship as a signed, notarized `.dmg` that installs via drag-to-Applications. No installer wizard.
-- **REQ-002** On first launch, the client SHALL present a 6-step onboarding (Welcome → How it works → Telemetry consent → Connect tools → Accessibility permission [if needed] → Celebration), matching [`ux-design-double-slash-oss-launch.md`](ux-design-double-slash-oss-launch.md) Flow 1.
+- **REQ-002** On first launch, the client SHALL present a 6-step onboarding (Welcome → How it works → Telemetry consent → Connect tools → Accessibility permission [if needed] → Celebration), matching [`ux-design-duble-slash-oss-launch.md`](ux-design-duble-slash-oss-launch.md) Flow 1.
 - **REQ-003** Telemetry consent dialogs SHALL default OFF for both "install counter" and "crash reports," with plain-English copy matching the UX doc.
 - **REQ-004** The user SHALL be able to skip any tool connection step without being blocked from continuing.
 - **REQ-005** If the user denies the macOS Accessibility permission prompt, the client SHALL gracefully disable Tier 3 capture and surface a message explaining what is still captured (Tier 0 + Tier 2).
@@ -119,14 +119,14 @@ Design + dev teams in 2026 use 5–10 AI tools per person across roles — a des
 - **REQ-022** The extension SHALL forward captured sessions to the desktop client via localhost HTTP POST authenticated with a per-install shared secret generated at client first-run.
 - **REQ-023** The extension SHALL NEVER transmit captured content to any remote endpoint.
 - **REQ-024** The extension SHALL respect per-site pause controls set in the desktop client's Tools & Sources.
-- **REQ-025** The extension SHALL ship with a visible "Double Slash is capturing" badge on the extension icon when active.
+- **REQ-025** The extension SHALL ship with a visible "Duble Slash is capturing" badge on the extension icon when active.
 
 ### 6.4 Capture — Tier 3 (native desktop apps)
 
 > **⚠ Conditional scope.** A 2-day MCP-server spike in week 1 will decide whether Tier 3 uses **(A) MCP-server-based capture** or **(B) macOS Accessibility API**. A/B picks are noted per-requirement; the one that survives the spike becomes canonical.
 
 - **REQ-030** The client SHALL capture sessions from Claude Desktop.
-  - **(A) MCP path:** the client SHALL ship a Double Slash MCP server that the user registers with Claude Desktop; captures flow through the MCP integration.
+  - **(A) MCP path:** the client SHALL ship a Duble Slash MCP server that the user registers with Claude Desktop; captures flow through the MCP integration.
   - **(B) AX path:** the client SHALL read Claude Desktop's Accessibility tree via the macOS Accessibility API.
 - **REQ-031** The client SHALL capture sessions from Cursor (same A/B structure as REQ-030).
 - **REQ-032** If Tier 3 is not at 80% working by end of week 4, it SHALL be dropped from the OSS launch and shipped as v0.2 within 2–3 weeks after.
@@ -154,8 +154,8 @@ Design + dev teams in 2026 use 5–10 AI tools per person across roles — a des
 
 - **REQ-060** The client SHALL show a persistent menubar icon whenever capture is enabled.
 - **REQ-061** The menubar icon SHALL indicate capture state via a visible status chip: `🟢 Capturing`, `⏸ Paused`, `⚠ Attention`.
-- **REQ-062** Clicking the menubar icon SHALL open a 280pt-wide popover matching [`ux-design-double-slash-oss-launch.md`](ux-design-double-slash-oss-launch.md) IA diagram.
-- **REQ-063** The popover SHALL expose: one-line status, today's session count per tool, [Pause capture] button, [Open Double Slash] button.
+- **REQ-062** Clicking the menubar icon SHALL open a 280pt-wide popover matching [`ux-design-duble-slash-oss-launch.md`](ux-design-duble-slash-oss-launch.md) IA diagram.
+- **REQ-063** The popover SHALL expose: one-line status, today's session count per tool, [Pause capture] button, [Open Duble Slash] button.
 
 ### 6.8 UI — main window
 
@@ -190,13 +190,13 @@ Design + dev teams in 2026 use 5–10 AI tools per person across roles — a des
 
 ### 6.12 Marketing site
 
-- **REQ-110** A marketing site SHALL ship at `doubleslash.<domain>` (domain TBD pending trademark clearance) with: hero + tagline + 20s demo loop, Privacy dashboard screenshot, "how it works" tier diagram, founder story, install + GitHub links.
+- **REQ-110** A marketing site SHALL ship at `dubleslash.<domain>` (domain TBD pending trademark clearance) with: hero + tagline + 20s demo loop, Privacy dashboard screenshot, "how it works" tier diagram, founder story, install + GitHub links.
 - **REQ-111** The site SHALL NOT include testimonials, enterprise logos, or customer quotes at launch.
 - **REQ-112** The site SHALL be built on Next.js + Vercel (boring, fast) and open-sourced in the same GitHub organization.
 
 ### 6.13 Error & degraded states
 
-Every error surface MUST follow the UX doc's error-message pattern: *"[What happened]. [What Double Slash is doing about it]. [What the user can do]."*
+Every error surface MUST follow the UX doc's error-message pattern: *"[What happened]. [What Duble Slash is doing about it]. [What the user can do]."*
 
 - **REQ-120** If a SQLite write fails (disk full, permissions, corruption), the client SHALL (a) retain the captured session in an in-memory queue for at least 60 seconds while retrying once every 5 seconds, (b) surface a `⚠ Attention` menubar chip with reason, (c) never silently drop a session. If retries exhaust, the client SHALL offer the user the option to export the pending session as markdown before discarding.
 - **REQ-121** If the macOS Keychain is locked or unavailable at client launch, the client SHALL NOT start capture. It SHALL display an unlock prompt on the main window and in the menubar popover, and capture SHALL resume automatically once Keychain becomes available. No session SHALL be written to local storage in unencrypted form during this state.
@@ -206,7 +206,7 @@ Every error surface MUST follow the UX doc's error-message pattern: *"[What happ
 
 ## 7. UX / Design Considerations
 
-All UX for this milestone is specified in detail in [`ux-design-double-slash-oss-launch.md`](ux-design-double-slash-oss-launch.md). Notes specific to this PRD:
+All UX for this milestone is specified in detail in [`ux-design-duble-slash-oss-launch.md`](ux-design-duble-slash-oss-launch.md). Notes specific to this PRD:
 
 - **North-star feel:** *"Oh — I can see what it's doing, and I'm in charge of all of it."*
 - **Menubar-primary architecture.** Main window is the destination; menubar is the always-on trust signal.
@@ -217,7 +217,7 @@ All UX for this milestone is specified in detail in [`ux-design-double-slash-oss
 
 ## 8. Technical Constraints
 
-Stack and architecture are specified in [`technical-research-double-slash-stack.md`](../docs/technical-research-double-slash-stack.md). PRD-level constraints:
+Stack and architecture are specified in [`technical-research-duble-slash-stack.md`](../docs/technical-research-duble-slash-stack.md). PRD-level constraints:
 
 - **Desktop client:** Tauri 2 (Rust core + React/TS/Tailwind + shadcn/ui).
   - *Fallback:* Electron if the MCP-server spike and engineering-capacity conversation reveal the team can't credibly handle Rust in the 6-week window.
@@ -250,7 +250,7 @@ All measured 30 days post-launch unless noted.
 - [ ] **Engineering capacity for the 6-week window.** The single most important unresolved input — see technical research. Resolve before kickoff.
 - [ ] **Tier 3 path (MCP vs. Accessibility API).** Resolved by week-1 spike. PRD currently specifies both conditionally; one gets deleted after spike.
 - [ ] **Tauri vs. Electron.** Hinges on engineering capacity. Tauri recommended; Electron is the safer fallback if Rust experience is zero.
-- [ ] **Name lock.** Name: **Double Slash** (logo: Double//Slash, or //). Prior working names: Collab → Trace → Double Slash. Trademark clearance search needed before filings and before `doubleslash.<domain>` purchase.
+- [ ] **Name lock.** Name: **Duble Slash** (logo: Double//Slash, or //). Prior working names: Collab → Trace → Duble Slash. Trademark clearance search needed before filings and before `dubleslash.<domain>` purchase.
 - [ ] **Auto-title approach for sessions.** Rule-based (OSS launch) confirmed; revisit for v1.
 - [ ] **Redaction ruleset.** PRD specifies the categories (email, phone, keys, tokens, SSN, client names); the exact patterns are a dev-handoff detail. Draft a `redaction-rules.md` in `_bmad/docs/` during implementation.
 - [ ] **Apple Developer account ownership.** Organizational ($99/yr) vs. individual — small legal decision with consequences for brand presentation.
@@ -289,5 +289,5 @@ Break into stories via `/bmad-create-epics-and-stories` after PRD validation.
 - [ ] Resolve open questions in §10 (especially engineering capacity + Tier 3 path).
 - [ ] Shenhav: hi-fi mockups per UX doc Next Steps.
 - [ ] Run **`/bmad-create-epics-and-stories`** to break this into dev-ready stories once validated.
-- [ ] Trademark clearance search for "Double Slash" in parallel.
+- [ ] Trademark clearance search for "Duble Slash" in parallel.
 - [ ] Engage specialist OSS-licensing + product counsel.

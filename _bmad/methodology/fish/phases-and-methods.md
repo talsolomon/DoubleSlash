@@ -505,7 +505,7 @@ Every method the FISH agents may reference. Grouped by purpose, tagged with appl
 
 <a id="storyboarding"></a>**Storyboarding** — sequential frames of the user's experience; bridge between journey map and UI. Phase: **Solidify**.
 
-<a id="trust-receipt"></a>**Trust receipt** — signed summary of what shipped, what was redacted, who approved it. Phase: **Ship**. Emitted by Double Slash's Shipper agent.
+<a id="trust-receipt"></a>**Trust receipt** — signed summary of what shipped, what was redacted, who approved it. Phase: **Ship**. Emitted by Duble Slash's Shipper agent.
 
 <a id="retrospective"></a>**Retrospective** — post-ship review: what happened, what to run differently next time. Phase: **Ship**.
 *When to use:* Willie (standard); Salmon (when a loop closes); skip Nemo unless a pattern is emerging.
