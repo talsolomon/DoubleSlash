@@ -12,6 +12,63 @@ They share one design rule: **transparent, narratable, overridable.** Users see 
 
 ---
 
+## Pipeline at a glance
+
+```
+┌── ON USER DEVICE ──────────────────────────────────────────────────┐
+│                                                                     │
+│   Local agents ( // )                                               │
+│   Explorer · Solidifier · Builder · Shipper                         │
+│        │                                                            │
+│        │  emits: handoffs · artifacts · invocations · commits       │
+│        ▼                                                            │
+│   ┌─────────────────────────────────────────────┐                   │
+│   │  Capture · Tally         (personal · OSS)   │                   │
+│   │  watches tools, tags session records,       │                   │
+│   │  stores locally (encrypted)                 │                   │
+│   └──────────────────┬──────────────────────────┘                   │
+│                      ▼                                              │
+│   ┌─────────────────────────────────────────────┐                   │
+│   │  Redaction · Cipher      (personal · OSS)   │                   │
+│   │  gates every outbound payload with a diff   │                   │
+│   │  preview; user approves, edits, or cancels  │                   │
+│   └──────────────────┬──────────────────────────┘                   │
+│                      ▼  (user push)                                 │
+│   ┌─────────────────────────────────────────────┐                   │
+│   │  Sync · Relay            (personal→system · V1) │               │
+│   │  queues redacted payloads; uploads; resolves    │               │
+│   │  conflicts; offline-tolerant                    │               │
+│   └──────────────────┬──────────────────────────────┘               │
+└──────────────────────┼──────────────────────────────────────────────┘
+                       │  encrypted transport
+                       ▼
+┌── CONTEXT CLOUD (V1+) ─────────────────────────────────────────────┐
+│                                                                     │
+│   team graph · cards · handoffs · artifacts · sigils                │
+│                                                                     │
+│   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐              │
+│   │ Handoff      │  │ Context      │  │ Digest       │              │
+│   │ · Beacon     │  │ Bundler·Pack │  │ · Echo       │              │
+│   │ (V1)         │  │ (V1)         │  │ (V1.5+)      │              │
+│   └──────────────┘  └──────────────┘  └──────────────┘              │
+│                                                                     │
+│   ┌──────────────┐  ┌──────────────┐                                │
+│   │ Flow Checker │  │ Process      │                                │
+│   │ · Gate (V2)  │  │ · Loom (V2)  │                                │
+│   └──────────────┘  └──────────────┘                                │
+│                                                                     │
+│   every action here is observable in the glass-kitchen UI           │
+└─────────────────────────────────────────────────────────────────────┘
+
+Personal Twin · Twin (personal · V1.5+) lives on the device and learns
+from the user's accumulated handoffs; answers simple async questions
+in their voice when they're offline.
+```
+
+Read the pipeline top-to-bottom: local agents produce events on the user's machine → Capture records → Redaction gates outbound → Sync transports → system agents work the team graph. Every arrow is observable; every arrow is overridable.
+
+---
+
 ## 1. Where they live
 
 | Agent scope | Runtime |
@@ -25,25 +82,27 @@ The same agent can start as personal-scope (OSS launch, no multiplayer) and gain
 
 ## 2. The roster
 
-| # | Agent | Scope | Milestone | One-line job |
+| # | Agent · call-sign | Scope | Milestone | One-line job |
 |---|---|---|---|---|
-| 1 | **Capture** | Personal | OSS launch | Watch each tool; tag every session with source, model, timestamp, and goal. |
-| 2 | **Redaction** | Personal | OSS launch | Auto-detect PII, secrets, client identifiers. Diff-style preview before anything leaves the device. |
-| 3 | **Sync** | Personal → System | V1 | Handle push from local store to team graph; honor per-session push controls. |
-| 4 | **Handoff** | System | V1 | Detect when a session hits a natural pause; surface it as pickup-able ("Alice paused on this — want it?"). Powers the Sarah→Marcus demo. |
-| 5 | **Context Bundler** | System | V1 | Assemble a context pack on demand for any teammate — powers live handoff + new-joiner onboarding. |
-| 6 | **Digest** | System | V1.5+ | Narrate "today at a glance" for the team. Replaces async standups. |
-| 7 | **Personal Twin** | Personal | V1.5+ | Represent the user on simple async questions while they're offline. |
-| 8 | **Flow Checker** | System | V2 / `flow.yaml` | Verify each card carries its required attributes (brief, source, context, goal, repository) per the team's `flow.yaml`. |
-| 9 | **Process** | System | V2 / `flow.yaml` | Enforce phase transitions per `flow.yaml` (e.g., "no card moves to Build without an approved brief"). |
+| 1 | **Capture** · *Tally* | Personal | OSS launch | Watch each tool; tag every session with source, model, timestamp, and goal. |
+| 2 | **Redaction** · *Cipher* | Personal | OSS launch | Auto-detect PII, secrets, client identifiers. Diff-style preview before anything leaves the device. |
+| 3 | **Sync** · *Relay* | Personal → System | V1 | Handle push from local store to team graph; honor per-session push controls. |
+| 4 | **Handoff** · *Beacon* | System | V1 | Detect when a session hits a natural pause; surface it as pickup-able ("Alice paused on this — want it?"). Powers the Sarah→Marcus demo. |
+| 5 | **Context Bundler** · *Pack* | System | V1 | Assemble a context pack on demand for any teammate — powers live handoff + new-joiner onboarding. |
+| 6 | **Digest** · *Echo* | System | V1.5+ | Narrate "today at a glance" for the team. Replaces async standups. |
+| 7 | **Personal Twin** · *Twin* | Personal | V1.5+ | Represent the user on simple async questions while they're offline. |
+| 8 | **Flow Checker** · *Gate* | System | V2 / `flow.yaml` | Verify each card carries its required attributes (brief, source, context, goal, repository) per the team's `flow.yaml`. |
+| 9 | **Process** · *Loom* | System | V2 / `flow.yaml` | Enforce phase transitions per `flow.yaml` (e.g., "no card moves to Build without an approved brief"). |
 
-Each agent gets a full section below.
+Call-signs humanize each agent in the UI, logs, and support conversations; the full name is the canonical reference. Each agent gets a full section below.
 
 ---
 
 ## 3. Per-agent specs
 
 ### 3.1 Capture agent
+
+**Snapshot:** *Tally* · trigger: tool session opens · output: tagged session record (encrypted, local) · scope: Personal · ships: OSS launch · disable impact: lose session index; `//` agents still work.
 
 **Scope:** Personal. **Ships:** OSS launch.
 
@@ -71,7 +130,26 @@ Each agent gets a full section below.
 - False negatives (missed sessions) — high cost, breaks the "yesterday" promise.
 - Silent captures the user didn't expect — integrity-GTM-risk. Indicator must be truthful.
 
+**Session record schema:**
+
+```
+session_id:    uuid
+tool:          claude-desktop | cursor | chatgpt-desktop | claude-web | ...
+model:         {provider}/{model_id} · null if unknown
+started_at:    ISO 8601
+ended_at:      ISO 8601 · null while active
+goal:          string · extracted from opening prompt
+card_id:       string · null if no FISH card in play
+sigil:         {size, certainty} · null if none
+phase:         explore | solidify | build | ship · null if none
+agent:         explorer | solidifier | builder | shipper · null if none
+handoffs:      [ { ts, from, to, card_id, hash } ]   # indexed separately
+content_ref:   pointer to encrypted blob on device (never plaintext in index)
+```
+
 ### 3.2 Redaction agent
+
+**Snapshot:** *Cipher* · trigger: any outbound payload (push, PR draft, trust receipt, announcement) · output: diff preview + signed redaction summary · scope: Personal · ships: OSS launch · disable impact: every push requires full manual review.
 
 **Scope:** Personal. **Ships:** OSS launch.
 
@@ -97,7 +175,31 @@ Each agent gets a full section below.
 - Runs entirely on-device.
 - Diff preview is the UX; no Duble Slash backend involved.
 
+**Redaction preview + receipt schema:**
+
+```
+redaction_preview:
+  payload_id:   uuid
+  original:     <content, local only — never logged>
+  redacted:     <content with matches replaced>
+  matches:
+    - pattern:   builtin:pii.email | builtin:secret.api-key | taught:{label}
+      location:  {line, col, span}
+      severity:  block | warn | info
+  user_action:  approve | edit | cancel
+  ts:           ISO 8601
+
+redaction_receipt (co-signed onto Shipper's trust receipt):
+  card_id:      string
+  redactions:   { count, by_pattern: {pattern: n} }
+  signer:       cipher
+  hash:         sha256:...
+  ts:           ISO 8601
+```
+
 ### 3.3 Sync agent
+
+**Snapshot:** *Relay* · trigger: user-approved push OR opt-in auto-sync · output: sync event (queued → uploaded → ack'd) + conflict dialogs · scope: Personal → System · ships: V1 · disable impact: single-player mode; local work continues.
 
 **Scope:** Personal → System. **Ships:** V1.
 
@@ -117,7 +219,24 @@ Each agent gets a full section below.
 - Sync is the mechanism by which a Solidifier's handoff in Claude Desktop reaches Marcus's Cursor.
 - Card IDs are stable across tools because Sync maintains the canonical card state in the Context Cloud.
 
+**Sync event schema:**
+
+```
+sync_event:
+  event_id:       uuid
+  card_id:        string
+  payload_type:   handoff | artifact | trust-receipt | capture
+  payload_ref:    {local path or blob hash}
+  redacted_by:    cipher · hash:...
+  state:          queued | uploading | acked | failed | conflict
+  attempt:        n
+  conflict:       null | { remote_hash, local_hash, resolution: merge|override|defer }
+  ts:             ISO 8601
+```
+
 ### 3.4 Handoff agent
+
+**Snapshot:** *Beacon* · trigger: `<FISH-handoff>` lands in team graph OR user closes a tool mid-card · output: pickup-able notification routed to the next phase's owner · scope: System · ships: V1 · disable impact: handoffs still stored in team graph but nobody gets notified.
 
 **Scope:** System (team graph). **Ships:** V1.
 
@@ -134,7 +253,28 @@ Each agent gets a full section below.
 
 **This is the Sarah→Marcus demo.** The Handoff agent is the glue; Sync is the transport.
 
+**Pickup notification schema:**
+
+```
+pickup_notification:
+  handoff_id:    uuid
+  card_id:       string
+  card_title:    string
+  sigil:         {size, certainty}
+  archetype:     nemo | tuna | salmon | willie
+  from_agent:    explorer | solidifier | builder | shipper
+  to_agent:      same set (next phase)
+  from_user:     {id, display}
+  to_users:      [{id, display, role}]    # candidates, not assignees
+  confidence:    0.0–1.0                   # from the handoff
+  urgency:       low | normal | high
+  link:          deep-link into the card in the desktop client
+  ts:            ISO 8601
+```
+
 ### 3.5 Context Bundler agent
+
+**Snapshot:** *Pack* · trigger: explicit request (button, command, agent-to-agent) · output: ephemeral context pack (passes team Redaction policy) · scope: System · ships: V1 · disable impact: teammates pick up via the raw card view with no curated pack.
 
 **Scope:** System. **Ships:** V1.
 
@@ -154,7 +294,27 @@ Each agent gets a full section below.
 - **Explicit request.** Packs are requested (button press, command, agent-to-agent request), never pushed.
 - **Expiring by default.** Packs are ephemeral — downloadable for a short window. Long-term access reads the live card.
 
+**Context pack schema:**
+
+```
+context_pack:
+  pack_id:        uuid
+  card_id:        string
+  requested_by:   user_id
+  expires_at:     ISO 8601 · default: +24h
+  redacted_by:    cipher · hash:... · team_policy_version
+  contents:
+    handoff_log:   [ <FISH-handoff> blocks, chronological ]
+    artifacts:     [ { path, type, bytes, summary } ]
+    capture_log:   [ { session_id, tool, goal, ts } ]  # metadata, not content
+    sigil_history: [ { sigil, phase, ts, changed_by } ]
+  total_bytes:   n
+  ts:            ISO 8601
+```
+
 ### 3.6 Digest agent
+
+**Snapshot:** *Echo* · trigger: cron (daily by default, team-configurable) OR on-demand · output: delta narrative (what changed since last digest, blockers first) · scope: System · ships: V1.5+ · disable impact: team loses the async-standup replacement; dashboards still work.
 
 **Scope:** System. **Ships:** V1.5+.
 
@@ -171,7 +331,28 @@ Each agent gets a full section below.
 
 **Why FISH makes this possible:** because every card carries `sigil + phase + handoffs`, the Digest agent can write status from structured data instead of guessing from chat scroll.
 
+**Digest schema:**
+
+```
+digest:
+  digest_id:     uuid
+  team_id:       string
+  window:        { from: ISO, to: ISO }    # typically 24h
+  sigil_counts:  { nemo: n, tuna: n, salmon: n, willie: n }
+  phase_counts:  { explore: n, solidify: n, build: n, ship: n }
+  deltas:
+    advanced:    [ { card_id, from_phase, to_phase, by_user } ]
+    reversed:    [ { card_id, from_phase, to_phase, by_user, reason } ]
+    stalled:     [ { card_id, phase, days_since_update } ]
+  blockers:      [ { card_id, kind, note } ]     # reverse handoffs, conflicts
+  narrative:     string                          # the prose paragraph
+  channels:      [ slack | email | in-app ]
+  ts:            ISO 8601
+```
+
 ### 3.7 Personal Twin agent
+
+**Snapshot:** *Twin* · trigger: async question addressed to the offline user · output: short in-voice response (logged in user's activity) OR explicit defer · scope: Personal · ships: V1.5+ · disable impact: async questions wait for the user to return.
 
 **Scope:** Personal. **Ships:** V1.5+.
 
@@ -189,7 +370,26 @@ Each agent gets a full section below.
 
 **FISH tie-in:** Twins learn from the user's accumulated handoff log. A designer's Twin knows how they Solidify; a developer's Twin knows how they Build.
 
+**Twin response schema:**
+
+```
+twin_response:
+  response_id:    uuid
+  asked_by:       user_id
+  on_behalf_of:   user_id (the offline user)
+  question:       string
+  answer:         string | null    # null when Twin defers
+  confidence:     0.0–1.0
+  grounded_in:    [ handoff_id | decision_id | redaction_rule_id ]  # sources
+  defer_reason:   string | null    # populated when answer is null
+  ts:             ISO 8601
+  user_review:    pending | acknowledged | corrected
+  correction:     string | null    # if user_review = corrected
+```
+
 ### 3.8 Flow Checker agent
+
+**Snapshot:** *Gate* · trigger: card state changes (phase transition attempted, artifact added, sigil changed) · output: advisory warning OR hard block (if team opted in to enforcing mode) · scope: System · ships: V2 (`flow.yaml`) · disable impact: no automated attribute checks; relies on human discipline.
 
 **Scope:** System. **Ships:** V2 (`flow.yaml` milestone).
 
@@ -207,7 +407,27 @@ Each agent gets a full section below.
 - **Enforcing mode** — teams can opt into hard-gating. Then Flow Checker blocks non-compliant transitions.
 - **Auditable.** Every check is logged.
 
+**Check result schema:**
+
+```
+flow_check:
+  check_id:      uuid
+  card_id:       string
+  flow_yaml:     path + version-hash
+  rule:          id from flow.yaml
+  status:        pass | warn | fail
+  expected:      string   # what the rule required
+  observed:      string   # what the card has
+  severity:      advisory | enforcing
+  outcome:       allowed | blocked | overridden
+  override_by:   user_id | null
+  override_reason: string | null
+  ts:            ISO 8601
+```
+
 ### 3.9 Process agent
+
+**Snapshot:** *Loom* · trigger: `<FISH-handoff>` attempts a phase transition · output: transition decision (allow | block | request-review) with logged reason · scope: System · ships: V2 (`flow.yaml`) · disable impact: all transitions allowed; the methodology becomes advisory rather than enforced.
 
 **Scope:** System. **Ships:** V2 (`flow.yaml` milestone).
 
@@ -224,6 +444,22 @@ Each agent gets a full section below.
 - **Team-specific.** Every team can have its own `flow.yaml`; Process agent honors the active team's rules.
 
 **Distinction from Flow Checker:** Flow Checker verifies attributes are present; Process agent enforces the transition graph. They work together.
+
+**Transition decision schema:**
+
+```
+transition_decision:
+  decision_id:   uuid
+  card_id:       string
+  from_phase:    explore | solidify | build | ship
+  to_phase:      same set
+  rule:          id from flow.yaml
+  decision:      allow | block | request-review
+  required_reviewers: [ user_id ]   # populated when decision = request-review
+  override_by:   user_id | null
+  override_reason: string | null
+  ts:            ISO 8601
+```
 
 ---
 
@@ -315,7 +551,104 @@ OSS launch ships with **just Capture + Redaction** because those are the integri
 
 ---
 
-## 7. Cross-references
+## 7. End-to-end walkthroughs
+
+How system agents interact in real scenarios. These are the default paths; every step is observable and overridable.
+
+### 7.1 OSS launch — solo user, single device (Tally + Cipher only)
+
+```
+1. User opens Claude Desktop, types //explore …
+   → Explorer (local) starts a session.
+   → Tally sees the session, tags it: tool=claude-desktop, phase=explore.
+
+2. Explorer emits a <FISH-handoff> to Solidifier.
+   → Tally indexes the handoff as a first-class event on the card.
+
+3. User closes the laptop. Next morning, opens Cursor and types //solidify.
+   → Tally's index shows a handoff is waiting. Solidifier (local) picks
+     up cold using the handoff. No copy-paste.
+
+4. Solidifier writes solidify/brief.md. Builder ships the feature.
+   Shipper asks to emit a trust receipt.
+   → Cipher gates the receipt — redacts the two email addresses found
+     in the brief. Shows diff preview.
+   → User approves. Receipt is hashed, timestamped, stored locally.
+
+   No network traffic. No team graph. OSS launch doesn't need one.
+```
+
+### 7.2 V1 multiplayer — the Sarah→Marcus demo (adds Relay, Beacon, Pack)
+
+```
+1. Sarah (designer, Claude Desktop) finishes a Solidify session.
+   Solidifier emits a <FISH-handoff> to Builder with card_id=billing-2026-05.
+
+2. Sarah hits "push to team".
+   → Cipher re-scans the handoff + referenced artifacts. Diff preview.
+     Sarah edits two sensitive strings; approves.
+   → Relay queues the redacted payload.
+   → Relay uploads. team graph acks.
+
+3. Beacon sees the ack. Reads to:=builder, archetype=tuna.
+   → Routes pickup notification to Marcus (team's usual Tuna Builder).
+   → Marcus gets a single, quiet ping: "Sarah paused a Tuna on
+     billing-2026-05 — want it?"
+
+4. Marcus opens the card in Duble Slash. Clicks "get pack".
+   → Pack assembles: handoff log, Sarah's brief + AC, the Explore
+     interview nuggets Sarah referenced, the sigil history.
+   → Pack passes team Redaction policy. Expires in 24h.
+
+5. Marcus opens Cursor, types //build <paste pack summary>.
+   → Builder (local) reads the contract. Runs CR. Builds.
+   → Tally records Marcus's session on his device.
+   → When Marcus emits HO to Shipper, the cycle repeats through Cipher +
+     Relay + Beacon for whoever Ships.
+
+No "copy the handoff into Slack" step. No "does anyone know where the brief is?"
+The handoff is the mechanism; system agents are the transport and routing.
+```
+
+### 7.3 V2 enforcement — a team that opted into flow.yaml (adds Gate + Loom)
+
+```
+flow.yaml (team-level):
+  archetypes:
+    salmon:
+      solidify_requires:
+        - interview_notes: artifact
+        - measurement_plan: artifact
+      build_requires:
+        - concept_test_result: artifact
+    willie:
+      solidify_requires:
+        - pitch: artifact
+        - decision_log: artifact
+      transitions:
+        solidify_to_build:
+          reviewers: 2
+
+1. Designer emits HO from Solidifier → Builder on a Salmon card.
+2. Loom intercepts the transition attempt.
+   → Reads flow.yaml. Salmon build requires a concept_test_result artifact.
+   → Card doesn't have one. Decision: block.
+   → UI inline warning: "Your team's flow.yaml requires a concept test
+     result before Build. Override (requires reason) or run a test?"
+3. Designer overrides with reason: "hotfix cohort, test scheduled in 3 days".
+   → Loom logs the override + reason + timestamp + user.
+   → Transition proceeds. Gate also logs that the artifact was missing.
+4. On the next daily digest, Echo surfaces the override:
+   "1 Salmon moved to Build without a concept test (overridden by Sarah —
+   reason: hotfix cohort, test scheduled)."
+
+Enforcement stays advisory-with-teeth: the team's rules are honored, but
+the human keeps the last word, and every override is visible.
+```
+
+---
+
+## 8. Cross-references
 
 - Local agents (`//` personas) → [`../local-agents/README.md`](../local-agents/README.md)
 - FISH spec → [`../fish/README.md`](../fish/README.md)
