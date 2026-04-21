@@ -6,7 +6,7 @@ type: methodology-spec
 
 # FISH — the method
 
-**Owner:** Tal · **Last revised:** 2026-04-21 · **Source lineage:** <https://www.talsolomonux.com/p/0d2>
+**Owner:** Tal · **Version:** 1.0.0 · **Last revised:** 2026-04-21 · **Source lineage:** <https://www.talsolomonux.com/p/0d2>
 
 FISH is a way of running one unit of design/product/engineering work so that:
 

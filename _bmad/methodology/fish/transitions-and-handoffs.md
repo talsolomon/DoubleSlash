@@ -101,6 +101,24 @@ The outgoing agent reports an honest number. The human reads it.
 
 **The human always has the override.** `//advance --force` (or the equivalent conversational move) proceeds despite low confidence. The override is logged in `notes`.
 
+### 3.2 Four agent moves at gates
+
+Phase transitions aren't the only moments an agent needs to signal upward. Entry-condition failures, scope changes, and mid-phase concerns all require a move. FISH uses four typed moves — the same vocabulary across all four agents — so the human reading chat can tell at a glance whether work can proceed:
+
+| Move | What it means | Blocks work? | Example |
+|---|---|---|---|
+| **Question** | Ask the human; keep working while you wait. | No | Explorer: *"Should I include admin users in this research, or scope to end-users only?"* |
+| **Review** | Hand to the human for explicit approval before continuing. | Soft — work pauses. | Solidifier: *"Brief is drafted — need sign-off before I hand to the Builder."* |
+| **Handoff** | Emit `<FISH-handoff>` to the next-phase agent. | No — this is the normal transition. | Builder → Shipper at Build exit. |
+| **Block** | Halt. Cannot proceed without the human resolving this. | Yes — hard stop. | Explorer: *"Scope changed from Salmon to Willie mid-phase. Blocking until you confirm the new sigil."* |
+
+Rules:
+- A move is **always narrated in chat** — never silent. ("Blocking: …" / "Question: …" / emitting `<FISH-handoff>`.)
+- **Block** is reserved for cases where continuing would cause irreversible consequences (scope change, sigil mismatch, missing required input). Overuse trains humans to ignore it.
+- **Review** is the right move at phase exits where `confidence_to_advance < 0.5` — the human green-lights rather than the agent auto-advancing.
+- **Question** is the default mid-phase move. Use it freely; it's cheap.
+- **Handoff** is the *only* move that changes phase. Everything else stays in the current phase.
+
 ---
 
 ## 4. Reverse transitions
