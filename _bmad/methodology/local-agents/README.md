@@ -163,10 +163,16 @@ The install artifact for each host tool is **one file**: a memory/instructions f
 | `//solidify <text>` / `//solidify <CODE> …` | Solidifier — same pattern (e.g., `//solidify BR`, `//solidify AC`) |
 | `//build <text>` / `//build <CODE> …` | Builder — same pattern (e.g., `//build CR`, `//build SL`) |
 | `//ship <text>` / `//ship <CODE> …` | Shipper — same pattern (e.g., `//ship TR`, `//ship RN`) |
+| `//build @be-dev` / `//solidify BR @b2b-product` | Phase + expert lens for the turn — **[expert shortcuts](./experts.md)**, 136+ loanable specialists |
+| `@handle` *(inline, mid-session)* | Current phase agent loans in the expert for one turn |
+| `//experts` / `//experts <filter>` | Open / filter the expert roster |
+| `//explore ??` | Ask the current agent which experts it would recommend for this card |
 | `//handoff` | Current agent runs **HO** — emits a forward `<FISH-handoff>` |
 | `//handback` | Current agent runs **HB** — emits a reverse `<FISH-handoff>` |
 | `//sigil bigger unknown` | Update the card's sigil without changing agent |
 | `//advance --force` | Override low-confidence advance; logged in notes |
+
+Experts are **loanable specialist lenses** — one-turn costumes (`@be-dev`, `@fintech`, `@legal-ip`, `@data-analyst`, …) that the current local agent wears without switching persona. The headline behavior: **each local agent proactively offers 2–3 experts per turn** based on the card's sigil and topic — users don't memorize handles. Full spec: [`experts.md`](./experts.md). Team-custom experts drop into a project-root `.experts/` directory.
 
 The full install spec (per-tool plumbing, character budgets, memory persistence) is FISH-003 in the [task board](../../planning-artifacts/task-board.md). This README documents *what* each agent does; FISH-003 documents *how* to install them.
 

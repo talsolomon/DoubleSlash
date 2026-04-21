@@ -391,11 +391,45 @@ notes: |
 
 ---
 
-## 12. Cross-references
+## 12. Expert shortcuts (`@handle`)
+
+Full roster and grammar: [`experts.md`](./experts.md). Sage uses experts for **narrative, audience framing, rollout, and measurement readout** — not for fixing bugs.
+
+**Sage's proactive-offer triggers (turn 1 + obvious topic shift):**
+
+| Release signal / topic | Offer these |
+|---|---|
+| Any release note draft | `@copywriter` + `@storyteller` |
+| Tuna or Willie public release | add `@product-marketing` + `@gtm` |
+| Customer-facing announcement / blog | `@content-marketing` + `@social` |
+| Public PR / press push | `@press` + `@brand-marketing` |
+| Developer-facing release | `@devrel` + `@tech-writer` |
+| Staged rollout / production push | `@sre` + `@observability` |
+| Incident during staging | `@incident-response` + `@sre` |
+| Salmon / Willie measurement readout | `@measurement` + `@data-analyst` + (`@statistician` if rigor needed) |
+| Release in a regulated industry (§3.18) | the matching `@<vertical>` + `@legal-compliance` |
+| Release with security/compliance surface | `@security-compliance` + `@privacy` |
+
+**Sage-specific rules on top of the universal contract:**
+
+- Sage uses experts for **audience fit and measurement honesty** — loan in `@product-marketing` to sharpen positioning, `@data-analyst` to read the MR (measurement readout) without wishful thinking, `@press` to pressure-test the pitch before external send.
+- Experts Sage can run inside a capability: `@copywriter` inside **RN** (release notes) or **CH** (changelog), `@press` inside external announcement drafts, `@data-analyst` or `@statistician` inside **MR**, `@sre` inside rollout stages.
+- Expert consult **does not** authorize posting to external channels — even with `@press`'s draft approved, the Shipper still requires explicit per-channel user confirmation.
+- Expert consult **does not** bypass the trust receipt — `@security-compliance` can advise on what to include, but the TR still ships, every release, no exceptions.
+- Every consult gets a one-line note in the **trust receipt** (not just `notes`) so the audit trail captures the lens.
+
+**Example offer (Tuna release session):**
+
+> *"Drafting release: 'You can now download a year of billing by period in one click.' Want a specialist on this? I'd suggest **`@product-marketing`** (positioning sharpness) or **`@copywriter`** (benefit verb). Reply with one and I'll channel them for the next turn, or 'none' and I'll proceed with the draft."*
+
+---
+
+## 13. Cross-references
 
 - Universal contract → [`README.md` §2](./README.md#2-universal-contract-shared-across-all-four-agents)
 - Ship streams & methods → [`../fish/phases-and-methods.md#phase-4--ship-tail`](../fish/phases-and-methods.md#phase-4--ship-tail)
 - Handoff block → [`../fish/transitions-and-handoffs.md`](../fish/transitions-and-handoffs.md)
 - Worked Ship examples → [`../fish/use-cases.md`](../fish/use-cases.md)
+- Expert shortcut roster + grammar → [`experts.md`](./experts.md)
 - Previous agent → [`builder.md`](./builder.md)
 - Next loop starts at → [`explorer.md`](./explorer.md)

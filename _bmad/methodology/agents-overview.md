@@ -181,6 +181,8 @@ What stays constant across the whole lifecycle:
 
 Task-first lookup. If you're trying to do X, start with Y.
 
+### 6.1 The four local agents
+
 | I want to… | Reach for | How |
 |---|---|---|
 | Open a new problem I haven't worked on | **Explorer · Nova** | `//explore <problem>` |
@@ -192,6 +194,34 @@ Task-first lookup. If you're trying to do X, start with Y.
 | Write a measurement plan for a Salmon | **Solidifier · Sol** | `//solidify MP` |
 | Pick up where I (or a teammate) left off | Whoever the last handoff's `to:` names | Paste the `<FISH-handoff>` into `//<phase>` |
 | Reverse a phase because the prior shape was wrong | Current agent's **HB** capability | `//handback` |
+
+### 6.2 Expert shortcuts — when the card crosses domains
+
+The four locals each carry a **136-expert roster** they can loan in for one turn without switching persona. You rarely need to memorize handles — each agent **proactively offers 2–3** based on the card's sigil and topic. Full roster + grammar: [`local-agents/experts.md`](./local-agents/experts.md).
+
+| I want expertise in… | Handles to reach for | Where they shine |
+|---|---|---|
+| Backend / API / DB / distributed / perf | `@be-dev` · `@api-designer` · `@db-schema` · `@distributed` · `@perf-eng` | Build (via Bram) |
+| Frontend / React / CSS / a11y / perf-web | `@fe-dev` · `@react-pro` · `@a11y` · `@perf-web` | Build (via Bram) |
+| AI / ML / LLM / agents / RAG | `@ai-ml` · `@llm-pro` · `@rag` · `@agent-arch` · `@prompt-eng` | Solidify + Build |
+| Security / authn / authz / privacy / compliance | `@sec-eng` · `@authn` · `@authz` · `@privacy` · `@security-compliance` · `@incident-response` | Any phase |
+| Data analysis / BI / rigor | `@data-analyst` · `@bi-dev` · `@statistician` · `@sql-wizard` | Explore + Solidify + Ship |
+| Product management / strategy / pricing | `@pm` · `@strategy` · `@pricing` · `@b2b-product` · `@b2c-product` · `@plg` | Explore + Solidify |
+| Marketing (product, brand, content, field) | `@product-marketing` · `@brand-marketing` · `@content-marketing` · `@growth` · `@gtm` | Ship (via Sage) |
+| Legal (contracts, IP, regulatory, compliance, international) | `@legal` · `@legal-contracts` · `@legal-ip` · `@legal-regulatory` · `@legal-compliance` · `@legal-international` | Any phase |
+| Finance & accounting | `@finance` · `@fp-a` · `@accounting` · `@treasury` | Explore + Ship |
+| Project / program mgmt | `@pm-delivery` · `@program-mgr` · `@scrum-master` | Solidify + Build |
+| Industry verticals (banking, fintech, health, retail, govtech, etc.) | `@banking` · `@fintech` · `@payments` · `@healthcare` · `@medtech-fda` · `@retail-ecomm` · `@edtech` · `@govtech` · `@insurance` · `@media-pub` · `@regulated-fin` | Explore + Solidify |
+| My team's in-house knowledge (billing system, legacy service, internal policy) | Team-custom `.experts/@your-handle.md` — drop it in the repo | Any phase |
+
+**How invocation works:** `//build @be-dev` runs Builder with the backend-dev lens for that turn. `@legal-ip` inline loans in the lens mid-session. `//experts` browses the roster; `//explore ??` asks the current agent for recommendations. One-turn loan — experts advise, they don't commit or gate.
+
+**Missing an expert?** Open a GitHub issue tagged `expert-roster`, or drop a `.experts/@handle.md` file in your repo today ([`local-agents/experts.md` §4](./local-agents/experts.md#4-team-custom-experts--experts-overlays)).
+
+### 6.3 System agents — the background rails
+
+| I want to… | Reach for | How |
+|---|---|---|
 | Redact something before it leaves my machine | **Redaction · Cipher** | Automatic on any outbound; edit the diff preview |
 | See which of my sessions today touched which cards | **Capture · Tally** | Capture indicator / session timeline in desktop client |
 | Push my work to teammates (V1) | **Sync · Relay** | Hit "push" → Cipher gates → Relay uploads |
@@ -201,11 +231,12 @@ Task-first lookup. If you're trying to do X, start with Y.
 | Have my voice answer an async question while I'm offline (V1.5+) | **Personal Twin · Twin** | Automatic, if opted in and within trained mandate |
 | Enforce "no Salmon ships without a measurement plan" (V2) | **Flow Checker · Gate** + **Process · Loom** | Encode in team `flow.yaml` |
 
-**Heuristic for confused moments:**
+### 6.4 Heuristics for confused moments
 
 - *"I'm not sure what phase I'm in"* → ask whichever `//` persona is active; they'll name the phase and offer the right handoff.
 - *"I'm not sure which phase to start from"* → `//explore`. Start divergent. Explorer will either keep you there or hand you off.
 - *"I'm blocked — I can't tell if this needs more research or more shaping"* → `//handback` from whoever you're currently talking to. Reverse transitions are first-class, not a failure state.
+- *"I need domain expertise I don't have"* → let the current local agent offer experts (turn 1 + topic shift), or type `//explore ??` / `//solidify ??` / `//build ??` / `//ship ??` to ask for recommendations. Don't leave the tool.
 
 ---
 

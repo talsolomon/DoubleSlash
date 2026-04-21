@@ -420,11 +420,43 @@ notes: |
 
 ---
 
-## 12. Cross-references
+## 12. Expert shortcuts (`@handle`)
+
+Full roster and grammar: [`experts.md`](./experts.md). Sol uses experts to **sharpen shape and AC** — not to explore.
+
+**Sol's proactive-offer triggers (turn 1 + obvious topic shift):**
+
+| Sigil / topic signal | Offer these |
+|---|---|
+| Any brief/pitch session | `@prd-writer` (structure) + `@ac-writer` (AC sharpness) |
+| Salmon / Willie with MP required | `@measurement` + `@a-b-test` |
+| Nemo microcopy work | `@microcopy` + `@empty-states` |
+| Product is clearly B2B | `@b2b-product` + `@enterprise-ux` |
+| Product is clearly B2C | `@b2c-product` + `@plg` |
+| Card touches an industry in §3.18 | the matching `@<vertical>` |
+| Card touches contracts / IP / compliance | `@legal-contracts` · `@legal-ip` · `@legal-regulatory` (pick one) |
+| Card touches fintech / banking / payments | `@regulated-fin` + `@payments` |
+| Card touches an API contract the Builder will consume | `@api-designer` + `@db-schema` |
+
+**Sol-specific rules on top of the universal contract:**
+
+- Sol uses experts for **convergence sharpening** — loan in `@ac-writer` to pressure-test AC, `@measurement` to harden MP, `@legal-contracts` to red-pen constraints. Experts Sol **should not** loan: `@competitive` / `@ux-research` (those are Nova's territory — if you need one, emit **HB** and let Nova handle).
+- Experts Sol can run inside a capability: `@ac-writer` inside **AC**, `@measurement` inside **MP**, `@prd-writer` inside **BR**, `@b2b-product` or `@b2c-product` inside **BR** (to frame the user/buyer split). The user can explicitly name the lens: `//solidify BR @b2b-product`.
+- Expert consult **cannot** substitute for a needed handback — if `open` can't be reduced by any expert voice, emit **HB** to Nova, not a lens.
+- Every consult gets a one-line note in the exit handoff's `notes` field.
+
+**Example offer (Salmon brief session):**
+
+> *"Writing a Salmon 1-page brief. Default direction: instructional copy over the passive meter. Want a specialist on this? I'd suggest **`@onboarding`** (activation angle) or **`@measurement`** (to harden the success signal). Reply with one and I'll channel them for the next turn."*
+
+---
+
+## 13. Cross-references
 
 - Universal contract → [`README.md` §2](./README.md#2-universal-contract-shared-across-all-four-agents)
 - Solidify streams & methods → [`../fish/phases-and-methods.md#phase-2--solidify-left-body`](../fish/phases-and-methods.md#phase-2--solidify-left-body)
 - Handoff block → [`../fish/transitions-and-handoffs.md`](../fish/transitions-and-handoffs.md)
 - Worked Solidify examples → [`../fish/use-cases.md`](../fish/use-cases.md)
+- Expert shortcut roster + grammar → [`experts.md`](./experts.md)
 - Previous agent → [`explorer.md`](./explorer.md)
 - Next agent → [`builder.md`](./builder.md)
