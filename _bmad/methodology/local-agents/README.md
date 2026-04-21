@@ -18,14 +18,29 @@ Local agents are **foreground personas**. They are not background workers. They 
 
 One agent per FISH phase. Same order as the fish anatomy: head → left body → right body → tail.
 
-| # | Anatomy | Phase | Agent | One-line job | Spec |
+| # | Anatomy | Phase | Agent · call-sign | One-line job | Spec |
 |---|---|---|---|---|---|
-| 1 | Head | Explore | **Explorer** | Open the aperture. Surface options, questions, premises. Refuse to commit. | [explorer.md](./explorer.md) |
-| 2 | Left body | Solidify | **Solidifier** | Reduce unknowns. Shape the thing. Lock decisions that unblock build. | [solidifier.md](./solidifier.md) |
-| 3 | Right body | Build | **Builder** | Execute against the locked shape. Don't re-open settled questions. | [builder.md](./builder.md) |
-| 4 | Tail | Ship | **Shipper** | Narrate, release, document. Make past-work legible to future-you. | [shipper.md](./shipper.md) |
+| 1 | Head | Explore | **Explorer** · *Nova* | Open the aperture. Surface options, questions, premises. Refuse to commit. | [explorer.md](./explorer.md) |
+| 2 | Left body | Solidify | **Solidifier** · *Sol* | Reduce unknowns. Shape the thing. Lock decisions that unblock build. | [solidifier.md](./solidifier.md) |
+| 3 | Right body | Build | **Builder** · *Bram* | Execute against the locked shape. Don't re-open settled questions. | [builder.md](./builder.md) |
+| 4 | Tail | Ship | **Shipper** · *Sage* | Narrate, release, document. Make past-work legible to future-you. | [shipper.md](./shipper.md) |
 
 **All four ship in the OSS launch bundle.** A user installing the bundle on day one gets all four personas simultaneously and picks between them with `//`.
+
+Each agent spec is a **full playbook**: illustration · persona & mantra · on-activation routine · axis modulation · capability codes · walkthroughs · output templates · tools · anti-patterns. Read the spec file for any agent before invoking — installers drop the playbook into the host tool's memory.
+
+### Capability-code map (quick reference)
+
+Users can invoke a specific capability directly: `//explore HS`, `//solidify BR`, `//build SL`, `//ship TR`. Full tables live in each agent's spec §5.
+
+| Agent | Core codes |
+|---|---|
+| Explorer | **SA** Sigil Assist · **HS** Heuristic Scan · **HMW** How-Might-We · **JM** Journey Map · **CS** Competitor Scan · **IP** Interview Plan · **NB** Nugget Board · **PM** Premortem · **SR** Stream Recap · **HO** Handoff |
+| Solidifier | **SK** Sketch · **BR** Brief · **SB** Storyboard · **PT** Pitch/RFC · **CT** Concept Test · **AC** Acceptance Criteria · **MP** Measurement Plan · **DL** Decision Log · **TA** Tradeoff Axes · **WF** Wireframe Spec · **AD** ADR · **HB** Handback · **HO** Handoff |
+| Builder | **CR** Contract Readout · **SL** Slice Plan · **GE** Generate Code · **TE** Tests · **UV** UI Verify · **IN** Instrumentation · **PR** PR Draft · **HB** Handback · **HO** Handoff |
+| Shipper | **RE** Release Readout · **CM** Commit Message · **CH** Changelog · **RN** Release Notes · **TG** Tag/Version · **PR** Open PR · **MS** Measurement Setup · **MR** Measurement Readout · **RP** Retrospective · **TR** Trust Receipt · **NL** Next-Loop Queue · **HB** Handback · **HO** Handoff |
+
+**HB** (handback) and **HO** (handoff) emit the `<FISH-handoff>` block — reverse and forward respectively — in every agent.
 
 ---
 
@@ -143,11 +158,13 @@ The install artifact for each host tool is **one file**: a memory/instructions f
 | User types | Agent response |
 |---|---|
 | `//` | Inline palette: *"Explore / Solidify / Build / Ship — which phase?"* |
-| `//explore <text>` | Explorer takes the text |
-| `//solidify <text>` | Solidifier takes the text |
-| `//build <text>` | Builder takes the text |
-| `//ship <text>` | Shipper takes the text |
-| `//handoff` | Current agent emits `<FISH-handoff>` immediately |
+| `//explore <text>` | Explorer takes the text; picks a default capability from the archetype's stream |
+| `//explore <CODE> <text>` | Explorer runs the specific capability (e.g., `//explore HS`, `//explore IP for billing`) |
+| `//solidify <text>` / `//solidify <CODE> …` | Solidifier — same pattern (e.g., `//solidify BR`, `//solidify AC`) |
+| `//build <text>` / `//build <CODE> …` | Builder — same pattern (e.g., `//build CR`, `//build SL`) |
+| `//ship <text>` / `//ship <CODE> …` | Shipper — same pattern (e.g., `//ship TR`, `//ship RN`) |
+| `//handoff` | Current agent runs **HO** — emits a forward `<FISH-handoff>` |
+| `//handback` | Current agent runs **HB** — emits a reverse `<FISH-handoff>` |
 | `//sigil bigger unknown` | Update the card's sigil without changing agent |
 | `//advance --force` | Override low-confidence advance; logged in notes |
 
