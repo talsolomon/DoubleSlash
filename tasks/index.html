@@ -94,9 +94,9 @@ input, select, textarea { font-family: inherit; font-size: inherit; color: inher
   width: 24px; height: 24px; border-radius: 6px;
   background: var(--brand-dark);
   display: inline-flex; align-items: center; justify-content: center;
-  color: var(--brand-accent); font-weight: 700; font-size: 13px;
-  letter-spacing: -0.04em; line-height: 1;
+  flex-shrink: 0;
 }
+.wordmark-mark svg { display: block; overflow: visible; }
 .wordmark-label { font-weight: 500; color: var(--muted); margin-left: 2px; }
 .wordmark-label::before { content: "/ "; color: var(--hair-2); }
 
@@ -376,8 +376,13 @@ input, select, textarea { font-family: inherit; font-size: inherit; color: inher
 <div class="gate" id="gate">
   <div class="gate-card">
     <a class="wordmark" href="#">
-      <span class="wordmark-mark">//</span>
-      <span>Double<span style="color:var(--brand-accent);font-weight:700;">//</span>Slash</span>
+      <span class="wordmark-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100" width="15" height="15">
+          <path d="M 58 22 L 34 78" stroke="#ffffff" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 78 22 L 54 78" stroke="#3dd9b6" stroke-width="12" stroke-linecap="round" fill="none"/>
+        </svg>
+      </span>
+      <span>Duble<span style="color:var(--brand-accent);font-weight:700;">//</span>Slash</span>
       <span class="wordmark-label">Task Board</span>
     </a>
     <h1 id="gate-title">Sign in</h1>
@@ -399,8 +404,13 @@ input, select, textarea { font-family: inherit; font-size: inherit; color: inher
   <header class="app-header">
     <div class="header-row">
       <a class="wordmark" href="#">
-        <span class="wordmark-mark">//</span>
-        <span>Double<span style="color:var(--brand-accent);font-weight:700;">//</span>Slash</span>
+        <span class="wordmark-mark" aria-hidden="true">
+          <svg viewBox="0 0 100 100" width="15" height="15">
+            <path d="M 58 22 L 34 78" stroke="#ffffff" stroke-width="12" stroke-linecap="round" fill="none"/>
+            <path d="M 78 22 L 54 78" stroke="#3dd9b6" stroke-width="12" stroke-linecap="round" fill="none"/>
+          </svg>
+        </span>
+        <span>Duble<span style="color:var(--brand-accent);font-weight:700;">//</span>Slash</span>
         <span class="wordmark-label">Task Board</span>
       </a>
       <div class="tabs" id="tabs">

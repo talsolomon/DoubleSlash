@@ -66,9 +66,9 @@ Duble Slash is a **menubar-primary app** with a main window for deeper explorati
 │  • Cursor         · 6                   │
 │  • ChatGPT web    · 3                   │
 │                                         │
-│  [⏸  Pause capture]  [Open Double//Slash →]   │
+│  [⏸  Pause capture]  [Open Duble//Slash →]   │
 ╰─────────────────────────────────────────╯
-       │ "Open Double//Slash"
+       │ "Open Duble//Slash"
        ▼
 ╭─────────────────────────────────────────╮
 │  Main window (960×680)                  │
@@ -274,7 +274,7 @@ Agents that have run
 - "Nothing has left this device."
 - "Local only."
 - "You're in charge of every action."
-- "Double//Slash — the layer between your team's AI tools." (tagline; uses the logo mark)
+- "Duble//Slash — the layer between your team's AI tools." (tagline; uses the logo mark)
 - "Pick up where your teammate left off." (V1 positioning — safe to foreshadow in OSS launch copy)
 - "🟢 Capturing · {N} apps · encrypted locally"
 

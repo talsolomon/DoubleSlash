@@ -1,10 +1,135 @@
 -- =============================================================================
--- Recovery patch — run this in Supabase SQL Editor.
--- Fixes the "already member of publication" error and completes the seed.
--- Safe to re-run.
+-- Duble Slash — initial schema + RLS + seed
+-- This was the original setup.sql; lives here so CI (`supabase db push`) can
+-- replay it on a fresh database. Fully idempotent: safe to run against a DB
+-- that already has this schema (all creates use `if not exists`, all inserts
+-- use `on conflict do nothing`).
 -- =============================================================================
 
--- ── 1. Make publication adds idempotent ─────────────────────────────────────
+-- ───────────────────────────── Allowlist ─────────────────────────────────────
+create table if not exists public.allowed_emails (
+  email      text primary key,
+  name       text,
+  added_at   timestamptz default now()
+);
+
+insert into public.allowed_emails (email, name) values
+  ('talsolomon21@gmail.com', 'Tal')
+on conflict (email) do nothing;
+
+-- ───────────────────────────── Reference tables ──────────────────────────────
+create table if not exists public.groups (
+  id         text primary key,
+  name       text not null,
+  icon       text,
+  sort_order int default 0
+);
+
+create table if not exists public.people (
+  id   text primary key,
+  name text not null
+);
+
+create table if not exists public.statuses (
+  id         text primary key,
+  label      text not null,
+  sort_order int default 0
+);
+
+create table if not exists public.priorities (
+  id         text primary key,
+  label      text not null,
+  sort_order int default 0
+);
+
+-- ───────────────────────────── Tasks ─────────────────────────────────────────
+create table if not exists public.tasks (
+  id         text primary key,
+  title      text not null,
+  group_id   text references public.groups(id),
+  owner_id   text references public.people(id),
+  status_id  text references public.statuses(id),
+  priority_id text references public.priorities(id),
+  due        date,
+  notes      text,
+  github     text,
+  sort_order int default 0,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+-- ───────────────────────────── KPIs ──────────────────────────────────────────
+create table if not exists public.kpis (
+  id         text primary key,
+  metric     text not null,
+  current    text,
+  target     text,
+  signal     text,
+  sort_order int default 0,
+  updated_at timestamptz default now()
+);
+
+-- ───────────────────────────── Repo activity ─────────────────────────────────
+create table if not exists public.repo_commits (
+  sha        text primary key,
+  msg        text not null,
+  feeds      text,
+  seen_at    timestamptz default now()
+);
+
+-- ───────────────────────────── Auto-update updated_at ────────────────────────
+create or replace function public.touch_updated_at() returns trigger
+language plpgsql as $$
+begin new.updated_at = now(); return new; end;
+$$;
+
+drop trigger if exists tasks_touch on public.tasks;
+create trigger tasks_touch before update on public.tasks
+  for each row execute function public.touch_updated_at();
+
+drop trigger if exists kpis_touch on public.kpis;
+create trigger kpis_touch before update on public.kpis
+  for each row execute function public.touch_updated_at();
+
+-- ───────────────────────────── RLS helper ────────────────────────────────────
+create or replace function public.is_allowed() returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists(
+    select 1 from public.allowed_emails
+    where lower(email) = lower(coalesce(auth.jwt()->>'email', ''))
+  );
+$$;
+
+grant execute on function public.is_allowed() to authenticated, anon;
+
+-- ───────────────────────────── Enable RLS ────────────────────────────────────
+alter table public.allowed_emails enable row level security;
+alter table public.groups         enable row level security;
+alter table public.people         enable row level security;
+alter table public.statuses       enable row level security;
+alter table public.priorities     enable row level security;
+alter table public.tasks          enable row level security;
+alter table public.kpis           enable row level security;
+alter table public.repo_commits   enable row level security;
+
+-- ───────────────────────────── Policies ──────────────────────────────────────
+drop policy if exists "allowed_select_emails" on public.allowed_emails;
+create policy "allowed_select_emails" on public.allowed_emails
+  for select using (public.is_allowed());
+
+do $$
+declare t text;
+begin
+  foreach t in array array['groups','people','statuses','priorities','tasks','kpis','repo_commits'] loop
+    execute format('drop policy if exists "allowed_all" on public.%I', t);
+    execute format(
+      'create policy "allowed_all" on public.%I for all using (public.is_allowed()) with check (public.is_allowed())',
+      t
+    );
+  end loop;
+end $$;
+
+-- ───────────────────────────── Realtime publication ──────────────────────────
 do $$
 declare t text;
 begin
@@ -12,12 +137,12 @@ begin
     begin
       execute format('alter publication supabase_realtime add table public.%I', t);
     exception when duplicate_object then
-      null; -- already in publication, skip
+      null;
     end;
   end loop;
 end $$;
 
--- ── 2. Seed (idempotent; on conflict do nothing) ────────────────────────────
+-- ───────────────────────────── Seed data ─────────────────────────────────────
 insert into public.groups (id, name, icon, sort_order) values
   ('marketing',   'Marketing & Outreach', '📣', 10),
   ('product',     'Product / PRD',        '🏗', 20),
@@ -68,40 +193,26 @@ insert into public.tasks (id, title, group_id, owner_id, status_id, priority_id,
   ('MKT-004', 'Map TLV + Herzliya startups by proximity; one day per cluster',         'marketing',   'tal',     'todo',        'p1', '2026-05-05', 'Clusters: מתחם אלון (TLV), Sarona (TLV), Rothschild, Ramat HaHayal, Herzliya Pituach.',         '',         40),
   ('MKT-005', 'Book demo days per cluster (4–6 meetings/day)',                         'marketing',   'tal',     'parked',      'p2', null,         'Unblocks after MKT-001 + MKT-004 complete.',                                                    '',         50),
   ('MKT-006', 'Create outreach log (name, co., cluster, last touch, next step)',       'marketing',   'tal',     'todo',        'p2', '2026-05-01', 'Feeds M5 (lab convos) + general pipeline tracking.',                                            '',         60),
-  ('PRD-001', 'Re-write PRD around Context Cloud framing',                              'product',     'tal',     'todo',        'p1', '2026-05-19', 'Demoted P0→P1 on 2026-04-21. Blocked-adjacent on FISH-001 — can''t rewrite PRD around Context Cloud until FISH is specified. May supersede existing OSS-launch PRD.', '',         10),
+
+  ('PRD-001', 'Re-write PRD around Context Cloud framing',                              'product',     'tal',     'todo',        'p1', '2026-05-19', 'Starter note; later migrations update this.',                                                   '',         10),
   ('PRD-002', 'Write Duble Slash manifesto (Lean Startup-style)',                      'product',     'tal',     'todo',        'p1', '2026-05-05', 'Pillars: test-oriented, experimental, community-connected. Gates MKT-002 + MKT-003.',           '',         20),
   ('PRD-003', 'Reconcile manifesto + new PRD with brief + deck',                        'product',     'tal',     'parked',      'p2', null,         'Detect contradictions; update brief where superseded.',                                         '',         30),
+
   ('SEC-001', 'Recruit technical advisor for vulnerability review',                    'security',    'tal',     'todo',        'p1', '2026-05-12', 'Scope: browser extension + macOS AX capture paths. Risk mitigator for M4.',                     '',         10),
   ('SEC-002', 'Define security review SOW with advisor',                               'security',    'shenhav', 'parked',      'p2', null,         'After SEC-001. Threat model, scope, deliverable format.',                                       '',         20),
+
   ('DES-001', 'Build public website with hero animation',                              'design',      'shenhav', 'in_progress', 'p0', '2026-05-05', 'Latest: c34c4e4 (larger stage, refined menubar icon, quicklook tail). Gates MKT-002/003.',      'c34c4e4',  10),
   ('DES-002', 'Performance pass on hero animation (Lottie/Rive, not video)',           'design',      'shenhav', 'todo',        'p1', '2026-05-05', 'LCP must fire on the headline in resting state, not on animation completion.',                 '',         20),
-  ('FISH-001','Write FISH methodology v2 spec',                                         'methodology', 'tal',     'todo',        'p0', '2026-04-28', 'Output: methodology-fish-v2.md. Phases, axes (bigger↔smaller × known↔unknown), transitions, per-phase demands. Source: https://www.talsolomonux.com/p/0d2. Bottleneck — PRD rewrite, agent spec, capture design all depend on this.', '',         10),
-  ('FISH-002','Define FISH agent roster — phase → agent mapping + handoff contract',    'methodology', 'tal',     'todo',        'p0', '2026-05-05', 'One agent per FISH phase; each agent''s prompt, tools, handoff I/O. This IS the OSS drop. Depends on FISH-001. Output: fish-agent-roster.md.', '',         20),
-  ('FISH-003','Spec the // install bundle for Claude Desktop / Cursor / ChatGPT Desktop','methodology', 'tal',     'todo',        'p0', '2026-05-12', 'Per-tool install plumbing — Claude (CLAUDE.md), Cursor (.cursorrules), ChatGPT (Custom Instructions). See technical-research-duble-slash-stack.md. Depends on FISH-002.', '',         30),
-  ('FISH-004','Map FISH stages → flow.yaml spec (v2 milestone)',                        'methodology', 'tal',     'parked',      'p2', null,         'Required attributes per card; phase transitions. Formerly FISH-002 — renumbered 2026-04-21.', '',         40),
+
+  ('FISH-001','Write FISH methodology v2 spec',                                         'methodology', 'tal',     'todo',        'p1', null,         'Starter row. Status/priority/due/notes set by later migrations.',                               '',         10),
+  ('FISH-002','Map FISH stages → flow.yaml spec (v2 milestone)',                        'methodology', 'tal',     'parked',      'p2', null,         'Starter row. Renumbered to FISH-004 by 20260421180000_fish_reprioritize.sql.',                  '',         40),
+
   ('OPS-001', 'Keep task board synced with GitHub + weekly status',                    'ops',         'claude',  'in_progress', 'p1', null,         'Recurring. Ask John to refresh.',                                                               '',         10),
   ('OPS-002', 'Weekly KPI snapshot vs. M1–M9 (post-launch)',                           'ops',         'tal',     'parked',      'p2', null,         'Measurement starts day of OSS launch.',                                                         '',         20)
 on conflict (id) do nothing;
 
 insert into public.repo_commits (sha, msg, feeds) values
-  ('ab0693f', 'Rename DoubleSlash to DubleSlash across the repo',                           null),
-  ('5447b8a', 'Add FISH methodology, Supabase task board, finish Double Slash rename',      'FISH-001'),
-  ('c34c4e4', 'Redesign website hero: larger stage, refined menubar icon, quicklook tail',  'DES-001'),
   ('f3c9448', 'Merge #1 from import/collab-workspace',                                      null),
   ('2a6cda7', 'Add Trace planning artifacts, BMAD docs, and website',                       null),
   ('bb9b228', 'Initial commit',                                                             null)
 on conflict (sha) do nothing;
-
--- ── 3. Add Shenhav to the allowlist ─────────────────────────────────────────
-insert into public.allowed_emails (email, name) values
-  ('Slev92@gmail.com', 'Shenhav')
-on conflict (email) do nothing;
-
--- ── 4. Sanity check ─────────────────────────────────────────────────────────
-select
-  (select count(*) from public.allowed_emails) as allowed_emails,
-  (select count(*) from public.groups)         as groups,
-  (select count(*) from public.people)         as people,
-  (select count(*) from public.tasks)          as tasks,
-  (select count(*) from public.kpis)           as kpis,
-  (select count(*) from public.repo_commits)   as commits;

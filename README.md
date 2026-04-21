@@ -1,6 +1,6 @@
 # Duble Slash
 
-Logo: **Double//Slash**, or **//**.
+Logo: **Duble//Slash**, or **//**.
 
 Working directory: `~/Documents/dubleslash`. Prior working names: Collab → Trace → Duble Slash.
 

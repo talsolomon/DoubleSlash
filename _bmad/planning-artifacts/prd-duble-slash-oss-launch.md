@@ -3,7 +3,7 @@
 **Status:** Draft v1.1
 **Version:** 1.1
 **Date:** 2026-04-20
-**Project:** Duble Slash (logo: Double//Slash, or //). Prior working names: Collab → Trace → Duble Slash.
+**Project:** Duble Slash (logo: Duble//Slash, or //). Prior working names: Collab → Trace → Duble Slash.
 **Target ship:** 6 weeks from kickoff (~early June 2026)
 **Authors:** Tal + Shenhav (co-founders)
 
@@ -250,7 +250,7 @@ All measured 30 days post-launch unless noted.
 - [ ] **Engineering capacity for the 6-week window.** The single most important unresolved input — see technical research. Resolve before kickoff.
 - [ ] **Tier 3 path (MCP vs. Accessibility API).** Resolved by week-1 spike. PRD currently specifies both conditionally; one gets deleted after spike.
 - [ ] **Tauri vs. Electron.** Hinges on engineering capacity. Tauri recommended; Electron is the safer fallback if Rust experience is zero.
-- [ ] **Name lock.** Name: **Duble Slash** (logo: Double//Slash, or //). Prior working names: Collab → Trace → Duble Slash. Trademark clearance search needed before filings and before `dubleslash.<domain>` purchase.
+- [ ] **Name lock.** Name: **Duble Slash** (logo: Duble//Slash, or //). Prior working names: Collab → Trace → Duble Slash. Trademark clearance search needed before filings and before `dubleslash.<domain>` purchase.
 - [ ] **Auto-title approach for sessions.** Rule-based (OSS launch) confirmed; revisit for v1.
 - [ ] **Redaction ruleset.** PRD specifies the categories (email, phone, keys, tokens, SSN, client names); the exact patterns are a dev-handoff detail. Draft a `redaction-rules.md` in `_bmad/docs/` during implementation.
 - [ ] **Apple Developer account ownership.** Organizational ($99/yr) vs. individual — small legal decision with consequences for brand presentation.

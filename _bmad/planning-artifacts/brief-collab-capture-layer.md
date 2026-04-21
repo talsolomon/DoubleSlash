@@ -5,7 +5,7 @@
 **Founders:** Tal + Shenhav (co-founders)
 **Status:** Draft v2 — five open questions resolved
 
-> Name: **Duble Slash** (logo: Double//Slash, or //). Prior working names: Collab → Trace → Duble Slash. Working directory: `~/Documents/duble-slash`. This brief's filename still contains the legacy `collab` token; rename pending.
+> Name: **Duble Slash** (logo: Duble//Slash, or //). Prior working names: Collab → Trace → Duble Slash. Working directory: `~/Documents/duble-slash`. This brief's filename still contains the legacy `collab` token; rename pending.
 
 ---
 
@@ -171,7 +171,7 @@ V1 is the **actual product**: the moment a design + dev team can replace the Lin
 
 ## Open Questions (remaining after Q&A pass)
 
-- [ ] **Trademark search & filings for "Duble Slash."** Full USPTO + EUIPO clearance search needed before filing. Pair with the Double//Slash wordmark + tagline to strengthen distinctiveness. Budget $5–10k for filings + clearance.
+- [ ] **Trademark search & filings for "Duble Slash."** Full USPTO + EUIPO clearance search needed before filing. Pair with the Duble//Slash wordmark + tagline to strengthen distinctiveness. Budget $5–10k for filings + clearance.
 - [ ] **Vendor outreach.** When and how to start the Anthropic conversation. Ideal: a quiet partnership conversation *before* OSS launch so they hear about Duble Slash from us, not Twitter.
 - [ ] **Cofounder responsibility split (informal, not titles).** Who owns the macOS client build vs. browser extension vs. agent runtime vs. landing page vs. legal/license setup? Worth a one-hour split-of-work conversation before kickoff. Output is a shared doc, not a hierarchy.
 
@@ -183,5 +183,5 @@ V1 is the **actual product**: the moment a design + dev team can replace the Lin
 - [ ] Run **`/bmad-create-prd`** for the OSS-launch milestone — grounded in tech-research + UX, not vibes.
 - [ ] Lock the license (FSL-1.1-Apache-2.0 recommended) + CLA setup before any external commits.
 - [ ] Engage OSS-licensing counsel + product counsel for capture-method review.
-- [ ] Trademark clearance search for "Duble Slash" (and the Double//Slash wordmark) → file in US + EU + UK.
+- [ ] Trademark clearance search for "Duble Slash" (and the Duble//Slash wordmark) → file in US + EU + UK.
 - [ ] Spin up `brief-multiplayer-handoff.md` for the v1 killer-demo brief once OSS launch ships.

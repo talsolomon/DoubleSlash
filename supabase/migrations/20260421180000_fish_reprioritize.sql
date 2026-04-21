@@ -1,21 +1,17 @@
 -- =============================================================================
--- Duble Slash — FISH-first reprioritization patch
+-- Duble Slash — FISH-first reprioritization
 -- Date: 2026-04-21
 -- Context: Tal reframed the MVP — FISH is the critical path; PRD rewrite demoted.
--- Run this in the Supabase SQL editor (Dashboard → SQL → New query → paste → Run).
 -- Safe to re-run (idempotent — all updates set explicit values, all inserts upsert).
 -- =============================================================================
 
-begin;
-
 -- ── 1. Renumber old FISH-002 (flow.yaml spec) → FISH-004 ────────────────────
--- This frees the FISH-002 slot for the new "agent roster" task.
--- No FKs reference tasks.id, so updating the PK is safe.
+-- Only renames if old row still exists with the v2-milestone title.
 update public.tasks
 set id         = 'FISH-004',
     sort_order = 40,
     notes      = 'Required attributes per card; phase transitions. V2 milestone. Formerly FISH-002 — renumbered 2026-04-21.'
-where id = 'FISH-002';
+where id = 'FISH-002' and title like 'Map FISH stages%';
 
 -- ── 2. Promote + retitle FISH-001 ───────────────────────────────────────────
 update public.tasks
@@ -66,11 +62,3 @@ set priority_id = 'p1',
     due         = date '2026-05-19',
     notes       = 'Demoted from P0 to P1 on 2026-04-21. Blocked-adjacent on FISH-001 — can''t rewrite the PRD around Context Cloud until FISH is specified, because FISH is what the Context Cloud organizes. May supersede existing OSS-launch PRD.'
 where id = 'PRD-001';
-
--- ── 6. Sanity check ─────────────────────────────────────────────────────────
-select id, title, priority_id, due, sort_order
-from public.tasks
-where group_id = 'methodology' or id in ('PRD-001')
-order by group_id, sort_order, id;
-
-commit;

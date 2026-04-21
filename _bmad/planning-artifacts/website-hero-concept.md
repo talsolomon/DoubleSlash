@@ -32,7 +32,7 @@ The second user clicks their Duble Slash icon. A panel reveals what landed: whic
 Each frame shows **what's on screen**, **what animates**, **approximate duration**, and **what the viewer is meant to feel/understand**.
 
 ### Frame 1 — Empty canvas
-- **Screen:** White (or deep-neutral) full-bleed. "Double//Slash" wordmark, top-left. Nothing else.
+- **Screen:** White (or deep-neutral) full-bleed. "Duble//Slash" wordmark, top-left. Nothing else.
 - **Motion:** Held still for 0.6s. Silence.
 - **Duration:** ~0.6s
 - **Intent:** Create anticipation. The emptiness is the hook — something is about to happen.
@@ -114,7 +114,7 @@ Each frame shows **what's on screen**, **what animates**, **approximate duration
 - **Intent:** "One click. It's on your machine. Keep going."
 
 ### Frame 14 — Resting state (the actual landing page)
-- **Screen:** The desktop fades back, the page simplifies: the Double//Slash wordmark stays top-left, the icon rests top-right (still gently blinking), and a real headline + primary CTA resolve into the center.
+- **Screen:** The desktop fades back, the page simplifies: the Duble//Slash wordmark stays top-left, the icon rests top-right (still gently blinking), and a real headline + primary CTA resolve into the center.
 - **Motion:** Crossfade + slight settle.
 - **Duration:** held
 - **Intent:** This is where late arrivals and second-time visitors live. The animation can replay on demand; the page is functional without it.

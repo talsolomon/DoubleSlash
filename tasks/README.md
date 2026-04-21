@@ -14,15 +14,36 @@ The site is publicly reachable, but data is locked down by **two independent gat
 
 So "live and easy to access" + "super safe" are not in tension here — the Vercel SSO wall is redundant and we keep it OFF (see step 3).
 
-## 1. One-time Supabase setup (3 min, 2 SQL scripts)
+## Git is the source of truth for the board
 
-1. Open [Supabase dashboard](https://supabase.com/dashboard) → your `rbuynvswyplfyxuxpyxy` project.
-2. **SQL Editor** → **New query** → paste the entire contents of [`../supabase/setup.sql`](../supabase/setup.sql) → **Run**. Creates all tables, RLS, realtime publication, seed tasks + KPIs.
+`main` is the source of truth for the task board's state. Commit a SQL file under [`../supabase/migrations/`](../supabase/migrations/) → push → a GitHub Action applies it to production. No more pasting SQL into the Supabase dashboard.
+
+- **Workflow:** [`.github/workflows/supabase-migrate.yml`](../.github/workflows/supabase-migrate.yml) (triggers on push to `main` touching `supabase/migrations/**`, plus manual run via the Actions tab).
+- **Migration filenames** must follow `YYYYMMDDHHMMSS_description.sql` (Supabase CLI convention). Applied in timestamp order.
+- **SQL must be idempotent** — re-runs must be no-ops. Use `on conflict do nothing` for seeds, `create table if not exists` for schema, explicit `update` with a `where` clause for state changes.
+- **Workflow-skipping files** (manual-only): `bootstrap-users.sql` (holds passwords), `rollback-bootstrap.sql` (destructive). These stay in [`../supabase/`](../supabase/) and are run by hand through the SQL editor when needed.
+
+### One-time CI secret setup
+
+In GitHub → Settings → Secrets and variables → Actions → **New repository secret**, add three:
+
+| Secret | Where to get it |
+|---|---|
+| `SUPABASE_ACCESS_TOKEN` | [Supabase dashboard → Account → Access Tokens](https://supabase.com/dashboard/account/tokens) → "Generate new token" |
+| `SUPABASE_DB_PASSWORD`  | The project's database password (Dashboard → Project Settings → Database → Database password) |
+| `SUPABASE_PROJECT_ID`   | `rbuynvswyplfyxuxpyxy` |
+
+After those are set, merge any PR that changes `supabase/migrations/**` and the Action runs automatically. First run against the existing DB will replay every migration; since they're all idempotent, only net-new changes take effect.
+
+## 1. One-time Supabase project bootstrap
+
+Only needed for a **fresh** Supabase project (not the existing one — it's already bootstrapped):
+
+1. Open [Supabase dashboard](https://supabase.com/dashboard) → your project.
+2. Run all files in [`../supabase/migrations/`](../supabase/migrations/) in timestamp order (or just push any change to `main` once the CI secrets above are configured; the Action will apply them all).
 3. **SQL Editor** → **New query** → open [`../supabase/bootstrap-users.sql`](../supabase/bootstrap-users.sql) → edit the two passwords + Shenhav's real email at the top → paste → **Run**. This creates both auth accounts directly, pre-confirmed, no email round-trip — side-stepping Supabase's magic-link rate limit entirely.
 
-That's it. **You don't need to configure email confirmation, providers, or redirect URLs** — the bootstrap script stamps `email_confirmed_at` directly, so Supabase's email settings don't come into play.
-
-To add a new allowed user later, re-run `bootstrap-users.sql` with their row added (or do it via Dashboard → Authentication → Users → "Add user" → Create new user → tick "Auto Confirm User", *and* insert their email into `public.allowed_emails`).
+Bootstrap is a one-off. To add a new allowed user later, re-run `bootstrap-users.sql` with their row added (or do it via Dashboard → Authentication → Users → "Add user" → Create new user → tick "Auto Confirm User", *and* insert their email into `public.allowed_emails`).
 
 ## 2. Run it locally
 

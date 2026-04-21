@@ -133,7 +133,7 @@ style: |
 
 <!-- SLIDE 1 — TITLE -->
 
-# Double//Slash
+# Duble//Slash
 
 ### The mutual ground for your team's AI work
 
@@ -145,7 +145,7 @@ style: |
 
 **Tal + Shenhav** · April 2026
 
-<!-- LOGO: Double//Slash wordmark · 200x48 · swap in _bmad/assets/logos/duble-slash-wordmark-white.svg -->
+<!-- LOGO: Duble//Slash wordmark · 200x48 · swap in _bmad/assets/logos/duble-slash-wordmark-white.svg -->
 
 ---
 
@@ -191,7 +191,7 @@ Tools multiplied: Claude, ChatGPT, Cursor, Copilot, Perplexity, Figma AI, v0, Re
 
 <!-- SLIDE 3 — INTRODUCING DUBLE SLASH -->
 
-## Introducing Double//Slash
+## Introducing Duble//Slash
 
 *The capture layer. The team graph on top. One install.*
 
@@ -212,7 +212,7 @@ A blanket that enfolds all the AI in the world into a cloud. Install one thing, 
 
 **North-star feel:** *"Oh — I can see what it's doing, I'm in charge of all of it, and I can already picture my teammate picking this up."*
 
-<!-- LOGO: Double//Slash wordmark · 160x36 · swap in _bmad/assets/logos/duble-slash-wordmark-white.svg -->
+<!-- LOGO: Duble//Slash wordmark · 160x36 · swap in _bmad/assets/logos/duble-slash-wordmark-white.svg -->
 
 ---
 
@@ -1132,12 +1132,12 @@ Anyone can implement a Duble Slash-compatible capture agent for any new AI tool,
 
 Stay in what you love. Push your work. Your teammate picks it up in what they love.
 
-**That's Double//Slash.**
+**That's Duble//Slash.**
 
 <br>
 <br>
 
-<!-- LOGO: Double//Slash wordmark · 180x44 · swap in _bmad/assets/logos/duble-slash-wordmark-white.svg -->
+<!-- LOGO: Duble//Slash wordmark · 180x44 · swap in _bmad/assets/logos/duble-slash-wordmark-white.svg -->
 
 <br>
 
