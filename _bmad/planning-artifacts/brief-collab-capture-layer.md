@@ -1,11 +1,11 @@
-# Product Brief — Trace (working title)
+# Product Brief — Double Slash
 
 **Date:** 2026-04-20 (Q&A pass: same day)
-**Project:** Trace
+**Project:** Double Slash
 **Founders:** Tal + Shenhav (co-founders)
 **Status:** Draft v2 — five open questions resolved
 
-> "Trace" is the working name (provisional). Confirm before trademark filings. Original working title: Collab. Files in `~/Documents/collab` and `_bmad/` keep the legacy folder name for now to avoid path churn.
+> Name: **Double Slash** (logo: Double//Slash, or //). Prior working names: Collab → Trace → Double Slash. Working directory: `~/Documents/double-slash`. This brief's filename still contains the legacy `collab` token; rename pending.
 
 ---
 
@@ -17,15 +17,15 @@ Existing players each own one slice — Granola/Rewind (capture), Cursor Teams (
 
 ## Idea
 
-**Trace is a collaboration tool for design + dev teams who currently work in silos across AI tools.** Linear and ClickUp organize tasks, but each teammate runs their own private AI sessions — there's no way to hand work between a designer in Claude Design and a developer in VS Code. Trace is the layer that carries AI work *between* people and *between* tools. Stay in whatever tool you love; push your session; a teammate picks it up in their tool; they push it back. Think GitHub-for-AI-sessions, spread across every AI surface.
+**Double Slash is a collaboration tool for design + dev teams who currently work in silos across AI tools.** Linear and ClickUp organize tasks, but each teammate runs their own private AI sessions — there's no way to hand work between a designer in Claude Design and a developer in VS Code. Double Slash is the layer that carries AI work *between* people and *between* tools. Stay in whatever tool you love; push your session; a teammate picks it up in their tool; they push it back. Think GitHub-for-AI-sessions, spread across every AI surface.
 
 Metaphor: *"a blanket that enfolds all the AI work in the world into a cloud."* User installs one thing, signs in once, and AI sessions across every tool sync into a shared, trail-able team graph. **15 minutes of full access on first install — every feature, no gates — then paid features lock behind the subscription.** Hosted: **free up to 5 seats forever, $12/seat/mo above 5.** Open-source self-host always free, unlimited seats.
 
-**Killer demo (V1):** Sarah (designer) opens Claude Design, runs a session iterating a UI component, ends with a result. She pushes. Marcus (developer, different continent) opens VS Code, sees Sarah's session in Trace, picks it up, implements the component in his IDE's AI assistant, pushes back. Sarah opens her Linear-like team view in Trace the next morning and sees Marcus's branch ready for review. Neither left their preferred tool.
+**Killer demo (V1):** Sarah (designer) opens Claude Design, runs a session iterating a UI component, ends with a result. She pushes. Marcus (developer, different continent) opens VS Code, sees Sarah's session in Double Slash, picks it up, implements the component in his IDE's AI assistant, pushes back. Sarah opens her Linear-like team view in Double Slash the next morning and sees Marcus's branch ready for review. Neither left their preferred tool.
 
 ## Agents — the moving parts of the layer
 
-Trace is not a passive sync layer — it's a fabric of small, focused **agents** that abide by the Trace `flow` methodology. Agents are what make the layer feel alive instead of inert.
+Double Slash is not a passive sync layer — it's a fabric of small, focused **agents** that abide by the Double Slash `flow` methodology. Agents are what make the layer feel alive instead of inert.
 
 **Two scopes:**
 - **Personal agents** — run on the user's device, scoped to that user's data. Privacy-first, local-by-default.
@@ -59,7 +59,7 @@ Trace is not a passive sync layer — it's a fabric of small, focused **agents**
 - **Microsoft Recall taught the market the wrong way** to do ambient capture. Trust + OSS + integrity-first is now the only viable entry framing — a tailwind for an OSS-first entrant.
 - **OSS-core + paid is a proven playbook** in this exact decade (Supabase, Cal.com, PostHog).
 - **EU AI Act provenance requirements** make the captured-AI-work substrate a future compliance asset.
-- **The founders' thesis** (see `user_founder_story.md`): two platform shifts ago (SaaS) and one shift ago (AI), value flowed to whoever consolidated fragmentation without forcing migration. Trace is that play for the AI era. Tal lived both shifts; the pattern recognition is the credibility hook.
+- **The founders' thesis** (see `user_founder_story.md`): two platform shifts ago (SaaS) and one shift ago (AI), value flowed to whoever consolidated fragmentation without forcing migration. Double Slash is that play for the AI era. Tal lived both shifts; the pattern recognition is the credibility hook.
 
 ## Pricing & Hosting (locked)
 
@@ -93,7 +93,7 @@ Trace is not a passive sync layer — it's a fabric of small, focused **agents**
 - First-run telemetry consent dialogs (install counter + crash reports, both default OFF)
 - Public GitHub repo: README, `GOVERNANCE.md`, CLA via cla-assistant.io, signed releases, SBOM, `security.txt`
 - Marketing landing page leading with the "mutual ground" positioning + integrity narrative
-- Trademark filings initiated for "Trace" in US + EU + UK (after name confirmation)
+- Trademark filings initiated for "Double Slash" in US + EU + UK
 
 **Out of the 6-week OSS launch (ships in V1 — see Milestone 2 below):**
 - Multiplayer team graph, push/branch/diff, cross-device sync
@@ -122,7 +122,7 @@ V1 is the **actual product**: the moment a design + dev team can replace the Lin
 - **Cross-tool handoff** (the killer demo) — a session started in Claude Design picked up in VS Code, implemented by Cursor's agent, pushed back for design review
 - **Cross-platform native clients: macOS + Windows + Linux** at V1 launch (not sequenced)
 - **Two views on top:** Linear-like task view + GitHub-like push/branch history view
-- **Slack + Teams + email integrations** — notifications, inline previews, "pick this up in Trace" actions
+- **Slack + Teams + email integrations** — notifications, inline previews, "pick this up in Double Slash" actions
 - **Web app for the team view** (complements native clients)
 - **15-min full-access trial** on install, 5-seat hosted free tier, $12/seat/mo above 5 seats
 - **Hardened self-host packaging** — Docker Compose, k8s Helm chart, ops runbook
@@ -171,8 +171,8 @@ V1 is the **actual product**: the moment a design + dev team can replace the Lin
 
 ## Open Questions (remaining after Q&A pass)
 
-- [ ] **Trademark search & filings for "Trace."** "Trace" is a common English word — full USPTO + EUIPO clearance search needed before filing. Pair with a distinctive logo + tagline ("Trace your team's AI work") to strengthen distinctiveness. Budget $5–10k for filings + clearance.
-- [ ] **Vendor outreach.** When and how to start the Anthropic conversation. Ideal: a quiet partnership conversation *before* OSS launch so they hear about Trace from us, not Twitter.
+- [ ] **Trademark search & filings for "Double Slash."** Full USPTO + EUIPO clearance search needed before filing. Pair with the Double//Slash wordmark + tagline to strengthen distinctiveness. Budget $5–10k for filings + clearance.
+- [ ] **Vendor outreach.** When and how to start the Anthropic conversation. Ideal: a quiet partnership conversation *before* OSS launch so they hear about Double Slash from us, not Twitter.
 - [ ] **Cofounder responsibility split (informal, not titles).** Who owns the macOS client build vs. browser extension vs. agent runtime vs. landing page vs. legal/license setup? Worth a one-hour split-of-work conversation before kickoff. Output is a shared doc, not a hierarchy.
 
 ## Next Steps
@@ -183,5 +183,5 @@ V1 is the **actual product**: the moment a design + dev team can replace the Lin
 - [ ] Run **`/bmad-create-prd`** for the OSS-launch milestone — grounded in tech-research + UX, not vibes.
 - [ ] Lock the license (FSL-1.1-Apache-2.0 recommended) + CLA setup before any external commits.
 - [ ] Engage OSS-licensing counsel + product counsel for capture-method review.
-- [ ] Trademark clearance search for "Trace" → file in US + EU + UK.
+- [ ] Trademark clearance search for "Double Slash" (and the Double//Slash wordmark) → file in US + EU + UK.
 - [ ] Spin up `brief-multiplayer-handoff.md` for the v1 killer-demo brief once OSS launch ships.

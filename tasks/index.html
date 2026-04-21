@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Double Slash — Task Board</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
+<meta name="theme-color" content="#0e3a35" />
+<style>
+:root {
+  --bg: #f6f5f1;
+  --ink: #0f1115;
+  --ink-2: #2a2d33;
+  --muted: #7a7d85;
+  --hair: #e6e3db;
+  --hair-2: #d8d4c8;
+  --card: #ffffff;
+  --accent: #d98a2b;
+  --brand-dark: #0e3a35;
+  --brand-accent: #3dd9b6;
+  --good: #10a37f;
+  --warn: #d98a2b;
+  --bad: #c96442;
+  --purple: #4a4a8a;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --shadow-sm: 0 1px 2px rgba(15,17,21,0.04), 0 1px 3px rgba(15,17,21,0.06);
+  --shadow-md: 0 6px 16px rgba(15,17,21,0.08), 0 2px 4px rgba(15,17,21,0.04);
+  --shadow-lg: 0 20px 50px rgba(15,17,21,0.12), 0 4px 10px rgba(15,17,21,0.06);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; min-height: 100%; }
+body {
+  font-family: var(--font); color: var(--ink);
+  background: var(--bg);
+  background-image: radial-gradient(circle at center, rgba(15,17,21,0.05) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  font-size: 14px; line-height: 1.45;
+}
+button { font-family: inherit; font-size: inherit; color: inherit; }
+input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+
+/* ===== Auth / Gate ===== */
+.gate {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.gate-card {
+  background: var(--card); border: 1px solid var(--hair);
+  border-radius: 16px; padding: 36px 40px;
+  max-width: 440px; width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+.gate-card .wordmark { margin-bottom: 20px; }
+.gate-card h1 { font-size: 22px; margin: 0 0 6px; letter-spacing: -0.01em; }
+.gate-card p { color: var(--muted); margin: 0 0 20px; line-height: 1.55; }
+.gate-form { display: flex; flex-direction: column; gap: 10px; }
+.gate-form input[type="email"],
+.gate-form input[type="password"] {
+  border: 1px solid var(--hair-2); background: var(--bg);
+  padding: 11px 14px; border-radius: 10px; font-size: 14px;
+}
+.gate-form input[type="email"]:focus,
+.gate-form input[type="password"]:focus { outline: 2px solid var(--brand-accent); border-color: transparent; }
+.gate-form button { padding: 11px 14px; }
+.gate-hint { font-size: 12px; color: var(--muted); margin-top: -2px; }
+.gate-msg {
+  margin-top: 14px; padding: 10px 12px; border-radius: 8px;
+  font-size: 13px; background: #fafaf6;
+  border: 1px solid var(--hair);
+}
+.gate-msg.ok { background: #e8f6f2; border-color: #c3ead8; color: #0e5146; }
+.gate-msg.err { background: #fbeceb; border-color: #f0cfcd; color: #7a2d22; }
+
+/* ===== Header ===== */
+.app-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(246, 245, 241, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hair);
+  padding: 14px 24px;
+}
+.header-row {
+  display: flex; align-items: center; gap: 20px;
+  max-width: 1600px; margin: 0 auto;
+}
+.wordmark {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 600; letter-spacing: -0.01em; font-size: 16px;
+  text-decoration: none; color: var(--ink);
+}
+.wordmark-mark {
+  width: 24px; height: 24px; border-radius: 6px;
+  background: var(--brand-dark);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--brand-accent); font-weight: 700; font-size: 13px;
+  letter-spacing: -0.04em; line-height: 1;
+}
+.wordmark-label { font-weight: 500; color: var(--muted); margin-left: 2px; }
+.wordmark-label::before { content: "/ "; color: var(--hair-2); }
+
+.tabs { display: flex; gap: 2px; background: var(--hair); padding: 3px; border-radius: 10px; }
+.tab {
+  border: 0; background: transparent; padding: 7px 14px; border-radius: 8px;
+  cursor: pointer; font-weight: 500; color: var(--ink-2); font-size: 13px;
+  transition: all 160ms ease;
+}
+.tab:hover { color: var(--ink); }
+.tab.active { background: var(--card); color: var(--ink); box-shadow: var(--shadow-sm); }
+
+.spacer { flex: 1; }
+
+.actions { display: flex; gap: 8px; align-items: center; }
+.btn {
+  border: 1px solid var(--hair-2); background: var(--card); color: var(--ink-2);
+  padding: 7px 13px; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 13px;
+  transition: all 160ms ease; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn:hover { border-color: var(--ink-2); color: var(--ink); }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn.primary:hover { background: var(--ink-2); }
+.btn.ghost { border-color: transparent; background: transparent; }
+.btn.ghost:hover { background: var(--hair); }
+.btn.danger-ghost { border-color: transparent; background: transparent; color: var(--muted); }
+.btn.danger-ghost:hover { background: #fbeceb; color: var(--bad); }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; color: var(--muted); font-family: var(--mono);
+}
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--good); }
+.badge-dot.stale { background: var(--muted); }
+.badge-dot.syncing { background: var(--warn); animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.user-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 999px;
+  background: var(--hair); font-size: 12px; color: var(--ink-2);
+}
+
+/* ===== Main layout ===== */
+.main {
+  max-width: 1600px; margin: 0 auto;
+  padding: 24px;
+}
+.view { display: none; }
+.view.active { display: block; }
+
+/* ===== KPI strip ===== */
+.kpi-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px; margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--card); border: 1px solid var(--hair);
+  border-radius: 12px; padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+}
+.kpi-card h4 {
+  margin: 0 0 4px; font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--muted);
+}
+.kpi-card .kpi-metric { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+.kpi-card .kpi-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.kpi-current { font-size: 22px; font-weight: 700; font-family: var(--mono); letter-spacing: -0.02em; outline: none; }
+.kpi-target { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+.kpi-signal { font-size: 11px; color: var(--muted); margin-top: 6px; }
+[contenteditable="true"]:focus { outline: 2px solid var(--brand-accent); border-radius: 4px; padding: 0 4px; }
+
+/* ===== Board view ===== */
+.board { display: flex; flex-direction: column; gap: 12px; }
+.group {
+  background: var(--card); border: 1px solid var(--hair);
+  border-radius: 12px; overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.group-header {
+  display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+  border-bottom: 1px solid var(--hair); cursor: pointer;
+  background: #fafaf6;
+}
+.group-caret { transition: transform 180ms ease; color: var(--muted); font-size: 11px; }
+.group.collapsed .group-caret { transform: rotate(-90deg); }
+.group.collapsed .group-body { display: none; }
+.group-title { font-weight: 600; font-size: 14px; flex: 1; display: flex; align-items: center; gap: 8px; }
+.group-icon { font-size: 16px; }
+.group-count {
+  font-size: 11px; color: var(--muted); font-family: var(--mono);
+  background: var(--hair); padding: 2px 8px; border-radius: 10px;
+}
+.group-add {
+  border: 1px dashed var(--hair-2); background: transparent; color: var(--muted);
+  padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+}
+.group-add:hover { color: var(--ink); border-color: var(--ink-2); }
+
+.group-body { padding: 0; }
+.row {
+  display: grid;
+  grid-template-columns: 24px 1fr 120px 140px 70px 120px 1fr 28px;
+  gap: 0;
+  align-items: center;
+  border-bottom: 1px solid var(--hair);
+  transition: background 120ms ease;
+}
+.row:last-child { border-bottom: 0; }
+.row:hover { background: #fafaf6; }
+.row.done .cell-title { text-decoration: line-through; color: var(--muted); }
+.row-head {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+  font-weight: 600;
+}
+.row-head .cell { padding: 8px 12px; }
+.cell { padding: 10px 12px; overflow: hidden; }
+.cell-id {
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  padding-left: 16px; text-align: center;
+}
+.cell-title {
+  font-weight: 500; outline: none; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cell-title[contenteditable="true"]:focus {
+  white-space: normal; overflow: visible; background: var(--card);
+  box-shadow: inset 0 0 0 2px var(--brand-accent); border-radius: 4px;
+}
+.cell-notes {
+  color: var(--muted); font-size: 12px; outline: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cell-notes[contenteditable="true"]:focus {
+  white-space: normal; color: var(--ink); background: var(--card);
+  box-shadow: inset 0 0 0 2px var(--brand-accent); border-radius: 4px;
+}
+.cell-del {
+  border: 0; background: transparent; cursor: pointer;
+  color: var(--muted); font-size: 16px; padding: 4px; border-radius: 4px;
+  visibility: hidden;
+}
+.row:hover .cell-del { visibility: visible; }
+.cell-del:hover { color: var(--bad); background: var(--hair); }
+
+/* Pills */
+.pill-select {
+  border: 0; background: transparent; cursor: pointer;
+  font-family: inherit; font-size: 12px; font-weight: 500;
+  padding: 4px 10px; border-radius: 999px;
+  appearance: none; -webkit-appearance: none;
+  width: 100%; outline: none;
+}
+.pill-select:focus { box-shadow: 0 0 0 2px var(--brand-accent); }
+.pill-status { color: #fff; text-align: center; }
+.pill-status[data-value="todo"] { background: var(--muted); }
+.pill-status[data-value="in_progress"] { background: var(--warn); }
+.pill-status[data-value="blocked"] { background: var(--bad); }
+.pill-status[data-value="review"] { background: var(--purple); }
+.pill-status[data-value="done"] { background: var(--good); }
+.pill-status[data-value="parked"] { background: #c4c2bb; color: var(--ink-2); }
+
+.pill-owner { background: var(--hair); color: var(--ink-2); text-align: center; }
+.pill-owner[data-value="tal"] { background: #fde2c4; color: #7a4a10; }
+.pill-owner[data-value="shenhav"] { background: #c8f0e4; color: #0e5146; }
+.pill-owner[data-value="claude"] { background: #e6e3db; color: var(--ink-2); }
+.pill-owner[data-value="advisor"] { background: #e4def5; color: #3a3470; }
+
+.pill-priority { text-align: center; font-family: var(--mono); font-weight: 600; }
+.pill-priority[data-value="p0"] { background: var(--bad); color: #fff; }
+.pill-priority[data-value="p1"] { background: var(--warn); color: #fff; }
+.pill-priority[data-value="p2"] { background: var(--hair); color: var(--muted); }
+
+.cell-due input {
+  border: 0; background: transparent; font-family: var(--mono); font-size: 12px;
+  color: var(--ink-2); width: 100%; padding: 4px 6px; border-radius: 4px;
+}
+.cell-due input:focus { outline: 2px solid var(--brand-accent); background: var(--card); }
+.cell-due.overdue input { color: var(--bad); font-weight: 600; }
+.cell-due.soon input { color: var(--warn); }
+
+/* ===== My Week view ===== */
+.week-hero {
+  background: var(--brand-dark); color: #fff;
+  border-radius: 12px; padding: 24px 28px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 20px;
+}
+.week-hero h2 { margin: 0 0 4px; font-size: 20px; font-weight: 600; }
+.week-hero p { margin: 0; color: var(--brand-accent); font-size: 13px; }
+.week-stat { text-align: center; padding: 0 16px; }
+.week-stat-num { font-size: 28px; font-weight: 700; font-family: var(--mono); line-height: 1; }
+.week-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-accent); margin-top: 4px; }
+
+/* ===== Repo panel ===== */
+.repo {
+  background: var(--card); border: 1px solid var(--hair);
+  border-radius: 12px; padding: 20px 24px; margin-top: 24px;
+}
+.repo h3 { margin: 0 0 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.repo ul { list-style: none; padding: 0; margin: 0; }
+.repo li {
+  padding: 8px 0; border-bottom: 1px solid var(--hair); font-size: 13px;
+  display: flex; align-items: center; gap: 12px;
+}
+.repo li:last-child { border: 0; }
+.repo code { font-family: var(--mono); font-size: 12px; background: var(--bg); padding: 2px 6px; border-radius: 4px; color: var(--accent); }
+.repo a { color: var(--ink); text-decoration: none; border-bottom: 1px dashed var(--hair-2); }
+.repo a:hover { border-bottom-style: solid; }
+
+/* ===== Empty state ===== */
+.empty {
+  padding: 32px; text-align: center; color: var(--muted);
+  font-size: 13px;
+}
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--bg);
+  padding: 10px 18px; border-radius: 8px; font-size: 13px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0; pointer-events: none; transition: opacity 200ms ease;
+  z-index: 100;
+}
+.toast.show { opacity: 1; }
+.toast.err { background: var(--bad); }
+
+/* ===== Filter bar ===== */
+.filter-bar {
+  display: flex; gap: 8px; align-items: center; margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.filter-bar input[type="search"] {
+  border: 1px solid var(--hair-2); background: var(--card);
+  padding: 7px 12px; border-radius: 8px; width: 280px; font-size: 13px;
+}
+.filter-bar input[type="search"]:focus { outline: 2px solid var(--brand-accent); border-color: transparent; }
+.filter-chip {
+  border: 1px solid var(--hair-2); background: var(--card);
+  padding: 5px 11px; border-radius: 999px; cursor: pointer; font-size: 12px;
+  color: var(--ink-2);
+}
+.filter-chip.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* ===== KPI view table ===== */
+.kpi-table {
+  background: var(--card); border: 1px solid var(--hair); border-radius: 12px;
+  overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.kpi-table table { width: 100%; border-collapse: collapse; }
+.kpi-table th {
+  text-align: left; padding: 12px 16px; background: #fafaf6;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+  border-bottom: 1px solid var(--hair);
+}
+.kpi-table td { padding: 12px 16px; border-bottom: 1px solid var(--hair); font-size: 13px; }
+.kpi-table tr:last-child td { border: 0; }
+.kpi-table .kpi-id { font-family: var(--mono); color: var(--muted); font-size: 12px; }
+.kpi-table [contenteditable="true"] { min-height: 20px; }
+.kpi-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.kpi-toolbar p { margin: 0; color: var(--muted); }
+.row-delete-cell { width: 36px; text-align: center; }
+
+@media (max-width: 900px) {
+  .row { grid-template-columns: 24px 1fr 100px 100px 60px; }
+  .row .cell-due, .row .cell-notes, .row .cell-del { display: none; }
+  .row-head .cell-due, .row-head .cell-notes, .row-head .cell-del { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== GATE (login + allowlist) ====== -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <a class="wordmark" href="#">
+      <span class="wordmark-mark">//</span>
+      <span>Double<span style="color:var(--brand-accent);font-weight:700;">//</span>Slash</span>
+      <span class="wordmark-label">Task Board</span>
+    </a>
+    <h1 id="gate-title">Sign in</h1>
+    <p id="gate-subtitle">Allowlisted access for Tal and Shenhav.</p>
+    <form class="gate-form" id="gate-form">
+      <input type="email" id="gate-email" placeholder="you@example.com" autocomplete="email" required />
+      <input type="password" id="gate-password" placeholder="password" autocomplete="current-password" required />
+      <button type="submit" class="btn primary" id="gate-submit">Sign in</button>
+    </form>
+    <div class="gate-msg" id="gate-msg" style="display:none"></div>
+    <div id="gate-signout" style="display:none;margin-top:14px;text-align:center">
+      <button class="btn ghost" id="btn-signout-gate">Sign out</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== APP ====== -->
+<div id="app" style="display:none">
+  <header class="app-header">
+    <div class="header-row">
+      <a class="wordmark" href="#">
+        <span class="wordmark-mark">//</span>
+        <span>Double<span style="color:var(--brand-accent);font-weight:700;">//</span>Slash</span>
+        <span class="wordmark-label">Task Board</span>
+      </a>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-view="board">Board</button>
+        <button class="tab" data-view="week">My Week</button>
+        <button class="tab" data-view="kpis">KPIs</button>
+      </div>
+      <div class="spacer"></div>
+      <span class="badge" id="sync-badge"><span class="badge-dot" id="sync-dot"></span><span id="sync-label">Live</span></span>
+      <span class="user-chip" id="user-chip"></span>
+      <div class="actions">
+        <button class="btn primary" id="btn-new">+ New task</button>
+        <button class="btn ghost" id="btn-signout" title="Sign out">⎋</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="view active" data-view="board">
+      <div class="filter-bar">
+        <input type="search" id="filter-search" placeholder="Search tasks…" />
+        <button class="filter-chip active" data-filter-owner="">All owners</button>
+        <button class="filter-chip" data-filter-owner="tal">Tal</button>
+        <button class="filter-chip" data-filter-owner="shenhav">Shenhav</button>
+        <button class="filter-chip" data-filter-status="open">Open only</button>
+        <button class="filter-chip" data-filter-priority="p0">P0</button>
+      </div>
+      <div class="kpi-strip" id="board-kpi-strip"></div>
+      <div class="board" id="board"></div>
+      <div class="repo" id="repo-panel"></div>
+    </section>
+
+    <section class="view" data-view="week">
+      <div class="week-hero">
+        <div style="flex:1">
+          <h2 id="week-title">Tal's focus — this week</h2>
+          <p>P0 + In-progress tasks assigned to you. Clear these to move the line.</p>
+        </div>
+        <div class="week-stat"><div class="week-stat-num" id="week-p0">0</div><div class="week-stat-label">P0 open</div></div>
+        <div class="week-stat"><div class="week-stat-num" id="week-active">0</div><div class="week-stat-label">In progress</div></div>
+        <div class="week-stat"><div class="week-stat-num" id="week-blocked">0</div><div class="week-stat-label">Blocked</div></div>
+      </div>
+      <div class="board" id="week-board"></div>
+    </section>
+
+    <section class="view" data-view="kpis">
+      <div class="kpi-toolbar">
+        <p>OSS-launch scorecard. Click any cell to edit. Targets pulled verbatim from the pitch deck appendix.</p>
+        <button class="btn primary" id="btn-kpi-new">+ New KPI</button>
+      </div>
+      <div class="kpi-table">
+        <table>
+          <thead><tr>
+            <th style="width:60px">#</th>
+            <th>Metric</th>
+            <th style="width:140px">Current</th>
+            <th style="width:220px">Target</th>
+            <th>Signal source</th>
+            <th style="width:36px"></th>
+          </tr></thead>
+          <tbody id="kpi-tbody"></tbody>
+        </table>
+      </div>
+      <p style="color:var(--muted);font-size:12px;margin-top:16px">
+        V1 targets (Milestone 2, ~4–5 months post-OSS-launch): 5k+ GitHub stars · 1k+ WAU · first paying team · end-to-end killer demo recorded + posted · ≥10 documented self-host deployments.
+      </p>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
+
+/* =========================================================================
+   Config
+   ========================================================================= */
+const SUPABASE_URL = 'https://rbuynvswyplfyxuxpyxy.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_A-bo5izhAVcluPdN5d_T2Q_pPqIHSy-';
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+});
+
+/* =========================================================================
+   State
+   ========================================================================= */
+let state = {
+  groups: [], people: [], statuses: [], priorities: [],
+  tasks: [], kpis: [], commits: []
+};
+let filters = { search: "", owner: "", status: "", priority: "" };
+let currentUser = null;
+let currentPersonId = null;  // maps user email → people.id so "My Week" follows you
+
+/* =========================================================================
+   Helpers
+   ========================================================================= */
+function $(id) { return document.getElementById(id); }
+function toast(msg, isErr = false) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.toggle('err', !!isErr);
+  t.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.remove('show'), 1600);
+}
+function setSync(label, cls = "") {
+  $('sync-label').textContent = label;
+  $('sync-dot').className = 'badge-dot ' + cls;
+}
+function el(tag, attrs = {}, children = []) {
+  const e = document.createElement(tag);
+  for (const k in attrs) {
+    if (k === 'class') e.className = attrs[k];
+    else if (k.startsWith('on')) e.addEventListener(k.slice(2), attrs[k]);
+    else if (k === 'html') e.innerHTML = attrs[k];
+    else if (attrs[k] !== null && attrs[k] !== undefined) e.setAttribute(k, attrs[k]);
+  }
+  (Array.isArray(children) ? children : [children]).forEach(c => {
+    if (c == null) return;
+    e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+  });
+  return e;
+}
+function nextId(prefix) {
+  const n = state.tasks.filter(t => t.id.startsWith(prefix + '-'))
+    .map(t => parseInt(t.id.split('-')[1], 10) || 0)
+    .reduce((m, v) => Math.max(m, v), 0);
+  return `${prefix}-${String(n + 1).padStart(3, '0')}`;
+}
+function groupPrefix(gid) {
+  return ({
+    marketing: 'MKT', product: 'PRD', security: 'SEC',
+    design: 'DES', methodology: 'FISH', ops: 'OPS'
+  })[gid] || 'TSK';
+}
+function taskMatchesFilters(t) {
+  if (filters.search) {
+    const q = filters.search.toLowerCase();
+    if (!(t.title + ' ' + (t.notes || '') + ' ' + t.id).toLowerCase().includes(q)) return false;
+  }
+  if (filters.owner && t.owner_id !== filters.owner) return false;
+  if (filters.priority && t.priority_id !== filters.priority) return false;
+  if (filters.status === 'open' && (t.status_id === 'done' || t.status_id === 'parked')) return false;
+  return true;
+}
+function dueClass(d) {
+  if (!d) return '';
+  const due = new Date(d + 'T00:00:00');
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const ms = due - today;
+  if (ms < 0) return 'overdue';
+  if (ms < 4 * 86400000) return 'soon';
+  return '';
+}
+function emailToPersonId(email) {
+  if (!email) return null;
+  const lc = email.toLowerCase();
+  if (lc.includes('talsolomon')) return 'tal';
+  // Add further mappings here (Shenhav, etc.). For now, unknown emails → no person match.
+  // If person.name matches the email's local part case-insensitively, map it.
+  const localPart = lc.split('@')[0];
+  const byName = state.people.find(p => p.name.toLowerCase() === localPart);
+  return byName ? byName.id : null;
+}
+
+/* =========================================================================
+   Auth flow
+   ========================================================================= */
+async function initAuth() {
+  // Supabase SDK handles the hash on load when detectSessionInUrl: true.
+  const { data } = await supabase.auth.getSession();
+  if (data.session) return enterApp(data.session.user);
+  showGate('Sign in', 'Allowlisted access for Tal and Shenhav.');
+
+  supabase.auth.onAuthStateChange((_event, session) => {
+    if (session?.user) enterApp(session.user);
+  });
+}
+
+function showGate(title, subtitle, msg = null, msgKind = '') {
+  $('gate').style.display = 'flex';
+  $('app').style.display = 'none';
+  $('gate-title').textContent = title;
+  $('gate-subtitle').textContent = subtitle;
+  const m = $('gate-msg');
+  if (msg) { m.textContent = msg; m.className = 'gate-msg ' + msgKind; m.style.display = 'block'; }
+  else { m.style.display = 'none'; }
+}
+
+async function enterApp(user) {
+  currentUser = user;
+  $('gate-signout').style.display = 'none';
+  setSync('Connecting…', 'syncing');
+  // Authoritative allowlist check via security-definer RPC.
+  const { data: allowed, error: rpcErr } = await supabase.rpc('is_allowed');
+  if (rpcErr) {
+    toast('Auth check failed: ' + rpcErr.message, true);
+    console.error(rpcErr);
+  }
+  if (!allowed) {
+    showGate(
+      'Not allowlisted',
+      `Your email (${user.email}) isn't on the allowlist. Ask Tal to add you in Supabase → allowed_emails.`,
+      null
+    );
+    $('gate-signout').style.display = 'block';
+    return;
+  }
+  $('gate').style.display = 'none';
+  $('app').style.display = 'block';
+  $('user-chip').textContent = user.email;
+  await loadAll();
+  subscribeRealtime();
+  setSync('Live', '');
+  // Adjust week title based on user
+  currentPersonId = emailToPersonId(user.email);
+  const person = state.people.find(p => p.id === currentPersonId);
+  $('week-title').textContent = (person ? `${person.name}'s` : 'Your') + ' focus — this week';
+}
+
+async function handleSignIn(email, password) {
+  setSync('Signing in…', 'syncing');
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  setSync('Live', '');
+  if (error) {
+    showGate('Sign in', 'Couldn\'t sign in.', error.message, 'err');
+    return;
+  }
+  if (!data.session) {
+    showGate('Sign in', 'No session returned. Ask Tal to bootstrap your account.', null, 'err');
+    return;
+  }
+  // onAuthStateChange → enterApp
+}
+
+async function signOut() {
+  await supabase.auth.signOut();
+  currentUser = null;
+  location.reload();
+}
+
+/* =========================================================================
+   Data loaders
+   ========================================================================= */
+async function loadAll() {
+  const [groups, people, statuses, priorities, tasks, kpis, commits] = await Promise.all([
+    supabase.from('groups').select('*').order('sort_order'),
+    supabase.from('people').select('*').order('name'),
+    supabase.from('statuses').select('*').order('sort_order'),
+    supabase.from('priorities').select('*').order('sort_order'),
+    supabase.from('tasks').select('*').order('sort_order'),
+    supabase.from('kpis').select('*').order('sort_order'),
+    supabase.from('repo_commits').select('*').order('seen_at', { ascending: false })
+  ]);
+  const fail = [groups, people, statuses, priorities, tasks, kpis, commits].find(r => r.error);
+  if (fail) {
+    toast('Load error: ' + fail.error.message, true);
+    console.error(fail.error);
+    return;
+  }
+  state.groups     = groups.data;
+  state.people     = people.data;
+  state.statuses   = statuses.data;
+  state.priorities = priorities.data;
+  state.tasks      = tasks.data;
+  state.kpis       = kpis.data;
+  state.commits    = commits.data;
+  renderAll();
+}
+
+/* =========================================================================
+   Realtime
+   ========================================================================= */
+function subscribeRealtime() {
+  const channel = supabase.channel('dslash-board');
+  const tables = ['tasks', 'kpis', 'groups', 'people', 'statuses', 'priorities', 'repo_commits'];
+  tables.forEach(t => {
+    channel.on('postgres_changes', { event: '*', schema: 'public', table: t }, (payload) => {
+      applyChange(t, payload);
+    });
+  });
+  channel.subscribe();
+}
+
+function applyChange(table, payload) {
+  const { eventType, new: nu, old: ol } = payload;
+  const key = {
+    tasks: 'tasks', kpis: 'kpis', groups: 'groups',
+    people: 'people', statuses: 'statuses', priorities: 'priorities',
+    repo_commits: 'commits'
+  }[table];
+  if (!key) return;
+  if (eventType === 'INSERT') {
+    if (!state[key].find(r => r.id === nu.id || r.sha === nu.sha)) state[key].push(nu);
+  } else if (eventType === 'UPDATE') {
+    const idx = state[key].findIndex(r => (r.id ?? r.sha) === (nu.id ?? nu.sha));
+    if (idx >= 0) state[key][idx] = nu;
+    else state[key].push(nu);
+  } else if (eventType === 'DELETE') {
+    state[key] = state[key].filter(r => (r.id ?? r.sha) !== (ol.id ?? ol.sha));
+  }
+  renderAll();
+}
+
+/* =========================================================================
+   Mutations
+   ========================================================================= */
+async function updateTask(id, patch) {
+  const idx = state.tasks.findIndex(t => t.id === id);
+  if (idx >= 0) Object.assign(state.tasks[idx], patch);
+  const { error } = await supabase.from('tasks').update(patch).eq('id', id);
+  if (error) { toast('Save failed: ' + error.message, true); console.error(error); }
+}
+async function createTask(groupId) {
+  const id = nextId(groupPrefix(groupId));
+  const row = {
+    id, title: 'New task', group_id: groupId,
+    owner_id: currentPersonId || 'tal', status_id: 'todo', priority_id: 'p1',
+    due: null, notes: '', github: '',
+    sort_order: (state.tasks.filter(t => t.group_id === groupId).length + 1) * 10
+  };
+  state.tasks.push(row);
+  renderAll();
+  const { error } = await supabase.from('tasks').insert(row);
+  if (error) { toast('Create failed: ' + error.message, true); console.error(error); }
+  setTimeout(() => {
+    const el = [...document.querySelectorAll('.cell-title')].find(
+      e => e.closest('.row')?.querySelector('.cell-id')?.textContent === id);
+    if (el) { el.focus(); document.getSelection().selectAllChildren(el); }
+  }, 60);
+}
+async function deleteTask(id) {
+  state.tasks = state.tasks.filter(t => t.id !== id);
+  renderAll();
+  const { error } = await supabase.from('tasks').delete().eq('id', id);
+  if (error) { toast('Delete failed: ' + error.message, true); console.error(error); }
+}
+async function updateKpi(id, patch) {
+  const idx = state.kpis.findIndex(k => k.id === id);
+  if (idx >= 0) Object.assign(state.kpis[idx], patch);
+  const { error } = await supabase.from('kpis').update(patch).eq('id', id);
+  if (error) { toast('Save failed: ' + error.message, true); console.error(error); }
+}
+async function createKpi() {
+  // Next Mn id
+  const nums = state.kpis.map(k => parseInt((k.id.match(/^M(\d+)$/) || [])[1], 10) || 0);
+  const id = 'M' + (Math.max(0, ...nums) + 1);
+  const row = {
+    id, metric: 'New metric', current: '', target: '', signal: '',
+    sort_order: (state.kpis.length + 1) * 10
+  };
+  state.kpis.push(row);
+  renderAll();
+  const { error } = await supabase.from('kpis').insert(row);
+  if (error) { toast('Create failed: ' + error.message, true); console.error(error); return; }
+  setTimeout(() => {
+    const row = document.querySelector(`tr[data-kpi-id="${id}"] .kpi-metric-cell`);
+    if (row) { row.focus(); document.getSelection().selectAllChildren(row); }
+  }, 60);
+}
+async function deleteKpi(id) {
+  if (!confirm(`Delete KPI ${id}?`)) return;
+  state.kpis = state.kpis.filter(k => k.id !== id);
+  renderAll();
+  const { error } = await supabase.from('kpis').delete().eq('id', id);
+  if (error) { toast('Delete failed: ' + error.message, true); console.error(error); }
+}
+
+/* =========================================================================
+   Rendering
+   ========================================================================= */
+function renderPillSelect(kind, value, options, onChange) {
+  const sel = el('select', { class: `pill-select pill-${kind}` });
+  options.forEach(o => {
+    const opt = el('option', { value: o.id }, o.label);
+    if (o.id === value) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  sel.dataset.value = value ?? '';
+  sel.addEventListener('change', () => {
+    sel.dataset.value = sel.value;
+    onChange(sel.value);
+  });
+  return sel;
+}
+
+function renderRow(task, isHead = false) {
+  if (isHead) {
+    return el('div', { class: 'row row-head' }, [
+      el('div', { class: 'cell cell-id' }, 'ID'),
+      el('div', { class: 'cell' }, 'Task'),
+      el('div', { class: 'cell' }, 'Owner'),
+      el('div', { class: 'cell' }, 'Status'),
+      el('div', { class: 'cell' }, 'Priority'),
+      el('div', { class: 'cell' }, 'Due'),
+      el('div', { class: 'cell' }, 'Notes / Links'),
+      el('div', { class: 'cell' }, '')
+    ]);
+  }
+  const row = el('div', { class: 'row' + (task.status_id === 'done' ? ' done' : '') });
+  row.appendChild(el('div', { class: 'cell cell-id' }, task.id));
+
+  const titleEl = el('div', { class: 'cell cell-title', contenteditable: 'true' }, task.title);
+  titleEl.addEventListener('blur', () => {
+    const v = titleEl.textContent.trim();
+    if (v !== task.title) updateTask(task.id, { title: v });
+  });
+  titleEl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); titleEl.blur(); } });
+  row.appendChild(titleEl);
+
+  const ownerCell = el('div', { class: 'cell' });
+  ownerCell.appendChild(renderPillSelect('owner', task.owner_id,
+    state.people.map(p => ({ id: p.id, label: p.name })),
+    v => updateTask(task.id, { owner_id: v })));
+  row.appendChild(ownerCell);
+
+  const statusCell = el('div', { class: 'cell' });
+  statusCell.appendChild(renderPillSelect('status', task.status_id,
+    state.statuses,
+    v => updateTask(task.id, { status_id: v })));
+  row.appendChild(statusCell);
+
+  const prioCell = el('div', { class: 'cell' });
+  prioCell.appendChild(renderPillSelect('priority', task.priority_id,
+    state.priorities,
+    v => updateTask(task.id, { priority_id: v })));
+  row.appendChild(prioCell);
+
+  const dueCell = el('div', { class: 'cell cell-due ' + dueClass(task.due) });
+  const dueInp = el('input', { type: 'date', value: task.due || '' });
+  dueInp.addEventListener('change', () => updateTask(task.id, { due: dueInp.value || null }));
+  dueCell.appendChild(dueInp);
+  row.appendChild(dueCell);
+
+  const notesEl = el('div', { class: 'cell cell-notes', contenteditable: 'true', title: task.notes || '' }, task.notes || '');
+  notesEl.addEventListener('blur', () => {
+    const v = notesEl.textContent;
+    if (v !== (task.notes || '')) updateTask(task.id, { notes: v });
+  });
+  row.appendChild(notesEl);
+
+  const del = el('button', { class: 'cell-del', title: 'Delete task',
+    onclick: () => { if (confirm(`Delete "${task.title}"?`)) deleteTask(task.id); }
+  }, '×');
+  const delCell = el('div', { class: 'cell', style: 'padding:6px;text-align:center' });
+  delCell.appendChild(del);
+  row.appendChild(delCell);
+
+  return row;
+}
+
+function renderGroup(group, tasks) {
+  const visible = tasks.filter(taskMatchesFilters);
+  const header = el('div', { class: 'group-header' }, [
+    el('span', { class: 'group-caret' }, '▼'),
+    el('span', { class: 'group-title' }, [
+      el('span', { class: 'group-icon' }, group.icon || '•'),
+      group.name,
+      el('span', { class: 'group-count' }, `${visible.length}/${tasks.length}`)
+    ]),
+    el('button', {
+      class: 'group-add',
+      onclick: e => { e.stopPropagation(); createTask(group.id); }
+    }, '+ Add task')
+  ]);
+  const body = el('div', { class: 'group-body' });
+  body.appendChild(renderRow(null, true));
+  if (visible.length === 0) {
+    body.appendChild(el('div', { class: 'empty' },
+      tasks.length === 0 ? 'No tasks yet. Click + Add task.' : 'No tasks match the current filter.'));
+  } else {
+    visible.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+    visible.forEach(t => body.appendChild(renderRow(t)));
+  }
+  const wrapper = el('div', { class: 'group' }, [header, body]);
+  header.addEventListener('click', () => wrapper.classList.toggle('collapsed'));
+  return wrapper;
+}
+
+function renderBoard() {
+  const container = $('board');
+  container.innerHTML = '';
+  state.groups.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  state.groups.forEach(g => {
+    const groupTasks = state.tasks.filter(t => t.group_id === g.id);
+    container.appendChild(renderGroup(g, groupTasks));
+  });
+}
+
+function renderKpiStrip() {
+  const container = $('board-kpi-strip');
+  container.innerHTML = '';
+  state.kpis.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  state.kpis.slice(0, 4).forEach(k => {
+    const card = el('div', { class: 'kpi-card' }, [
+      el('h4', {}, k.id),
+      el('div', { class: 'kpi-metric' }, k.metric),
+      el('div', { class: 'kpi-row' }, [
+        el('div', { class: 'kpi-current', contenteditable: 'true' }, k.current || ''),
+        el('div', { class: 'kpi-target' }, k.target || '')
+      ]),
+      el('div', { class: 'kpi-signal' }, k.signal || '')
+    ]);
+    const cur = card.querySelector('.kpi-current');
+    cur.addEventListener('blur', () => {
+      const v = cur.textContent.trim();
+      if (v !== (k.current || '')) updateKpi(k.id, { current: v });
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderKpiTable() {
+  const tbody = $('kpi-tbody');
+  tbody.innerHTML = '';
+  state.kpis.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  state.kpis.forEach(k => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-kpi-id', k.id);
+    tr.appendChild(el('td', { class: 'kpi-id' }, k.id));
+
+    const metricTd = el('td', {}, [el('div', { class: 'kpi-metric-cell', contenteditable: 'true' }, k.metric || '')]);
+    metricTd.firstChild.addEventListener('blur', () => {
+      const v = metricTd.firstChild.textContent.trim();
+      if (v !== (k.metric || '')) updateKpi(k.id, { metric: v });
+    });
+    tr.appendChild(metricTd);
+
+    const curTd = el('td', {}, [el('div', { contenteditable: 'true' }, k.current || '')]);
+    curTd.firstChild.addEventListener('blur', () => {
+      const v = curTd.firstChild.textContent.trim();
+      if (v !== (k.current || '')) updateKpi(k.id, { current: v });
+    });
+    tr.appendChild(curTd);
+
+    const tgtTd = el('td', {}, [el('div', { contenteditable: 'true' }, k.target || '')]);
+    tgtTd.firstChild.addEventListener('blur', () => {
+      const v = tgtTd.firstChild.textContent.trim();
+      if (v !== (k.target || '')) updateKpi(k.id, { target: v });
+    });
+    tr.appendChild(tgtTd);
+
+    const sigTd = el('td', { style: 'color:var(--muted)' },
+      [el('div', { contenteditable: 'true' }, k.signal || '')]);
+    sigTd.firstChild.addEventListener('blur', () => {
+      const v = sigTd.firstChild.textContent.trim();
+      if (v !== (k.signal || '')) updateKpi(k.id, { signal: v });
+    });
+    tr.appendChild(sigTd);
+
+    const delTd = el('td', { class: 'row-delete-cell' }, [
+      el('button', { class: 'btn danger-ghost', title: 'Delete KPI',
+        onclick: () => deleteKpi(k.id) }, '×')
+    ]);
+    tr.appendChild(delTd);
+
+    tbody.appendChild(tr);
+  });
+}
+
+function renderWeek() {
+  const container = $('week-board');
+  container.innerHTML = '';
+  const me = currentPersonId;
+  if (!me) {
+    container.appendChild(el('div', { class: 'empty' },
+      'No person mapped to your email yet. Ask Tal to add you to the people table.'));
+    $('week-p0').textContent = '—';
+    $('week-active').textContent = '—';
+    $('week-blocked').textContent = '—';
+    return;
+  }
+  const mine = state.tasks.filter(t =>
+    t.owner_id === me &&
+    (t.priority_id === 'p0' || t.status_id === 'in_progress' || t.status_id === 'blocked')
+  );
+  $('week-p0').textContent = mine.filter(t => t.priority_id === 'p0' && t.status_id !== 'done').length;
+  $('week-active').textContent = mine.filter(t => t.status_id === 'in_progress').length;
+  $('week-blocked').textContent = mine.filter(t => t.status_id === 'blocked').length;
+  state.groups.forEach(g => {
+    const gt = mine.filter(t => t.group_id === g.id);
+    if (gt.length > 0) container.appendChild(renderGroup(g, gt));
+  });
+  if (mine.length === 0) {
+    container.appendChild(el('div', { class: 'empty' }, 'Nothing urgent. You might actually be free.'));
+  }
+}
+
+function renderRepo() {
+  const panel = $('repo-panel');
+  panel.innerHTML = '';
+  panel.appendChild(el('h3', {}, 'Repo activity'));
+  panel.appendChild(el('p', { style: 'margin:0 0 12px;font-size:13px' }, [
+    el('a', { href: 'https://github.com/talsolomon/collab', target: '_blank' }, 'talsolomon/collab')
+  ]));
+  const ul = el('ul');
+  state.commits.slice(0, 6).forEach(c => {
+    const li = el('li', {}, [
+      el('code', {}, c.sha),
+      el('span', {}, c.msg),
+      c.feeds ? el('span', {
+        style: 'margin-left:auto;color:var(--muted);font-family:var(--mono);font-size:11px'
+      }, `→ ${c.feeds}`) : null
+    ]);
+    ul.appendChild(li);
+  });
+  panel.appendChild(ul);
+}
+
+function renderAll() {
+  if ($('app').style.display === 'none') return;
+  renderBoard();
+  renderKpiStrip();
+  renderKpiTable();
+  renderWeek();
+  renderRepo();
+}
+
+/* =========================================================================
+   Wiring
+   ========================================================================= */
+$('tabs').addEventListener('click', e => {
+  if (!e.target.matches('.tab')) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  const view = e.target.dataset.view;
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.dataset.view === view));
+});
+
+$('filter-search').addEventListener('input', e => { filters.search = e.target.value; renderBoard(); });
+document.querySelectorAll('[data-filter-owner]').forEach(b => {
+  b.addEventListener('click', () => {
+    filters.owner = b.dataset.filterOwner;
+    document.querySelectorAll('[data-filter-owner]').forEach(x => x.classList.toggle('active', x === b));
+    renderBoard();
+  });
+});
+document.querySelectorAll('[data-filter-status]').forEach(b => {
+  b.addEventListener('click', () => {
+    filters.status = filters.status === b.dataset.filterStatus ? '' : b.dataset.filterStatus;
+    b.classList.toggle('active', filters.status === b.dataset.filterStatus);
+    renderBoard();
+  });
+});
+document.querySelectorAll('[data-filter-priority]').forEach(b => {
+  b.addEventListener('click', () => {
+    filters.priority = filters.priority === b.dataset.filterPriority ? '' : b.dataset.filterPriority;
+    b.classList.toggle('active', filters.priority === b.dataset.filterPriority);
+    renderBoard();
+  });
+});
+
+$('btn-new').addEventListener('click', () => createTask(state.groups[0]?.id || 'marketing'));
+$('btn-kpi-new').addEventListener('click', createKpi);
+$('btn-signout').addEventListener('click', signOut);
+$('btn-signout-gate').addEventListener('click', signOut);
+
+$('gate-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = $('gate-email').value.trim();
+  const password = $('gate-password').value;
+  if (email && password) handleSignIn(email, password);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && !document.activeElement.isContentEditable) {
+    e.preventDefault();
+    const s = $('filter-search'); if (s) s.focus();
+  }
+});
+
+/* =========================================================================
+   Boot
+   ========================================================================= */
+initAuth();
+</script>
+</body>
+</html>

@@ -1,9 +1,9 @@
-# Technical Research — Trace Stack & Feasibility
+# Technical Research — Double Slash Stack & Feasibility
 
 **Date:** 2026-04-20
-**Question:** What's the realistic technology stack for Trace's OSS launch (6 weeks) and v1 multiplayer (3 months later) given a two-designer founding team and the integrity-first product profile? Where are the swing risks?
+**Question:** What's the realistic technology stack for Double Slash's OSS launch (6 weeks) and v1 multiplayer (3 months later) given a two-designer founding team and the integrity-first product profile? Where are the swing risks?
 
-> **Stack note:** BMAD's default assumption was a React+Vite web app. Trace is a **desktop capture client + browser extension + (later) hosted backend + agent fabric** — fundamentally different. This report establishes the real stack from scratch.
+> **Stack note:** BMAD's default assumption was a React+Vite web app. Double Slash is a **desktop capture client + browser extension + (later) hosted backend + agent fabric** — fundamentally different. This report establishes the real stack from scratch.
 
 ---
 
@@ -15,7 +15,7 @@
 | **UI inside the client** | React + TypeScript + Tailwind + shadcn/ui | Founders are designers; UI work is where their leverage is highest. Reused later for the v1 web app. Matches BMAD config defaults. |
 | **Browser extension** | Manifest V3 + Plasmo + React/TS | Plasmo removes 80% of MV3 boilerplate. Same UI library as desktop. |
 | **Local encrypted storage** | SQLite (Tauri SQL plugin) + `age` for content encryption | Boring, auditable, single-file portable. `age` is the modern OSS-friendly encryption choice. |
-| **Capture — Tier 0 (API key)** | Local proxy / pass-through SDK wrappers | User points their app at `http://localhost:port`; Trace forwards to OpenAI/Anthropic and records. Zero ToS risk. |
+| **Capture — Tier 0 (API key)** | Local proxy / pass-through SDK wrappers | User points their app at `http://localhost:port`; Double Slash forwards to OpenAI/Anthropic and records. Zero ToS risk. |
 | **Capture — Tier 2 (browser)** | MV3 content scripts on chatgpt.com, claude.ai, perplexity.ai | DOM-scraped + `fetch` interception. Routine pattern (Grammarly, ReadWise). |
 | **Capture — Tier 3 (native macOS)** | macOS Accessibility API via Tauri Rust core | Highest-risk swing item. See Risks section. |
 | **Agent runtime (v1 OSS — personal agents)** | In-process in the desktop client; Anthropic SDK with Claude Haiku 4.5 (cheap, fast) and prompt caching | Personal agents = capture, redaction. Run locally, no server roundtrip. Privacy story stays clean. |
@@ -47,7 +47,7 @@
 
 ### Tier 0 — API-key bring-your-own (always-safe)
 
-**How it works:** User installs Trace, enters their OpenAI / Anthropic / etc. API key. Trace runs a local HTTP proxy on `localhost:<port>`. User configures their tools to point at the local proxy (or installs a Trace-aware SDK wrapper). Trace forwards every call to the real provider, records the request + response, returns to the caller.
+**How it works:** User installs Double Slash, enters their OpenAI / Anthropic / etc. API key. Double Slash runs a local HTTP proxy on `localhost:<port>`. User configures their tools to point at the local proxy (or installs a Double Slash-aware SDK wrapper). Double Slash forwards every call to the real provider, records the request + response, returns to the caller.
 
 **Stack:** Tauri Rust core hosts the proxy (using `axum` or `hyper`). Or: ship a tiny standalone proxy daemon that runs alongside the Tauri client.
 
@@ -75,7 +75,7 @@
 
 ### Tier 3 — macOS Accessibility (the swing item)
 
-**How it works:** macOS exposes window content to apps the user grants Accessibility permission to (System Settings → Privacy → Accessibility). Trace queries the AX tree of Claude Desktop, Cursor, etc. and reads the rendered conversation as it changes.
+**How it works:** macOS exposes window content to apps the user grants Accessibility permission to (System Settings → Privacy → Accessibility). Double Slash queries the AX tree of Claude Desktop, Cursor, etc. and reads the rendered conversation as it changes.
 
 **Stack:** Tauri Rust core + the `accessibility-rs` or `objc2` crates to call the macOS Accessibility C API. Not React-side — has to be in the Rust core.
 
@@ -93,9 +93,23 @@
 **Pros (if it works):** Native capture for the two highest-value desktop apps. Strong launch story. No ToS risk (you're using a platform-legitimate API the user explicitly granted).
 **Cons:** High effort, fragile, macOS-only (Windows UIAutomation is a separate later effort).
 
-**Alternative if Tier 3 falls behind schedule:** Use Anthropic's **MCP (Model Context Protocol) server** approach for Claude Desktop. Claude Desktop natively supports MCP servers — Trace ships an MCP server, the user adds it to their Claude config, and capture flows through the MCP integration. **Lower-risk path; recommend exploring as Tier 3-alt before committing 4 weeks to AX work.** Same idea works for Cursor's MCP support (recently added). May replace the Accessibility-API path entirely.
+**Alternative if Tier 3 falls behind schedule:** Use Anthropic's **MCP (Model Context Protocol) server** approach for Claude Desktop. Claude Desktop natively supports MCP servers — Double Slash ships an MCP server, the user adds it to their Claude config, and capture flows through the MCP integration. **Lower-risk path; recommend exploring as Tier 3-alt before committing 4 weeks to AX work.** Same idea works for Cursor's MCP support (recently added). May replace the Accessibility-API path entirely.
 
 > **Critical action item:** spike MCP-server-based capture in week 1 (2–3 days). If it covers Claude Desktop and Cursor cleanly, it could replace the Accessibility-API work entirely and pull weeks out of the timeline.
+
+### Capture invocation — the `//` trigger
+
+The `//` gesture (consent-per-session capture trigger) is not a capture *mechanism* — it's an invocation primitive the user types inside the target AI tool. Making the target tool *recognize* `//` as "hand this session to Double Slash" requires **tool-specific install plumbing**:
+
+| Target tool | Mechanism |
+|---|---|
+| Claude Desktop | Write into `CLAUDE.md` / memory files |
+| Cursor | Write into `.cursorrules` |
+| ChatGPT Desktop | Write into Custom Instructions |
+
+No universal primitive exists. Treat `//` onboarding as **N separate integrations**, one per supported AI tool — not one feature. Each target also needs a versioned handler (the file format and mechanism evolve per tool), and the installer needs to be able to update these handlers out-of-band when the target tool changes.
+
+**Implication for scope:** the "install once and `//` works everywhere" story costs roughly one integration-week per supported tool at v1, plus ongoing maintenance. For launch, pick the 2–3 tools where the wedge is strongest (likely Claude Desktop + Cursor) and document the gap honestly for the rest.
 
 ---
 
@@ -164,7 +178,7 @@ The Alice→Bob killer demo requires real-time-ish sync between client devices a
 
 **Personal agents (capture, redaction):** in-process in the desktop client.
 - Use Anthropic SDK with **Claude Haiku 4.5** for fast/cheap inference.
-- Run on the user's own API key (BYOK) so the user pays inference and Trace doesn't carry the cost.
+- Run on the user's own API key (BYOK) so the user pays inference and Double Slash doesn't carry the cost.
 - Aggressive prompt caching — most personal-agent prompts are stable scaffolds with small per-session variation; cache the scaffold. (See `claude-api` skill.)
 - For redaction specifically: prefer fast regex + structured pattern detection (PII, secrets) as the first pass, then a small Claude call only for ambiguous cases. Saves cost + latency + works offline.
 
@@ -176,9 +190,9 @@ The Alice→Bob killer demo requires real-time-ish sync between client devices a
 **Why split personal/system this way:**
 - Personal agents on-device = privacy story stays clean (no content leaves device for personal-agent inference).
 - System agents on the server = they need the shared team graph anyway, no point round-tripping.
-- BYOK on personal agents = Trace doesn't pay for inference at the seat where 90% of inference happens.
+- BYOK on personal agents = Double Slash doesn't pay for inference at the seat where 90% of inference happens.
 
-**Reject local-LLM-only agent runtime (Ollama, llama.cpp).** Local model quality in 2026 is good but not at Sonnet/Haiku level for the agent tasks Trace needs (structured tool use, redaction precision). Ship hosted-LLM with BYOK; revisit local models in v2.
+**Reject local-LLM-only agent runtime (Ollama, llama.cpp).** Local model quality in 2026 is good but not at Sonnet/Haiku level for the agent tasks Double Slash needs (structured tool use, redaction precision). Ship hosted-LLM with BYOK; revisit local models in v2.
 
 ---
 
@@ -229,7 +243,7 @@ The Alice→Bob killer demo requires real-time-ish sync between client devices a
 | MV3 capture breaks when ChatGPT/Claude.ai change DOM | Medium | Medium | Both DOM + fetch-intercept paths; quick-update extension channel. |
 | macOS codesigning + notarization eats a week | High | Medium | Allocate week 5 for it explicitly; Apple Developer account ready week 1. |
 | 2 designers can't ship Rust code | High | Critical | **Bring in engineering help before kickoff.** This is the report's single most important call-out. |
-| Trademark for "Trace" not clearable | Medium | Medium (delays public launch) | Start clearance search this week. |
+| Trademark for "Double Slash" not clearable | Medium | Medium (delays public launch) | Start clearance search this week. |
 | Anthropic / OpenAI ToS enforcement on capture | Low | High | Lead with Tier 0 (API key, explicitly authorized); Tier 2 follows precedent (browser extensions are routine). Engage product counsel pre-launch. |
 
 ---
@@ -248,7 +262,7 @@ The Alice→Bob killer demo requires real-time-ish sync between client devices a
 | **Total at OSS launch (no backend)** | **~$40–80/mo** |
 | **Total at v1 multiplayer** | **~$150–400/mo** |
 
-Personal-agent inference is BYOK so doesn't hit Trace's bill.
+Personal-agent inference is BYOK so doesn't hit Double Slash's bill.
 
 ---
 

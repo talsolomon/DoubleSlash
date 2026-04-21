@@ -1,9 +1,9 @@
-# UX Design — Trace OSS Launch (single-player)
+# UX Design — Double Slash OSS Launch (single-player)
 
 **Status:** Draft v1
 **Date:** 2026-04-20
 **Brief:** [`brief-collab-capture-layer.md`](brief-collab-capture-layer.md)
-**Tech research:** [`technical-research-trace-stack.md`](../docs/technical-research-trace-stack.md)
+**Tech research:** [`technical-research-double-slash-stack.md`](../docs/technical-research-double-slash-stack.md)
 **Founders (both designers):** Tal + Shenhav
 
 > **Scope:** the 6-week OSS-launch milestone only. Single-player, local-only, macOS. Multiplayer UX is a separate doc after OSS launch ships.
@@ -12,7 +12,7 @@
 
 ## Design Goal
 
-Make Trace feel like **the quiet layer your team's AI work lives on** — always on, never creepy, and clearly in service of the handoff between teammates. The install-to-first-capture moment must turn skepticism into relief. Every surface must earn the right to watch AI work by visibly respecting the user and making the collaboration story legible from day one (even though full multiplayer ships in V1, not OSS launch).
+Make Double Slash feel like **the quiet layer your team's AI work lives on** — always on, never creepy, and clearly in service of the handoff between teammates. The install-to-first-capture moment must turn skepticism into relief. Every surface must earn the right to watch AI work by visibly respecting the user and making the collaboration story legible from day one (even though full multiplayer ships in V1, not OSS launch).
 
 **North-star feel:** *"Oh — I can see what it's doing, I'm in charge of all of it, and I can already picture my teammate picking this up."*
 
@@ -35,7 +35,7 @@ Make Trace feel like **the quiet layer your team's AI work lives on** — always
 
 **Primary persona:** *Senior IC on a design + dev team* who lives in 3+ AI tools daily and keeps hitting the wall where their AI session can't cross tool boundaries to a teammate. Designer using Claude Design + Figma AI, or developer using Cursor + VS Code's AI — either way, their AI work is trapped and they're pasting screenshots into Slack to bridge the gap. Technical enough to install a native macOS app, savvy enough to be suspicious of a "layer that sees everything."
 
-**Entry point:** downloads the `.dmg` from the marketing site after seeing it on Twitter, Hacker News, a friend's recommendation, or the Trace GitHub README. Frequently arriving with a co-worker in mind — *"if this works, I want to send it to [designer/developer teammate]."*
+**Entry point:** downloads the `.dmg` from the marketing site after seeing it on Twitter, Hacker News, a friend's recommendation, or the Double Slash GitHub README. Frequently arriving with a co-worker in mind — *"if this works, I want to send it to [designer/developer teammate]."*
 
 **Intent:** *"Let me try this. If it's creepy, I'm uninstalling. If it works, I'm sending it to my teammate."*
 
@@ -47,12 +47,12 @@ Make Trace feel like **the quiet layer your team's AI work lives on** — always
 
 ## Information Architecture
 
-Trace is a **menubar-primary app** with a main window for deeper exploration.
+Double Slash is a **menubar-primary app** with a main window for deeper exploration.
 
 ```
 ╭─────────────────────────────────────────╮
 │  macOS menubar                          │
-│  …  🟢 Trace  [14 sessions today]       │  ← always-visible
+│  …  🟢 //  [14 sessions today]          │  ← always-visible (logo mark)
 ╰─────────────────────────────────────────╯
        │ click
        ▼
@@ -66,9 +66,9 @@ Trace is a **menubar-primary app** with a main window for deeper exploration.
 │  • Cursor         · 6                   │
 │  • ChatGPT web    · 3                   │
 │                                         │
-│  [⏸  Pause capture]  [Open Trace →]    │
+│  [⏸  Pause capture]  [Open Double//Slash →]   │
 ╰─────────────────────────────────────────╯
-       │ "Open Trace"
+       │ "Open Double//Slash"
        ▼
 ╭─────────────────────────────────────────╮
 │  Main window (960×680)                  │
@@ -79,7 +79,7 @@ Trace is a **menubar-primary app** with a main window for deeper exploration.
 ╰─────────────────────────────────────────╯
 ```
 
-**Why menubar-primary:** Trace is a background tool, not a destination. The main window is for when you *want* to look. The menubar is the always-on "yes, it's working, here's what it's doing."
+**Why menubar-primary:** Double Slash is a background tool, not a destination. The main window is for when you *want* to look. The menubar is the always-on "yes, it's working, here's what it's doing."
 
 **Dock icon:** YES, keep it. A hidden menubar app feels sneakier than one with a visible dock presence — runs counter to the transparency principle. The dock icon is part of the trust signal.
 
@@ -93,12 +93,12 @@ Trace is a **menubar-primary app** with a main window for deeper exploration.
 
 | # | Screen | User sees | User does | System does |
 |---|---|---|---|---|
-| 1 | Welcome | "Welcome to Trace. Trace carries your AI work between tools — and, when your team is on it, between teammates. Today we're in OSS launch: single-player, local-only. Multiplayer handoff ships in V1." + tagline + one-sentence privacy promise + [Get started] | Clicks Get started | — |
-| 2 | How it works | 3 dot-points with illustrations: (1) Trace watches the AI tools *you choose* (Claude Desktop, Cursor, ChatGPT, Perplexity, your API key), (2) Everything stays on your Mac until you push it — and in OSS launch there's nothing to push to yet, (3) When V1 ships, pushing a session hands it to a teammate in their preferred tool — designer's Claude Design session picked up by a developer in VS Code, and back. | Clicks Continue | — |
-| 3 | Telemetry consent | Two plain-English toggles, both OFF by default: "Help us count installs? (+1 only, no content)" and "Send crash reports if Trace breaks?" + [Continue] | Decides each | Persists consent |
+| 1 | Welcome | "Welcome to Double Slash. Double Slash carries your AI work between tools — and, when your team is on it, between teammates. Today we're in OSS launch: single-player, local-only. Multiplayer handoff ships in V1." + tagline + one-sentence privacy promise + [Get started] | Clicks Get started | — |
+| 2 | How it works | 3 dot-points with illustrations: (1) Double Slash watches the AI tools *you choose* (Claude Desktop, Cursor, ChatGPT, Perplexity, your API key), (2) Everything stays on your Mac until you push it — and in OSS launch there's nothing to push to yet, (3) When V1 ships, pushing a session hands it to a teammate in their preferred tool — designer's Claude Design session picked up by a developer in VS Code, and back. | Clicks Continue | — |
+| 3 | Telemetry consent | Two plain-English toggles, both OFF by default: "Help us count installs? (+1 only, no content)" and "Send crash reports if Double Slash breaks?" + [Continue] | Decides each | Persists consent |
 | 4 | Connect your tools | Checklist of capture paths — each shows current status: ① API keys (empty → [Add key]) ② Browser extension (not installed → [Install from Chrome Web Store]) ③ Claude Desktop (no permission → [Grant access]) ④ Cursor (no permission → [Grant access]) | Connects at least one | Validates each |
-| 5 | Accessibility permission (if user chose Claude Desktop or Cursor) | Plain-English explainer panel FIRST, then macOS system dialog. Panel text: "macOS will ask if Trace can read content from Claude Desktop. This is how Trace captures sessions. We only read what's on screen in the apps you selected. Nothing else." + [Open System Settings] | Clicks, grants permission | Deep links to System Settings |
-| 6 | First-run celebration | "You're set. Trace is now watching {N} tools. Go work in {Claude/Cursor/ChatGPT} for a minute, then come back." + [Done] | Closes window | Menubar indicator goes green |
+| 5 | Accessibility permission (if user chose Claude Desktop or Cursor) | Plain-English explainer panel FIRST, then macOS system dialog. Panel text: "macOS will ask if Double Slash can read content from Claude Desktop. This is how Double Slash captures sessions. We only read what's on screen in the apps you selected. Nothing else." + [Open System Settings] | Clicks, grants permission | Deep links to System Settings |
+| 6 | First-run celebration | "You're set. Double Slash is now watching {N} tools. Go work in {Claude/Cursor/ChatGPT} for a minute, then come back." + [Done] | Closes window | Menubar indicator goes green |
 | 7 | (User goes and uses Claude) | — | Runs a session in Claude Desktop | Captures it |
 | 8 | Return — Today view | First session appears in timeline: "Claude Desktop · 2 min ago · [session title auto-generated]" | Clicks it | Opens session detail |
 
@@ -141,18 +141,18 @@ The moment of product truth. Must feel like "a clean, human log of my AI day."
 
 | State | Copy + pattern |
 |---|---|
-| No sessions ever | Big calm illustration. "Trace is watching {N} tools. Start a session in {Claude/Cursor/ChatGPT} and it'll show up here — ready to hand off to a teammate when V1 ships." Footer: "Nothing has left this device." |
+| No sessions ever | Big calm illustration. "Double Slash is watching {N} tools. Start a session in {Claude/Cursor/ChatGPT} and it'll show up here — ready to hand off to a teammate when V1 ships." Footer: "Nothing has left this device." |
 | No sessions today (but history exists) | "Nothing yet today. [See yesterday →]" |
 | Tool disconnected | Inline card: "Claude Desktop stopped reporting. [Check Tools & Sources]" |
 
 ### Flow 3 — Session detail view
 
-Open a captured session; see what Trace recorded.
+Open a captured session; see what Double Slash recorded.
 
 **Layout:**
 - **Header:** tool icon, model, timestamp, turn count, source indicator ("🟢 stored locally — never transmitted")
 - **Body:** the session as a threaded conversation, each turn showing prompt / response exactly as captured
-- **Right rail (collapsible):** metadata — source app, model, tokens, goal (if Trace inferred one), agents involved (capture agent, redaction agent), agent activity log
+- **Right rail (collapsible):** metadata — source app, model, tokens, goal (if Double Slash inferred one), agents involved (capture agent, redaction agent), agent activity log
 
 **Agent activity log (right rail):**
 ```
@@ -177,7 +177,7 @@ Side-by-side diff: "As captured" vs. "What would leave your device if pushed." R
 
 ### Flow 4 — Tools & Sources
 
-Dashboard of every capture path Trace is using. Per-tool: live status, last capture, [Pause] button, [Disconnect].
+Dashboard of every capture path Double Slash is using. Per-tool: live status, last capture, [Pause] button, [Disconnect].
 
 ```
 Tools & Sources
@@ -210,13 +210,13 @@ Sections (left-side sub-nav):
 1. **General** — app launch, menubar display options
 2. **Capture** — capture agent settings, default redaction rules, data retention (default 30 days, configurable)
 3. **Telemetry** — re-expose the two opt-in toggles with same plain-English copy
-4. **API keys** — BYOK entry + test button + "Trace never sees these keys leave this device"
+4. **API keys** — BYOK entry + test button + "Double Slash never sees these keys leave this device"
 5. **Data & privacy** — [Export all data] [Delete all data] [Open the storage folder]
 6. **About** — version, license (FSL-1.1-Apache-2.0), [View source on GitHub], build hash
 
 ### Flow 6 — Privacy dashboard
 
-A single page, accessible from sidebar + from the first-run welcome. Answers: *"What does Trace know, and what has ever left this device?"*
+A single page, accessible from sidebar + from the first-run welcome. Answers: *"What does Double Slash know, and what has ever left this device?"*
 
 ```
 Privacy dashboard
@@ -274,7 +274,7 @@ Agents that have run
 - "Nothing has left this device."
 - "Local only."
 - "You're in charge of every action."
-- "Trace your team's AI work." (tagline)
+- "Double//Slash — the layer between your team's AI tools." (tagline; uses the logo mark)
 - "Pick up where your teammate left off." (V1 positioning — safe to foreshadow in OSS launch copy)
 - "🟢 Capturing · {N} apps · encrypted locally"
 
@@ -283,11 +283,11 @@ Agents that have run
 - "Revolutionary" (marketing tell)
 - "We value your privacy" (boilerplate)
 - "Enterprise-grade" (wrong audience)
-- Passive voice in error messages ("an error occurred" → "Trace couldn't reach Claude Desktop.")
+- Passive voice in error messages ("an error occurred" → "Double Slash couldn't reach Claude Desktop.")
 
 **Error-message pattern:**
-`[What happened]. [What Trace is doing about it]. [What the user can do].`
-Example: *"Claude Desktop stopped reporting. Trace is retrying every 30s. You can force a refresh in Tools & Sources."*
+`[What happened]. [What Double Slash is doing about it]. [What the user can do].`
+Example: *"Claude Desktop stopped reporting. Double Slash is retrying every 30s. You can force a refresh in Tools & Sources."*
 
 ---
 
@@ -355,7 +355,7 @@ Separate doc would go deeper, but for context:
 ## Next steps
 
 - [ ] Shenhav: sketch hi-fi mockups for (a) Today view, (b) first-run step 4 (connect tools), (c) Privacy dashboard, (d) menubar popover. These are the screenshots the GTM will hinge on.
-- [ ] Validate against the tech-research constraints ([`technical-research-trace-stack.md`](../docs/technical-research-trace-stack.md)) — some UX choices assume the Accessibility API; verify feasibility survives the MCP-server spike in week 1.
+- [ ] Validate against the tech-research constraints ([`technical-research-double-slash-stack.md`](../docs/technical-research-double-slash-stack.md)) — some UX choices assume the Accessibility API; verify feasibility survives the MCP-server spike in week 1.
 - [ ] Run `/bmad-create-prd` — OSS-launch PRD grounded in this UX and the tech research.
 - [ ] Run `/bmad-validate-prd` after PRD is drafted.
 - [ ] Break into stories via `/bmad-create-epics-and-stories` once PRD is locked.

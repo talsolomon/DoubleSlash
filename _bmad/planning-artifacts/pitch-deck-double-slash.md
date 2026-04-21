@@ -133,19 +133,19 @@ style: |
 
 <!-- SLIDE 1 — TITLE -->
 
-# Trace
+# Double//Slash
 
 ### The mutual ground for your team's AI work
 
 <br>
 
-**Trace your team's AI work across every tool, every model, every teammate.**
+**Your team's AI work — across every tool, every model, every teammate.**
 
 <br>
 
 **Tal + Shenhav** · April 2026
 
-<!-- LOGO: Trace wordmark · 200x48 · swap in _bmad/assets/logos/trace-wordmark-white.svg -->
+<!-- LOGO: Double//Slash wordmark · 200x48 · swap in _bmad/assets/logos/double-slash-wordmark-white.svg -->
 
 ---
 
@@ -185,19 +185,19 @@ Tools multiplied: Claude, ChatGPT, Cursor, Copilot, Perplexity, Figma AI, v0, Re
 
 <br>
 
-> *"Let people shine wherever they already shine."* — the thesis that drives Trace.
+> *"Let people shine wherever they already shine."* — the thesis that drives Double Slash.
 
 ---
 
-<!-- SLIDE 3 — INTRODUCING TRACE -->
+<!-- SLIDE 3 — INTRODUCING DOUBLE SLASH -->
 
-## Introducing Trace
+## Introducing Double//Slash
 
 *The capture layer. The team graph on top. One install.*
 
 <br>
 
-**One sentence:** Trace is the layer that carries your team's AI work between tools and between teammates — so a designer in Claude can push a session, a developer in VS Code can pick it up, and neither person has to leave what they love.
+**One sentence:** Double Slash is the layer that carries your team's AI work between tools and between teammates — so a designer in Claude can push a session, a developer in VS Code can pick it up, and neither person has to leave what they love.
 
 <br>
 
@@ -212,7 +212,7 @@ A blanket that enfolds all the AI in the world into a cloud. Install one thing, 
 
 **North-star feel:** *"Oh — I can see what it's doing, I'm in charge of all of it, and I can already picture my teammate picking this up."*
 
-<!-- LOGO: Trace wordmark · 160x36 · swap in _bmad/assets/logos/trace-wordmark-white.svg -->
+<!-- LOGO: Double//Slash wordmark · 160x36 · swap in _bmad/assets/logos/double-slash-wordmark-white.svg -->
 
 ---
 
@@ -280,7 +280,7 @@ flowchart LR
 ### Tier 0
 **API-key proxy**
 
-User provides their own OpenAI / Anthropic key. Trace runs a local proxy that forwards every call and records it.
+User provides their own OpenAI / Anthropic key. Double Slash runs a local proxy that forwards every call and records it.
 
 **Coverage:** any tool that calls the OpenAI / Anthropic API — scripts, agents, custom tools.
 
@@ -332,7 +332,7 @@ Reads Claude Desktop and Cursor's content via the macOS Accessibility API — pl
 
 ## Agents are first-class
 
-*Trace is not a passive sync layer. It's a fabric of small, focused agents.*
+*Double Slash is not a passive sync layer. It's a fabric of small, focused agents.*
 
 <br>
 
@@ -450,7 +450,7 @@ Each team member's AI work is a stream of pushes. Sessions have branches. You ca
 
 **Why this matters for GTM:**
 
-Recall (Microsoft, 2024) showed the market exactly what not to do: default-on, no redaction, unencrypted. Trace is the direct response. Local-first + transparent + OSS + opt-in telemetry is not a feature list — it's the only viable entry frame for a product that watches AI work.
+Recall (Microsoft, 2024) showed the market exactly what not to do: default-on, no redaction, unencrypted. Double Slash is the direct response. Local-first + transparent + OSS + opt-in telemetry is not a feature list — it's the only viable entry frame for a product that watches AI work.
 
 **Opt-in telemetry (default OFF):** install counter (+1, no content, no ID) and crash reports — that's all. Nothing else ever phones home.
 
@@ -477,7 +477,7 @@ Recall (Microsoft, 2024) showed the market exactly what not to do: default-on, n
 The Functional Source License (FSL), published by Sentry in 2023. Source-available. Two-year non-compete clause. Auto-converts to Apache 2.0 after two years.
 
 **Why not MIT / Apache from day one:**
-A hyperscaler could clone the capture client, run "Managed Trace" against us, and use our own substrate as a distribution lever. FSL closes that window for the critical 2 years.
+A hyperscaler could clone the capture client, run "Managed Double Slash" against us, and use our own substrate as a distribution lever. FSL closes that window for the critical 2 years.
 
 **Why not AGPL:**
 Enterprise legal teams increasingly refuse AGPL on principle. FSL is approved by more enterprise procurement desks than AGPL is. Sentry, Keygen, and several YC-backed OSS companies use it today.
@@ -530,7 +530,7 @@ Every design + dev team running 5–10 AI tools per person — and that's most t
 
 **Where we start: SMB design + dev teams**
 
-These teams: run 5–10 AI surfaces daily, hate enterprise procurement, spread tools virally (one install → teammate install → team install), and already use the GTM playbook Trace is designed for: Linear, Figma, Notion, Slack all grew this way.
+These teams: run 5–10 AI surfaces daily, hate enterprise procurement, spread tools virally (one install → teammate install → team install), and already use the GTM playbook Double Slash is designed for: Linear, Figma, Notion, Slack all grew this way.
 
 **Pricing reference:**
 
@@ -539,7 +539,7 @@ These teams: run 5–10 AI surfaces daily, hate enterprise procurement, spread t
 | Linear | $8–14/seat |
 | Granola | $14/seat |
 | Glean (enterprise) | $40+/seat |
-| **Trace (target)** | **Free ≤5 seats; $12/seat/mo >5** |
+| **Double Slash (target)** | **Free ≤5 seats; $12/seat/mo >5** |
 
 OSS removes the friction of the first conversation. Trust earns the first paying team.
 
@@ -553,7 +553,7 @@ OSS removes the friction of the first conversation. Trust earns the first paying
 
 ## Competitive landscape
 
-*Trace sits alone in the only unoccupied quadrant.*
+*Double Slash sits alone in the only unoccupied quadrant.*
 
 <br>
 
@@ -562,12 +562,12 @@ quadrantChart
     title Cross-tool coverage vs. Team vs. Personal scope
     x-axis "Tool-specific" --> "Cross-tool"
     y-axis "Personal only" --> "Team"
-    quadrant-1 "The gap — where Trace lives"
+    quadrant-1 "The gap — where Double Slash lives"
     quadrant-2 "Team · tool-specific (IDEs, PM tools)"
     quadrant-3 "Personal · tool-specific (capture, memory)"
     quadrant-4 "Personal · cross-tool (closest: Rewind)"
 
-    Trace: [0.9, 0.88]
+    Double Slash: [0.9, 0.88]
     Linear-AI: [0.35, 0.75]
     Cursor-Teams: [0.2, 0.65]
     Granola: [0.12, 0.3]
@@ -589,12 +589,12 @@ quadrantChart
 
 | Competitor | What they own | What they don't | Our line when they come up |
 |---|---|---|---|
-| **Linear / ClickUp Brain** | Task surface | The AI sessions that produced the work | "Linear sees the ticket. Trace sees the 45 minutes that created it." |
-| **Figma / FigJam** | Design artifacts | The Claude sessions that informed the design | "Figma owns the file. Trace owns the trail." |
+| **Linear / ClickUp Brain** | Task surface | The AI sessions that produced the work | "Linear sees the ticket. Double Slash sees the 45 minutes that created it." |
+| **Figma / FigJam** | Design artifacts | The Claude sessions that informed the design | "Figma owns the file. Double Slash owns the trail." |
 | **Granola / Otter** | Meetings | The 8 hours of AI work around the meeting | "Granola doesn't leave the meeting room." |
-| **Cursor / Copilot / Claude Code** | The IDE session | Every non-IDE surface (designer, PM, researcher) | "They see what developers do inside the IDE. Trace sees the rest." |
+| **Cursor / Copilot / Claude Code** | The IDE session | Every non-IDE surface (designer, PM, researcher) | "They see what developers do inside the IDE. Double Slash sees the rest." |
 | **Notion AI / ClickUp Brain** | Their own workspace | Anything outside their platform | "Notion AI can only see what's in Notion." |
-| **Rewind / Recall** | Single-player screen/audio capture | Team graph, privacy trust | "Recall showed the market what not to do. Trace is the structural opposite." |
+| **Rewind / Recall** | Single-player screen/audio capture | Team graph, privacy trust | "Recall showed the market what not to do. Double Slash is the structural opposite." |
 | **Anthropic / OpenAI** | Their own model's sessions | Neutral cross-vendor visibility | "They're the silos we trail across. Making themselves portable would cost them leverage." |
 
 <br>
@@ -691,7 +691,7 @@ For compliance-sensitive teams who need data residency. For the OSS faithful. Fo
 
 <br>
 
-<span class="muted">Personal-agent inference (Haiku 4.5, on-device) runs on the user's own Anthropic API key — BYOK. Trace doesn't pay for that inference.</span>
+<span class="muted">Personal-agent inference (Haiku 4.5, on-device) runs on the user's own Anthropic API key — BYOK. Double Slash doesn't pay for that inference.</span>
 
 ---
 
@@ -907,7 +907,7 @@ Microsoft Recall's trust failure in 2024 taught the market what *not* to do: def
 
 **The OSS-core GTM has proven itself again**
 
-Supabase, PostHog, Cal.com, Linear (community), Grafana — all used OSS distribution to reach design + dev communities without enterprise sales. The playbook is proven. The audience for Trace is exactly this audience.
+Supabase, PostHog, Cal.com, Linear (community), Grafana — all used OSS distribution to reach design + dev communities without enterprise sales. The playbook is proven. The audience for Double Slash is exactly this audience.
 
 </div>
 
@@ -958,7 +958,7 @@ The value is in the graph, not the client. The graph requires multi-tool capture
 <div>
 
 **Why a bigger infra company can't just acquire the position:**
-Neutrality is structural. A company that sells an AI tool *cannot* be the neutral ground — the conflict of interest is perceived even if their intentions are good. Trace's neutrality is defensible only while Trace is not owned by a tool vendor.
+Neutrality is structural. A company that sells an AI tool *cannot* be the neutral ground — the conflict of interest is perceived even if their intentions are good. Double Slash's neutrality is defensible only while Double Slash is not owned by a tool vendor.
 
 </div>
 
@@ -1106,7 +1106,7 @@ AGPL is rejected categorically by many enterprise legal teams. SSPL is so broad 
 
 **The capture protocol stays Apache 2.0:**
 
-Anyone can implement a Trace-compatible capture agent for any new AI tool, forever, with no restrictions. That's what makes the ecosystem grow and what makes the "vendor-agnostic" claim credible.
+Anyone can implement a Double Slash-compatible capture agent for any new AI tool, forever, with no restrictions. That's what makes the ecosystem grow and what makes the "vendor-agnostic" claim credible.
 
 **Precedent:** Sentry, Keygen, multiple YC OSS companies launched on FSL in 2024–2026.
 
@@ -1124,7 +1124,7 @@ Anyone can implement a Trace-compatible capture agent for any new AI tool, forev
 <br>
 <br>
 
-> *"No single company will win — Trace is the mutual ground that makes every AI tool's work trail-able in one place."*
+> *"No single company will win — Double Slash is the mutual ground that makes every AI tool's work trail-able in one place."*
 
 <br>
 <br>
@@ -1132,13 +1132,13 @@ Anyone can implement a Trace-compatible capture agent for any new AI tool, forev
 
 Stay in what you love. Push your work. Your teammate picks it up in what they love.
 
-**That's Trace.**
+**That's Double//Slash.**
 
 <br>
 <br>
 
-<!-- LOGO: Trace wordmark · 180x44 · swap in _bmad/assets/logos/trace-wordmark-white.svg -->
+<!-- LOGO: Double//Slash wordmark · 180x44 · swap in _bmad/assets/logos/double-slash-wordmark-white.svg -->
 
 <br>
 
-<span class="muted">Trace is the provisional product name pending trademark clearance. All roadmap dates are targets, not commitments. Contact founders before circulating this deck externally.</span>
+<span class="muted">All roadmap dates are targets, not commitments. Contact founders before circulating this deck externally.</span>

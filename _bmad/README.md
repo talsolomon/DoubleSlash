@@ -1,6 +1,6 @@
-# BMAD Method — Collab
+# BMAD Method — Double Slash
 
-This is the BMAD (AI-driven agile development) workspace for the Collab project.
+This is the BMAD (AI-driven agile development) workspace for the **Double Slash** project (logo: Double//Slash, or //). Working directory: `~/Documents/double-slash` (earlier working names: Collab → Trace → Double Slash).
 All BMAD files live in `_bmad/` and `.claude/commands/bmad-*` — completely separate from the platform code in `src/`.
 
 ---

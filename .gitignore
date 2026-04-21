@@ -1,2 +1,5 @@
 .DS_Store
 **/.DS_Store
+
+# Supabase — local dev credentials (founder passwords). Do not commit.
+supabase/bootstrap-users.sql

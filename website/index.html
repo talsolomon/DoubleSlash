@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Trace — Your team's AI work, wherever you pick it up.</title>
-  <meta name="description" content="Trace captures what your team does across Claude, ChatGPT, and Cursor — and lands it on the machine you're working on now." />
+  <title>Double Slash — Your team's AI work, wherever you pick it up.</title>
+  <meta name="description" content="Double Slash captures what your team does across Claude, ChatGPT, and Cursor — and lands it on the machine you're working on now." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <meta name="theme-color" content="#0e3a35" />
 
   <style>
     :root {
@@ -15,6 +18,9 @@
       --hair: #e6e3db;
       --accent: #d98a2b;
       --accent-soft: #f2c892;
+      /* Brand — Double//Slash logo */
+      --brand-dark: #0e3a35;
+      --brand-accent: #3dd9b6;
       --claude: #c96442;
       --gpt: #10a37f;
       --cursor-ink: #111;
@@ -48,13 +54,22 @@
     /* ---------- Page chrome ---------- */
     .wordmark {
       position: fixed; top: 22px; left: 28px; z-index: 100;
+      display: inline-flex; align-items: center; gap: 10px;
       font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
       color: var(--ink); text-decoration: none;
     }
-    .wordmark::after {
-      content: "";
-      display: inline-block; width: 5px; height: 5px; border-radius: 50%;
-      background: var(--accent); margin-left: 6px; transform: translateY(-2px);
+    .wordmark-mark {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: var(--brand-dark);
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .wordmark-mark svg { display: block; overflow: visible; }
+    .wordmark-slashes {
+      color: var(--brand-accent);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin: 0 1px;
     }
 
     .skip-pill, .replay-pill {
@@ -193,7 +208,7 @@
     .apps-layer.slide-in-right { transform: translateX(0); opacity: 1; }
     .apps-layer.prep-right { transform: translateX(12%); opacity: 0; transition: none; }
 
-    /* ---------- Trace icon ---------- */
+    /* ---------- Double Slash icon ---------- */
     .icon {
       position: absolute;
       z-index: 80;
@@ -224,16 +239,19 @@
     }
     /* "instant" mode — drops all transitions, used by skipToEnd */
     .icon.instant { transition: none !important; }
-    .icon .icon-bg { fill: #0f1115; }
-    .icon .icon-stroke { stroke: #f6d89a; stroke-width: 9; fill: none; stroke-linecap: round; }
+    .icon .icon-bg { fill: var(--brand-dark); }
+    .icon .slash { fill: none; stroke-linecap: round; stroke-width: 14; }
+    .icon .slash-1 { stroke: #ffffff; }
+    .icon .slash-2 { stroke: var(--brand-accent); }
     .icon .icon-dot-live { fill: var(--accent); }
     /* ring is a large-size detail; hide when docked since it won't read at 22px */
     .icon .icon-ring { fill: none; stroke: var(--accent); stroke-width: 3; opacity: 0.45; }
     .icon.docked .icon-ring { display: none; }
-    /* at docked size, the stroke swoosh is too fine to read; hide it and let the dot carry */
-    .icon.docked .icon-stroke { display: none; }
-    /* Amber dot becomes the recognizable "Trace" mark at small size — off-center top-right */
-    .icon.docked .icon-dot-live { r: 22; cx: 66px; cy: 34px; }
+    /* at docked size the slashes stay as the mark; thicken slightly so they read at 22px */
+    .icon.docked .slash { stroke-width: 18; }
+    /* Amber live-dot tucks into top-right corner — the "new activity" signal */
+    .icon .icon-dot-live { r: 10; }
+    .icon.docked .icon-dot-live { r: 14; cx: 82px; cy: 18px; }
 
     /* Subtle breathing on the live dot */
     .icon.blink .icon-dot-live { animation: blink 2.4s ease-in-out infinite; }
@@ -251,22 +269,22 @@
     /* Pulse when capture arrives */
     .icon.pulse .icon-bg { animation: iconPulse 700ms ease-out; }
     @keyframes iconPulse {
-      0% { fill: #0f1115; }
+      0% { fill: var(--brand-dark); }
       30% { fill: var(--accent); }
-      100% { fill: #0f1115; }
+      100% { fill: var(--brand-dark); }
     }
     .icon.pulse .icon-dot-live { animation: dotFlare 700ms ease-out; }
     @keyframes dotFlare {
-      0% { r: 14; }
-      30% { r: 22; }
-      100% { r: 14; }
+      0% { r: 10; }
+      30% { r: 18; }
+      100% { r: 10; }
     }
     /* Docked state has a bigger resting r — pulse must scale up FROM that, not shrink */
     .icon.docked.pulse .icon-dot-live { animation: dotFlareDocked 700ms ease-out; }
     @keyframes dotFlareDocked {
-      0% { r: 22; }
-      30% { r: 34; }
-      100% { r: 22; }
+      0% { r: 14; }
+      30% { r: 22; }
+      100% { r: 14; }
     }
 
     /* Badge: tiny pill that peeks from the icon's top-right without crossing the stage corner.
@@ -563,12 +581,20 @@
   </style>
 </head>
 <body>
-  <a class="wordmark" href="/">Trace</a>
+  <a class="wordmark" href="/">
+    <span class="wordmark-mark" aria-hidden="true">
+      <svg viewBox="0 0 100 100" width="14" height="14">
+        <path d="M 58 22 L 34 78" stroke="#ffffff" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <path d="M 78 22 L 54 78" stroke="#3dd9b6" stroke-width="12" stroke-linecap="round" fill="none"/>
+      </svg>
+    </span>
+    <span>Double<span class="wordmark-slashes">//</span>Slash</span>
+  </a>
 
   <main class="hero">
     <div class="hero-copy">
       <h1>Your team's AI work, wherever you pick it up.</h1>
-      <p>Trace captures what your team does across Claude, ChatGPT, and Cursor — and lands it on the machine you're working on now.</p>
+      <p>Double Slash captures what your team does across Claude, ChatGPT, and Cursor — and lands it on the machine you're working on now.</p>
     </div>
 
     <div class="stage-wrap">
@@ -579,7 +605,7 @@
         <!-- Outer window chrome -->
         <div class="stage-chrome">
           <div class="traffic"><span></span><span></span><span></span></div>
-          <div class="title">Trace</div>
+          <div class="title">Double//Slash</div>
         </div>
 
         <!-- Desktop area -->
@@ -610,7 +636,7 @@
               </div>
               <div class="chat-area">
                 <div class="bubble-user">what's the status on the pricing page refresh?</div>
-                <div class="bubble-ai">You have 2 updates waiting in Trace from Alex — draft copy and the new tier table.</div>
+                <div class="bubble-ai">You have 2 updates waiting in Double Slash from Alex — draft copy and the new tier table.</div>
               </div>
             </div>
 
@@ -622,7 +648,7 @@
               <div class="branch">
                 <span class="badge">branch</span>
                 <span>pricing/tier-table-v2</span>
-                <span style="color:#70708a"> • pulled from Trace</span>
+                <span style="color:#70708a"> • pulled from Double Slash</span>
               </div>
 <pre><span class="cm">// Draft from Alex, captured via Claude</span>
 <span class="kw">export</span> <span class="kw">const</span> <span class="fn">tiers</span> = [
@@ -646,22 +672,23 @@
             <div class="clock" id="clock">9:42 AM</div>
           </div>
 
-          <!-- Trace icon (persistent — does NOT slide with apps) -->
+          <!-- Double//Slash icon (persistent — does NOT slide with apps) -->
           <div class="icon" id="traceIcon">
             <svg viewBox="0 0 100 100" width="100%" height="100%">
               <rect class="icon-bg" x="0" y="0" width="100" height="100" rx="24" />
-              <!-- simple swooshing trace from bottom-left to top-right -->
-              <path class="icon-stroke" d="M 22 76 Q 42 38, 74 26" />
-              <!-- breathing ring around the live dot -->
-              <circle class="icon-ring" cx="74" cy="26" r="16" />
+              <!-- Two slashes — the Double//Slash mark -->
+              <path class="slash slash-1" d="M 56 22 L 32 78" />
+              <path class="slash slash-2" d="M 76 22 L 52 78" />
+              <!-- breathing ring around the live dot (top-right corner) -->
+              <circle class="icon-ring" cx="80" cy="20" r="12" />
               <!-- the bright "live" signal -->
-              <circle class="icon-dot-live" cx="74" cy="26" r="14" />
+              <circle class="icon-dot-live" cx="80" cy="20" r="10" />
             </svg>
             <div class="icon-badge" id="iconBadge">1</div>
           </div>
 
           <!-- Quick-look panel -->
-          <div class="quicklook" id="quicklook" role="dialog" aria-label="Trace quick look">
+          <div class="quicklook" id="quicklook" role="dialog" aria-label="Double Slash quick look">
             <div class="ql-label">Projects updated</div>
             <div class="ql-row" id="qlRow1">
               <div class="src claude">C</div>
@@ -718,7 +745,7 @@
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     const $ = (id) => document.getElementById(id);
     const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const COOKIE = 'trace_hero_seen';
+    const COOKIE = 'doubleslash_hero_seen';
     const COOKIE_DAYS = 30;
 
     function setCookie(name, val, days) {
