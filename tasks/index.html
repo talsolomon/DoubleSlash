@@ -358,17 +358,95 @@ tbody.drag-target-empty {
 .cell-due.overdue input { color: var(--bad); font-weight: 600; }
 .cell-due.soon input { color: var(--warn); }
 
-/* ===== My Week view ===== */
-.week-hero {
-  background: var(--brand-dark); color: #fff;
-  border-radius: 12px; padding: 24px 28px; margin-bottom: 20px;
-  display: flex; align-items: center; gap: 20px;
+/* ===== Interview detail ===== */
+.iv-detail-toolbar {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 0 20px; border-bottom: 1px solid var(--hair);
+  margin-bottom: 20px;
 }
-.week-hero h2 { margin: 0 0 4px; font-size: 20px; font-weight: 600; }
-.week-hero p { margin: 0; color: var(--brand-accent); font-size: 13px; }
-.week-stat { text-align: center; padding: 0 16px; }
-.week-stat-num { font-size: 28px; font-weight: 700; font-family: var(--mono); line-height: 1; }
-.week-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-accent); margin-top: 4px; }
+.iv-header { flex: 1; min-width: 0; }
+.iv-header h2 { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.2; }
+.iv-header .iv-meta {
+  color: var(--muted); font-size: 13px; margin-top: 4px;
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.iv-header .iv-meta a { color: var(--brand-accent); text-decoration: none; }
+.iv-header .iv-meta a:hover { text-decoration: underline; }
+.iv-sections { display: flex; flex-direction: column; gap: 28px; }
+.iv-section {
+  background: var(--card); border: 1px solid var(--hair);
+  border-radius: 12px; padding: 20px 24px;
+}
+.iv-section-header {
+  display: flex; align-items: baseline; gap: 12px;
+  padding-bottom: 12px; margin-bottom: 16px;
+  border-bottom: 1px solid var(--hair);
+}
+.iv-section-header h3 { margin: 0; font-size: 16px; font-weight: 600; }
+.iv-section-header .iv-timing {
+  color: var(--muted); font-size: 12px; font-family: var(--mono);
+}
+.iv-section-header .iv-theme {
+  background: var(--brand-dark); color: #fff;
+  padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;
+  font-family: var(--mono);
+}
+.iv-question { margin-bottom: 20px; }
+.iv-question:last-child { margin-bottom: 0; }
+.iv-question-text {
+  font-size: 14px; line-height: 1.5; margin-bottom: 8px;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.iv-question-type {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; padding: 2px 6px; border-radius: 3px;
+  flex-shrink: 0; margin-top: 2px;
+}
+.iv-qt-anchor { background: #e9f5ef; color: #0e6e3c; }
+.iv-qt-probe { background: #eef1f5; color: #3b4758; }
+.iv-qt-counter_probe { background: #fbeceb; color: #a8352c; }
+.iv-qt-consent, .iv-qt-context, .iv-qt-screening, .iv-qt-close {
+  background: #f3eedc; color: #6a5312;
+}
+.iv-response-row {
+  display: grid; grid-template-columns: 1fr 200px; gap: 10px;
+  margin-top: 6px;
+}
+.iv-response {
+  border: 1px solid var(--hair); border-radius: 8px;
+  padding: 10px 12px; font-size: 13px; line-height: 1.45;
+  min-height: 40px; background: var(--bg); font-family: inherit;
+  resize: vertical;
+}
+.iv-response:focus { outline: 2px solid var(--brand-accent); outline-offset: -1px; background: #fff; }
+.iv-sidemeta { display: flex; flex-direction: column; gap: 6px; }
+.iv-quote-input {
+  font-size: 12px; padding: 6px 8px; border: 1px solid var(--hair);
+  border-radius: 6px; background: var(--bg); font-family: inherit;
+}
+.iv-signal-row { display: flex; gap: 4px; }
+.iv-signal {
+  flex: 1; padding: 4px 6px; border: 1px solid var(--hair);
+  border-radius: 4px; background: var(--bg); cursor: pointer;
+  font-size: 11px; text-align: center; font-weight: 500;
+}
+.iv-signal.active[data-signal="validates"] { background: #c9efd9; border-color: #0e6e3c; color: #0e6e3c; }
+.iv-signal.active[data-signal="falsifies"] { background: #fbd9d6; border-color: #a8352c; color: #a8352c; }
+.iv-signal.active[data-signal="surprise"]  { background: #ffe8b8; border-color: #9c6b00; color: #9c6b00; }
+.iv-wouldpay {
+  font-size: 11px; display: flex; align-items: center; gap: 4px;
+  color: var(--muted); cursor: pointer;
+}
+.iv-footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--hair); }
+
+/* Run-interview button */
+.iv-run-btn {
+  background: var(--brand-accent); color: #000;
+  border: 1px solid var(--brand-dark);
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  border-radius: 5px; cursor: pointer;
+}
+.iv-run-btn:hover { background: var(--brand-dark); color: #fff; }
 
 /* ===== Repo panel ===== */
 .repo {
@@ -495,7 +573,6 @@ tbody.drag-target-empty {
       </a>
       <div class="tabs" id="tabs">
         <button class="tab active" data-view="board">Board</button>
-        <button class="tab" data-view="week">My Week</button>
         <button class="tab" data-view="outreach">Outreach</button>
         <button class="tab" data-view="interviews">Interviews</button>
         <button class="tab" data-view="kpis">KPIs</button>
@@ -523,19 +600,6 @@ tbody.drag-target-empty {
       <div class="kpi-strip" id="board-kpi-strip"></div>
       <div class="board" id="board"></div>
       <div class="repo" id="repo-panel"></div>
-    </section>
-
-    <section class="view" data-view="week">
-      <div class="week-hero">
-        <div style="flex:1">
-          <h2 id="week-title">Tal's focus — this week</h2>
-          <p>P0 + In-progress tasks assigned to you. Clear these to move the line.</p>
-        </div>
-        <div class="week-stat"><div class="week-stat-num" id="week-p0">0</div><div class="week-stat-label">P0 open</div></div>
-        <div class="week-stat"><div class="week-stat-num" id="week-active">0</div><div class="week-stat-label">In progress</div></div>
-        <div class="week-stat"><div class="week-stat-num" id="week-blocked">0</div><div class="week-stat-label">Blocked</div></div>
-      </div>
-      <div class="board" id="week-board"></div>
     </section>
 
     <section class="view" data-view="outreach">
@@ -600,9 +664,25 @@ tbody.drag-target-empty {
 
     <section class="view" data-view="interviews">
       <p style="color:var(--muted);font-size:13px;margin:0 0 20px">
-        Problem-validation interview pool. 30-person target, 25 completed (see <a href="../_bmad/planning-artifacts/research/user-research-plan.md" style="color:var(--brand-accent)">user-research-plan.md</a>). Stages: In pool → Outreach → Scheduled → Conducted → Synthesized. Notes file = path to the per-interview markdown under <code>research/interviews/</code>.
+        Problem-validation interview pool. 30-person target, 25 completed (see <a href="../_bmad/planning-artifacts/research/user-research-plan.md" style="color:var(--brand-accent)">user-research-plan.md</a>). Stages: In pool → Outreach → Scheduled → Conducted → Synthesized. Click <strong>Run</strong> on a row to conduct the interview in-app with the full question template.
       </p>
       <div id="interview-sections"></div>
+    </section>
+
+    <section class="view" data-view="interview-detail">
+      <div class="iv-detail-toolbar">
+        <button class="btn ghost" id="iv-back">← Back to list</button>
+        <div id="iv-header" class="iv-header"></div>
+        <div class="spacer"></div>
+        <button class="btn ghost" id="iv-copy-md" title="Copy formatted markdown to clipboard">📋 Copy as markdown</button>
+      </div>
+      <div id="iv-sections" class="iv-sections"></div>
+      <div class="iv-footer">
+        <p style="color:var(--muted);font-size:12px;margin:0">
+          Responses save on blur. To sync to git so Claude can read this interview, use <strong>Copy as markdown</strong> and paste into
+          <code>_bmad/planning-artifacts/research/interviews/&lt;initials&gt;.md</code>.
+        </p>
+      </div>
     </section>
 
     <section class="view" data-view="kpis">
@@ -651,7 +731,9 @@ let state = {
   groups: [], people: [], statuses: [], priorities: [],
   tasks: [], kpis: [], commits: [],
   contacts: [], outreach_stages: [],
-  interviews: [], interview_stages: [], interview_buckets: []
+  interviews: [], interview_stages: [], interview_buckets: [],
+  interview_questions: [], interview_responses: [],
+  current_interview_id: null
 };
 let filters = { search: "", owner: "", status: "", priority: "" };
 let currentUser = null;
@@ -778,10 +860,7 @@ async function enterApp(user) {
   await loadAll();
   subscribeRealtime();
   setSync('Live', '');
-  // Adjust week title based on user
   currentPersonId = emailToPersonId(user.email);
-  const person = state.people.find(p => p.id === currentPersonId);
-  $('week-title').textContent = (person ? `${person.name}'s` : 'Your') + ' focus — this week';
 }
 
 async function handleSignIn(email, password) {
@@ -809,7 +888,7 @@ async function signOut() {
    Data loaders
    ========================================================================= */
 async function loadAll() {
-  const [groups, people, statuses, priorities, tasks, kpis, commits, contacts, outreachStages, interviews, interviewStages, interviewBuckets] = await Promise.all([
+  const [groups, people, statuses, priorities, tasks, kpis, commits, contacts, outreachStages, interviews, interviewStages, interviewBuckets, interviewQuestions, interviewResponses] = await Promise.all([
     supabase.from('groups').select('*').order('sort_order'),
     supabase.from('people').select('*').order('name'),
     supabase.from('statuses').select('*').order('sort_order'),
@@ -821,9 +900,11 @@ async function loadAll() {
     supabase.from('outreach_stages').select('*').order('sort_order'),
     supabase.from('interview_contacts').select('*').order('sort_order'),
     supabase.from('interview_stages').select('*').order('sort_order'),
-    supabase.from('interview_buckets').select('*').order('sort_order')
+    supabase.from('interview_buckets').select('*').order('sort_order'),
+    supabase.from('interview_questions').select('*').order('sort_order'),
+    supabase.from('interview_responses').select('*')
   ]);
-  const fail = [groups, people, statuses, priorities, tasks, kpis, commits, contacts, outreachStages, interviews, interviewStages, interviewBuckets].find(r => r.error);
+  const fail = [groups, people, statuses, priorities, tasks, kpis, commits, contacts, outreachStages, interviews, interviewStages, interviewBuckets, interviewQuestions, interviewResponses].find(r => r.error);
   if (fail) {
     toast('Load error: ' + fail.error.message, true);
     console.error(fail.error);
@@ -838,9 +919,11 @@ async function loadAll() {
   state.commits            = commits.data;
   state.contacts           = contacts.data;
   state.outreach_stages    = outreachStages.data;
-  state.interviews         = interviews.data;
-  state.interview_stages   = interviewStages.data;
-  state.interview_buckets  = interviewBuckets.data;
+  state.interviews           = interviews.data;
+  state.interview_stages     = interviewStages.data;
+  state.interview_buckets    = interviewBuckets.data;
+  state.interview_questions  = interviewQuestions.data;
+  state.interview_responses  = interviewResponses.data;
   renderAll();
 }
 
@@ -849,7 +932,8 @@ async function loadAll() {
    ========================================================================= */
 function subscribeRealtime() {
   const channel = supabase.channel('dslash-board');
-  const tables = ['tasks', 'kpis', 'groups', 'people', 'statuses', 'priorities', 'repo_commits', 'outreach_contacts', 'outreach_stages', 'interview_contacts', 'interview_stages', 'interview_buckets'];
+  // interview_questions is static seed data — skip realtime (uses question_key PK not id)
+  const tables = ['tasks', 'kpis', 'groups', 'people', 'statuses', 'priorities', 'repo_commits', 'outreach_contacts', 'outreach_stages', 'interview_contacts', 'interview_stages', 'interview_buckets', 'interview_responses'];
   tables.forEach(t => {
     channel.on('postgres_changes', { event: '*', schema: 'public', table: t }, (payload) => {
       applyChange(t, payload);
@@ -868,7 +952,9 @@ function applyChange(table, payload) {
     outreach_stages: 'outreach_stages',
     interview_contacts: 'interviews',
     interview_stages: 'interview_stages',
-    interview_buckets: 'interview_buckets'
+    interview_buckets: 'interview_buckets',
+    interview_questions: 'interview_questions',
+    interview_responses: 'interview_responses'
   }[table];
   if (!key) return;
   if (eventType === 'INSERT') {
@@ -1332,34 +1418,6 @@ function renderKpiTable() {
   });
 }
 
-function renderWeek() {
-  const container = $('week-board');
-  container.innerHTML = '';
-  const me = currentPersonId;
-  if (!me) {
-    container.appendChild(el('div', { class: 'empty' },
-      'No person mapped to your email yet. Ask Tal to add you to the people table.'));
-    $('week-p0').textContent = '—';
-    $('week-active').textContent = '—';
-    $('week-blocked').textContent = '—';
-    return;
-  }
-  const mine = state.tasks.filter(t =>
-    t.owner_id === me &&
-    (t.priority_id === 'p0' || t.status_id === 'in_progress' || t.status_id === 'blocked')
-  );
-  $('week-p0').textContent = mine.filter(t => t.priority_id === 'p0' && t.status_id !== 'done').length;
-  $('week-active').textContent = mine.filter(t => t.status_id === 'in_progress').length;
-  $('week-blocked').textContent = mine.filter(t => t.status_id === 'blocked').length;
-  state.groups.forEach(g => {
-    const gt = mine.filter(t => t.group_id === g.id);
-    if (gt.length > 0) container.appendChild(renderGroup(g, gt));
-  });
-  if (mine.length === 0) {
-    container.appendChild(el('div', { class: 'empty' }, 'Nothing urgent. You might actually be free.'));
-  }
-}
-
 function renderContactRow(c) {
   const tr = document.createElement('tr');
   tr.setAttribute('data-contact-id', c.id);
@@ -1593,11 +1651,55 @@ function renderInterviewRow(c) {
   dueTd.appendChild(dueInp);
   tr.appendChild(dueTd);
 
-  const conductedTd = el('td', {});
-  const conductedInp = el('input', { type: 'date', value: c.conducted_at || '', title: 'Date interview was conducted' });
+  // Scheduled at (datetime-local) + Calendar event link
+  const schedTd = el('td', {});
+  const schedInp = el('input', {
+    type: 'datetime-local',
+    value: c.scheduled_at ? new Date(c.scheduled_at).toISOString().slice(0, 16) : '',
+    title: 'Scheduled date/time'
+  });
+  schedInp.addEventListener('change', () => {
+    const iso = schedInp.value ? new Date(schedInp.value).toISOString() : null;
+    updateInterview(c.id, { scheduled_at: iso });
+  });
+  schedTd.appendChild(schedInp);
+  if (c.calendar_event_link) {
+    schedTd.appendChild(el('a', {
+      href: c.calendar_event_link, target: '_blank', rel: 'noopener noreferrer',
+      class: 'company-link', title: 'Open calendar event', style: 'margin-left:4px'
+    }, '📅'));
+  }
+  schedTd.appendChild(el('button', {
+    class: 'company-link-edit', title: 'Paste Google Calendar event link',
+    onclick: () => {
+      const v = prompt('Google Calendar event link', c.calendar_event_link || '');
+      if (v !== null) updateInterview(c.id, { calendar_event_link: v.trim() || null });
+    }
+  }, '✎'));
+  tr.appendChild(schedTd);
+
+  // Meeting URL (Zoom/Meet) + conducted date
+  const meetTd = el('td', {});
+  if (c.meeting_url) {
+    meetTd.appendChild(el('a', {
+      href: c.meeting_url, target: '_blank', rel: 'noopener noreferrer',
+      class: 'company-link', title: c.meeting_url, style: 'display:inline-block;margin-right:4px'
+    }, 'Join ↗'));
+  }
+  meetTd.appendChild(el('button', {
+    class: 'company-link-edit', title: 'Paste meeting URL',
+    onclick: () => {
+      const v = prompt('Meeting URL (Zoom / Meet / Teams)', c.meeting_url || '');
+      if (v !== null) updateInterview(c.id, { meeting_url: v.trim() || null });
+    }
+  }, '✎'));
+  const conductedInp = el('input', {
+    type: 'date', value: c.conducted_at || '',
+    title: 'Date interview was conducted', style: 'display:block;margin-top:4px'
+  });
   conductedInp.addEventListener('change', () => updateInterview(c.id, { conducted_at: conductedInp.value || null }));
-  conductedTd.appendChild(conductedInp);
-  tr.appendChild(conductedTd);
+  meetTd.appendChild(conductedInp);
+  tr.appendChild(meetTd);
 
   const notesDiv = el('div', { contenteditable: 'true', title: 'Freeform notes' }, c.notes || '');
   notesDiv.addEventListener('blur', () => {
@@ -1621,8 +1723,12 @@ function renderInterviewRow(c) {
   notesTd.appendChild(notesFileBtn);
   tr.appendChild(notesTd);
 
-  tr.appendChild(el('td', { style: 'text-align:center' }, [
+  tr.appendChild(el('td', { style: 'text-align:center;white-space:nowrap' }, [
     el('div', { class: 'contact-actions' }, [
+      el('button', {
+        class: 'iv-run-btn', title: 'Open interview-mode view with full question template',
+        onclick: () => openInterview(c.id)
+      }, '▶ Run'),
       el('button', {
         class: 'btn danger-ghost', title: 'Delete interview contact',
         onclick: () => deleteInterview(c.id)
@@ -1659,16 +1765,17 @@ function renderInterviews() {
     const thead = el('thead', {}, [
       el('tr', {}, [
         el('th', { style: 'width:24px' }),
-        el('th', { style: 'width:180px' }, 'Name'),
-        el('th', { style: 'width:190px' }, 'Role · Company'),
-        el('th', { style: 'width:72px' }, 'Link'),
-        el('th', { style: 'width:120px' }, 'Stage'),
-        el('th', { style: 'width:160px' }, 'Tools used'),
+        el('th', { style: 'width:170px' }, 'Name'),
+        el('th', { style: 'width:180px' }, 'Role · Company'),
+        el('th', { style: 'width:64px' }, 'Link'),
+        el('th', { style: 'width:110px' }, 'Stage'),
+        el('th', { style: 'width:140px' }, 'Tools used'),
         el('th', {}, 'Next step'),
-        el('th', { style: 'width:130px' }, 'Due'),
-        el('th', { style: 'width:130px' }, 'Conducted'),
+        el('th', { style: 'width:120px' }, 'Due'),
+        el('th', { style: 'width:180px' }, 'Scheduled 📅'),
+        el('th', { style: 'width:130px' }, 'Meeting · Conducted'),
         el('th', {}, 'Notes'),
-        el('th', { style: 'width:56px' })
+        el('th', { style: 'width:110px' })
       ])
     ]);
     table.appendChild(thead);
@@ -1682,6 +1789,265 @@ function renderInterviews() {
     ]);
     host.appendChild(section);
   });
+}
+
+/* ------- Interview-detail mutations + renderer ---------------- */
+function responseFor(interviewId, questionKey) {
+  return state.interview_responses.find(r =>
+    r.interview_id === interviewId && r.question_key === questionKey);
+}
+
+async function upsertResponse(interviewId, questionKey, patch) {
+  let existing = responseFor(interviewId, questionKey);
+  if (existing) {
+    Object.assign(existing, patch);
+    const { error } = await supabase.from('interview_responses')
+      .update(patch).eq('id', existing.id);
+    if (error) { toast('Save failed: ' + error.message, true); console.error(error); }
+  } else {
+    const id = 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    const row = {
+      id, interview_id: interviewId, question_key: questionKey,
+      response: null, key_quote: null, signal: null, would_pay: false,
+      ...patch
+    };
+    state.interview_responses.push(row);
+    const { error } = await supabase.from('interview_responses').insert(row);
+    if (error) {
+      toast('Save failed: ' + error.message, true);
+      console.error(error);
+      // Roll back optimistic push
+      state.interview_responses = state.interview_responses.filter(r => r.id !== id);
+    }
+  }
+}
+
+function openInterview(id) {
+  state.current_interview_id = id;
+  // Switch view
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v =>
+    v.classList.toggle('active', v.dataset.view === 'interview-detail'));
+  renderInterviewDetail();
+  window.scrollTo(0, 0);
+}
+
+function closeInterview() {
+  state.current_interview_id = null;
+  // Restore Interviews tab
+  document.querySelector('.tab[data-view="interviews"]')?.classList.add('active');
+  document.querySelectorAll('.view').forEach(v =>
+    v.classList.toggle('active', v.dataset.view === 'interviews'));
+  renderInterviews();
+}
+
+function renderInterviewDetail() {
+  const interview = state.interviews.find(i => i.id === state.current_interview_id);
+  const header = $('iv-header');
+  const host = $('iv-sections');
+  if (!interview) {
+    header.innerHTML = '<em>No interview selected.</em>';
+    host.innerHTML = '';
+    return;
+  }
+
+  // Header
+  const bucket = state.interview_buckets.find(b => b.id === interview.bucket_id);
+  const stage = state.interview_stages.find(s => s.id === interview.stage_id);
+  const scheduled = interview.scheduled_at ? new Date(interview.scheduled_at).toLocaleString() : null;
+  const metaLine = [
+    interview.role ? interview.role : null,
+    interview.company ? `@ ${interview.company}` : null,
+    bucket ? bucket.label : null,
+    stage ? `Stage: ${stage.label}` : null,
+    scheduled ? `📅 ${scheduled}` : null,
+    interview.meeting_url ? `<a href="${interview.meeting_url}" target="_blank" rel="noopener noreferrer">Join meeting ↗</a>` : null,
+    interview.calendar_event_link ? `<a href="${interview.calendar_event_link}" target="_blank" rel="noopener noreferrer">Calendar event ↗</a>` : null,
+    interview.tools_used ? `Tools: ${interview.tools_used}` : null
+  ].filter(Boolean).join(' · ');
+
+  header.innerHTML = `
+    <h2>${interview.name || 'Unnamed'}</h2>
+    <div class="iv-meta">${metaLine}</div>
+  `;
+
+  // Group questions by section
+  const questions = [...state.interview_questions].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const sections = [];
+  const seen = {};
+  questions.forEach(q => {
+    if (!seen[q.section]) {
+      seen[q.section] = { name: q.section, timing: q.timing_min, theme: q.theme, questions: [] };
+      sections.push(seen[q.section]);
+    }
+    seen[q.section].questions.push(q);
+  });
+
+  host.innerHTML = '';
+  sections.forEach(sec => {
+    const sectionEl = el('div', { class: 'iv-section' });
+    const headerRow = el('div', { class: 'iv-section-header' }, [
+      el('h3', {}, sec.name),
+      sec.theme ? el('span', { class: 'iv-theme' }, `Theme ${sec.theme}`) : null,
+      sec.timing ? el('span', { class: 'iv-timing' }, `~${sec.timing} min`) : null
+    ]);
+    sectionEl.appendChild(headerRow);
+    sec.questions.forEach(q => sectionEl.appendChild(renderQuestionBlock(interview.id, q)));
+    host.appendChild(sectionEl);
+  });
+}
+
+function renderQuestionBlock(interviewId, q) {
+  const existing = responseFor(interviewId, q.question_key) || {};
+  const block = el('div', { class: 'iv-question', 'data-question-key': q.question_key });
+
+  const textRow = el('div', { class: 'iv-question-text' }, [
+    el('span', { class: 'iv-question-type iv-qt-' + (q.question_type || 'probe') }, q.question_type || 'probe'),
+    el('span', {}, q.question_text)
+  ]);
+  block.appendChild(textRow);
+
+  const responseRow = el('div', { class: 'iv-response-row' });
+
+  const textarea = document.createElement('textarea');
+  textarea.className = 'iv-response';
+  textarea.rows = 3;
+  textarea.placeholder = 'Interviewee response…';
+  textarea.value = existing.response || '';
+  textarea.addEventListener('blur', () => {
+    if (textarea.value !== (existing.response || '')) {
+      upsertResponse(interviewId, q.question_key, { response: textarea.value });
+    }
+  });
+  responseRow.appendChild(textarea);
+
+  const sidemeta = el('div', { class: 'iv-sidemeta' });
+
+  // Key quote
+  const quoteInput = document.createElement('input');
+  quoteInput.type = 'text';
+  quoteInput.className = 'iv-quote-input';
+  quoteInput.placeholder = 'Key quote (verbatim)';
+  quoteInput.value = existing.key_quote || '';
+  quoteInput.addEventListener('blur', () => {
+    if (quoteInput.value !== (existing.key_quote || '')) {
+      upsertResponse(interviewId, q.question_key, { key_quote: quoteInput.value });
+    }
+  });
+  sidemeta.appendChild(quoteInput);
+
+  // Signal pills
+  const signalRow = el('div', { class: 'iv-signal-row' });
+  ['validates', 'falsifies', 'surprise'].forEach(s => {
+    const pill = el('button', {
+      class: 'iv-signal' + (existing.signal === s ? ' active' : ''),
+      'data-signal': s,
+      title: `Mark as ${s}`,
+      onclick: () => {
+        const next = existing.signal === s ? null : s;
+        upsertResponse(interviewId, q.question_key, { signal: next }).then(renderInterviewDetail);
+      }
+    }, s[0].toUpperCase() + s.slice(1));
+    signalRow.appendChild(pill);
+  });
+  sidemeta.appendChild(signalRow);
+
+  // Would-pay (only meaningful on the open-ended "would pay" question, but available everywhere)
+  if (q.question_key === 'open_would_pay' || existing.would_pay) {
+    const wp = document.createElement('label');
+    wp.className = 'iv-wouldpay';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = !!existing.would_pay;
+    cb.addEventListener('change', () => upsertResponse(interviewId, q.question_key, { would_pay: cb.checked }));
+    wp.appendChild(cb);
+    wp.appendChild(document.createTextNode(' Would-pay marker'));
+    sidemeta.appendChild(wp);
+  }
+
+  responseRow.appendChild(sidemeta);
+  block.appendChild(responseRow);
+  return block;
+}
+
+/* ------- Markdown export for git/Claude sync ------------------- */
+function interviewToMarkdown(interviewId) {
+  const iv = state.interviews.find(i => i.id === interviewId);
+  if (!iv) return '';
+  const bucket = state.interview_buckets.find(b => b.id === iv.bucket_id);
+  const stage = state.interview_stages.find(s => s.id === iv.stage_id);
+  const questions = [...state.interview_questions].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+
+  const lines = [];
+  lines.push(`# Interview — ${iv.name || 'Unnamed'}${iv.role ? `, ${iv.role}` : ''}${iv.company ? `, ${iv.company}` : ''}`);
+  lines.push('');
+  lines.push(`**Date:** ${iv.conducted_at || '—'}`);
+  if (iv.scheduled_at) lines.push(`**Scheduled:** ${new Date(iv.scheduled_at).toISOString()}`);
+  if (iv.tools_used) lines.push(`**Tools used weekly:** ${iv.tools_used}`);
+  if (bucket) lines.push(`**Pool bucket:** ${bucket.label}`);
+  if (stage) lines.push(`**Stage:** ${stage.label}`);
+  if (iv.anonymization) lines.push(`**Anonymization:** ${iv.anonymization}`);
+  if (iv.meeting_url) lines.push(`**Meeting:** ${iv.meeting_url}`);
+  lines.push('');
+
+  // Section-by-section
+  const bySection = {};
+  questions.forEach(q => { (bySection[q.section] ||= []).push(q); });
+  Object.keys(bySection).forEach(sec => {
+    lines.push(`## ${sec}`);
+    lines.push('');
+    bySection[sec].forEach(q => {
+      const r = responseFor(interviewId, q.question_key) || {};
+      const hasAnything = r.response || r.key_quote || r.signal || r.would_pay;
+      lines.push(`**${(q.question_type || 'probe').replace('_', '-')}:** ${q.question_text}`);
+      if (r.response) {
+        lines.push('');
+        r.response.split('\n').forEach(l => lines.push('> ' + l));
+      }
+      if (r.key_quote) lines.push(`- Key quote: "${r.key_quote}"`);
+      if (r.signal) lines.push(`- Signal: **${r.signal}**`);
+      if (r.would_pay) lines.push(`- Would-pay marker: ✓`);
+      if (!hasAnything) lines.push('- *(no response)*');
+      lines.push('');
+    });
+  });
+
+  // Tagged quotes roll-up
+  const tagged = questions
+    .map(q => ({ q, r: responseFor(interviewId, q.question_key) }))
+    .filter(x => x.r && x.r.key_quote);
+  if (tagged.length) {
+    lines.push('## Tagged quotes (cross-theme)');
+    lines.push('');
+    tagged.forEach(({ q, r }) => {
+      const tag = q.theme ? `#${q.theme}-${q.question_type}` : `#${q.question_type}`;
+      lines.push(`- "${r.key_quote}" — ${tag}${r.signal ? ` #${r.signal}` : ''}${r.would_pay ? ' #would-pay' : ''}`);
+    });
+    lines.push('');
+  }
+
+  if (iv.notes) {
+    lines.push('## Additional notes');
+    lines.push('');
+    lines.push(iv.notes);
+    lines.push('');
+  }
+
+  return lines.join('\n');
+}
+
+async function copyInterviewMarkdown() {
+  if (!state.current_interview_id) return;
+  const md = interviewToMarkdown(state.current_interview_id);
+  try {
+    await navigator.clipboard.writeText(md);
+    toast('Markdown copied — paste into research/interviews/<initials>.md');
+  } catch (e) {
+    // Fallback: open a window with the content
+    const w = window.open('', '_blank');
+    w.document.write('<pre>' + md.replace(/</g, '&lt;') + '</pre>');
+    toast('Clipboard blocked — opened as a tab instead', true);
+  }
 }
 
 function renderRepo() {
@@ -1710,9 +2076,9 @@ function renderAll() {
   renderBoard();
   renderKpiStrip();
   renderKpiTable();
-  renderWeek();
   renderOutreach();
   renderInterviews();
+  if (state.current_interview_id) renderInterviewDetail();
   renderRepo();
 }
 
@@ -1725,6 +2091,8 @@ $('tabs').addEventListener('click', e => {
   e.target.classList.add('active');
   const view = e.target.dataset.view;
   document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.dataset.view === view));
+  // Leaving the detail view — clear the current interview so realtime updates don't target a hidden view
+  if (view !== 'interview-detail') state.current_interview_id = null;
 });
 
 $('filter-search').addEventListener('input', e => { filters.search = e.target.value; renderBoard(); });
@@ -1757,6 +2125,8 @@ document.querySelectorAll('[data-new-contact]').forEach(b => {
 });
 $('btn-signout').addEventListener('click', signOut);
 $('btn-signout-gate').addEventListener('click', signOut);
+$('iv-back').addEventListener('click', closeInterview);
+$('iv-copy-md').addEventListener('click', copyInterviewMarkdown);
 
 $('gate-form').addEventListener('submit', e => {
   e.preventDefault();
