@@ -74,76 +74,56 @@ Default to option 2 unless the design interviews surface governance pain strongl
 
 ---
 
-## 4. Unified interview guide (~45 min)
+## 4. Interview guide (~30 min, v2 — conversational flow)
 
-**One script for all interviewees**, organized by the 5 themes. Each interviewee touches every theme — this is efficient given a single pool and makes cross-theme analysis possible (e.g. "how often do people mention context AND methodology in the same breath").
+> **Live version of this guide runs inside the Tasks app.** Click **▶ Run** on any interview contact to open interview-mode with these questions pre-loaded. Source of truth: [`supabase/migrations/20260422100000_interview_flow_v2.sql`](../../../supabase/migrations/20260422100000_interview_flow_v2.sql). This doc mirrors it for offline reading.
 
-Each section has: an **anchor question** (always asked), 1–2 **probes** (asked if time), and at least one **counter-probe** (actively tries to falsify the hypothesis, not just confirm it).
+**One script for all interviewees**, merged from the 5 themes into 4 conversational arcs. A+B (memory) share a session because context-loss and team-invisibility usually surface together; D+E (install + shadow AI) share because trust drives both. C stays alone — it's the differentiator.
 
-### Intro (3 min)
+Each section has: an **anchor** (always), 1–3 **probes** (asked if the conversation goes there), and a **counter-probe** (actively try to falsify, not confirm).
 
-- Consent to record + use anonymized quotes in investor materials.
-- "What's your role? Team size? Rough % of your work that involves AI tools right now?"
-- "Which AI tools are you using weekly?" *(listen for 2+ — screening check)*
+### Intro (2 min)
 
-### Section 1 — Theme A: Context memory (6 min)
+- **Consent:** "Can I record this? I'd use anonymized quotes in investor materials — your name and company would be omitted; title and role are OK to attribute unless you say otherwise."
+- **Anchor:** "Quick setup — your role, team size, and roughly what % of your work involves AI tools right now."
 
-*Hypotheses: H1, H2, H7, H12*
+### Memory — yours and your team's (7 min)
 
-- **Anchor:** "Walk me through the last time you had to re-explain context to Claude, ChatGPT, or Cursor. What happened, and how did it feel?"
-- **Probe:** "Across the AI tools you use, where does context live? When you switch tools, what do you lose?"
-- **Probe:** "How long does it typically take to get back into a session from yesterday or last week?"
-- **Counter-probe:** "Do Claude Projects, ChatGPT memory, or Cursor's rules already solve this for you?"
-- **Probe (for H1):** "If someone built a 'project management app for AI work' that you had to open and work inside — would you use it? Why or why not?"
+*Themes A + B · Hypotheses H1, H2, H3, H6, H7, H11, H12*
 
-### Section 2 — Theme B: Team memory (6 min)
+- **Anchor:** "Tell me about a recent AI session you wish was still open — or that you had to restart from scratch. What happened? What got lost?"
+- **Probe:** "Who on your team knows what you just did with AI? How does that knowledge travel across people — or does it?"
+- **Counter-probe:** "Do Claude Projects, ChatGPT memory, Cursor rules, or a shared Notion already cover this for you? Where does it break?"
 
-*Hypotheses: H3, H6, H11*
+### How the team actually runs (8 min — highest priority)
 
-- **Anchor:** "How does your team share what people have done with AI? Slack? Shared docs? Not at all?"
-- **Probe:** "In the last 30 days, can you name a moment two people on your team solved the same thing with AI separately?"
-- **Probe:** "If a teammate disappeared tomorrow, what AI work of theirs would be lost — and would anyone notice?"
-- **Counter-probe:** "Does Slack + shared Notion already cover this? Where specifically does it break down?"
+*Theme C · Hypotheses H4, H8, H9 · This is the headline bet.*
 
-### Section 3 — Theme C: Operating model (8 min — highest priority)
-
-*Hypotheses: H4 (revised), H8, H9*
-
-- **Anchor:** "Does your team have a *named* process for working WITH AI? What do you call it?" *(Listen for: 'we don't really,' 'kind of Agile,' 'we're figuring it out.')*
-- **Probe:** "Tell me about a time your team's existing process — Agile, Scrum, Shape Up, whatever — felt *wrong* for AI-assisted work."
-- **Probe:** "Does AI ever feel like it's running too fast for your team's rhythm? Or too slow?"
-- **Probe:** "If I said 'we run a Fish model — Head phase is explore, Body is build, Tail is ship, and every card is sized bigger-vs-smaller and known-vs-unknown' — does any part of that vocabulary map to something missing in your world?"
+- **Anchor:** "Does your team have a *named* process for AI-assisted work? What do you call it?" *(Listen for: "not really", "kind of Agile", "we're figuring it out".)*
+- **Probe:** "Walk me through a time your existing process — Agile, sprints, Shape Up, whatever — felt *off* because AI moved faster (or slower) than the rhythm it was built for."
+- **Probe (FISH vocab test):** "If I said 'Fish model — Head explores, Body builds, Tail ships, and every task is sized bigger-vs-smaller × known-vs-unknown' — does any part of that vocabulary map to something missing in your world?"
 - **Counter-probe:** "Is Agile-with-AI basically fine for you, just faster? What would have to change for you to switch frameworks?"
 
-### Section 4 — Theme D: Install + trust (6 min)
+### Install + trust (6 min)
 
-*Hypotheses: H5 (revised, with trust prong)*
+*Themes D + E · Hypotheses H5, H10, H11*
 
-- **Anchor:** "Walk me through the last AI tool you installed. What happened?"
-- **Probe:** "Any AI tool you wanted to try but gave up on? Why?"
-- **Probe (trust prong):** "When you install something AI-powered on your work machine, what goes through your head? Any hesitation about permissions, data, what it's watching?"
-- **Counter-probe:** "For you, is install complexity the blocker, or is it something else — time, priority, permission from IT?"
+- **Anchor:** "Walk me through the last AI tool you tried to install on your work machine. What happened?"
+- **Probe:** "When something AI-powered lands on your machine, what runs through your head — permissions, data, what it's watching, where things go?"
+- **Probe (shadow AI):** "Does anyone on your team use personal Claude or ChatGPT accounts for work? Why?" *(Ask casually — surfaces governance gap without judgment.)*
+- **Counter-probe:** "Is install actually the blocker, or is it something else — time, priority, permission from IT?"
 
-### Section 5 — Theme E: Governance + ROI visibility (5 min, skip if not relevant)
+### The pain you'd pay to fix (4 min)
 
-*Hypotheses: H10, H11*
+*Open-ended · the only validation that counts for the deck.*
 
-Skip if the interviewee has no manager / IT / compliance exposure.
-
-- **Anchor:** "Does anyone on your team use personal Claude or ChatGPT accounts for work?" *(Ask casually — this surfaces shadow AI without judgment.)*
-- **Probe:** "If your VP asked 'is AI paying off for your team,' could you answer with data?"
-- **Probe:** "Has your company's security or legal team raised AI usage concerns? What happened?"
-
-### Section 6 — Open-ended (5 min)
-
-- **Anchor:** "What didn't I ask about that I should have? What AI-workflow pain have you hit that none of my questions touched?"
-- **Probe:** "What pain in your AI workflow would you pay — actual money, not 'I'd try it' — to make go away?"
+- **Anchor:** "What pain in your AI workflow would you pay — actual money, not 'I'd try it' — to make go away?"
+- **Probe:** "What should I have asked that I didn't? What AI-workflow pain did none of my questions touch?"
 
 ### Close (2 min)
 
-- Thank.
-- Ask for 1 referral (design leader or hands-on practitioner who should be in this research).
-- Confirm anonymization preferences — name/company omitted, title/role OK, quotes OK.
+- **Referral:** Ask for 1 referral — one design leader or hands-on practitioner who should be in this research.
+- **Anonymization:** Confirm preferences — name/company omitted, title/role OK, or fully anonymous quotes.
 
 ---
 

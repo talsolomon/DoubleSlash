@@ -439,6 +439,32 @@ tbody.drag-target-empty {
 }
 .iv-footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--hair); }
 
+/* Preview / read-only styling */
+.iv-mode-badge {
+  background: #eef1f5; color: #3b4758;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 11px; font-weight: 600;
+  font-family: var(--mono);
+}
+.iv-mode-badge.iv-mode-run { background: var(--brand-accent); color: #000; }
+.iv-response-ro {
+  margin-top: 6px; padding: 10px 14px;
+  background: var(--bg); border-left: 3px solid var(--brand-accent);
+  border-radius: 4px; font-size: 13px; line-height: 1.55;
+  white-space: pre-wrap;
+}
+.iv-response-ro.iv-empty { color: var(--muted); font-style: italic; border-left-color: var(--hair); }
+.iv-badge-row { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
+.iv-badge {
+  font-size: 11px; padding: 3px 8px; border-radius: 3px;
+  font-family: var(--mono);
+}
+.iv-badge-quote { background: #eef1f5; color: #3b4758; font-family: inherit; font-style: italic; }
+.iv-badge-validates { background: #c9efd9; color: #0e6e3c; }
+.iv-badge-falsifies { background: #fbd9d6; color: #a8352c; }
+.iv-badge-surprise  { background: #ffe8b8; color: #9c6b00; }
+.iv-badge-pay       { background: #d8e7ff; color: #1a4a8e; }
+
 /* Run-interview button */
 .iv-run-btn {
   background: var(--brand-accent); color: #000;
@@ -674,13 +700,14 @@ tbody.drag-target-empty {
         <button class="btn ghost" id="iv-back">← Back to list</button>
         <div id="iv-header" class="iv-header"></div>
         <div class="spacer"></div>
-        <button class="btn ghost" id="iv-copy-md" title="Copy formatted markdown to clipboard">📋 Copy as markdown</button>
+        <button class="btn ghost" id="iv-copy-md" title="Copy formatted markdown to clipboard">📋 Copy</button>
+        <button class="btn primary" id="iv-sync-git" title="Commit this interview as markdown to the repo">🔄 Sync to git</button>
       </div>
       <div id="iv-sections" class="iv-sections"></div>
       <div class="iv-footer">
         <p style="color:var(--muted);font-size:12px;margin:0">
-          Responses save on blur. To sync to git so Claude can read this interview, use <strong>Copy as markdown</strong> and paste into
-          <code>_bmad/planning-artifacts/research/interviews/&lt;initials&gt;.md</code>.
+          Responses save on blur. <strong>Sync to git</strong> writes
+          <code>_bmad/planning-artifacts/research/interviews/&lt;slug&gt;.md</code> to <code>main</code> — Claude can read it after <code>git pull</code>.
         </p>
       </div>
     </section>
@@ -733,7 +760,8 @@ let state = {
   contacts: [], outreach_stages: [],
   interviews: [], interview_stages: [], interview_buckets: [],
   interview_questions: [], interview_responses: [],
-  current_interview_id: null
+  current_interview_id: null,
+  interview_mode: 'run'  // 'run' = editable | 'preview' = read-only
 };
 let filters = { search: "", owner: "", status: "", priority: "" };
 let currentUser = null;
@@ -1724,11 +1752,16 @@ function renderInterviewRow(c) {
   tr.appendChild(notesTd);
 
   tr.appendChild(el('td', { style: 'text-align:center;white-space:nowrap' }, [
-    el('div', { class: 'contact-actions' }, [
+    el('div', { class: 'contact-actions', style: 'gap:4px' }, [
       el('button', {
         class: 'iv-run-btn', title: 'Open interview-mode view with full question template',
-        onclick: () => openInterview(c.id)
+        onclick: () => openInterview(c.id, 'run')
       }, '▶ Run'),
+      el('button', {
+        class: 'btn ghost', title: 'Read-only view of captured responses',
+        style: 'padding:4px 8px;font-size:11px',
+        onclick: () => openInterview(c.id, 'preview')
+      }, '👁 Preview'),
       el('button', {
         class: 'btn danger-ghost', title: 'Delete interview contact',
         onclick: () => deleteInterview(c.id)
@@ -1822,9 +1855,9 @@ async function upsertResponse(interviewId, questionKey, patch) {
   }
 }
 
-function openInterview(id) {
+function openInterview(id, mode = 'run') {
   state.current_interview_id = id;
-  // Switch view
+  state.interview_mode = mode;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v =>
     v.classList.toggle('active', v.dataset.view === 'interview-detail'));
@@ -1834,7 +1867,7 @@ function openInterview(id) {
 
 function closeInterview() {
   state.current_interview_id = null;
-  // Restore Interviews tab
+  state.interview_mode = 'run';
   document.querySelector('.tab[data-view="interviews"]')?.classList.add('active');
   document.querySelectorAll('.view').forEach(v =>
     v.classList.toggle('active', v.dataset.view === 'interviews'));
@@ -1845,6 +1878,14 @@ function renderInterviewDetail() {
   const interview = state.interviews.find(i => i.id === state.current_interview_id);
   const header = $('iv-header');
   const host = $('iv-sections');
+  const readonly = state.interview_mode === 'preview';
+
+  // Toggle the mode-dependent toolbar buttons
+  const copyBtn = $('iv-copy-md');
+  const syncBtn = $('iv-sync-git');
+  if (copyBtn) copyBtn.style.display = '';
+  if (syncBtn) syncBtn.style.display = readonly ? 'none' : '';
+
   if (!interview) {
     header.innerHTML = '<em>No interview selected.</em>';
     host.innerHTML = '';
@@ -1855,12 +1896,15 @@ function renderInterviewDetail() {
   const bucket = state.interview_buckets.find(b => b.id === interview.bucket_id);
   const stage = state.interview_stages.find(s => s.id === interview.stage_id);
   const scheduled = interview.scheduled_at ? new Date(interview.scheduled_at).toLocaleString() : null;
+  const conducted = interview.conducted_at || null;
   const metaLine = [
+    readonly ? '<span class="iv-mode-badge">👁 Preview</span>' : '<span class="iv-mode-badge iv-mode-run">▶ Running</span>',
     interview.role ? interview.role : null,
     interview.company ? `@ ${interview.company}` : null,
     bucket ? bucket.label : null,
     stage ? `Stage: ${stage.label}` : null,
     scheduled ? `📅 ${scheduled}` : null,
+    conducted ? `Conducted: ${conducted}` : null,
     interview.meeting_url ? `<a href="${interview.meeting_url}" target="_blank" rel="noopener noreferrer">Join meeting ↗</a>` : null,
     interview.calendar_event_link ? `<a href="${interview.calendar_event_link}" target="_blank" rel="noopener noreferrer">Calendar event ↗</a>` : null,
     interview.tools_used ? `Tools: ${interview.tools_used}` : null
@@ -1871,15 +1915,16 @@ function renderInterviewDetail() {
     <div class="iv-meta">${metaLine}</div>
   `;
 
-  // Group questions by section
+  // Group questions by section, preserving sort order
   const questions = [...state.interview_questions].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const sections = [];
   const seen = {};
   questions.forEach(q => {
     if (!seen[q.section]) {
-      seen[q.section] = { name: q.section, timing: q.timing_min, theme: q.theme, questions: [] };
+      seen[q.section] = { name: q.section, timing: 0, theme: q.theme, questions: [] };
       sections.push(seen[q.section]);
     }
+    seen[q.section].timing += q.timing_min || 0;
     seen[q.section].questions.push(q);
   });
 
@@ -1888,25 +1933,42 @@ function renderInterviewDetail() {
     const sectionEl = el('div', { class: 'iv-section' });
     const headerRow = el('div', { class: 'iv-section-header' }, [
       el('h3', {}, sec.name),
-      sec.theme ? el('span', { class: 'iv-theme' }, `Theme ${sec.theme}`) : null,
+      sec.theme ? el('span', { class: 'iv-theme' }, sec.theme === 'C' ? 'Theme C · headline bet' : `Theme${sec.theme.length > 1 ? 's' : ''} ${sec.theme}`) : null,
       sec.timing ? el('span', { class: 'iv-timing' }, `~${sec.timing} min`) : null
     ]);
     sectionEl.appendChild(headerRow);
-    sec.questions.forEach(q => sectionEl.appendChild(renderQuestionBlock(interview.id, q)));
+    sec.questions.forEach(q => sectionEl.appendChild(renderQuestionBlock(interview.id, q, readonly)));
     host.appendChild(sectionEl);
   });
 }
 
-function renderQuestionBlock(interviewId, q) {
+function renderQuestionBlock(interviewId, q, readonly = false) {
   const existing = responseFor(interviewId, q.question_key) || {};
   const block = el('div', { class: 'iv-question', 'data-question-key': q.question_key });
 
   const textRow = el('div', { class: 'iv-question-text' }, [
-    el('span', { class: 'iv-question-type iv-qt-' + (q.question_type || 'probe') }, q.question_type || 'probe'),
+    el('span', { class: 'iv-question-type iv-qt-' + (q.question_type || 'probe') }, (q.question_type || 'probe').replace('_', '-')),
     el('span', {}, q.question_text)
   ]);
   block.appendChild(textRow);
 
+  // Preview mode — render as read-only blocks
+  if (readonly) {
+    if (existing.response) {
+      const pre = el('div', { class: 'iv-response-ro' }, existing.response);
+      block.appendChild(pre);
+    } else {
+      block.appendChild(el('div', { class: 'iv-response-ro iv-empty' }, '(no response)'));
+    }
+    const badges = [];
+    if (existing.key_quote) badges.push(el('span', { class: 'iv-badge iv-badge-quote' }, `"${existing.key_quote}"`));
+    if (existing.signal) badges.push(el('span', { class: 'iv-badge iv-badge-' + existing.signal }, existing.signal));
+    if (existing.would_pay) badges.push(el('span', { class: 'iv-badge iv-badge-pay' }, '💰 would-pay'));
+    if (badges.length) block.appendChild(el('div', { class: 'iv-badge-row' }, badges));
+    return block;
+  }
+
+  // Run mode — editable
   const responseRow = el('div', { class: 'iv-response-row' });
 
   const textarea = document.createElement('textarea');
@@ -1952,8 +2014,8 @@ function renderQuestionBlock(interviewId, q) {
   });
   sidemeta.appendChild(signalRow);
 
-  // Would-pay (only meaningful on the open-ended "would pay" question, but available everywhere)
-  if (q.question_key === 'open_would_pay' || existing.would_pay) {
+  // Would-pay (meaningful on open_pay question, but available anywhere)
+  if (q.question_key === 'open_pay' || existing.would_pay) {
     const wp = document.createElement('label');
     wp.className = 'iv-wouldpay';
     const cb = document.createElement('input');
@@ -2043,10 +2105,39 @@ async function copyInterviewMarkdown() {
     await navigator.clipboard.writeText(md);
     toast('Markdown copied — paste into research/interviews/<initials>.md');
   } catch (e) {
-    // Fallback: open a window with the content
     const w = window.open('', '_blank');
     w.document.write('<pre>' + md.replace(/</g, '&lt;') + '</pre>');
     toast('Clipboard blocked — opened as a tab instead', true);
+  }
+}
+
+async function syncInterviewToGit() {
+  if (!state.current_interview_id) return;
+  const btn = $('iv-sync-git');
+  const orig = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '🔄 Syncing…';
+  try {
+    const { data: { session }, error: sessErr } = await supabase.auth.getSession();
+    if (sessErr || !session) throw new Error('Not signed in');
+    const res = await fetch('/api/sync-interview', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`
+      },
+      body: JSON.stringify({ interviewId: state.current_interview_id })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    toast(`Synced → ${data.path} (${data.action})`);
+    if (data.htmlUrl) window.open(data.htmlUrl, '_blank');
+  } catch (e) {
+    toast('Sync failed: ' + e.message, true);
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = orig;
   }
 }
 
@@ -2127,6 +2218,7 @@ $('btn-signout').addEventListener('click', signOut);
 $('btn-signout-gate').addEventListener('click', signOut);
 $('iv-back').addEventListener('click', closeInterview);
 $('iv-copy-md').addEventListener('click', copyInterviewMarkdown);
+$('iv-sync-git').addEventListener('click', syncInterviewToGit);
 
 $('gate-form').addEventListener('submit', e => {
   e.preventDefault();

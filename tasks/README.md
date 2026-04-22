@@ -70,6 +70,38 @@ cd tasks
 npx vercel --prod
 ```
 
+## 4. Interview → git sync (one-time env var)
+
+The **Sync to git** button in the Interviews tab invokes
+[`api/sync-interview.js`](api/sync-interview.js) — a Vercel Serverless Function
+that writes the interview notes as a markdown file to
+`_bmad/planning-artifacts/research/interviews/<slug>.md` on `main` via the
+GitHub Contents API. After clicking it, the file shows up in your local
+checkout after `git pull`.
+
+### One-time setup
+
+1. Create a **fine-grained** GitHub personal access token:
+   - https://github.com/settings/personal-access-tokens/new
+   - **Resource owner:** your account
+   - **Repository access:** Only `talsolomon/DubleSlash`
+   - **Permissions → Repository permissions → Contents:** Read and write
+   - Expiration: whatever you're comfortable with (90 days is fine; tokens are easy to rotate).
+   - Copy the `github_pat_…` string — you won't see it again.
+2. Add it to Vercel:
+   - https://vercel.com/talsolomon21-gmailcoms-projects/tasks/settings/environment-variables
+   - Name: `GITHUB_TOKEN`
+   - Value: paste the token
+   - Environments: **Production** (tick Preview + Development if you want sync from preview deploys too)
+   - Save.
+3. Redeploy: `cd tasks && npx vercel --prod` — the function picks up env vars at build time.
+
+The function only writes to `_bmad/planning-artifacts/research/interviews/` paths; scope is enforced in code, not by the token itself.
+
+### Rotating the token
+
+Revoke the old PAT on GitHub, generate a new one, replace the value in Vercel env vars, redeploy. No downtime if you swap it while a deploy is cached.
+
 ## Data model (for reference)
 
 | Table           | Purpose                                       |
@@ -82,6 +114,8 @@ npx vercel --prod
 | `tasks`         | One row per task                              |
 | `kpis`          | M1–M9 OSS-launch scorecard                    |
 | `repo_commits`  | Mirror of relevant GitHub activity            |
+| `outreach_*`    | Contacts pipeline (stages, contacts)          |
+| `interview_*`   | Problem-validation interview pool + live question template + per-interview responses (contacts, stages, buckets, questions, responses) |
 
 RLS: only rows visible/writable to `allowed_emails`. Changes stream to all connected browsers via Supabase Realtime.
 
