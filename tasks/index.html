@@ -737,7 +737,7 @@ let state = {
 };
 let filters = { search: "", owner: "", status: "", priority: "" };
 let currentUser = null;
-let currentPersonId = null;  // maps user email → people.id so "My Week" follows you
+let currentPersonId = null;  // maps user email → people.id (used by createTask default owner)
 
 /* =========================================================================
    Helpers
