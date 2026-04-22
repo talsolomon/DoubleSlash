@@ -8,6 +8,7 @@ Working directory: `~/Documents/dubleslash`. Prior working names: Collab → Tra
 
 | Folder        | What it is                                | Vercel project        | Production URL                              |
 |---------------|-------------------------------------------|-----------------------|---------------------------------------------|
+| [methodology/](methodology/) | **The moat** — FISH method + the 13 agents that enact it | — | — |
 | [website/](website/)    | Public marketing site (the Hero stage)    | `dubleslash-website` *(rename pending)* | https://website-rouge-three-68.vercel.app |
 | [tasks/](tasks/)        | Internal task board for Tal + Shenhav     | `dubleslash-tasks` *(rename pending)*   | https://tasks-seven-zeta.vercel.app       |
 | [supabase/](supabase/)  | DB schema + seed for the task board       | —                     | —                                           |

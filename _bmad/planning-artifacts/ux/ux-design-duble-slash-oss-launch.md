@@ -2,8 +2,8 @@
 
 **Status:** Draft v1
 **Date:** 2026-04-20
-**Brief:** [`brief-collab-capture-layer.md`](brief-collab-capture-layer.md)
-**Tech research:** [`technical-research-duble-slash-stack.md`](../docs/technical-research-duble-slash-stack.md)
+**Brief:** [`brief-collab-capture-layer.md`](../briefs/brief-collab-capture-layer.md)
+**Tech research:** [`technical-research-duble-slash-stack.md`](../../docs/technical-research-duble-slash-stack.md)
 **Founders (both designers):** Tal + Shenhav
 
 > **Scope:** the 6-week OSS-launch milestone only. Single-player, local-only, macOS. Multiplayer UX is a separate doc after OSS launch ships.
@@ -355,7 +355,7 @@ Separate doc would go deeper, but for context:
 ## Next steps
 
 - [ ] Shenhav: sketch hi-fi mockups for (a) Today view, (b) first-run step 4 (connect tools), (c) Privacy dashboard, (d) menubar popover. These are the screenshots the GTM will hinge on.
-- [ ] Validate against the tech-research constraints ([`technical-research-duble-slash-stack.md`](../docs/technical-research-duble-slash-stack.md)) — some UX choices assume the Accessibility API; verify feasibility survives the MCP-server spike in week 1.
+- [ ] Validate against the tech-research constraints ([`technical-research-duble-slash-stack.md`](../../docs/technical-research-duble-slash-stack.md)) — some UX choices assume the Accessibility API; verify feasibility survives the MCP-server spike in week 1.
 - [ ] Run `/bmad-create-prd` — OSS-launch PRD grounded in this UX and the tech research.
 - [ ] Run `/bmad-validate-prd` after PRD is drafted.
 - [ ] Break into stories via `/bmad-create-epics-and-stories` once PRD is locked.

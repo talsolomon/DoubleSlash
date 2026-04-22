@@ -428,7 +428,7 @@ The goal is that the roster grows from real demand, not from a designer's imagin
 
 - Local-agent roster + grammar → [`README.md`](./README.md)
 - The four local agents that load this roster → [`explorer.md`](./explorer.md) · [`solidifier.md`](./solidifier.md) · [`builder.md`](./builder.md) · [`shipper.md`](./shipper.md)
-- Original brainstorm (prior thinking, top-ideas table) → [`../../planning-artifacts/brainstorm-expert-shortcuts.md`](../../planning-artifacts/brainstorm-expert-shortcuts.md)
+- Original brainstorm (prior thinking, top-ideas table) → [`_bmad/planning-artifacts/brainstorms/brainstorm-expert-shortcuts.md`](../../_bmad/planning-artifacts/brainstorms/brainstorm-expert-shortcuts.md)
 - FISH methodology → [`../fish/README.md`](../fish/README.md)
 - Transitions / handoffs → [`../fish/transitions-and-handoffs.md`](../fish/transitions-and-handoffs.md)
 - All agents (local + system) at a glance → [`../agents-overview.md`](../agents-overview.md)

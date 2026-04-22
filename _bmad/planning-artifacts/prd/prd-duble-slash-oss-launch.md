@@ -11,11 +11,11 @@
 - **v1.1 (2026-04-20):** Reframed as team-collab substrate (not personal AI brain). V1 scope expanded to include Windows/Linux clients, Slack/Teams/email integrations, Linear-like + GitHub-like views, and 15-min full-access trial — collapses old V1 + V1.5 into one V1 milestone. Non-goals restructured into "ships in V1" vs. "V2/never." Added US-11/US-12 for team-evaluation framing. Tightened REQ-022/050/094. Added §6.13 error/degraded states. Fixed M9 metric.
 
 **Upstream docs:**
-- Brief: [`brief-collab-capture-layer.md`](brief-collab-capture-layer.md)
-- UX: [`ux-design-duble-slash-oss-launch.md`](ux-design-duble-slash-oss-launch.md)
-- Tech research: [`../docs/technical-research-duble-slash-stack.md`](../docs/technical-research-duble-slash-stack.md)
-- Market research: [`../docs/market-research-collab-capture-layer.md`](../docs/market-research-collab-capture-layer.md)
-- Legal / license: [`../docs/domain-research-oss-license-governance.md`](../docs/domain-research-oss-license-governance.md) · [`../docs/domain-research-capture-legality.md`](../docs/domain-research-capture-legality.md)
+- Brief: [`brief-collab-capture-layer.md`](../briefs/brief-collab-capture-layer.md)
+- UX: [`ux-design-duble-slash-oss-launch.md`](../ux/ux-design-duble-slash-oss-launch.md)
+- Tech research: [`technical-research-duble-slash-stack.md`](../../docs/technical-research-duble-slash-stack.md)
+- Market research: [`market-research-collab-capture-layer.md`](../../docs/market-research-collab-capture-layer.md)
+- Legal / license: [`domain-research-oss-license-governance.md`](../../docs/domain-research-oss-license-governance.md) · [`domain-research-capture-legality.md`](../../docs/domain-research-capture-legality.md)
 
 ---
 
@@ -217,7 +217,7 @@ All UX for this milestone is specified in detail in [`ux-design-duble-slash-oss-
 
 ## 8. Technical Constraints
 
-Stack and architecture are specified in [`technical-research-duble-slash-stack.md`](../docs/technical-research-duble-slash-stack.md). PRD-level constraints:
+Stack and architecture are specified in [`technical-research-duble-slash-stack.md`](../../docs/technical-research-duble-slash-stack.md). PRD-level constraints:
 
 - **Desktop client:** Tauri 2 (Rust core + React/TS/Tailwind + shadcn/ui).
   - *Fallback:* Electron if the MCP-server spike and engineering-capacity conversation reveal the team can't credibly handle Rust in the 6-week window.

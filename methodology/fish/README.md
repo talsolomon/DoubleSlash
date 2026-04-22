@@ -218,4 +218,4 @@ FISH (this spec) is the **agent-operable** evolution: same lineage, newly legibl
 - Handoff contract + transition gates → [`transitions-and-handoffs.md`](./transitions-and-handoffs.md)
 - Agents that enact FISH inside the user's AI tool → [`../local-agents/`](../local-agents/)
 - Background workers that make FISH reliable across sessions and teams → [`../system-agents/`](../system-agents/)
-- Task tracking → [`../../planning-artifacts/task-board.md`](../../planning-artifacts/task-board.md)
+- Task tracking → [`_bmad/planning-artifacts/task-board.md`](../../_bmad/planning-artifacts/task-board.md)

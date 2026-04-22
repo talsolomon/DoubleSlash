@@ -65,7 +65,7 @@ Collapse six values into four. Lead with **"A screen is not a product. A journey
 
 ## Session outcome (2026-04-21)
 
-Session progressed through ~4 rewrites before Tal flagged the output as unsatisfactory and parked revision for later. Current draft saved to [company-values.md](./company-values.md). Task tracked as **PRD-004** on [task-board.md](./task-board.md).
+Session progressed through ~4 rewrites before Tal flagged the output as unsatisfactory and parked revision for later. Current draft saved to [company-values.md](../company/company-values.md). Task tracked as **PRD-004** on [task-board.md](../task-board.md).
 
 **Final draft (provisional, not locked):**
 

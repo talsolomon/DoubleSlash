@@ -1,8 +1,8 @@
 # Epics & Stories — Duble Slash OSS Launch (Milestone 1)
 
-**PRD:** [`../planning-artifacts/prd-duble-slash-oss-launch.md`](../planning-artifacts/prd-duble-slash-oss-launch.md) (v1.1)
-**UX:** [`../planning-artifacts/ux-design-duble-slash-oss-launch.md`](../planning-artifacts/ux-design-duble-slash-oss-launch.md)
-**Brief:** [`../planning-artifacts/brief-collab-capture-layer.md`](../planning-artifacts/brief-collab-capture-layer.md)
+**PRD:** [`../planning-artifacts/prd/prd-duble-slash-oss-launch.md`](../planning-artifacts/prd/prd-duble-slash-oss-launch.md) (v1.1)
+**UX:** [`../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md`](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md)
+**Brief:** [`../planning-artifacts/briefs/brief-collab-capture-layer.md`](../planning-artifacts/briefs/brief-collab-capture-layer.md)
 **Tech research:** [`../docs/technical-research-duble-slash-stack.md`](../docs/technical-research-duble-slash-stack.md)
 **Date:** 2026-04-20
 **Status:** Ready for sprint planning
@@ -70,7 +70,7 @@ Ship the macOS client skeleton: signed + notarized Tauri app, menubar-primary ar
 - [ ] AC-005: Pulse animation on the chip is disabled when macOS "Reduce motion" is enabled.
 - [ ] AC-006: Tooltip on the icon shows plain-text status for VoiceOver.
 
-**Design reference:** [UX doc — IA diagram + menubar popover](../planning-artifacts/ux-design-duble-slash-oss-launch.md#information-architecture)
+**Design reference:** [UX doc — IA diagram + menubar popover](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#information-architecture)
 **Technical notes:** Use `tauri-plugin-positioner` for popover anchoring. Keep popover logic stateless — pulls from the main-process capture-state store.
 **Estimated effort:** M
 **PRD refs:** REQ-060, REQ-061, REQ-062, REQ-063
@@ -91,7 +91,7 @@ Ship the macOS client skeleton: signed + notarized Tauri app, menubar-primary ar
 - [ ] AC-005: Palette matches visual direction: neutral off-white / soft dark, accent `#3FB68B`, redaction yellow `#F4C95D`.
 - [ ] AC-006: Keyboard tab order matches visual order; VoiceOver announces sidebar as a list.
 
-**Design reference:** [UX doc — IA diagram](../planning-artifacts/ux-design-duble-slash-oss-launch.md#information-architecture), [Visual direction](../planning-artifacts/ux-design-duble-slash-oss-launch.md#visual-direction-for-shenhav)
+**Design reference:** [UX doc — IA diagram](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#information-architecture), [Visual direction](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#visual-direction-for-shenhav)
 **Technical notes:** Use shadcn/ui `ScrollArea` for the main content area. Sidebar is a plain list, not a collapsible tree.
 **Estimated effort:** M
 **PRD refs:** REQ-070
@@ -113,7 +113,7 @@ Ship the macOS client skeleton: signed + notarized Tauri app, menubar-primary ar
 - [ ] AC-006: Celebration screen correctly reflects the number of tools connected and gives a next-action prompt.
 - [ ] AC-007: First-run state is persisted so the flow doesn't repeat on next launch. User can re-open via a "Show tour" action in Settings.
 
-**Design reference:** [UX doc — Flow 1](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-1--first-run-onboarding-install--first-capture)
+**Design reference:** [UX doc — Flow 1](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-1--first-run-onboarding-install--first-capture)
 **Technical notes:** Welcome copy per v1.1 reframe: *"Welcome to Duble Slash. Duble Slash carries your AI work between tools — and, when your team is on it, between teammates. Today we're in OSS launch: single-player, local-only. Multiplayer handoff ships in V1."* Don't overclaim V1 features as live.
 **Estimated effort:** L
 **PRD refs:** REQ-002, REQ-003, REQ-004
@@ -136,7 +136,7 @@ Ship the macOS client skeleton: signed + notarized Tauri app, menubar-primary ar
 - [ ] AC-007: Color contrast meets WCAG AA in both light and dark modes (automated check via `axe-core` or equivalent).
 - [ ] AC-008: Settings tabs are a proper ARIA tablist.
 
-**Design reference:** [UX doc — Accessibility](../planning-artifacts/ux-design-duble-slash-oss-launch.md#accessibility), [Flow 1 step 5](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-1--first-run-onboarding-install--first-capture)
+**Design reference:** [UX doc — Accessibility](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#accessibility), [Flow 1 step 5](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-1--first-run-onboarding-install--first-capture)
 **Technical notes:** Accessibility pass is typically a week-5 activity, but AC-005/006/007 should be in every story's definition-of-done from day 1. This story is the "audit + fix + ship" consolidation.
 **Estimated effort:** M
 **PRD refs:** REQ-005
@@ -183,7 +183,7 @@ The core reason Duble Slash exists. Ship three independent capture paths that to
 - [ ] AC-005: Keys can be updated or deleted; deletion removes from Keychain immediately.
 - [ ] AC-006: If Keychain is locked when the proxy tries to use a key, the proxy fails gracefully per REQ-121.
 
-**Design reference:** [UX doc — Flow 5 Settings](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-5--settings)
+**Design reference:** [UX doc — Flow 5 Settings](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-5--settings)
 **Technical notes:** `security-framework` crate for Keychain access. Treat API key value as never-logged data in the codebase (Rust `zeroize` or equivalent).
 **Estimated effort:** S
 **PRD refs:** REQ-012
@@ -204,7 +204,7 @@ The core reason Duble Slash exists. Ship three independent capture paths that to
 - [ ] AC-005: Per-site capture respects the pause state set in the desktop client's Tools & Sources view.
 - [ ] AC-006: Extension is published to Chrome Web Store, Firefox Add-ons, and Safari Extensions Gallery with signed builds.
 
-**Design reference:** [UX doc — Flow 4 Tools & Sources](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-4--tools--sources)
+**Design reference:** [UX doc — Flow 4 Tools & Sources](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-4--tools--sources)
 **Technical notes:** Use Plasmo framework. Each site gets its own content-script DOM selector module — isolate failures. Capture shape conforms to the Apache-2.0 capture-protocol repo (REQ-101).
 **Estimated effort:** L
 **PRD refs:** REQ-020, REQ-021, REQ-023, REQ-024, REQ-025
@@ -246,7 +246,7 @@ The core reason Duble Slash exists. Ship three independent capture paths that to
 - [ ] AC-005: End-to-end test: starting a fresh session in Claude Desktop or Cursor produces a session in Duble Slash's Today view within 5 seconds of session end.
 - [ ] AC-006: **Week-4 GO/NO-GO gate:** If capture reliability is <80% on the test matrix at end of week 4, this story drops from OSS launch and ships as v0.2 within 2–3 weeks after.
 
-**Design reference:** [UX doc — Flow 4 Tools & Sources](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-4--tools--sources)
+**Design reference:** [UX doc — Flow 4 Tools & Sources](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-4--tools--sources)
 **Technical notes:** MCP path: ship a Duble Slash MCP server the user registers with each target app. AX path: read the target app's Accessibility tree via macOS Accessibility API (needs explicit permission per Story 1.5). Either path requires the Apple Developer entitlement set up in Story 1.1.
 **Estimated effort:** L
 **PRD refs:** REQ-030, REQ-031, REQ-032, REQ-033
@@ -272,7 +272,7 @@ Captured data lives on-device, encrypted with a key the user controls. This epic
 - [ ] AC-006: If retries exhaust, user is offered the option to export the pending session as markdown before it's discarded.
 - [ ] AC-007: Disk-full state is handled gracefully — no crash, clear user message.
 
-**Design reference:** [UX doc — error message pattern](../planning-artifacts/ux-design-duble-slash-oss-launch.md#copy-system)
+**Design reference:** [UX doc — error message pattern](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#copy-system)
 **Technical notes:** Use `rusqlite` or `sqlx`. Run migrations inside a transaction. Don't fsync on every write — use WAL mode and checkpoint periodically.
 **Estimated effort:** M
 **PRD refs:** REQ-040, REQ-042, REQ-120
@@ -294,7 +294,7 @@ Captured data lives on-device, encrypted with a key the user controls. This epic
 - [ ] AC-006: If Keychain is locked/unavailable at launch (REQ-121), capture does NOT start; client shows unlock prompt; no unencrypted session is ever written.
 - [ ] AC-007: Decryption failure (corrupt data or wrong key) surfaces a clear error without crashing.
 
-**Design reference:** [UX doc — Flow 1 step 5, Flow 5 Settings Data & privacy](../planning-artifacts/ux-design-duble-slash-oss-launch.md)
+**Design reference:** [UX doc — Flow 1 step 5, Flow 5 Settings Data & privacy](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md)
 **Technical notes:** `age` Rust crate. Argon2id parameters: m=64MB, t=3, p=4 (tune on a low-end Mac). Key material zeroed from memory after use.
 **Estimated effort:** M
 **PRD refs:** REQ-041, REQ-043, REQ-121
@@ -316,7 +316,7 @@ Captured data lives on-device, encrypted with a key the user controls. This epic
 - [ ] AC-006: Privacy dashboard's "Stored on this device" count updates immediately after export/delete operations.
 - [ ] AC-007: Export does not include encryption keys or the passphrase.
 
-**Design reference:** [UX doc — Flow 5 Data & privacy, Flow 6 Privacy dashboard](../planning-artifacts/ux-design-duble-slash-oss-launch.md)
+**Design reference:** [UX doc — Flow 5 Data & privacy, Flow 6 Privacy dashboard](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md)
 **Technical notes:** Upcoming-expiry notices are explicitly V1, not OSS launch. Export format conforms to the capture-protocol repo's schema (REQ-101) so migrations across app versions remain frictionless.
 **Estimated effort:** M
 **PRD refs:** REQ-044, REQ-045, REQ-124
@@ -340,7 +340,7 @@ Two in-process agents do the work that makes Duble Slash feel alive: tag every s
 - [ ] AC-004: Each agent can be individually disabled in Settings → Capture. Disabling one agent does not break the others or capture itself.
 - [ ] AC-005: Runtime enforces a per-agent timeout; a stuck agent does not block the capture pipeline.
 
-**Design reference:** [UX doc — Flow 3 session detail right rail](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-3--session-detail-view), [Flow 6 Privacy dashboard](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-6--privacy-dashboard)
+**Design reference:** [UX doc — Flow 3 session detail right rail](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-3--session-detail-view), [Flow 6 Privacy dashboard](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-6--privacy-dashboard)
 **Technical notes:** In-process only for OSS launch (Anthropic SDK calls from V1 agents are BYOK and out of scope here). Audit log is append-only, written in the same transaction as the session insert where possible.
 **Estimated effort:** M
 **PRD refs:** REQ-050, REQ-054, REQ-055
@@ -360,7 +360,7 @@ Two in-process agents do the work that makes Duble Slash feel alive: tag every s
 - [ ] AC-004: Capture agent tags every session with source tool, model, timestamp, turn count, and the auto-title.
 - [ ] AC-005: Agent-generated titles via Haiku are explicitly NOT in scope (V1 feature).
 
-**Design reference:** [UX doc — session card](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-2--seeing-todays-captured-work-today-view)
+**Design reference:** [UX doc — session card](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-2--seeing-todays-captured-work-today-view)
 **Technical notes:** Pure function, unit-testable with a fixture table of prompts → titles. Don't LLM this.
 **Estimated effort:** S
 **PRD refs:** REQ-050, REQ-051
@@ -382,7 +382,7 @@ Two in-process agents do the work that makes Duble Slash feel alive: tag every s
 - [ ] AC-006: Detection rules live in `_bmad/docs/redaction-rules.md` (new file) so future contributors can propose patterns via PR.
 - [ ] AC-007: Agent action is recorded to the audit log with counts-by-category (not the detected values themselves).
 
-**Design reference:** [UX doc — Flow 3 redaction preview](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-3--session-detail-view)
+**Design reference:** [UX doc — Flow 3 redaction preview](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-3--session-detail-view)
 **Technical notes:** Regex + heuristics; no LLM call required for OSS launch. Client/company name detection is the fuzziest category — start with a small wordlist and explicit document of known limitations.
 **Estimated effort:** L
 **PRD refs:** REQ-052, REQ-053, REQ-054
@@ -408,7 +408,7 @@ The surfaces users actually look at. These views turn the capture substrate into
 - [ ] AC-006: Empty state (nothing today but history exists) shows *"Nothing yet today. [See yesterday →]"*.
 - [ ] AC-007: Disconnected-tool inline card: *"Claude Desktop stopped reporting. [Check Tools & Sources]"* appears when a configured tool has not reported for >10 min.
 
-**Design reference:** [UX doc — Flow 2](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-2--seeing-todays-captured-work-today-view)
+**Design reference:** [UX doc — Flow 2](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-2--seeing-todays-captured-work-today-view)
 **Technical notes:** Virtualize the list (`@tanstack/react-virtual`) for "All time" view. Keep metadata query cheap — content stays encrypted and is lazy-decrypted on open.
 **Estimated effort:** L
 **PRD refs:** REQ-071
@@ -429,7 +429,7 @@ The surfaces users actually look at. These views turn the capture substrate into
 - [ ] AC-005: Decryption happens on-demand when the detail opens, not at list-render time.
 - [ ] AC-006: Large sessions (>100 turns) render without UI stall; use progressive rendering or virtualization.
 
-**Design reference:** [UX doc — Flow 3](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-3--session-detail-view)
+**Design reference:** [UX doc — Flow 3](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-3--session-detail-view)
 **Technical notes:** Markdown export uses a stable, documented template — conforms to the capture-protocol repo's export schema.
 **Estimated effort:** L
 **PRD refs:** REQ-072
@@ -450,7 +450,7 @@ The surfaces users actually look at. These views turn the capture substrate into
 - [ ] AC-005: Not-connected rows show a [Install extension] or [Grant access] action appropriate to the tool.
 - [ ] AC-006: Live status updates in real-time when a tool connects/disconnects (no refresh required).
 
-**Design reference:** [UX doc — Flow 4](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-4--tools--sources)
+**Design reference:** [UX doc — Flow 4](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-4--tools--sources)
 **Technical notes:** Source of truth is the capture-state store in the main process; view subscribes.
 **Estimated effort:** M
 **PRD refs:** REQ-073
@@ -472,7 +472,7 @@ The surfaces users actually look at. These views turn the capture substrate into
 - [ ] AC-006: Page is visually polished enough to screenshot and share on social — Shenhav signs off on composition before launch.
 - [ ] AC-007: Every number on the page reflects real, current app state — no placeholders.
 
-**Design reference:** [UX doc — Flow 6](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-6--privacy-dashboard)
+**Design reference:** [UX doc — Flow 6](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-6--privacy-dashboard)
 **Technical notes:** This page IS the ad. Treat polish here as a marketing deliverable, not a dev chore. Export the page as a standalone marketing screenshot for the site.
 **Estimated effort:** M
 **PRD refs:** REQ-074
@@ -494,7 +494,7 @@ The surfaces users actually look at. These views turn the capture substrate into
 - [ ] AC-006: Overlay clearly communicates: "This is informational. There is no push target in OSS launch — this view exists to build trust before V1 ships."
 - [ ] AC-007: Toggling accept/reject persists the decision per-session for when V1 push lands (forward-compat).
 
-**Design reference:** [UX doc — Flow 5 Settings](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-5--settings), [Flow 3 redaction preview](../planning-artifacts/ux-design-duble-slash-oss-launch.md#flow-3--session-detail-view)
+**Design reference:** [UX doc — Flow 5 Settings](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-5--settings), [Flow 3 redaction preview](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#flow-3--session-detail-view)
 **Technical notes:** Settings is a shadcn Tabs component inside the main window. Redaction overlay is a Dialog with the custom `RedactionDiffView` component.
 **Estimated effort:** L
 **PRD refs:** REQ-075, REQ-080, REQ-081, REQ-082
@@ -519,7 +519,7 @@ Tiny epic, big integrity stakes. Two opt-in pings, both default OFF, nothing els
 - [ ] AC-005: Preferences re-exposed in Settings → Telemetry with identical plain-English copy from first-run.
 - [ ] AC-006: No captured content, no usage analytics, no behavioral events are collected by PostHog beyond the install event itself.
 
-**Design reference:** [UX doc — Flow 1 step 3, Flow 5 Telemetry](../planning-artifacts/ux-design-duble-slash-oss-launch.md)
+**Design reference:** [UX doc — Flow 1 step 3, Flow 5 Telemetry](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md)
 **Technical notes:** Set up the PostHog OSS instance as part of Epic 7. Rails here: `posthog-js` with strict event allowlist — reject all non-install events at compile time.
 **Estimated effort:** S
 **PRD refs:** REQ-090, REQ-091, REQ-092, REQ-093, REQ-094
@@ -540,7 +540,7 @@ Tiny epic, big integrity stakes. Two opt-in pings, both default OFF, nothing els
 - [ ] AC-005: Preferences re-exposed in Settings → Telemetry.
 - [ ] AC-006: Opt-in subset of crashes is the signal source for success metric M8 (crash-free rate ≥ 99%).
 
-**Design reference:** [UX doc — Flow 1 step 3](../planning-artifacts/ux-design-duble-slash-oss-launch.md)
+**Design reference:** [UX doc — Flow 1 step 3](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md)
 **Technical notes:** `@sentry/tauri` or rolling our own thin reporter. Verify `beforeSend` scrubbing with a test matrix of synthetic stack traces containing fake PII.
 **Estimated effort:** S
 **PRD refs:** REQ-090, REQ-091, REQ-092, REQ-093, REQ-094
@@ -606,7 +606,7 @@ The non-code work that makes Duble Slash a credible OSS launch. If this epic sli
 - [ ] AC-005: Site hits Lighthouse 95+ for Performance, Accessibility, Best Practices, SEO on mobile and desktop.
 - [ ] AC-006: Install CTA resolves to the signed `.dmg` via a stable, versioned URL.
 
-**Design reference:** [UX doc — Marketing site section](../planning-artifacts/ux-design-duble-slash-oss-launch.md#marketing-site-v0--not-part-of-the-app-but-gated-together-at-launch)
+**Design reference:** [UX doc — Marketing site section](../planning-artifacts/ux/ux-design-duble-slash-oss-launch.md#marketing-site-v0--not-part-of-the-app-but-gated-together-at-launch)
 **Technical notes:** Demo loop is a looping MP4/WebM, not a JS animation — keeps the page cheap and offline-screenshot-friendly.
 **Estimated effort:** M
 **PRD refs:** REQ-110, REQ-111, REQ-112

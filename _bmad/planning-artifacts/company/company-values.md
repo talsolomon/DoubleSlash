@@ -7,9 +7,9 @@ status: DRAFT — pending revision
 
 # What Duble Slash believes
 
-**Status:** Draft. Tal flagged the current wording as "really bad" on 2026-04-21 and will revise. See [task-board.md](./task-board.md) → PRD-004.
+**Status:** Draft. Tal flagged the current wording as "really bad" on 2026-04-21 and will revise. See [task-board.md](../task-board.md) → PRD-004.
 
-Source brainstorm: [brainstorm-company-values.md](./brainstorm-company-values.md).
+Source brainstorm: [brainstorm-company-values.md](../brainstorms/brainstorm-company-values.md).
 
 ---
 

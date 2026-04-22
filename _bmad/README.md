@@ -65,9 +65,16 @@ That's it. After that, use whatever BMAD commands suit your work.
 
 | What | Where |
 |---|---|
-| Briefs, PRDs, UX docs, brainstorms | `_bmad/planning-artifacts/` |
+| Briefs | `_bmad/planning-artifacts/briefs/` |
+| PRDs | `_bmad/planning-artifacts/prd/` |
+| UX docs + website concepts | `_bmad/planning-artifacts/ux/` |
+| Brainstorms | `_bmad/planning-artifacts/brainstorms/` |
+| Pitch decks | `_bmad/planning-artifacts/pitch-decks/` |
+| Problem validation (hypotheses + user/industry research) | `_bmad/planning-artifacts/research/` |
+| Company values + manifesto | `_bmad/planning-artifacts/company/` |
+| Task board (index) | `_bmad/planning-artifacts/task-board.md` |
 | Epics & stories for dev handoff | `_bmad/implementation-artifacts/` |
-| Research, project knowledge | `_bmad/docs/` |
+| External research, project knowledge | `_bmad/docs/` |
 
 All artifacts stay in `_bmad/` — never in `src/`.
 

@@ -13,7 +13,7 @@ type: methodology-index
 ## What lives here
 
 ```
-_bmad/methodology/
+methodology/
 ├── agents-overview.md              ← START HERE · all 13 agents in one map
 ├── fish/                           ← the methodology itself
 │   ├── README.md                   overview, axes, archetypes, phases

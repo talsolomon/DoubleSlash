@@ -497,6 +497,7 @@ tbody.drag-target-empty {
         <button class="tab active" data-view="board">Board</button>
         <button class="tab" data-view="week">My Week</button>
         <button class="tab" data-view="outreach">Outreach</button>
+        <button class="tab" data-view="interviews">Interviews</button>
         <button class="tab" data-view="kpis">KPIs</button>
       </div>
       <div class="spacer"></div>
@@ -597,6 +598,13 @@ tbody.drag-target-empty {
       </div>
     </section>
 
+    <section class="view" data-view="interviews">
+      <p style="color:var(--muted);font-size:13px;margin:0 0 20px">
+        Problem-validation interview pool. 30-person target, 25 completed (see <a href="../_bmad/planning-artifacts/research/user-research-plan.md" style="color:var(--brand-accent)">user-research-plan.md</a>). Stages: In pool → Outreach → Scheduled → Conducted → Synthesized. Notes file = path to the per-interview markdown under <code>research/interviews/</code>.
+      </p>
+      <div id="interview-sections"></div>
+    </section>
+
     <section class="view" data-view="kpis">
       <div class="kpi-toolbar">
         <p>OSS-launch scorecard. Click any cell to edit. Targets pulled verbatim from the pitch deck appendix.</p>
@@ -642,7 +650,8 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
 let state = {
   groups: [], people: [], statuses: [], priorities: [],
   tasks: [], kpis: [], commits: [],
-  contacts: [], outreach_stages: []
+  contacts: [], outreach_stages: [],
+  interviews: [], interview_stages: [], interview_buckets: []
 };
 let filters = { search: "", owner: "", status: "", priority: "" };
 let currentUser = null;
@@ -800,7 +809,7 @@ async function signOut() {
    Data loaders
    ========================================================================= */
 async function loadAll() {
-  const [groups, people, statuses, priorities, tasks, kpis, commits, contacts, outreachStages] = await Promise.all([
+  const [groups, people, statuses, priorities, tasks, kpis, commits, contacts, outreachStages, interviews, interviewStages, interviewBuckets] = await Promise.all([
     supabase.from('groups').select('*').order('sort_order'),
     supabase.from('people').select('*').order('name'),
     supabase.from('statuses').select('*').order('sort_order'),
@@ -809,23 +818,29 @@ async function loadAll() {
     supabase.from('kpis').select('*').order('sort_order'),
     supabase.from('repo_commits').select('*').order('seen_at', { ascending: false }),
     supabase.from('outreach_contacts').select('*').order('sort_order'),
-    supabase.from('outreach_stages').select('*').order('sort_order')
+    supabase.from('outreach_stages').select('*').order('sort_order'),
+    supabase.from('interview_contacts').select('*').order('sort_order'),
+    supabase.from('interview_stages').select('*').order('sort_order'),
+    supabase.from('interview_buckets').select('*').order('sort_order')
   ]);
-  const fail = [groups, people, statuses, priorities, tasks, kpis, commits, contacts, outreachStages].find(r => r.error);
+  const fail = [groups, people, statuses, priorities, tasks, kpis, commits, contacts, outreachStages, interviews, interviewStages, interviewBuckets].find(r => r.error);
   if (fail) {
     toast('Load error: ' + fail.error.message, true);
     console.error(fail.error);
     return;
   }
-  state.groups          = groups.data;
-  state.people          = people.data;
-  state.statuses        = statuses.data;
-  state.priorities      = priorities.data;
-  state.tasks           = tasks.data;
-  state.kpis            = kpis.data;
-  state.commits         = commits.data;
-  state.contacts        = contacts.data;
-  state.outreach_stages = outreachStages.data;
+  state.groups             = groups.data;
+  state.people             = people.data;
+  state.statuses           = statuses.data;
+  state.priorities         = priorities.data;
+  state.tasks              = tasks.data;
+  state.kpis               = kpis.data;
+  state.commits            = commits.data;
+  state.contacts           = contacts.data;
+  state.outreach_stages    = outreachStages.data;
+  state.interviews         = interviews.data;
+  state.interview_stages   = interviewStages.data;
+  state.interview_buckets  = interviewBuckets.data;
   renderAll();
 }
 
@@ -834,7 +849,7 @@ async function loadAll() {
    ========================================================================= */
 function subscribeRealtime() {
   const channel = supabase.channel('dslash-board');
-  const tables = ['tasks', 'kpis', 'groups', 'people', 'statuses', 'priorities', 'repo_commits', 'outreach_contacts', 'outreach_stages'];
+  const tables = ['tasks', 'kpis', 'groups', 'people', 'statuses', 'priorities', 'repo_commits', 'outreach_contacts', 'outreach_stages', 'interview_contacts', 'interview_stages', 'interview_buckets'];
   tables.forEach(t => {
     channel.on('postgres_changes', { event: '*', schema: 'public', table: t }, (payload) => {
       applyChange(t, payload);
@@ -850,7 +865,10 @@ function applyChange(table, payload) {
     people: 'people', statuses: 'statuses', priorities: 'priorities',
     repo_commits: 'commits',
     outreach_contacts: 'contacts',
-    outreach_stages: 'outreach_stages'
+    outreach_stages: 'outreach_stages',
+    interview_contacts: 'interviews',
+    interview_stages: 'interview_stages',
+    interview_buckets: 'interview_buckets'
   }[table];
   if (!key) return;
   if (eventType === 'INSERT') {
@@ -963,6 +981,44 @@ async function deleteContact(id) {
   const { error } = await supabase.from('outreach_contacts').delete().eq('id', id);
   if (error) { toast('Delete failed: ' + error.message, true); console.error(error); }
 }
+
+/* ------- Interview mutations ----------------------------------- */
+async function updateInterview(id, patch) {
+  const idx = state.interviews.findIndex(c => c.id === id);
+  if (idx >= 0) Object.assign(state.interviews[idx], patch);
+  const { error } = await supabase.from('interview_contacts').update(patch).eq('id', id);
+  if (error) { toast('Save failed: ' + error.message, true); console.error(error); }
+}
+async function createInterview(bucketId) {
+  const id = 'i' + Date.now().toString(36);
+  const siblings = state.interviews.filter(c => c.bucket_id === bucketId);
+  const row = {
+    id, name: 'New interview contact',
+    role: '', company: '', company_url: null, linkedin: null, email: null,
+    bucket_id: bucketId, stage_id: 'pool',
+    owner_id: currentPersonId || 'tal',
+    tools_used: '', next_step: '', next_step_due: null,
+    conducted_at: null, notes_file: '', anonymization: null, notes: '',
+    sort_order: (siblings.length + 1) * 10
+  };
+  state.interviews.push(row);
+  renderAll();
+  const { error } = await supabase.from('interview_contacts').insert(row);
+  if (error) { toast('Create failed: ' + error.message, true); console.error(error); return; }
+  setTimeout(() => {
+    const nameEl = document.querySelector(`tr[data-interview-id="${id}"] .contact-name-cell`);
+    if (nameEl) { nameEl.focus(); document.getSelection().selectAllChildren(nameEl); }
+  }, 60);
+}
+async function deleteInterview(id) {
+  const c = state.interviews.find(x => x.id === id);
+  if (!confirm(`Delete interview contact "${c?.name || id}"?`)) return;
+  state.interviews = state.interviews.filter(x => x.id !== id);
+  renderAll();
+  const { error } = await supabase.from('interview_contacts').delete().eq('id', id);
+  if (error) { toast('Delete failed: ' + error.message, true); console.error(error); }
+}
+
 /* ------- Outreach drag & drop ---------------------------------- */
 let _dragState = { id: null };
 
@@ -1456,6 +1512,178 @@ function renderOutreach() {
   const cs = $('contact-count-studio');  if (cs) cs.textContent = nStudio;
 }
 
+function renderInterviewRow(c) {
+  const tr = document.createElement('tr');
+  tr.setAttribute('data-interview-id', c.id);
+
+  tr.appendChild(el('td', {}, [el('div', { class: 'drag-handle', title: 'Drag handle (reorder coming)' }, '⋮⋮')]));
+
+  const nameCell = el('div', { class: 'contact-name-cell', contenteditable: 'true' }, c.name || '');
+  nameCell.addEventListener('blur', () => {
+    const v = nameCell.textContent.trim();
+    if (v !== (c.name || '')) updateInterview(c.id, { name: v });
+  });
+  tr.appendChild(el('td', {}, [nameCell]));
+
+  const roleDiv = el('div', { class: 'role', contenteditable: 'true', title: 'Role' }, c.role || '');
+  roleDiv.addEventListener('blur', () => {
+    const v = roleDiv.textContent.trim();
+    if (v !== (c.role || '')) updateInterview(c.id, { role: v });
+  });
+  const companyDiv = el('div', { class: 'company', contenteditable: 'true', title: 'Company' }, c.company || '');
+  companyDiv.addEventListener('blur', () => {
+    const v = companyDiv.textContent.trim();
+    if (v !== (c.company || '')) updateInterview(c.id, { company: v });
+  });
+  const companyRow = el('div', { class: 'company-row' }, [companyDiv]);
+  if (c.company_url) {
+    companyRow.appendChild(el('a', {
+      class: 'company-link', href: c.company_url, target: '_blank',
+      rel: 'noopener noreferrer', title: c.company_url
+    }, '↗'));
+  }
+  companyRow.appendChild(el('button', {
+    class: 'company-link-edit', title: 'Edit company URL',
+    onclick: () => {
+      const v = prompt('Company website URL', c.company_url || '');
+      if (v !== null) updateInterview(c.id, { company_url: v.trim() || null });
+    }
+  }, '✎'));
+  tr.appendChild(el('td', {}, [el('div', { class: 'contact-role-cell' }, [roleDiv, companyRow])]));
+
+  const linkWrap = el('div', { style: 'display:inline-flex;gap:4px;align-items:center' });
+  if (c.linkedin) {
+    linkWrap.appendChild(el('a', {
+      class: 'linkedin-icon', href: c.linkedin, target: '_blank',
+      rel: 'noopener noreferrer', title: c.linkedin
+    }, 'in'));
+  }
+  linkWrap.appendChild(el('button', {
+    class: 'contact-linkedin-edit', title: 'Edit LinkedIn URL',
+    onclick: () => {
+      const v = prompt('LinkedIn URL', c.linkedin || '');
+      if (v !== null) updateInterview(c.id, { linkedin: v.trim() || null });
+    }
+  }, '✎'));
+  tr.appendChild(el('td', {}, [linkWrap]));
+
+  const stageTd = el('td', {});
+  stageTd.appendChild(renderPillSelect('stage', c.stage_id,
+    state.interview_stages.map(s => ({ id: s.id, label: s.label })),
+    v => updateInterview(c.id, { stage_id: v })));
+  tr.appendChild(stageTd);
+
+  const toolsDiv = el('div', { contenteditable: 'true', title: 'Tools used weekly (e.g. Claude, Cursor, Figma AI)' }, c.tools_used || '');
+  toolsDiv.addEventListener('blur', () => {
+    const v = toolsDiv.textContent.trim();
+    if (v !== (c.tools_used || '')) updateInterview(c.id, { tools_used: v });
+  });
+  tr.appendChild(el('td', {}, [toolsDiv]));
+
+  const nextDiv = el('div', { contenteditable: 'true', title: 'Next step' }, c.next_step || '');
+  nextDiv.addEventListener('blur', () => {
+    const v = nextDiv.textContent.trim();
+    if (v !== (c.next_step || '')) updateInterview(c.id, { next_step: v });
+  });
+  tr.appendChild(el('td', {}, [nextDiv]));
+
+  const dueTd = el('td', { class: 'cell-due ' + dueClass(c.next_step_due) });
+  const dueInp = el('input', { type: 'date', value: c.next_step_due || '' });
+  dueInp.addEventListener('change', () => updateInterview(c.id, { next_step_due: dueInp.value || null }));
+  dueTd.appendChild(dueInp);
+  tr.appendChild(dueTd);
+
+  const conductedTd = el('td', {});
+  const conductedInp = el('input', { type: 'date', value: c.conducted_at || '', title: 'Date interview was conducted' });
+  conductedInp.addEventListener('change', () => updateInterview(c.id, { conducted_at: conductedInp.value || null }));
+  conductedTd.appendChild(conductedInp);
+  tr.appendChild(conductedTd);
+
+  const notesDiv = el('div', { contenteditable: 'true', title: 'Freeform notes' }, c.notes || '');
+  notesDiv.addEventListener('blur', () => {
+    const v = notesDiv.textContent.trim();
+    if (v !== (c.notes || '')) updateInterview(c.id, { notes: v });
+  });
+  const notesTd = el('td', {}, [notesDiv]);
+  if (c.notes_file) {
+    notesTd.appendChild(el('div', { class: 'contact-tasks' }, [
+      el('span', { title: c.notes_file }, '📄 ' + c.notes_file)
+    ]));
+  }
+  const notesFileBtn = el('button', {
+    class: 'company-link-edit', title: 'Edit notes file path',
+    style: 'margin-left:4px',
+    onclick: () => {
+      const v = prompt('Notes file (relative path under research/interviews/)', c.notes_file || '');
+      if (v !== null) updateInterview(c.id, { notes_file: v.trim() || null });
+    }
+  }, '✎');
+  notesTd.appendChild(notesFileBtn);
+  tr.appendChild(notesTd);
+
+  tr.appendChild(el('td', { style: 'text-align:center' }, [
+    el('div', { class: 'contact-actions' }, [
+      el('button', {
+        class: 'btn danger-ghost', title: 'Delete interview contact',
+        onclick: () => deleteInterview(c.id)
+      }, '×')
+    ])
+  ]));
+
+  return tr;
+}
+
+function renderInterviews() {
+  const host = $('interview-sections');
+  if (!host) return;
+  host.innerHTML = '';
+  const buckets = [...state.interview_buckets].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  buckets.forEach(b => {
+    const rows = state.interviews
+      .filter(c => c.bucket_id === b.id)
+      .sort((x, y) => (x.sort_order || 0) - (y.sort_order || 0));
+    const count = rows.length;
+    const targetTxt = b.target ? `${count} / ${b.target}` : `${count}`;
+
+    const header = el('div', { class: 'outreach-section-header' }, [
+      el('h3', {}, b.label),
+      el('span', { class: 'outreach-count' }, targetTxt),
+      el('div', { class: 'spacer' }),
+      el('button', {
+        class: 'btn primary',
+        onclick: () => createInterview(b.id)
+      }, '+ New')
+    ]);
+
+    const table = el('table', {});
+    const thead = el('thead', {}, [
+      el('tr', {}, [
+        el('th', { style: 'width:24px' }),
+        el('th', { style: 'width:180px' }, 'Name'),
+        el('th', { style: 'width:190px' }, 'Role · Company'),
+        el('th', { style: 'width:72px' }, 'Link'),
+        el('th', { style: 'width:120px' }, 'Stage'),
+        el('th', { style: 'width:160px' }, 'Tools used'),
+        el('th', {}, 'Next step'),
+        el('th', { style: 'width:130px' }, 'Due'),
+        el('th', { style: 'width:130px' }, 'Conducted'),
+        el('th', {}, 'Notes'),
+        el('th', { style: 'width:56px' })
+      ])
+    ]);
+    table.appendChild(thead);
+    const tbody = el('tbody', {});
+    rows.forEach(c => tbody.appendChild(renderInterviewRow(c)));
+    table.appendChild(tbody);
+
+    const section = el('div', { class: 'outreach-section' }, [
+      header,
+      el('div', { class: 'kpi-table' }, [table])
+    ]);
+    host.appendChild(section);
+  });
+}
+
 function renderRepo() {
   const panel = $('repo-panel');
   panel.innerHTML = '';
@@ -1484,6 +1712,7 @@ function renderAll() {
   renderKpiTable();
   renderWeek();
   renderOutreach();
+  renderInterviews();
   renderRepo();
 }
 

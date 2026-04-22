@@ -23,8 +23,13 @@ Duble Slash ships **thirteen agents** that cooperate through one shared vocabula
 │                               Shipper · Sage                                │
 │                               (tail)                                        │
 │                                                                             │
-│    You type // inside Claude / Cursor / ChatGPT → tool adopts ONE persona.  │
-│    Four personas; one at a time; explicit <FISH-handoff> between them.      │
+│    Each is a SPECIALIST PERSONA with a deep method catalog.                 │
+│    Nova — the researcher. ~25 discovery methods (SA, PM, HMW, JM, CS, IP,   │
+│       NB, HS, SR + JTBD, contextual inquiry, design sprint, scenario plan…) │
+│    Sol — the shaper. BR, AC, MP, DL, TA, WF, AD, SK, SB, PT, CT…            │
+│    Bram — the builder. CR, SL, GE, TE, UV, IN, PR…                          │
+│    Sage — the shipper. CM, CH, RN, TG, MS, MR, RP, TR, NL…                  │
+│    You type // → tool adopts ONE persona; explicit <FISH-handoff> between.  │
 └────────────────────────────────────┬────────────────────────────────────────┘
                                      │ emits: handoffs · artifacts · invocations · commits
                                      ▼
@@ -49,7 +54,10 @@ Duble Slash ships **thirteen agents** that cooperate through one shared vocabula
 │    daily delta narrative   flow.yaml attribute        flow.yaml transition  │
 │    (replaces standups)     checks (advisory+enforce)  enforcement           │
 │                                                                             │
-│    Team-scope. Every action visible in the glass-kitchen audit UI.          │
+│    Team-scope. Not just plumbing — METHODOLOGY ORCHESTRATORS: they apply   │
+│    FISH at project scale, classify each card's archetype (Nemo / Tuna /    │
+│    Salmon / Willie), set which local agent LEADS the card, and enforce the │
+│    team's flow.yaml. Every action visible in the glass-kitchen audit UI.    │
 └─────────────────────────────────────────────────────────────────────────────┘
 
   Ship order:  Tally + Cipher            → OSS launch
@@ -66,16 +74,17 @@ The map reads top-down: **you** drive a local agent inside an AI tool; each loca
 
 | | **Local agents** (`local-agents/`) | **System agents** (`system-agents/`) |
 |---|---|---|
+| **What they ARE** | **Specialist personas, each with a deep method catalog.** Nova is *the researcher* — 25+ discovery methods. Sol is *the shaper* — briefs, AC, measurement, ADRs, tradeoff axes. Bram is *the builder*. Sage is *the shipper*. The persona is how you *address* the specialist ("bring in Nova to run a Premortem"); the method catalog is what she *offers* once you do. Neither half works without the other — a toolbox without a voice is a command menu; a voice without methods is a chatbot. | **Methodology orchestrators.** They apply FISH at *project scope* — classify each card's archetype (Nemo / Tuna / Salmon / Willie), decide which local agent *leads* that card, and enforce the team's `flow.yaml`. Not plumbing. Not just sync. They are what makes FISH a methodology instead of four prompts. |
 | **Where they live** | Inside the user's AI tool (Claude Desktop, Cursor, ChatGPT Desktop) as memory/instructions | Duble Slash desktop client + Context Cloud backend |
-| **How they activate** | User types `//explore`, `//solidify`, `//build`, `//ship` (+ optional capability code) | Triggered by events: tool session opens, push requested, handoff lands, cron fires, transition attempted |
+| **How they activate** | User types `//explore`, `//solidify`, `//build`, `//ship` (+ optional method code — e.g. `//explore PM` runs Premortem) | Triggered by events: tool session opens, push requested, handoff lands, cron fires, transition attempted |
 | **Conversational?** | Yes — persona-embodied, dialogic | No — observe, process, emit records; surface UI when they need your attention |
 | **Who owns each run** | The user (one persona at a time) | The runtime; configured per user or per team |
 | **Scope** | Per-user, per-session | Personal (on device) or System (team graph) |
-| **Artifacts** | Briefs, AC, measurement plans, pitches, code, release notes, trust receipts | Session records, diff previews, sync events, pickup notifications, context packs, digests, twin responses, flow-check results, transition decisions |
-| **Disable impact** | Switching persona = switching agent; disabling one means you do that phase manually | Each can be disabled individually without breaking the others |
+| **Artifacts** | Method outputs: briefs, AC, measurement plans, interview plans, premortems, journey maps, tradeoff axes, code, release notes, trust receipts | Session records, diff previews, sync events, pickup notifications, context packs, digests, twin responses, **archetype classifications, lead-agent assignments, flow-check results, transition decisions** |
+| **Disable impact** | Switching persona = switching method toolbox; disabling one means you do that phase's methods by hand | Each can be disabled individually; disabling the *orchestration* layer (Gate + Loom) drops the project back to per-card self-direction |
 | **Ships** | All four at OSS launch | Staged: Tally+Cipher OSS → Relay+Beacon+Pack V1 → Echo+Twin V1.5 → Gate+Loom V2 |
 
-**Load-bearing distinction:** local agents talk *to* you; system agents work *around* you. Every local-agent action creates events that some system agent may process. The local-agent pipeline keeps working even if every system agent is disabled — you just lose multiplayer continuity and audit.
+**Load-bearing distinction:** local agents talk *to* you and run *methods with* you; system agents work *around* you and run *methodology on* you. Every local-agent action creates events that some system agent may process. The local-agent pipeline keeps working even if every system agent is disabled — you just lose multiplayer continuity, audit, and project-level FISH orchestration.
 
 ---
 
@@ -83,10 +92,10 @@ The map reads top-down: **you** drive a local agent inside an AI tool; each loca
 
 | # | Agent · call-sign | Kind | Scope | Ships | One-line job |
 |---|---|---|---|---|---|
-| L1 | **Explorer** · *Nova* | Local · head | Per-user | OSS | Open the aperture. Surface options, questions, premises. Refuse to commit. |
-| L2 | **Solidifier** · *Sol* | Local · left body | Per-user | OSS | Reduce unknowns. Shape the thing. Lock decisions that unblock Build. |
-| L3 | **Builder** · *Bram* | Local · right body | Per-user | OSS | Execute against the locked shape. No re-opening settled questions. |
-| L4 | **Shipper** · *Sage* | Local · tail | Per-user | OSS | Narrate, release, document. Make past-work legible to future-you. |
+| L1 | **Explorer** · *Nova* | Local · head | Per-user | OSS | Open the aperture with a research / discovery method. Surface options, questions, premises. Refuse to commit. |
+| L2 | **Solidifier** · *Sol* | Local · left body | Per-user | OSS | Reduce unknowns via shaping methods (brief, AC, MP, ADR, tradeoff axes). Lock decisions that unblock Build. |
+| L3 | **Builder** · *Bram* | Local · right body | Per-user | OSS | Execute against the locked shape via build methods (contract readout, slice plan, tests, UI verify, instrumentation). |
+| L4 | **Shipper** · *Sage* | Local · tail | Per-user | OSS | Release + narrate via ship methods (trust receipt, measurement readout, retrospective, changelog, next-loop queue). |
 | S1 | **Capture** · *Tally* | System · personal | On device | OSS | Watch each tool; tag every session with source, model, timestamp, goal. |
 | S2 | **Redaction** · *Cipher* | System · personal | On device | OSS | Auto-detect PII / secrets. Diff preview before anything leaves the device. |
 | S3 | **Sync** · *Relay* | System · personal→team | Hybrid | V1 | Queue + upload approved payloads. Honor push controls. Resolve conflicts. |
@@ -94,10 +103,26 @@ The map reads top-down: **you** drive a local agent inside an AI tool; each loca
 | S5 | **Context Bundler** · *Pack* | System · team | Context Cloud | V1 | Assemble on-demand context packs (pickup, onboarding, catch-up). |
 | S6 | **Digest** · *Echo* | System · team | Context Cloud | V1.5+ | Delta-based team narrative ("today at a glance"). Replaces standups. |
 | S7 | **Personal Twin** · *Twin* | System · personal | On device | V1.5+ | Answer simple async questions in the user's voice while they're offline. |
-| S8 | **Flow Checker** · *Gate* | System · team | Context Cloud | V2 | Verify each card carries the attributes required by the team's `flow.yaml`. |
-| S9 | **Process** · *Loom* | System · team | Context Cloud | V2 | Enforce phase transitions per `flow.yaml`. Advisory or hard-gating. |
+| S8 | **Flow Checker** · *Gate* | System · team | Context Cloud | V2 | Apply the team's `flow.yaml` to each card: verify archetype-required attributes, flag mismatches, gate transitions. |
+| S9 | **Process** · *Loom* | System · team | Context Cloud | V2 | Orchestrate FISH across the project: classify archetype, set which local agent leads each card, enforce transitions. |
 
 Legend: **L** = local (you invoke), **S** = system (event-triggered). Call-signs are the humanized handle used in UI / logs / support; the full name is canonical.
+
+### 3.1 Method catalogs — what each persona specializes in
+
+Personas are who you talk to; **methods are what they're specialized in offering**. You reach for Nova because she's *the researcher* — and she proactively offers the research methods that fit your card. Invoked as `//<phase> <code>` (e.g. `//explore PM` runs Premortem). Full specs in each agent file.
+
+- **Explorer · Nova** — the research/discovery toolbox.
+  `SA` Sigil Assist · `HS` Heuristic Scan · `HMW` How-Might-We · `JM` Journey Map · `CS` Competitor/Pattern Scan · `IP` Interview Plan · `NB` Nugget Board · `PM` Premortem · `SR` Stream Recap · `HO` Handoff
+  *Plus the classics Nova draws from when the card asks for them:* JTBD interviews, contextual inquiry, task analysis, Goal-Directed Design, Operational Sequence Diagram, scenario planning, Design Sprint, heuristic evaluation, TZUMI recaps.
+- **Solidifier · Sol** — the shaping toolbox.
+  `SK` Sketch · `SB` Storyboard · `BR` Brief · `PT` Pitch/RFC · `CT` Concept Test · `AC` Acceptance Criteria · `MP` Measurement Plan · `DL` Decision Log · `TA` Tradeoff Axes · `WF` Wireframe Spec · `AD` ADR · `HB` Handback · `HO` Handoff
+- **Builder · Bram** — the build toolbox.
+  `CR` Contract Readout · `SL` Slice Plan · `GE` Generate Code · `TE` Tests · `UV` UI Verify · `IN` Instrumentation · `PR` PR Draft · `HB` Handback · `HO` Handoff
+- **Shipper · Sage** — the release toolbox.
+  `RE` Release Readout · `CM` Commit Message · `CH` Changelog · `RN` Release Notes · `TG` Tag/Version · `PR` Open PR · `MS` Measurement Setup · `MR` Measurement Readout · `RP` Retrospective · `TR` Trust Receipt · `NL` Next-Loop Queue · `HB` Handback · `HO` Handoff
+
+The method code is the load-bearing part of an invocation. `//explore` alone is fine; `//explore PM` is *precise* — it tells Nova which method to run and which artifact shape to emit.
 
 ---
 
@@ -119,58 +144,70 @@ Who can *do* what, who can *stop* it, and what it leaves behind.
 | Digest · Echo | Scheduled (team-configurable) + on-demand | Team admin (schedule, channels) | Cron tick or on-demand request | Team falls back to whatever standup ritual it had |
 | Personal Twin · Twin | Async question addressed to the offline user | User (correct or retract any Twin answer) | Async question arrives while user offline + question is within Twin's trained mandate | Questions wait for the user; no in-voice answers |
 | Flow Checker · Gate | Automatic on card state changes | User per-override; team enables advisory vs enforcing | Phase-transition attempt, artifact add, sigil change | No automated attribute checks; humans self-enforce |
-| Process · Loom | Automatic on transition attempts | User per-override (reason logged); team sets `flow.yaml` | `<FISH-handoff>` requests a phase transition | Transitions always allowed; methodology becomes advisory |
+| Process · Loom | Automatic on card creation + transition attempts | User per-override (reason logged); team sets `flow.yaml` | Card opened, sigil assigned, or `<FISH-handoff>` requests a phase transition | Transitions always allowed; archetype/lead are set ad-hoc per card; methodology becomes advisory |
 
 **Authority lines** (what can hurt vs. what can only advise):
 
 - **Only two agents write code:** Builder (product code) and Shipper (release plumbing only — version bumps, changelog, tag messages, commit text). Everyone else produces documents, diffs, or decisions.
 - **Only Shipper commits, tags, or publishes** — and only with per-action user confirmation.
 - **Only Loom (V2) can block a transition** — and only when the team has opted into enforcing mode.
+- **Only the system-agent layer applies FISH at project scope.** Gate + Loom (reading the team's `flow.yaml`) classify each card's archetype (Nemo / Tuna / Salmon / Willie) and assign the *lead local agent* accordingly — Nemo leans on Bram, Tuna on Sol, Salmon and Willie on Nova. Local agents run methods; system agents decide which methods a given card requires and who should run them. Users can override any assignment (reason logged). Until V2 ships, this role is held locally by Explorer's **SA** (Sigil Assist) and team convention; V2 formalizes it.
 - **Only you can push data off the device** — Cipher *gates* but does not initiate; Relay *queues* but does not auto-upload without your approval (OSS default).
 
 ---
 
 ## 5. Lifecycle — a card from birth to next loop
 
-One card's end-to-end journey, showing local agents as the main track and system agents as the rails underneath.
+One card's end-to-end journey. **System agents frame the card; local agents run the methods inside it.** The right column shows what the system-agent layer is doing at each step — not just recording, but orchestrating.
 
 ```
-      ┌─ USER · "//explore the export tooltip is confusing users"
+      ┌─ USER · "the export tooltip is confusing users"
       ▼
-  ┌──────────┐                                              Tally records the session.
-  │ Explorer │── options, nuggets, sigil ──┐                Cipher watches for anything
-  │  · Nova  │                             │                sensitive the user might
-  └──────────┘                             │                paste during the chat.
-      │                                    │
-      │  <FISH-handoff> (to: solidifier)   │
-      ▼                                    │
-  ┌────────────┐                           │                Handoff stored locally;
-  │ Solidifier │── brief, AC, MP ──────────┤                if user pushes to team,
-  │   · Sol    │                           │                Cipher gates the push and
-  └────────────┘                           │                Relay queues it. Beacon
-      │                                    │                routes pickup notifications.
-      │  <FISH-handoff> (to: builder)      │
-      ▼                                    │
-  ┌──────────┐                             │                Tally captures the Build
-  │ Builder  │── code, tests, UI ──────────┤                session in whichever tool
-  │  · Bram  │                             │                you're coding in. Gate
-  └──────────┘                             │                checks flow.yaml if your
-      │                                    │                team has V2 enabled.
-      │  <FISH-handoff> (to: shipper)      │
-      ▼                                    │
-  ┌──────────┐                             │                Cipher co-signs the trust
-  │ Shipper  │── release, TR, next loop ──┘                 receipt. Relay syndicates
+  ┌──────────────────────┐                                   Loom reads the card + team
+  │ FISH-TYPE CLASSIFY   │── sigil = Salmon ─────────┐       flow.yaml. Classifies the
+  │ (system · Loom/Gate) │── lead  = Nova (Explorer) │       archetype (small + uncertain
+  │ or Nova's SA today   │── required: MP before TR ─┤       → Salmon), assigns the lead
+  └──────────────────────┘                           │       local agent, and tags the
+      │                                              │       methods required for this
+      │  //explore (invoked by user or auto-routed)  │       archetype. Pre-V2 this role
+      ▼                                              │       is held by Nova's SA method.
+  ┌──────────┐                                       │
+  │ Explorer │── runs: IP, NB, PM ──────────────────┤       Tally records the session.
+  │  · Nova  │   (methods Loom flagged for Salmon)   │       Cipher watches for anything
+  └──────────┘                                       │       sensitive pasted in chat.
+      │                                              │
+      │  <FISH-handoff> (to: solidifier)             │
+      ▼                                              │       Handoff stored locally;
+  ┌────────────┐                                     │       if user pushes to team,
+  │ Solidifier │── runs: BR, AC, MP, DL ────────────┤       Cipher gates the push and
+  │   · Sol    │                                     │       Relay queues it. Beacon
+  └────────────┘                                     │       routes pickup notifications.
+      │                                              │       Gate verifies AC + MP exist
+      │  <FISH-handoff> (to: builder)                │       (Salmon requires both).
+      ▼                                              │
+  ┌──────────┐                                       │       Tally captures the Build
+  │ Builder  │── runs: CR, SL, TE, UV, IN ──────────┤       session in whichever tool
+  │  · Bram  │                                       │       you're coding in. Gate
+  └──────────┘                                       │       checks flow.yaml.
+      │                                              │
+      │  <FISH-handoff> (to: shipper)                │
+      ▼                                              │
+  ┌──────────┐                                       │       Cipher co-signs the trust
+  │ Shipper  │── runs: CM, CH, RN, TG, MR, RP, TR ──┘       receipt. Relay syndicates
   │  · Sage  │                                              the release to the team
   └──────────┘                                              graph. Echo includes it
       │                                                     in tomorrow's Digest.
       │  <FISH-handoff> (to: explorer, next loop)
       ▼
-   next card or next loop on this card — Pack can assemble a context pack
+   next card or next loop on this card — Pack assembles a context pack
    for whoever picks it up, whether that's you tomorrow or a teammate.
 ```
 
+**Two tracks, not one.** The left column is the *methods track* — Nova, Sol, Bram, Sage each running the specific method codes (IP, AC, MP, CR, TR…) that the card requires. The right column is the *methodology track* — Loom classifies and assigns, Gate verifies, Beacon routes, Cipher/Relay/Tally/Echo handle capture, privacy, sync, and narration. Remove the methodology track and you still have four competent method toolboxes; remove the methods track and you have a flow.yaml with nothing running inside it.
+
 What stays constant across the whole lifecycle:
-- **Sigil** (size × certainty) is set in Explore and travels with every handoff.
+- **Sigil** (size × certainty) is set up front — by Loom reading `flow.yaml` (V2) or by Nova's `SA` method (today) — and travels with every handoff.
+- **Lead agent** is assigned with the sigil and travels with the card. Nemo-leads-Bram, Tuna-leads-Sol, Salmon/Willie-lead-Nova is the default; teams override in `flow.yaml`.
 - **Card ID** is stable across sessions, tools, and teammates.
 - **Trust receipt** exists for every Ship, even solo — it's what makes audit possible later.
 - **Every transition is a `<FISH-handoff>` block** — the universal mechanism for picking up cold.

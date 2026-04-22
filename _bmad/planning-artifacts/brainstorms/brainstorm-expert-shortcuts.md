@@ -294,6 +294,6 @@ Rules the agent follows when picking the 2–3 offers:
 ## Next steps
 
 - [ ] Create product brief → `/bmad-create-product-brief` (name: **Expert Shortcuts — loanable personas for local agents**)
-- [ ] Draft the four local-agent spec-file additions (`§ Expert shortcuts` section in each of [explorer.md](../methodology/local-agents/explorer.md), [solidifier.md](../methodology/local-agents/solidifier.md), [builder.md](../methodology/local-agents/builder.md), [shipper.md](../methodology/local-agents/shipper.md))
+- [ ] Draft the four local-agent spec-file additions (`§ Expert shortcuts` section in each of [explorer.md](../../../methodology/local-agents/explorer.md), [solidifier.md](../../../methodology/local-agents/solidifier.md), [builder.md](../../../methodology/local-agents/builder.md), [shipper.md](../../../methodology/local-agents/shipper.md))
 - [ ] Prototype the proactive-offer prompt pattern on one agent (suggest Sol — highest offer-density, most natural surface) and smoke-test
 - [ ] Decide on V1 vs V1.5 cut: headline feature in OSS, ensembles/debate/custom-experts in V1.5

@@ -163,7 +163,7 @@ content_ref:   pointer to encrypted blob on device (never plaintext in index)
 
 **Design rules:**
 - **Pre-push preview.** Any push (to V1 Context Cloud or any external service) shows a diff-style preview: original vs. redacted. User approves, edits, or cancels.
-- **Teach once** (from [brainstorm item H](../../planning-artifacts/brainstorm-mvp-post-reframe.md#thread-4--redaction-trust)). First time the user flags a new pattern ("also redact our internal project codename"), Redaction learns it for future sessions.
+- **Teach once** (from [brainstorm item H](../../_bmad/planning-artifacts/brainstorms/brainstorm-mvp-post-reframe.md#thread-4--redaction-trust)). First time the user flags a new pattern ("also redact our internal project codename"), Redaction learns it for future sessions.
 - **Never silent.** No autonomous data movement. Every redact-and-send is an explicit action.
 - **Co-signs trust receipts** (with the Shipper local agent). When the Shipper emits a trust receipt, Redaction appends a signed count of what was stripped.
 
@@ -653,5 +653,5 @@ the human keeps the last word, and every override is visible.
 - Local agents (`//` personas) → [`../local-agents/README.md`](../local-agents/README.md)
 - FISH spec → [`../fish/README.md`](../fish/README.md)
 - Transitions + handoff contract → [`../fish/transitions-and-handoffs.md`](../fish/transitions-and-handoffs.md)
-- Product brief (source of agent list + milestones) → [`../../planning-artifacts/brief-collab-capture-layer.md`](../../planning-artifacts/brief-collab-capture-layer.md)
-- Technical stack → [`../../docs/technical-research-duble-slash-stack.md`](../../docs/technical-research-duble-slash-stack.md)
+- Product brief (source of agent list + milestones) → [`_bmad/planning-artifacts/briefs/brief-collab-capture-layer.md`](../../_bmad/planning-artifacts/briefs/brief-collab-capture-layer.md)
+- Technical stack → [`_bmad/docs/technical-research-duble-slash-stack.md`](../../_bmad/docs/technical-research-duble-slash-stack.md)
