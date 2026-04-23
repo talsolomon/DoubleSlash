@@ -59,13 +59,14 @@ jobs:
             TS=$(git log -1 "$full" --pretty=%aI)
             echo "Inserting: $SHA — $MSG @ $TS"
 
-            # jq -Rn builds a safe JSON body — handles quotes, backslashes,
-            # unicode in the commit message.
-            BODY=$(jq -Rn --arg sha "$SHA" --arg msg "$MSG" --arg ts "$TS" \
-              '{query: ("insert into public.repo_commits (sha, msg, seen_at) values (" +
-                        ($sha | @json) + ", " +
-                        ($msg | @json) + ", " +
-                        ($ts  | @json) + "::timestamptz) on conflict (sha) do nothing;")}')
+            # SQL-escape single quotes (double them) in bash, then let jq
+            # wrap the final SQL string in a JSON envelope. Doing it in two
+            # stages avoids brain-melting nested quote escaping.
+            SHA_ESC=${SHA//\'/\'\'}
+            MSG_ESC=${MSG//\'/\'\'}
+            TS_ESC=${TS//\'/\'\'}
+            SQL="insert into public.repo_commits (sha, msg, seen_at) values ('${SHA_ESC}', '${MSG_ESC}', '${TS_ESC}'::timestamptz) on conflict (sha) do nothing;"
+            BODY=$(jq -n --arg q "$SQL" '{query: $q}')
 
             HTTP_CODE=$(curl -sS -o /tmp/resp.json -w '%{http_code}' \
               -X POST "$API_URL" \
