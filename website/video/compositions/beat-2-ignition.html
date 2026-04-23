@@ -1,0 +1,225 @@
+<template id="beat-2-ignition-template">
+  <div data-composition-id="beat-2-ignition" data-start="0" data-duration="7.96" data-width="1920" data-height="1080">
+    <style>
+      [data-composition-id="beat-2-ignition"] {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: #07080B;
+        overflow: hidden;
+      }
+      [data-composition-id="beat-2-ignition"] .logomark {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 420px;
+        height: 420px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 48px;
+      }
+      [data-composition-id="beat-2-ignition"] .slash {
+        position: relative;
+        width: 72px;
+        height: 320px;
+        transform: rotate(-18deg);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: stretch;
+        justify-content: center;
+      }
+      [data-composition-id="beat-2-ignition"] .slash .bar {
+        width: 100%;
+        border-radius: 4px;
+        flex: 1;
+      }
+      [data-composition-id="beat-2-ignition"] .slash-left .bar {
+        background: #0e3a35;
+      }
+      [data-composition-id="beat-2-ignition"] .slash-right .bar {
+        background: #0e3a35;
+      }
+      [data-composition-id="beat-2-ignition"] .bloom {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        filter: blur(90px);
+        opacity: 0;
+        pointer-events: none;
+      }
+      [data-composition-id="beat-2-ignition"] .bloom-green {
+        background: radial-gradient(
+          circle,
+          rgba(61, 217, 182, 0.55) 0%,
+          rgba(61, 217, 182, 0) 70%
+        );
+        left: calc(50% - 60px);
+      }
+      [data-composition-id="beat-2-ignition"] .bloom-white {
+        background: radial-gradient(
+          circle,
+          rgba(255, 251, 240, 0.45) 0%,
+          rgba(255, 251, 240, 0) 70%
+        );
+        left: calc(50% + 60px);
+      }
+      [data-composition-id="beat-2-ignition"] .word-flash {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 320px);
+        transform: translateX(-50%);
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 140px;
+        letter-spacing: 0.02em;
+        color: #F2EFE8;
+        opacity: 0;
+        white-space: nowrap;
+      }
+      [data-composition-id="beat-2-ignition"] .pain-stack {
+        position: absolute;
+        left: 50%;
+        top: calc(50% - 300px);
+        transform: translateX(-50%);
+        font-family: "Fraunces", serif;
+        font-weight: 500;
+        font-size: 42px;
+        color: #F2EFE8;
+        opacity: 0.75;
+        letter-spacing: -0.01em;
+        text-align: center;
+        line-height: 1.35;
+      }
+    </style>
+
+    <div class="bloom bloom-green"></div>
+    <div class="bloom bloom-white"></div>
+
+    <div class="pain-stack">
+      <span class="line-1" style="opacity: 0">Your AI tools are everywhere.</span><br />
+      <span class="line-2" style="opacity: 0">Your AI work is nowhere.</span>
+    </div>
+
+    <div class="logomark">
+      <div class="slash slash-left">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="slash slash-right">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+
+    <div class="word-flash">TRUST</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const scope = '[data-composition-id="beat-2-ignition"] ';
+
+        // Inherit ghost state from beat 1
+        tl.set(scope + ".logomark", { opacity: 0.35 }, 0);
+        tl.set(scope + ".slash-left .bar", { opacity: 0.25, background: "#0e3a35" }, 0);
+        tl.set(scope + ".slash-right .bar", { opacity: 0.25, background: "#0e3a35" }, 0);
+
+        // 0.0 – 1.3s: still ghost while "Cursor for code" and "ChatGPT for writing" land
+        tl.to(scope + ".logomark", { opacity: 0.5, duration: 0.8, ease: "power2.out" }, 0.2);
+
+        // 1.3s: IGNITION — both slashes transform in one frame
+        tl.set(scope + ".slash-left .bar", { background: "#3dd9b6" }, 1.3);
+        tl.set(scope + ".slash-right .bar", { background: "#FFFBF0" }, 1.3);
+        tl.to(scope + ".logomark", { opacity: 1, duration: 0.4, ease: "expo.out" }, 1.3);
+        tl.to(scope + ".slash-left .bar", { opacity: 1, duration: 0.5, ease: "expo.out" }, 1.3);
+        tl.to(scope + ".slash-right .bar", { opacity: 1, duration: 0.5, ease: "expo.out" }, 1.3);
+
+        // Bloom kicks in
+        tl.to(
+          scope + ".bloom-green",
+          { opacity: 1, duration: 0.6, ease: "expo.out" },
+          1.3
+        );
+        tl.to(
+          scope + ".bloom-white",
+          { opacity: 0.8, duration: 0.6, ease: "expo.out" },
+          1.3
+        );
+
+        // Equalizer surge — bars flare into full amplitude
+        const leftBars = document.querySelectorAll(scope + ".slash-left .bar");
+        const rightBars = document.querySelectorAll(scope + ".slash-right .bar");
+        [...leftBars, ...rightBars].forEach((bar, i) => {
+          const seed = 0.6 + ((i * 0.09) % 0.3);
+          tl.to(
+            bar,
+            { opacity: seed, duration: 0.35, ease: "sine.inOut" },
+            2.2 + (i % 5) * 0.06
+          );
+          tl.to(
+            bar,
+            { opacity: 1, duration: 0.4, ease: "sine.inOut" },
+            2.8 + (i % 5) * 0.06
+          );
+          tl.to(
+            bar,
+            { opacity: seed + 0.1, duration: 0.4, ease: "sine.inOut" },
+            3.4 + (i % 5) * 0.06
+          );
+        });
+
+        // 1.5s: "Your AI tools are everywhere." lands
+        tl.to(
+          scope + ".pain-stack .line-1",
+          { opacity: 1, duration: 0.5, ease: "power3.out" },
+          1.8
+        );
+
+        // 2.7s: "Your AI work is nowhere."
+        tl.to(
+          scope + ".pain-stack .line-2",
+          { opacity: 1, duration: 0.5, ease: "power3.out" },
+          3.0
+        );
+
+        // TRUST word-flash at 1.8s, holds 1.4s, fades 0.4s
+        tl.fromTo(
+          scope + ".word-flash",
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          1.8
+        );
+        tl.to(scope + ".word-flash", { opacity: 0, duration: 0.5, ease: "power2.in" }, 3.6);
+
+        // Sustain bloom through end
+        tl.to(
+          scope + ".bloom-green",
+          { opacity: 0.8, duration: 2.0, ease: "sine.inOut" },
+          4.0
+        );
+        tl.to(
+          scope + ".bloom-white",
+          { opacity: 0.65, duration: 2.0, ease: "sine.inOut" },
+          4.0
+        );
+
+        window.__timelines["beat-2-ignition"] = tl;
+      })();
+    </script>
+  </div>
+</template>

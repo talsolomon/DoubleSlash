@@ -8,3 +8,6 @@
 
 # Supabase — local dev credentials (founder passwords). Do not commit.
 supabase/bootstrap-users.sql
+
+# HyperFrames auto-generated preview thumbnails — regenerated on every render.
+**/.thumbnails/

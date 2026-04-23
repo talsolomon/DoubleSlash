@@ -1,0 +1,322 @@
+[
+  {
+    "text": "You",
+    "start": 0.04,
+    "end": 0.2
+  },
+  {
+    "text": "use",
+    "start": 0.2,
+    "end": 0.32
+  },
+  {
+    "text": "Claude",
+    "start": 0.4,
+    "end": 0.81
+  },
+  {
+    "text": "for",
+    "start": 0.81,
+    "end": 1.01
+  },
+  {
+    "text": "research,",
+    "start": 1.01,
+    "end": 1.64
+  },
+  {
+    "text": "Cursor",
+    "start": 1.69,
+    "end": 2.08
+  },
+  {
+    "text": "for",
+    "start": 2.08,
+    "end": 2.3
+  },
+  {
+    "text": "code,",
+    "start": 2.3,
+    "end": 2.84
+  },
+  {
+    "text": "Chat",
+    "start": 2.85,
+    "end": 3.3
+  },
+  {
+    "text": "GPT",
+    "start": 3.3,
+    "end": 3.65
+  },
+  {
+    "text": "for",
+    "start": 3.71,
+    "end": 3.91
+  },
+  {
+    "text": "writing,",
+    "start": 3.91,
+    "end": 4.62
+  },
+  {
+    "text": "your",
+    "start": 4.62,
+    "end": 4.87
+  },
+  {
+    "text": "AI",
+    "start": 4.87,
+    "end": 5
+  },
+  {
+    "text": "tools",
+    "start": 5,
+    "end": 5.4
+  },
+  {
+    "text": "are",
+    "start": 5.4,
+    "end": 5.52
+  },
+  {
+    "text": "everywhere,",
+    "start": 5.63,
+    "end": 6.24
+  },
+  {
+    "text": "your",
+    "start": 6.28,
+    "end": 6.56
+  },
+  {
+    "text": "AI",
+    "start": 6.64,
+    "end": 6.73
+  },
+  {
+    "text": "work",
+    "start": 6.73,
+    "end": 7.06
+  },
+  {
+    "text": "is",
+    "start": 7.06,
+    "end": 7.22
+  },
+  {
+    "text": "nowhere,",
+    "start": 7.22,
+    "end": 7.96
+  },
+  {
+    "text": "type",
+    "start": 7.96,
+    "end": 8.29
+  },
+  {
+    "text": "2",
+    "start": 8.29,
+    "end": 8.54
+  },
+  {
+    "text": "slashes,",
+    "start": 8.54,
+    "end": 9.32
+  },
+  {
+    "text": "one",
+    "start": 9.32,
+    "end": 9.48
+  },
+  {
+    "text": "of",
+    "start": 9.48,
+    "end": 9.53
+  },
+  {
+    "text": "four",
+    "start": 9.6,
+    "end": 9.79
+  },
+  {
+    "text": "agents",
+    "start": 9.79,
+    "end": 10.11
+  },
+  {
+    "text": "picks",
+    "start": 10.11,
+    "end": 10.37
+  },
+  {
+    "text": "up",
+    "start": 10.37,
+    "end": 10.47
+  },
+  {
+    "text": "your",
+    "start": 10.47,
+    "end": 10.51
+  },
+  {
+    "text": "project",
+    "start": 10.81,
+    "end": 11.14
+  },
+  {
+    "text": "where",
+    "start": 11.14,
+    "end": 11.28
+  },
+  {
+    "text": "you",
+    "start": 11.32,
+    "end": 11.5
+  },
+  {
+    "text": "left",
+    "start": 11.5,
+    "end": 11.8
+  },
+  {
+    "text": "it,",
+    "start": 11.8,
+    "end": 12.1
+  },
+  {
+    "text": "explore,",
+    "start": 12.1,
+    "end": 12.7
+  },
+  {
+    "text": "solidify,",
+    "start": 12.96,
+    "end": 13.53
+  },
+  {
+    "text": "build,",
+    "start": 13.53,
+    "end": 14.06
+  },
+  {
+    "text": "ship,",
+    "start": 14.13,
+    "end": 14.51
+  },
+  {
+    "text": "your",
+    "start": 14.51,
+    "end": 14.79
+  },
+  {
+    "text": "process",
+    "start": 14.82,
+    "end": 15.29
+  },
+  {
+    "text": "sinks",
+    "start": 15.32,
+    "end": 15.55
+  },
+  {
+    "text": "across",
+    "start": 15.85,
+    "end": 16.17
+  },
+  {
+    "text": "your",
+    "start": 16.17,
+    "end": 16.43
+  },
+  {
+    "text": "machines,",
+    "start": 16.47,
+    "end": 17.32
+  },
+  {
+    "text": "your",
+    "start": 17.32,
+    "end": 17.36
+  },
+  {
+    "text": "teammates",
+    "start": 17.36,
+    "end": 17.93
+  },
+  {
+    "text": "pick",
+    "start": 17.93,
+    "end": 18.2
+  },
+  {
+    "text": "it",
+    "start": 18.2,
+    "end": 18.33
+  },
+  {
+    "text": "up",
+    "start": 18.33,
+    "end": 18.46
+  },
+  {
+    "text": "on",
+    "start": 18.46,
+    "end": 18.58
+  },
+  {
+    "text": "theirs,",
+    "start": 18.63,
+    "end": 19.12
+  },
+  {
+    "text": "keep",
+    "start": 19.12,
+    "end": 19.39
+  },
+  {
+    "text": "doing",
+    "start": 19.39,
+    "end": 19.72
+  },
+  {
+    "text": "what",
+    "start": 19.72,
+    "end": 19.82
+  },
+  {
+    "text": "you",
+    "start": 20.16,
+    "end": 20.19
+  },
+  {
+    "text": "do",
+    "start": 20.19,
+    "end": 20.31
+  },
+  {
+    "text": "best,",
+    "start": 20.39,
+    "end": 20.72
+  },
+  {
+    "text": "will",
+    "start": 20.72,
+    "end": 20.97
+  },
+  {
+    "text": "consolidate",
+    "start": 21.03,
+    "end": 21.58
+  },
+  {
+    "text": "the",
+    "start": 21.89,
+    "end": 21.93
+  },
+  {
+    "text": "rest.",
+    "start": 21.93,
+    "end": 22.28
+  }
+]

@@ -1,0 +1,194 @@
+<template id="beat-6-close-template">
+  <div data-composition-id="beat-6-close" data-start="0" data-duration="3.2" data-width="1920" data-height="1080">
+    <style>
+      [data-composition-id="beat-6-close"] {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: #07080B;
+        overflow: hidden;
+      }
+      [data-composition-id="beat-6-close"] .logomark {
+        position: absolute;
+        left: 50%;
+        top: 32%;
+        transform: translate(-50%, -50%);
+        width: 280px;
+        height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+      }
+      [data-composition-id="beat-6-close"] .slash {
+        position: relative;
+        width: 48px;
+        height: 220px;
+        transform: rotate(-18deg);
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        align-items: stretch;
+        justify-content: center;
+      }
+      [data-composition-id="beat-6-close"] .slash .bar {
+        width: 100%;
+        border-radius: 3px;
+        flex: 1;
+        opacity: 0.85;
+      }
+      [data-composition-id="beat-6-close"] .slash-left .bar {
+        background: #3dd9b6;
+      }
+      [data-composition-id="beat-6-close"] .slash-right .bar {
+        background: #FFFBF0;
+      }
+      [data-composition-id="beat-6-close"] .bloom {
+        position: absolute;
+        left: 50%;
+        top: 32%;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        filter: blur(80px);
+        opacity: 0.45;
+        pointer-events: none;
+        background: radial-gradient(
+          circle,
+          rgba(61, 217, 182, 0.4) 0%,
+          rgba(255, 251, 240, 0.2) 40%,
+          rgba(7, 8, 11, 0) 75%
+        );
+      }
+      [data-composition-id="beat-6-close"] .tagline {
+        position: absolute;
+        left: 50%;
+        top: 60%;
+        transform: translateX(-50%);
+        font-family: "Fraunces", serif;
+        font-weight: 700;
+        font-size: 128px;
+        letter-spacing: -0.02em;
+        color: #F2EFE8;
+        text-align: center;
+        line-height: 1.15;
+        font-variation-settings: "opsz" 144;
+      }
+      [data-composition-id="beat-6-close"] .tagline .line {
+        display: block;
+        opacity: 0;
+      }
+      [data-composition-id="beat-6-close"] .wordmark-caption {
+        position: absolute;
+        left: 50%;
+        top: 86%;
+        transform: translateX(-50%);
+        font-family: "Fraunces", serif;
+        font-weight: 500;
+        font-size: 32px;
+        letter-spacing: 0.04em;
+        color: #6B6E76;
+        text-align: center;
+        opacity: 0;
+        text-transform: uppercase;
+      }
+      [data-composition-id="beat-6-close"] .wordmark-caption .slashes {
+        color: #3dd9b6;
+        font-weight: 700;
+      }
+    </style>
+
+    <div class="bloom"></div>
+
+    <div class="logomark">
+      <div class="slash slash-left">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="slash slash-right">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+
+    <div class="tagline">
+      <span class="line line-1">Keep doing what you do best.</span>
+      <span class="line line-2">We'll consolidate the rest.</span>
+    </div>
+
+    <div class="wordmark-caption">
+      Duble<span class="slashes">//</span>Slash
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const scope = '[data-composition-id="beat-6-close"] ';
+
+        tl.set(scope + ".logomark", { opacity: 0, scale: 0.92 }, 0);
+        tl.to(
+          scope + ".logomark",
+          { opacity: 1, scale: 1, duration: 1.0, ease: "expo.out" },
+          0.1
+        );
+
+        // Narration: "Keep doing what you do best." at 0.0s
+        tl.fromTo(
+          scope + ".tagline .line-1",
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+          0.2
+        );
+
+        // "We'll consolidate the rest." at ~1.6s
+        tl.fromTo(
+          scope + ".tagline .line-2",
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+          1.7
+        );
+
+        // Wordmark caption fades in slowly
+        tl.fromTo(
+          scope + ".wordmark-caption",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.8, ease: "power2.out" },
+          2.0
+        );
+
+        // Bars decelerate breathing (just slight opacity variation — reads as "beacon at rest")
+        const leftBars = document.querySelectorAll(scope + ".slash-left .bar");
+        const rightBars = document.querySelectorAll(scope + ".slash-right .bar");
+        [...leftBars, ...rightBars].forEach((bar, i) => {
+          tl.to(
+            bar,
+            { opacity: 0.6 + ((i * 0.09) % 0.3), duration: 0.5, ease: "sine.inOut" },
+            0.4 + i * 0.04
+          );
+          tl.to(
+            bar,
+            { opacity: 0.95, duration: 0.6, ease: "sine.inOut" },
+            1.4 + i * 0.04
+          );
+        });
+
+        // Very subtle logomark scale-up through hold
+        tl.to(scope + ".logomark", { scale: 1.04, duration: 3.0, ease: "power1.out" }, 0.1);
+
+        // Final whisper dip to 0.9 opacity
+        tl.to(scope + ".tagline", { opacity: 0.9, duration: 0.5, ease: "power2.in" }, 2.8);
+
+        window.__timelines["beat-6-close"] = tl;
+      })();
+    </script>
+  </div>
+</template>

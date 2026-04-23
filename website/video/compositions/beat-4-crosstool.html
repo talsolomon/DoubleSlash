@@ -1,0 +1,359 @@
+<template id="beat-4-crosstool-template">
+  <div data-composition-id="beat-4-crosstool" data-start="0" data-duration="4.64" data-width="1920" data-height="1080">
+    <style>
+      [data-composition-id="beat-4-crosstool"] {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: #07080B;
+        overflow: hidden;
+      }
+
+      /* Stylized tool windows — each ~500x320, arranged in a 2x2 grid with beacon center-right */
+      [data-composition-id="beat-4-crosstool"] .tool {
+        position: absolute;
+        width: 440px;
+        height: 260px;
+        background: #12141A;
+        border: 1px solid #1E2028;
+        border-radius: 14px;
+        padding: 24px 28px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-name {
+        font-family: "Fraunces", serif;
+        font-size: 22px;
+        font-weight: 600;
+        color: #F2EFE8;
+        letter-spacing: -0.01em;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-input {
+        background: #0E1016;
+        border: 1px solid #1E2028;
+        border-radius: 10px;
+        padding: 14px 18px;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 22px;
+        color: #F2EFE8;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-slash {
+        color: #3dd9b6;
+        font-weight: 700;
+        opacity: 0;
+      }
+
+      /* Tool positions */
+      [data-composition-id="beat-4-crosstool"] .tool-cursor {
+        left: 120px;
+        top: 200px;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-chatgpt {
+        right: 120px;
+        top: 200px;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-terminal {
+        left: 120px;
+        bottom: 180px;
+      }
+      [data-composition-id="beat-4-crosstool"] .tool-perplexity {
+        right: 120px;
+        bottom: 180px;
+      }
+
+      [data-composition-id="beat-4-crosstool"] .tool-cursor .tool-dot { background: #4b8bff; }
+      [data-composition-id="beat-4-crosstool"] .tool-chatgpt .tool-dot { background: #10a37f; }
+      [data-composition-id="beat-4-crosstool"] .tool-terminal .tool-dot { background: #5cfc85; }
+      [data-composition-id="beat-4-crosstool"] .tool-perplexity .tool-dot { background: #20b8cd; }
+
+      /* Central beacon */
+      [data-composition-id="beat-4-crosstool"] .beacon {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 220px;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        filter: drop-shadow(0 0 40px rgba(61, 217, 182, 0.4));
+      }
+      [data-composition-id="beat-4-crosstool"] .beacon .slash {
+        width: 42px;
+        height: 180px;
+        transform: rotate(-18deg);
+        border-radius: 3px;
+      }
+      [data-composition-id="beat-4-crosstool"] .beacon .slash-left {
+        background: #3dd9b6;
+      }
+      [data-composition-id="beat-4-crosstool"] .beacon .slash-right {
+        background: #FFFBF0;
+      }
+
+      /* Badge */
+      [data-composition-id="beat-4-crosstool"] .badge {
+        position: absolute;
+        left: calc(50% + 70px);
+        top: calc(50% - 120px);
+        min-width: 52px;
+        height: 52px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: #d98a2b;
+        color: white;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 28px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 0 4px rgba(7, 8, 11, 0.6), 0 8px 24px rgba(217, 138, 43, 0.5);
+        opacity: 0;
+        transform: scale(0.6);
+      }
+
+      /* Sync lines — 4 absolute-positioned SVGs, one per tool */
+      [data-composition-id="beat-4-crosstool"] .sync-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      [data-composition-id="beat-4-crosstool"] .sync-line path {
+        fill: none;
+        stroke: #3dd9b6;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        filter: drop-shadow(0 0 6px rgba(61, 217, 182, 0.8));
+      }
+
+      /* EVERYWHERE word-flash */
+      [data-composition-id="beat-4-crosstool"] .word-flash {
+        position: absolute;
+        left: 50%;
+        bottom: 80px;
+        transform: translateX(-50%);
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 160px;
+        color: #F2EFE8;
+        opacity: 0;
+        white-space: nowrap;
+        z-index: 1;
+      }
+    </style>
+
+    <div class="word-flash">EVERYWHERE</div>
+
+    <div class="tool tool-cursor">
+      <div class="tool-header">
+        <span class="tool-dot"></span>
+        <span class="tool-name">Cursor</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-input">
+          <span class="tool-slash">//</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool tool-chatgpt">
+      <div class="tool-header">
+        <span class="tool-dot"></span>
+        <span class="tool-name">ChatGPT</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-input">
+          <span class="tool-slash">//</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool tool-terminal">
+      <div class="tool-header">
+        <span class="tool-dot"></span>
+        <span class="tool-name">Terminal</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-input">
+          <span class="tool-slash">//</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool tool-perplexity">
+      <div class="tool-header">
+        <span class="tool-dot"></span>
+        <span class="tool-name">Perplexity</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-input">
+          <span class="tool-slash">//</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="beacon">
+      <div class="slash slash-left"></div>
+      <div class="slash slash-right"></div>
+    </div>
+
+    <div class="badge">1</div>
+
+    <svg class="sync-line sync-cursor" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+      <path d="M 340 330 Q 700 400 960 540" />
+    </svg>
+    <svg class="sync-line sync-chatgpt" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+      <path d="M 1580 330 Q 1220 400 960 540" />
+    </svg>
+    <svg class="sync-line sync-terminal" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+      <path d="M 340 750 Q 700 680 960 540" />
+    </svg>
+    <svg class="sync-line sync-perplexity" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+      <path d="M 1580 750 Q 1220 680 960 540" />
+    </svg>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const scope = '[data-composition-id="beat-4-crosstool"] ';
+
+        // Stagger-fade in the 4 tools
+        const tools = [
+          scope + ".tool-cursor",
+          scope + ".tool-chatgpt",
+          scope + ".tool-terminal",
+          scope + ".tool-perplexity",
+        ];
+        tools.forEach((sel, i) => {
+          tl.fromTo(
+            sel,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
+            0.1 + i * 0.1
+          );
+        });
+
+        // The sequence of // firings
+        const events = [
+          { tool: "cursor", at: 0.7 },
+          { tool: "chatgpt", at: 1.1 },
+          { tool: "terminal", at: 1.5 },
+          { tool: "perplexity", at: 1.9 },
+        ];
+
+        events.forEach(({ tool, at }, i) => {
+          // Flash the // in the tool input
+          tl.to(
+            scope + ".tool-" + tool + " .tool-slash",
+            { opacity: 1, duration: 0.1 },
+            at
+          );
+          // Draw the sync line
+          tl.to(
+            scope + ".sync-" + tool + " path",
+            { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" },
+            at + 0.05
+          );
+          // Fade the sync line back out
+          tl.to(
+            scope + ".sync-" + tool + " path",
+            { opacity: 0, duration: 0.6, ease: "power2.in" },
+            at + 0.8
+          );
+          // Tick the badge
+          const badgeValue = i + 2; // Claude already counted as 1 in Beat 3
+          tl.call(
+            () => {
+              const badge = document.querySelector(scope + ".badge");
+              if (badge) badge.textContent = String(badgeValue);
+            },
+            [],
+            at + 0.3
+          );
+          tl.to(
+            scope + ".badge",
+            { scale: 1.45, duration: 0.18, ease: "power2.out" },
+            at + 0.3
+          );
+          tl.to(
+            scope + ".badge",
+            { scale: 1, duration: 0.24, ease: "power2.in" },
+            at + 0.48
+          );
+        });
+
+        // Badge appears first at 0.3s as "1"
+        tl.to(scope + ".badge", { opacity: 1, scale: 1, duration: 0.3, ease: "expo.out" }, 0.3);
+
+        // EVERYWHERE word-flash 1.2s–4.3s (long hold through most of the montage)
+        tl.fromTo(
+          scope + ".word-flash",
+          { opacity: 0, y: 40 },
+          { opacity: 0.55, y: 0, duration: 0.8, ease: "power3.out" },
+          1.2
+        );
+        tl.to(scope + ".word-flash", { opacity: 0, duration: 0.6, ease: "power2.in" }, 4.0);
+
+        // Beacon equalizer pulse as each tool fires
+        events.forEach(({ at }) => {
+          tl.to(
+            scope + ".beacon .slash-left",
+            { scale: 1.04, duration: 0.15, ease: "power2.out" },
+            at + 0.2
+          );
+          tl.to(
+            scope + ".beacon .slash-left",
+            { scale: 1, duration: 0.25, ease: "power2.in" },
+            at + 0.35
+          );
+          tl.to(
+            scope + ".beacon .slash-right",
+            { scale: 1.04, duration: 0.15, ease: "power2.out" },
+            at + 0.22
+          );
+          tl.to(
+            scope + ".beacon .slash-right",
+            { scale: 1, duration: 0.25, ease: "power2.in" },
+            at + 0.37
+          );
+        });
+
+        window.__timelines["beat-4-crosstool"] = tl;
+      })();
+    </script>
+  </div>
+</template>

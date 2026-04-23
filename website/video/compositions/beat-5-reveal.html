@@ -1,0 +1,431 @@
+<template id="beat-5-reveal-template">
+  <div data-composition-id="beat-5-reveal" data-start="0" data-duration="3.84" data-width="1920" data-height="1080">
+    <style>
+      [data-composition-id="beat-5-reveal"] {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: #07080B;
+        overflow: hidden;
+      }
+
+      /* Docked beacon top-right */
+      [data-composition-id="beat-5-reveal"] .beacon {
+        position: absolute;
+        top: 60px;
+        right: 80px;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        filter: drop-shadow(0 0 24px rgba(61, 217, 182, 0.4));
+      }
+      [data-composition-id="beat-5-reveal"] .beacon .slash {
+        width: 16px;
+        height: 64px;
+        transform: rotate(-18deg);
+        border-radius: 2px;
+      }
+      [data-composition-id="beat-5-reveal"] .beacon .slash-left {
+        background: #3dd9b6;
+      }
+      [data-composition-id="beat-5-reveal"] .beacon .slash-right {
+        background: #FFFBF0;
+      }
+
+      /* Reveal panel — unfurls from beacon */
+      [data-composition-id="beat-5-reveal"] .panel {
+        position: absolute;
+        left: 50%;
+        top: 180px;
+        transform: translateX(-50%);
+        transform-origin: top center;
+        width: 1680px;
+        padding: 36px 40px;
+        background: rgba(18, 20, 26, 0.92);
+        border: 1px solid #1E2028;
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+      }
+      [data-composition-id="beat-5-reveal"] .panel-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 32px;
+      }
+      [data-composition-id="beat-5-reveal"] .sub-panel {
+        background: rgba(7, 8, 11, 0.5);
+        border: 1px solid #1E2028;
+        border-radius: 14px;
+        padding: 28px;
+        min-height: 520px;
+        display: flex;
+        flex-direction: column;
+      }
+      [data-composition-id="beat-5-reveal"] .sub-panel-label {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        color: #6B6E76;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+
+      /* Panel A — FISH ribbon */
+      [data-composition-id="beat-5-reveal"] .fish-ribbon {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      [data-composition-id="beat-5-reveal"] .fish-ribbon svg {
+        width: 100%;
+        height: auto;
+      }
+      [data-composition-id="beat-5-reveal"] .fish-ribbon .node-label {
+        position: absolute;
+        font-family: "Fraunces", serif;
+        font-size: 22px;
+        font-weight: 500;
+        color: #F2EFE8;
+        opacity: 0;
+        white-space: nowrap;
+        text-align: center;
+        width: 120px;
+        transform: translateX(-50%);
+      }
+      [data-composition-id="beat-5-reveal"] .progress-tip {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 16px;
+        color: #6B6E76;
+        letter-spacing: 0.02em;
+        opacity: 0;
+        text-align: center;
+        white-space: nowrap;
+      }
+      [data-composition-id="beat-5-reveal"] .progress-tip .hl {
+        color: #3dd9b6;
+      }
+
+      /* Panel B — Linear-style */
+      [data-composition-id="beat-5-reveal"] .linear-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        flex: 1;
+      }
+      [data-composition-id="beat-5-reveal"] .linear-col-label {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        color: #6B6E76;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      [data-composition-id="beat-5-reveal"] .linear-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid #1E2028;
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 8px;
+        opacity: 0;
+      }
+      [data-composition-id="beat-5-reveal"] .linear-card .id {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        color: #6B6E76;
+        margin-bottom: 4px;
+      }
+      [data-composition-id="beat-5-reveal"] .linear-card .t {
+        font-family: "Fraunces", serif;
+        font-size: 14px;
+        color: #F2EFE8;
+        line-height: 1.3;
+      }
+
+      /* Panel C — GitHub-style */
+      [data-composition-id="beat-5-reveal"] .gh-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 0;
+        border-bottom: 1px solid #1E2028;
+        opacity: 0;
+      }
+      [data-composition-id="beat-5-reveal"] .gh-row:last-child {
+        border-bottom: 0;
+      }
+      [data-composition-id="beat-5-reveal"] .gh-branch {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 13px;
+        color: #3dd9b6;
+        background: rgba(61, 217, 182, 0.08);
+        padding: 4px 10px;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+      [data-composition-id="beat-5-reveal"] .gh-msg {
+        font-family: "Fraunces", serif;
+        font-size: 15px;
+        color: #F2EFE8;
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      [data-composition-id="beat-5-reveal"] .gh-tool {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        color: #6B6E76;
+        padding: 3px 8px;
+        border: 1px solid #1E2028;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+      [data-composition-id="beat-5-reveal"] .gh-time {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        color: #6B6E76;
+        flex-shrink: 0;
+      }
+
+      /* DESIGNER-FRIENDLY word flash — background poetry */
+      [data-composition-id="beat-5-reveal"] .word-flash {
+        position: absolute;
+        left: 50%;
+        bottom: 60px;
+        transform: translateX(-50%);
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 140px;
+        color: #F2EFE8;
+        opacity: 0;
+        white-space: nowrap;
+        letter-spacing: 0.01em;
+        z-index: 0;
+      }
+    </style>
+
+    <div class="beacon">
+      <div class="slash slash-left"></div>
+      <div class="slash slash-right"></div>
+    </div>
+
+    <div class="word-flash">DESIGNER-FRIENDLY</div>
+
+    <div class="panel">
+      <div class="panel-inner">
+        <!-- Panel A: FISH / Double-Diamond ribbon -->
+        <div class="sub-panel">
+          <div class="sub-panel-label">Project · FISH</div>
+          <div class="fish-ribbon">
+            <svg viewBox="0 0 500 380" preserveAspectRatio="xMidYMid meet">
+              <!-- Double diamond curves -->
+              <path
+                class="diamond-top"
+                d="M 50 190 Q 130 70 250 70 Q 370 70 450 190"
+                fill="none"
+                stroke="#3dd9b6"
+                stroke-width="2"
+                stroke-dasharray="900"
+                stroke-dashoffset="900"
+                opacity="0.5"
+              />
+              <path
+                class="diamond-bottom"
+                d="M 50 190 Q 130 310 250 310 Q 370 310 450 190"
+                fill="none"
+                stroke="#3dd9b6"
+                stroke-width="2"
+                stroke-dasharray="900"
+                stroke-dashoffset="900"
+                opacity="0.5"
+              />
+              <!-- Nodes -->
+              <circle class="node node-1" cx="50" cy="190" r="14" fill="#3dd9b6" opacity="0" />
+              <circle class="node node-2" cx="250" cy="70" r="14" fill="#3dd9b6" opacity="0" />
+              <circle class="node node-3" cx="250" cy="310" r="18" fill="#3dd9b6" opacity="0" />
+              <circle class="node node-4" cx="450" cy="190" r="10" fill="#6B6E76" opacity="0" />
+            </svg>
+            <div class="node-label label-1" style="left: 10%; top: 58%;">Explore</div>
+            <div class="node-label label-2" style="left: 50%; top: 12%;">Solidify</div>
+            <div class="node-label label-3" style="left: 50%; top: 80%;">Build</div>
+            <div class="node-label label-4" style="left: 90%; top: 58%;">Ship</div>
+            <div class="progress-tip">
+              solidify · <span class="hl">100%</span> · build · <span class="hl">62%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel B: Linear-style task view -->
+        <div class="sub-panel">
+          <div class="sub-panel-label">Linear · FISH</div>
+          <div class="linear-cols">
+            <div>
+              <div class="linear-col-label">Explore</div>
+              <div class="linear-card">
+                <div class="id">PRICE-40</div>
+                <div class="t">Audience insights</div>
+              </div>
+              <div class="linear-card">
+                <div class="id">PRICE-41</div>
+                <div class="t">Competitor scan</div>
+              </div>
+            </div>
+            <div>
+              <div class="linear-col-label">Solidify</div>
+              <div class="linear-card">
+                <div class="id">PRICE-42</div>
+                <div class="t">Tier table refresh</div>
+              </div>
+              <div class="linear-card">
+                <div class="id">PRICE-43</div>
+                <div class="t">Copy direction</div>
+              </div>
+            </div>
+            <div>
+              <div class="linear-col-label">Build</div>
+              <div class="linear-card">
+                <div class="id">PRICE-44</div>
+                <div class="t">Landing mocks</div>
+              </div>
+              <div class="linear-card">
+                <div class="id">PRICE-45</div>
+                <div class="t">Tier component</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel C: GitHub-style push history -->
+        <div class="sub-panel">
+          <div class="sub-panel-label">Push history</div>
+          <div style="flex: 1;">
+            <div class="gh-row">
+              <span class="gh-branch">pricing-refresh</span>
+              <span class="gh-msg">draft tier copy</span>
+              <span class="gh-tool">Claude</span>
+              <span class="gh-time">12m</span>
+            </div>
+            <div class="gh-row">
+              <span class="gh-branch">pricing-refresh</span>
+              <span class="gh-msg">tier component scaffold</span>
+              <span class="gh-tool">Cursor</span>
+              <span class="gh-time">34m</span>
+            </div>
+            <div class="gh-row">
+              <span class="gh-branch">main</span>
+              <span class="gh-msg">landing-hero micro-interactions</span>
+              <span class="gh-tool">Claude</span>
+              <span class="gh-time">2h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const scope = '[data-composition-id="beat-5-reveal"] ';
+
+        // Panel unfurls from top (beacon direction)
+        tl.fromTo(
+          scope + ".panel",
+          { opacity: 0, scaleY: 0.1 },
+          { opacity: 1, scaleY: 1, duration: 0.55, ease: "expo.out" },
+          0.05
+        );
+
+        // FISH diamond curves draw in
+        tl.to(
+          scope + ".diamond-top",
+          { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" },
+          0.6
+        );
+        tl.to(
+          scope + ".diamond-bottom",
+          { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" },
+          0.75
+        );
+
+        // Nodes stagger-fade
+        tl.to(scope + ".node-1", { opacity: 1, duration: 0.3 }, 0.9);
+        tl.fromTo(scope + ".label-1", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.0);
+        tl.to(scope + ".node-2", { opacity: 1, duration: 0.3 }, 1.05);
+        tl.fromTo(scope + ".label-2", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.15);
+        tl.to(scope + ".node-3", { opacity: 1, duration: 0.3 }, 1.2);
+        tl.fromTo(scope + ".label-3", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.3);
+        tl.to(scope + ".node-4", { opacity: 1, duration: 0.3 }, 1.35);
+        tl.fromTo(scope + ".label-4", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.45);
+
+        // Build node pulses green (it's the current position)
+        tl.to(
+          scope + ".node-3",
+          { attr: { r: 22 }, duration: 0.4, ease: "power2.out" },
+          1.7
+        );
+        tl.to(
+          scope + ".node-3",
+          { attr: { r: 18 }, duration: 0.5, ease: "power2.in" },
+          2.1
+        );
+
+        // Progress tip fades in
+        tl.fromTo(
+          scope + ".progress-tip",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.4, ease: "power2.out" },
+          1.8
+        );
+
+        // Linear cards stagger
+        const linearCards = document.querySelectorAll(scope + ".linear-card");
+        linearCards.forEach((card, i) => {
+          tl.fromTo(
+            card,
+            { opacity: 0, y: 6 },
+            { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" },
+            0.8 + i * 0.08
+          );
+        });
+
+        // GH rows stagger
+        const ghRows = document.querySelectorAll(scope + ".gh-row");
+        ghRows.forEach((row, i) => {
+          tl.fromTo(
+            row,
+            { opacity: 0, x: 10 },
+            { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" },
+            1.0 + i * 0.12
+          );
+        });
+
+        // DESIGNER-FRIENDLY long hold 0.3s–3.5s
+        tl.fromTo(
+          scope + ".word-flash",
+          { opacity: 0, y: 30 },
+          { opacity: 0.28, y: 0, duration: 1.0, ease: "power3.out" },
+          0.3
+        );
+        tl.to(scope + ".word-flash", { opacity: 0, duration: 0.5, ease: "power2.in" }, 3.3);
+
+        window.__timelines["beat-5-reveal"] = tl;
+      })();
+    </script>
+  </div>
+</template>
