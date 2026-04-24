@@ -6,12 +6,12 @@
 project_name: Duble Slash
 user_skill_level: intermediate
 user_role: product designer
-planning_artifacts: "{project-root}/_bmad/planning-artifacts"
-implementation_artifacts: "{project-root}/_bmad/implementation-artifacts"
-project_knowledge: "{project-root}/_bmad/docs"
+planning_artifacts: "{project-root}/planning"
+implementation_artifacts: "{project-root}/planning/stories"
+project_knowledge: "{project-root}/planning/research"
 
 # Core Configuration Values
 user_name: Talsolomon
 communication_language: English
 document_output_language: English
-output_folder: _bmad
+output_folder: planning

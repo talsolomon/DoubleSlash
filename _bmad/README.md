@@ -1,7 +1,7 @@
 # BMAD Method — Duble Slash
 
-This is the BMAD (AI-driven agile development) workspace for the **Duble Slash** project (logo: Duble//Slash, or //). Working directory: `~/Documents/duble-slash` (earlier working names: Collab → Trace → Duble Slash).
-All BMAD files live in `_bmad/` and `.claude/commands/bmad-*` — completely separate from the platform code in `src/`.
+This is the BMAD (AI-driven agile development) workspace for the **Duble Slash** project (logo: Duble//Slash, or //). Working directory: `~/Documents/dubleslash` (earlier working names: Collab → Trace → Duble Slash).
+BMAD tooling lives here in `_bmad/` and in `.claude/commands/bmad-*`. Project artifacts (briefs, PRDs, research, decks) live at the top level under [`planning/`](../planning/) — not inside this folder.
 
 ---
 
@@ -65,18 +65,19 @@ That's it. After that, use whatever BMAD commands suit your work.
 
 | What | Where |
 |---|---|
-| Briefs | `_bmad/planning-artifacts/briefs/` |
-| PRDs | `_bmad/planning-artifacts/prd/` |
-| UX docs + website concepts | `_bmad/planning-artifacts/ux/` |
-| Brainstorms | `_bmad/planning-artifacts/brainstorms/` |
-| Pitch decks | `_bmad/planning-artifacts/pitch-decks/` |
-| Problem validation (hypotheses + user/industry research) | `_bmad/planning-artifacts/research/` |
-| Company values + manifesto | `_bmad/planning-artifacts/company/` |
-| Task board (index) | `_bmad/planning-artifacts/task-board.md` |
-| Epics & stories for dev handoff | `_bmad/implementation-artifacts/` |
-| External research, project knowledge | `_bmad/docs/` |
+| Briefs | `planning/briefs/` |
+| PRDs | `planning/prd/` |
+| UX docs + website concepts | `planning/ux/` |
+| Brainstorms | `planning/brainstorms/` |
+| Pitch decks | `planning/pitch-decks/` |
+| User / industry research (hypotheses, interviews, plans) | `planning/research/user/` |
+| Market / domain / technical research | `planning/research/{market,domain,technical}/` |
+| Company values + manifesto | `planning/company/` |
+| Task board (index) | `planning/task-board.md` |
+| Epics & stories for dev handoff | `planning/stories/` |
+| BMAD-about-BMAD notes (teardowns, shape-adoption memos) | `_bmad/docs/` |
 
-All artifacts stay in `_bmad/` — never in `src/`.
+All project artifacts live under `planning/`. `_bmad/` itself only holds BMAD framework scaffolding (configs, module manifests, BMAD-teardown memos) — never product content.
 
 ---
 

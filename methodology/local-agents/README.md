@@ -174,7 +174,7 @@ The install artifact for each host tool is **one file**: a memory/instructions f
 
 Experts are **loanable specialist lenses** — one-turn costumes (`@be-dev`, `@fintech`, `@legal-ip`, `@data-analyst`, …) that the current local agent wears without switching persona. The headline behavior: **each local agent proactively offers 2–3 experts per turn** based on the card's sigil and topic — users don't memorize handles. Full spec: [`experts.md`](./experts.md). Team-custom experts drop into a project-root `.experts/` directory.
 
-The full install spec (per-tool plumbing, character budgets, memory persistence) is FISH-003 in the [task board](../../_bmad/planning-artifacts/task-board.md). This README documents *what* each agent does; FISH-003 documents *how* to install them.
+The full install spec (per-tool plumbing, character budgets, memory persistence) is FISH-003 in the [task board](../../planning/task-board.md). This README documents *what* each agent does; FISH-003 documents *how* to install them.
 
 ---
 
@@ -200,4 +200,4 @@ Local agents and [system agents](../system-agents/README.md) work together:
 - Handoff block shape → [`../fish/transitions-and-handoffs.md`](../fish/transitions-and-handoffs.md)
 - Why this exists — the moat → [`../fish/human-ai-collaboration.md`](../fish/human-ai-collaboration.md)
 - Background workers → [`../system-agents/README.md`](../system-agents/README.md)
-- Install bundle task → FISH-003 on [`../../_bmad/planning-artifacts/task-board.md`](../../_bmad/planning-artifacts/task-board.md)
+- Install bundle task → FISH-003 on [`../../planning/task-board.md`](../../planning/task-board.md)

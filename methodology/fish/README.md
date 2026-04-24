@@ -214,8 +214,9 @@ FISH (this spec) is the **agent-operable** evolution: same lineage, newly legibl
 
 - Deep dive on phases, methods, and the full method catalog → [`phases-and-methods.md`](./phases-and-methods.md)
 - The moat (value for AI-using designers) → [`human-ai-collaboration.md`](./human-ai-collaboration.md)
+- **HAI primitives — agent-operable contracts** → [`contracts.md`](./contracts.md)
 - Four worked scenarios → [`use-cases.md`](./use-cases.md)
 - Handoff contract + transition gates → [`transitions-and-handoffs.md`](./transitions-and-handoffs.md)
 - Agents that enact FISH inside the user's AI tool → [`../local-agents/`](../local-agents/)
 - Background workers that make FISH reliable across sessions and teams → [`../system-agents/`](../system-agents/)
-- Task tracking → [`_bmad/planning-artifacts/task-board.md`](../../_bmad/planning-artifacts/task-board.md)
+- Task tracking → [`planning/task-board.md`](../../planning/task-board.md)

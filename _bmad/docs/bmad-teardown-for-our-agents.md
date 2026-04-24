@@ -21,11 +21,11 @@ Source files studied:
 
 2. **BMAD's course-correction command (`/bmad-correct-course`) formalizes mid-sprint pivots better than we do.** The impact table (which artifact changes, which stories to swap) is a pattern we should wire into our `//ship RP` retrospective method and into Gate/Loom's V2 scope.
 
-3. **BMAD's persona/command split is its biggest structural anti-pattern.** `/bmad-agent-pm` and `/bmad-create-prd` do almost identical things — one via persona dialogue, one direct-workflow. This dual-entry confusion is what happens when you don't have a clean phase boundary enforced by methodology. Our FISH phase gates are what prevent this proliferation.
+3. **BMAD's persona/command split is its biggest structural anti-pattern.** `/bmad-agent-pm` and `/bmad-create-prd` do almost identical things — one via persona dialogue, one direct-workflow. This dual-entry confusion is what happens when you don't have a clean phase boundary enforced by methodology. Our FLOW phase gates are what prevent this proliferation.
 
 4. **BMAD's capability-code tables (CP, VP, EP, CE inside John; BP, MR, DR, TR, CB inside Mary) are the right shape, but the codes are shallow** — no archetype-modulation, no refusal conditions, no stop criteria. Our code tables (SA, HS, HMW, BR, AC, MP…) are more rigorous; keep that rigor.
 
-5. **BMAD has no structured handoff mechanism.** State moves between personas by convention and shared file paths — there is no `<FISH-handoff>` equivalent. This means every BMAD transition is a silent leap of faith. Our handoff block is a genuine moat; protect it.
+5. **BMAD has no structured handoff mechanism.** State moves between personas by convention and shared file paths — there is no `<FLOW-handoff>` equivalent. This means every BMAD transition is a silent leap of faith. Our handoff block is a genuine moat; protect it.
 
 ---
 
@@ -52,7 +52,7 @@ Source files studied:
 
 **Gap in our system:** Our local agents (`explorer.md`, `solidifier.md`, …) do not load a shared project-context file. Every `//explore` call starts cold unless the user pastes a handoff. For a new contributor opening Cursor on day one, this is a wall.
 
-**Apply to us:** Add an `on-activation` step to all four local-agent specs that reads a `_ds/project-context.md` (or `.fish/context.md`). Create a `//context-init` or `//install` command that generates it on first run — mirroring what `bmad-generate-project-context` does but reading FISH sigil history, not just package.json. This file becomes what Pack (context bundler) uses as the base layer for onboarding packs. Concrete edit: [`local-agents/README.md` §2.1 prompt skeleton](../../methodology/local-agents/README.md) — add step 0 to the universal activation routine: *"Load `.fish/project-context.md` if it exists. State what you read in one sentence."*
+**Apply to us:** Add an `on-activation` step to all four local-agent specs that reads a `_ds/project-context.md` (or `.flow/context.md`). Create a `//context-init` or `//install` command that generates it on first run — mirroring what `bmad-generate-project-context` does but reading FLOW sigil history, not just package.json. This file becomes what Pack (context bundler) uses as the base layer for onboarding packs. Concrete edit: [`local-agents/README.md` §2.1 prompt skeleton](../../methodology/local-agents/README.md) — add step 0 to the universal activation routine: *"Load `.flow/project-context.md` if it exists. State what you read in one sentence."*
 
 ### P2 — "Default-first" interaction pattern
 
@@ -96,17 +96,17 @@ Source files studied:
 
 ### A1 — Persona/command split without a principled distinction
 
-BMAD has `/bmad-agent-pm` (John) and `/bmad-create-prd`, `/bmad-edit-prd`, `/bmad-validate-prd` as separate commands doing nearly identical work. John's CP capability runs nearly the same steps as `/bmad-create-prd`. This forces users to learn two entry points for the same work. The split is never explained in any file. Our FISH `//` prefix is the only entry point; method codes are the resolution mechanism. Never add a parallel `//create-brief` shortcut alongside `//solidify BR` — they'd rot independently.
+BMAD has `/bmad-agent-pm` (John) and `/bmad-create-prd`, `/bmad-edit-prd`, `/bmad-validate-prd` as separate commands doing nearly identical work. John's CP capability runs nearly the same steps as `/bmad-create-prd`. This forces users to learn two entry points for the same work. The split is never explained in any file. Our FLOW `//` prefix is the only entry point; method codes are the resolution mechanism. Never add a parallel `//create-brief` shortcut alongside `//solidify BR` — they'd rot independently.
 
 ### A2 — Persona sprawl across 8 roles with no shared vocabulary
 
-BMAD's 8 personas have no common handoff contract, no sigil, no archetype. When Winston (Architect) finishes an ADR, there is no formal mechanism to get it to Amelia (Dev). The convention is "save to `_bmad/docs/` and Amelia will find it." This is how state gets lost. Our 4 local agents communicate via a strict `<FISH-handoff>` block with a schema. That shared vocabulary is load-bearing — don't dilute it by adding a fifth local agent that doesn't emit the block.
+BMAD's 8 personas have no common handoff contract, no sigil, no archetype. When Winston (Architect) finishes an ADR, there is no formal mechanism to get it to Amelia (Dev). The convention is "save to `_bmad/docs/` and Amelia will find it." This is how state gets lost. Our 4 local agents communicate via a strict `<FLOW-handoff>` block with a schema. That shared vocabulary is load-bearing — don't dilute it by adding a fifth local agent that doesn't emit the block.
 
 ### A3 — No refusal conditions on capability codes
 
 BMAD persona capability tables list codes and descriptions but include no refusal logic. Mary (Analyst) will run market research on a tooltip (a Nemo-scale problem). Sally (UX Designer) will wireframe before a brief is locked. BMAD relies on user judgment to stop this. Our refusal rules — NB refuses if no interviews exist; PM refuses on Nemos; HO refuses if `open` has build-blockers — are genuinely better. Don't weaken them under pressure to ship faster.
 
-### A4 — Config-as-state (config.yaml carries project name but no FISH state)
+### A4 — Config-as-state (config.yaml carries project name but no FLOW state)
 
 BMAD's `config.yaml` stores `project_name`, artifact paths, and user role. Every agent reads it on startup. But it contains no living state — no current sigil, no active card, no open handoffs. We don't have a `config.yaml` equivalent at all, which is a gap (see P1). But when we add one, resist the BMAD pattern of making it a config-only file. Our version should also index the last handoff block per card, so agents can resume without copy-paste. This is what Tally (Capture) will do at V1; at OSS launch, the config file should at minimum point at the `notes/` directory.
 
@@ -120,23 +120,23 @@ BMAD's `/bmad-retrospective` generates a document and then says *"want to update
 
 | # | File | Change | Priority |
 |---|---|---|---|
-| 1 | [`local-agents/README.md` §2.1](../../methodology/local-agents/README.md) | Add universal step 0 to activation routine: load `.fish/project-context.md` if present, state what you read. | High |
+| 1 | [`local-agents/README.md` §2.1](../../methodology/local-agents/README.md) | Add universal step 0 to activation routine: load `.flow/project-context.md` if present, state what you read. | High |
 | 2 | [`local-agents/README.md` §6 (new section)](../../methodology/local-agents/README.md) | Add "Typical Tuna lifecycle" example: `//explore HS → //explore HMW → HO → //solidify BR → //solidify AC → HO → //build CR → //build GE → HO → //ship TR → NL`. | Medium |
 | 3 | [`local-agents/solidifier.md` §5](../../methodology/local-agents/solidifier.md) | Add `IR` capability row: lightweight implementation-readiness cross-check before HO on Tuna/Willie. | High |
 | 4 | [`local-agents/solidifier.md` §5](../../methodology/local-agents/solidifier.md) | Add `CC` capability row: structured course-correction when a Builder HB signals fundamental shape change (not just AC ambiguity). Produce an impact table + revised HO with a DL entry. | Medium |
 | 5 | [`local-agents/builder.md` §8](../../methodology/local-agents/builder.md) | Add `UV report` template: spec-vs-actual table for each UI state. This output becomes an artifact reference in Shipper's trust receipt. | Medium |
 | 6 | [`local-agents/shipper.md` §5 (NL)](../../methodology/local-agents/shipper.md) | Make `NL` (Next-Loop Queue) non-optional when `RP` (Retrospective) completes. If user skips, log *"next-loop queue not emitted"* in handoff `notes`. | Low |
 | 7 | [`system-agents/README.md` §3.8 Gate](../../methodology/system-agents/README.md) | When Gate checks flow.yaml rules, the check output should include a pointer to the `IR` Sol capability as the human-facing resolution path for missing-artifact failures. | Low (V2) |
-| 8 | New file: `.fish/project-context.md` template | Create a template (not the file itself) that mirrors BMAD's project-context format but includes FISH-specific fields: default archetype for common card types, team's `flow.yaml` path, last handoff per active card. | High |
+| 8 | New file: `.flow/project-context.md` template | Create a template (not the file itself) that mirrors BMAD's project-context format but includes FLOW-specific fields: default archetype for common card types, team's `flow.yaml` path, last handoff per active card. | High |
 
 ---
 
 ## 6. Open questions for Tal
 
-1. **Do we want a `//context-init` command that generates `.fish/project-context.md`?** BMAD's generate-project-context is the strongest onboarding step in the system — it reads the codebase (package.json, tailwind.config, components) and produces a shared reference. We could do the same, reading our tech stack + existing handoffs + `methodology/` docs. But this needs a decision: is it a fifth local agent command, a system agent responsibility (Pack?), or a one-time install script?
+1. **Do we want a `//context-init` command that generates `.flow/project-context.md`?** BMAD's generate-project-context is the strongest onboarding step in the system — it reads the codebase (package.json, tailwind.config, components) and produces a shared reference. We could do the same, reading our tech stack + existing handoffs + `methodology/` docs. But this needs a decision: is it a fifth local agent command, a system agent responsibility (Pack?), or a one-time install script?
 
-2. **Should the `//` commands also have stateless direct-workflow alternatives (like BMAD's `/bmad-create-prd`)?** The argument for: lower barrier for a user who just wants a brief and doesn't care about FISH. The argument against: it fragments the onboarding story and creates two maintenance targets. BMAD's experience suggests the latter wins. My read: don't do it. Confirm.
+2. **Should the `//` commands also have stateless direct-workflow alternatives (like BMAD's `/bmad-create-prd`)?** The argument for: lower barrier for a user who just wants a brief and doesn't care about FLOW. The argument against: it fragments the onboarding story and creates two maintenance targets. BMAD's experience suggests the latter wins. My read: don't do it. Confirm.
 
 3. **Bob (SM) and Quinn (QA) in BMAD map roughly to Gate + Loom in our system.** The question is whether any of their specific output templates (sprint plan, DQ report) should be absorbed into our Builder's `UV` template or into Gate's check output — before V2 ships. Bob's story-preparation (CS) is a manual gate check; Gate automates it. Are we confident Gate's V2 design is sufficient, or do we want a manual-mode `//build IR` as a stopgap?
 
-4. **BMAD's personas all ground themselves in `ActionAI Platform` (the platform they were built for).** Our agents currently have no equivalent domain grounding beyond `methodology/` cross-references. When the four local-agent specs move out of `_bmad/`, will there be a new canonical home for team-specific grounding (design system, component library, stack specifics)? This is the `.fish/project-context.md` question — but it also has install-mechanics implications.
+4. **BMAD's personas all ground themselves in `ActionAI Platform` (the platform they were built for).** Our agents currently have no equivalent domain grounding beyond `methodology/` cross-references. When the four local-agent specs move out of `_bmad/`, will there be a new canonical home for team-specific grounding (design system, component library, stack specifics)? This is the `.flow/project-context.md` question — but it also has install-mechanics implications.

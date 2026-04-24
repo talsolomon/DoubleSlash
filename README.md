@@ -9,9 +9,10 @@ Working directory: `~/Documents/dubleslash`. Prior working names: Collab → Tra
 | Folder        | What it is                                | Vercel project        | Production URL                              |
 |---------------|-------------------------------------------|-----------------------|---------------------------------------------|
 | [methodology/](methodology/) | **The moat** — FISH method + the 13 agents that enact it | — | — |
+| [planning/](planning/)  | Briefs, PRDs, UX, pitch decks, research, stories, task-board | —           | —                                           |
 | [website/](website/)    | Public marketing site (the Hero stage)    | `dubleslash-website` *(rename pending)* | https://website-rouge-three-68.vercel.app |
 | [tasks/](tasks/)        | Internal task board for Tal + Shenhav     | `dubleslash-tasks` *(rename pending)*   | https://tasks-seven-zeta.vercel.app       |
 | [supabase/](supabase/)  | DB schema + seed for the task board       | —                     | —                                           |
-| [_bmad/](_bmad/)        | Planning, PRD, UX, research artifacts     | —                     | —                                           |
+| [_bmad/](_bmad/)        | BMAD framework scaffolding (configs, module manifests)  | —           | —                                           |
 
 The two Vercel projects currently live under the generic names `website` and `tasks`. Rename them in the [Vercel dashboard](https://vercel.com/talsolomon21-gmailcoms-projects) → Settings → General. See [`tasks/README.md`](tasks/README.md) for the full task-board setup, including how to give Shenhav access.

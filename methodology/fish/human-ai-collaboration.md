@@ -191,10 +191,98 @@ Being clear about this is part of the integrity GTM pillar. We're not selling mi
 
 ---
 
-## 8. Cross-references
+## 8. Agent state model — what every FISH agent tracks
+
+Sections 1–7 made the case. Sections 8–10 make the case **operable**: if FISH is a contract the AI can finally read, this is where the contract gets signed.
+
+Every FISH agent — local or system, operator (Dora/Sol/Bran/May) or expert (Design/PM/Dev/…) — maintains the same minimum state. Interoperability depends on this: Sol can pick up what Dora wrote because they speak the same state; a teammate's agent tomorrow can pick up yours because the state is in the handoff, not in the agent's head.
+
+| State | Type | Updated when | Consumed by |
+|---|---|---|---|
+| `current_phase` | `explore` \| `solidify` \| `build` \| `ship` | On activation; on handoff | `PHASE-CHECK`, `HANDOFF-EMIT` |
+| `current_sigil` | `{size, certainty}` | On activation; on sigil change | `INTENSITY-CAP`, `NARRATE-STATE` |
+| `current_archetype` | `nemo` \| `tuna` \| `salmon` \| `willie` | Derived from sigil | `INTENSITY-CAP` |
+| `locked_decisions` | list\<string\> | Per phase, append-only | `HANDOFF-EMIT` |
+| `open_questions` | list\<string\> | Per phase; can be resolved | `HANDOFF-EMIT` |
+| `artifacts_produced` | list\<path \| url\> | When artifact created | `HANDOFF-EMIT` |
+| `confidence_to_advance` | float 0.0–1.0 | Self-reported at exit | `HANDOFF-EMIT`, `OVERRIDE-LOG` |
+| `capability_loadout` | list\<capability-code\> | On activation (from spec) | all primitives |
+| `loaned_experts` | list\<@handle\> | When expert borrowed / returned | `NARRATE-STATE` |
+| `override_log` | list\<override-event\> | When human forces a gate | `TRUST-RECEIPT` |
+
+**Invariant:** *no hidden state.* Everything above is either in the active `<FISH-handoff>` block, the session capture, or the agent's chat narration. If an agent knows something the human can't see, it's a bug.
+
+---
+
+## 9. HAI primitives — the operable contracts
+
+A **primitive** is a named contract every agent implements identically. Primitives are *what agents do* — not style, not taste, not judgement. The point of naming them:
+
+1. Agent specs say *"on activation, run `PHASE-CHECK`"* and that is a complete instruction.
+2. When a user says *"Dora refused to wireframe"*, the exact primitive is `PHASE-CHECK` — debuggable, logged, overridable.
+3. The BMAD-shaped skills (Phase 3 of the Duble Slash rebuild) implement these primitives literally in their `steps/` files; there is no interpretation gap between methodology and agent.
+
+Every primitive has a full spec in [`contracts.md`](./contracts.md) with: signature, trigger, action, refusal, override, verbiage, anti-pattern, worked example.
+
+### The eight primitives (at a glance)
+
+| # | Primitive | What it enforces | Fixes |
+|---|---|---|---|
+| 1 | `PHASE-CHECK` | Agent refuses out-of-phase requests; offers handoff | §1.1 Phase drift |
+| 2 | `INTENSITY-CAP` | Output sized to archetype × phase cell from the matrix | §1.2 Intensity mismatch |
+| 3 | `HANDOFF-EMIT` | Phase exits always produce `<FISH-handoff>`; never silent | §1.3 Context amnesia |
+| 4 | `TRUST-RECEIPT` | Shipper emits a signed release summary every time | §1.4 Trust opacity |
+| 5 | `NARRATE-STATE` | Agent publishes phase, sigil-read, reasoning visibly in chat | §1.4 Trust opacity |
+| 6 | `REQUEST-HANDBACK` | Downstream agent reverses explicitly with reason — never silently redesigns | [Transitions §4](./transitions-and-handoffs.md#4-reverse-transitions) |
+| 7 | `OVERRIDE-LOG` | Human override of `confidence_to_advance` recorded in `notes` | Trust audit |
+| 8 | `REDACTION-GATE` | Any artifact leaving the device passes through the Redaction agent first | Leak prevention |
+
+### The standard request pipeline
+
+Every user message inside an active agent session flows through the same pipeline. This is the same for Dora, Sol, Bran, May, and every expert agent — what differs is only what work they produce inside step 4.
+
+```
+user message
+  1. NARRATE-STATE      ← agent echoes current phase + sigil before work
+  2. PHASE-CHECK        ← does this request belong in current_phase?
+        └─ no  → refuse + offer handoff  (pipeline stops)
+  3. INTENSITY-CAP      ← size the response to archetype × phase cell
+  4. PRODUCE OUTPUT     ← the agent's actual work (the only variable step)
+  5. UPDATE STATE       ← append locked / open / artifacts
+  6. if phase exit      → HANDOFF-EMIT  → next agent begins at step 1
+  7. if release         → REDACTION-GATE → TRUST-RECEIPT
+```
+
+`REQUEST-HANDBACK` and `OVERRIDE-LOG` are out-of-band: they can fire at any step when the agent detects an upstream mistake (handback) or the human overrides a refusal (override log).
+
+### Why primitives, not "rules" or "behaviors"
+
+A *rule* can be interpreted. A *primitive* can be called. When we write `//build` and Bran activates, Bran's `workflow.md` literally invokes `PHASE-CHECK`, `INTENSITY-CAP`, `HANDOFF-EMIT` as named operations backed by [`contracts.md`](./contracts.md). The agent persona is *composed of primitive calls plus one produce-output step*. That is the moat in mechanical form.
+
+---
+
+## 10. Failure mode × primitive matrix
+
+Every failure mode in §1 now has at least one primitive that mechanically prevents it. The matrix below is the traceability check: if a failure mode appears without a named primitive, we name a new primitive — we do not issue an ad-hoc rule.
+
+| Failure mode | Primitives | How the combination prevents it |
+|---|---|---|
+| §1.1 Phase drift | `PHASE-CHECK` + `NARRATE-STATE` | Check catches the cross-phase request; narrate surfaces the catch ("I'm in Explore; that's a Solidify request — hand off?") |
+| §1.2 Intensity mismatch | `INTENSITY-CAP` | Archetype × phase cell bounds effort. A Nemo Explore cannot produce a Willie-sized thesis. |
+| §1.3 Context amnesia | `HANDOFF-EMIT` | Every phase exit writes the resume block; no session ever ends without one. |
+| §1.4 Trust opacity | `TRUST-RECEIPT` + `NARRATE-STATE` + `REDACTION-GATE` | Receipt at ship, narration during work, redaction at every outbound boundary. The human can always audit. |
+| Silent redesign (Transitions §4) | `REQUEST-HANDBACK` | Reverse transitions are typed moves, not quiet edits. |
+| Unlogged human overrides | `OVERRIDE-LOG` | `confidence_to_advance` overrides go to handoff `notes` with timestamp and reason. |
+
+**Rule:** adding a new primitive is cheap. Relaxing one is expensive. When in doubt, add a primitive rather than weakening an existing one.
+
+---
+
+## 11. Cross-references
 
 - Main FISH spec → [`README.md`](./README.md)
 - Phase-level steps & methods → [`phases-and-methods.md`](./phases-and-methods.md)
 - Handoff contract → [`transitions-and-handoffs.md`](./transitions-and-handoffs.md)
+- **Primitive specs (full)** → [`contracts.md`](./contracts.md)
 - Worked use cases → [`use-cases.md`](./use-cases.md)
-- The local agents that enforce all of the above → [`../local-agents/`](../local-agents/)
+- The local agents that enforce all of the above → [`../agents/`](../agents/)
