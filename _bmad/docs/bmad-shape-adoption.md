@@ -226,8 +226,8 @@ Locked layout. Phase 3a creates the first three expert folders + one operator fo
 ```
 agents/
 ├── manifest.yaml                          # version, modules, loader config
-├── agent-manifest.csv                     # every operator + expert registers here
-├── skill-manifest.csv                     # every workflow-skill registers here
+├── operator-manifest.csv                  # one row per operator (and per expert when authored)
+├── skill-manifest.csv                     # every workflow-skill registers here, helpers included
 ├── config.yaml                            # {user_name}, {communication_language}, paths
 │
 ├── operators/                             # Layer 1 · 4 operators
@@ -382,7 +382,7 @@ See §4.1 above. One file per method. Begin with `## INITIALIZATION` (config, pa
 
 Every new folder gets two rows:
 
-`agents/agent-manifest.csv`:
+`agents/operator-manifest.csv`:
 ```csv
 name,displayName,title,icon,capabilities,role,identity,communicationStyle,principles,module,path,canonicalId
 "ds-operator-dora","Dora","Explorer","🔭","…","…","…","…","…","operators","agents/operators/dora",""
@@ -683,7 +683,7 @@ agents/experts/dev/
 
 ### 9.5 Manifest updates
 
-Append rows to `agents/agent-manifest.csv` (4 new: Dora + Design + PM + Dev) and `agents/skill-manifest.csv` (25+ new rows — every skill folder above gets one row).
+Append rows to `agents/operator-manifest.csv` (4 new: Dora + Design + PM + Dev) and `agents/skill-manifest.csv` (25+ new rows — every skill folder above gets one row).
 
 ### 9.6 Phase 3a acceptance criteria
 
