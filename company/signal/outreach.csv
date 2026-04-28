@@ -1,0 +1,9 @@
+ID,Task,Status,Priority,Due,Notes
+OUT-001,Build outreach list of Israeli design leaders,In Progress,P0,2026-05-05,"39 names imported from LinkedIn CSV; lives in the Tasks-app Outreach tab. Next: enrich with cluster + next-step per contact, re-pitch under the new STORY.md framing."
+OUT-002,Post in WhatsApp group of design leaders,Todo,P1,TBD,"Single shot; don't burn the channel. Gated on landing/manifesto under the new positioning (TBD which artifact)."
+OUT-003,Post in Facebook design groups + student communities,Todo,P1,TBD,"Separate copy per audience (leaders vs. students). Same gate as OUT-002."
+OUT-004,Map TLV + Herzliya startup clusters → schedule one demo day per cluster,Todo,P1,2026-05-05,"Clusters: מתחם אלון, Sarona, Rothschild, Ramat HaHayal, Herzliya Pituach. Output: cluster → companies → design leads → target day."
+OUT-005,Book demo days per cluster (4–6 meetings/day),Parked,P2,after OUT-001 + OUT-004,Parked until list + map exist.
+OUT-006,"Outreach log: name, company, cluster, status, last touch, next step",Todo,P2,2026-05-05,Small sheet or markdown table. Pipeline tracking + lab-conversation log.
+OUT-007,First design-studio cohort — define ask target list pitch,Todo,P0,2026-05-05,"Per STORY.md ""Who we start with."" Decide: how many studios, what they get, what we ask in return, by when."
+OUT-008,Anthropic / lab outreach — timing channel who DMs first,Todo,P1,2026-05-19,"Decide: DM vs. email, warm intro vs. cold, what artifact to send."
