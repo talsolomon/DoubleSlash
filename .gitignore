@@ -14,3 +14,6 @@ supabase/bootstrap-users.sql
 
 # Microsoft Office lock files (open doc → ~$filename.docx/pptx).
 ~$*
+
+# Claude Code harness — agent worktrees, never commit.
+.claude/worktrees/
