@@ -43,15 +43,19 @@ Non-technical users — designers, PMs, creative leads — are the majority of k
 
 ## THE SOLUTION — No fluff
 
-Duble//Slash is a personal agent that lives on your machine.
+Duble//Slash is a desktop app that runs in your menu bar — always present, system-wide. Think Wispr Flow's form factor, applied to context instead of voice.
 
-You press `//` anywhere — inside Claude, inside Figma, inside Perplexity — and it knows what project you're focused on, what files are relevant, what phase you're in, what was decided last. It injects the right context into the right tool without you rebuilding it from scratch.
+**In the background**, it collects and organizes context across your projects — files, briefs, decisions, design reviews — and structures them in a personal Context Cloud.
 
-A designer types `//` in Figma: *"Create concept designs for the home page."* The agent knows the Figma file, the frame, the brief, the last design review. It doesn't ask. It acts.
+**In any LLM or design tool**, you press `//` and it knows what project you're on, what phase you're in, what was decided last. It injects the right context into the prompt and pushes the work through a Double-Diamond loop toward a smart deliverable — which gets tagged back into the Context Cloud automatically.
 
-A PM types `//` in Claude: *"Initiate competitive research based on our last discussion."* The agent attaches the relevant MD files, the project brief, the open tickets. The prompt is already right.
+A designer types `//` in Figma: *"Create concept designs for the home page."* The agent knows the file, the frame, the brief, the last review. It doesn't ask. It acts. The output is filed.
 
-This is not a wrapper. It is a **workflow layer** that lives where work actually happens.
+A PM types `//` in Claude: *"Initiate competitive research based on our last discussion."* The agent attaches the relevant briefs, open tickets, prior threads. The prompt is already right. The output is filed.
+
+Tool-agnostic. Always on. This is not a wrapper inside one tool — it is a **context management system** that lives across them.
+
+The agents and methodology are open. The platform that runs them is what we sell. *[OPEN — pricing shape TBD; revisit when ready]*
 
 ---
 
@@ -81,7 +85,9 @@ When agents are present in every worker's workflow, they become present in the t
 
 ## THE ASK
 
-We are at the stage of building our first design studio cohort. We are not asking you to bet on a vision. We are asking you to look at the gap between where AI tools are and where the average knowledge worker actually is — and tell us you don't see it.
+We are recruiting our first cohort: **15 Israeli design studios** — including [`STUDIO 1`], [`STUDIO 2`], [`STUDIO 3`] — over the next **8 weeks**, free and hands-on, in exchange for being public references and weekly product feedback. *[OPEN — Tal to reframe numbers + studio names]*
+
+We are not asking you to bet on a vision. We are asking you to look at the gap between where AI tools are and where the average knowledge worker actually is — and tell us you don't see it.
 
 We see it. We're closing it.
 
