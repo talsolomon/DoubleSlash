@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{ts,tsx}', './index.html'],
+  safelist: [
+    'bg-ds-explore', 'bg-ds-solidify', 'bg-ds-build', 'bg-ds-ship',
+  ],
   theme: {
     extend: {
       colors: {

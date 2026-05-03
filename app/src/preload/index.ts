@@ -20,8 +20,33 @@ contextBridge.exposeInMainWorld('ds', {
   openScreenSettings: () => ipcRenderer.send('screen:open-settings'),
   getToolsStatus: () => ipcRenderer.invoke('tools:status'),
 
+  // Legacy Ollama stream (kept for compatibility)
   streamChat: (messages: { role: string; content: string }[], contextBrief?: string) =>
-    ipcRenderer.send('ollama:stream', messages, contextBrief),
+    ipcRenderer.send('ai:stream', messages, contextBrief),
+
+  // AI provider (routes through active provider)
+  streamAI: (messages: { role: string; content: string }[], contextBrief?: string) =>
+    ipcRenderer.send('ai:stream', messages, contextBrief),
+
+  onAIToken: (cb: (token: string) => void) => {
+    const handler = (_: unknown, token: string) => cb(token)
+    ipcRenderer.on('ai:token', handler)
+    return () => ipcRenderer.removeListener('ai:token', handler)
+  },
+  onAIDone: (cb: () => void) => {
+    ipcRenderer.on('ai:done', cb)
+    return () => ipcRenderer.removeListener('ai:done', cb)
+  },
+  onAIError: (cb: (err: string) => void) => {
+    const handler = (_: unknown, err: string) => cb(err)
+    ipcRenderer.on('ai:error', handler)
+    return () => ipcRenderer.removeListener('ai:error', handler)
+  },
+
+  // Settings
+  getSettings: () => ipcRenderer.invoke('settings:get'),
+  updateSettings: (patch: object) => ipcRenderer.invoke('settings:update', patch),
+  checkConnection: (provider: string) => ipcRenderer.invoke('settings:check-connection', provider),
 
   selectContext: (id: string) => ipcRenderer.send('command:select-context', id),
 
@@ -35,18 +60,20 @@ contextBridge.exposeInMainWorld('ds', {
     ipcRenderer.on('context:changed', handler)
     return () => ipcRenderer.removeListener('context:changed', handler)
   },
+
+  // Legacy Ollama events (mapped to ai: events for backwards compat)
   onOllamaToken: (cb: (token: string) => void) => {
     const handler = (_: unknown, token: string) => cb(token)
-    ipcRenderer.on('ollama:token', handler)
-    return () => ipcRenderer.removeListener('ollama:token', handler)
+    ipcRenderer.on('ai:token', handler)
+    return () => ipcRenderer.removeListener('ai:token', handler)
   },
   onOllamaDone: (cb: () => void) => {
-    ipcRenderer.on('ollama:done', cb)
-    return () => ipcRenderer.removeListener('ollama:done', cb)
+    ipcRenderer.on('ai:done', cb)
+    return () => ipcRenderer.removeListener('ai:done', cb)
   },
   onOllamaError: (cb: (err: string) => void) => {
     const handler = (_: unknown, err: string) => cb(err)
-    ipcRenderer.on('ollama:error', handler)
-    return () => ipcRenderer.removeListener('ollama:error', handler)
+    ipcRenderer.on('ai:error', handler)
+    return () => ipcRenderer.removeListener('ai:error', handler)
   }
 })

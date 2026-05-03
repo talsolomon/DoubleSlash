@@ -62,7 +62,7 @@ export default function KanbanView({ spaces, activeContextId, selectedContextId,
     <div className="h-full flex flex-col">
       <div className="flex-1 flex overflow-x-auto p-3 gap-0">
         {PHASES.map((phase, i) => (
-          <div key={phase} className="flex items-start gap-0">
+          <div key={phase} className="flex items-stretch gap-0 h-full">
             <KanbanColumn
               phase={phase}
               width={widths[phase]}
@@ -129,7 +129,7 @@ function KanbanColumn({
   }
 
   return (
-    <div style={{ width }} className="shrink-0 flex flex-col">
+    <div style={{ width }} className="shrink-0 flex flex-col h-full">
       <div className="flex items-center gap-2 px-2 py-3 mb-1">
         <span className={`text-sm ${meta.color}`}>{meta.icon}</span>
         <span className="text-xs font-mono font-semibold text-ds-text-secondary uppercase tracking-widest">
@@ -258,11 +258,11 @@ function ContextCard({ context, space, isActive, isSelected, onSelect, onSetActi
             {visibleTasks.map(task => (
               <div key={task.id} className="flex items-start gap-1.5">
                 <span className={`mt-0.5 w-3 h-3 rounded-sm border shrink-0 flex items-center justify-center
-                  ${task.done ? 'bg-ds-accent/15 border-ds-accent/40' : 'border-ds-border-light'}`}
+                  ${task.done ? 'bg-ds-accent/15 border-ds-accent/40 text-ds-accent' : 'border-ds-border-light'}`}
                 >
                   {task.done && (
                     <svg width="7" height="7" viewBox="0 0 8 8" fill="none">
-                      <path d="M1.5 4l2 2 3-3" stroke="#4ADE80" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M1.5 4l2 2 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   )}
                 </span>

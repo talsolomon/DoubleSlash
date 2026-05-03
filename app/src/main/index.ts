@@ -5,8 +5,12 @@ import { execFile, execFileSync } from 'child_process'
 import { readFileSync, unlinkSync } from 'fs'
 import { getContexts, getActiveContext, setActiveContext, updateContext, createContext } from './store'
 import type { Context, Phase } from './store'
+import { getSettings, updateSettings } from './settings'
 import { getGitLog } from './git'
 import { ollamaStream } from './ollama'
+import { aiStream } from './providers'
+import { checkClaudeConnection } from './providers/claude'
+import { checkOpenAICompatConnection } from './providers/openai-compat'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -167,19 +171,63 @@ function setupIPC(): void {
 
   ipcMain.on(
     'ollama:stream',
-    async (event, messages: { role: string; content: string }[], contextId?: string) => {
+    async (event, messages: { role: string; content: string }[], contextBrief?: string) => {
       try {
         await ollamaStream(
           messages,
           (token) => event.sender.send('ollama:token', token),
           () => event.sender.send('ollama:done'),
-          contextId
+          contextBrief
         )
       } catch (err) {
         event.sender.send('ollama:error', String(err))
       }
     }
   )
+
+  ipcMain.on(
+    'ai:stream',
+    async (event, messages: { role: string; content: string }[], contextBrief?: string) => {
+      try {
+        await aiStream(
+          messages,
+          (token) => event.sender.send('ai:token', token),
+          () => event.sender.send('ai:done'),
+          contextBrief
+        )
+      } catch (err) {
+        event.sender.send('ai:error', String(err))
+      }
+    }
+  )
+
+  ipcMain.handle('settings:get', () => getSettings())
+  ipcMain.handle('settings:update', (_, patch) => updateSettings(patch))
+
+  ipcMain.handle('settings:check-connection', async (_, provider: string) => {
+    const s = getSettings()
+    try {
+      switch (provider) {
+        case 'claude':
+          if (!s.apiKeys.claude) return false
+          return await checkClaudeConnection(s.apiKeys.claude)
+        case 'openai':
+          if (!s.apiKeys.openai) return false
+          return await checkOpenAICompatConnection(s.apiKeys.openai, 'https://api.openai.com/v1')
+        case 'openrouter':
+          if (!s.apiKeys.openrouter) return false
+          return await checkOpenAICompatConnection(s.apiKeys.openrouter, 'https://openrouter.ai/api/v1')
+        case 'ollama': {
+          const res = await fetch(`${s.ollama.host}/api/tags`).catch(() => null)
+          return res?.ok ?? false
+        }
+        default:
+          return false
+      }
+    } catch {
+      return false
+    }
+  })
 
   ipcMain.on('command:select-context', (_, contextId: string) => {
     const ctx = setActiveContext(contextId)

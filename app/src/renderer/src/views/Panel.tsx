@@ -3,8 +3,9 @@ import { Space, Context, Phase, PHASE_META } from '../types'
 import KanbanView from '../components/KanbanView'
 import GitLog from '../components/GitLog'
 import PromptBar from '../components/PromptBar'
+import Connections from './Connections'
 
-type Tab = 'chat' | 'log' | 'map'
+type Tab = 'chat' | 'log' | 'map' | 'connections'
 
 const AGENT_ROSTER: { name: string; phase: Phase; desc: string }[] = [
   { name: 'Dora', phase: 'explore',  desc: 'research & define' },
@@ -176,7 +177,7 @@ export default function Panel() {
 
           {/* Tab bar */}
           <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-9 shrink-0">
-            {(['chat', 'log', 'map'] as Tab[]).map(t => (
+            {(['chat', 'log', 'map', 'connections'] as Tab[]).map(t => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -204,6 +205,7 @@ export default function Panel() {
                 onRefresh={loadData}
               />
             )}
+            {tab === 'connections' && <Connections />}
           </div>
 
         </div>

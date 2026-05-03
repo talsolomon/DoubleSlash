@@ -1,5 +1,26 @@
 export type Phase = 'explore' | 'solidify' | 'build' | 'ship'
 
+export type ProviderType = 'claude' | 'ollama' | 'openai' | 'openrouter'
+
+export interface Settings {
+  activeProvider: ProviderType
+  apiKeys: {
+    claude: string
+    openai: string
+    openrouter: string
+  }
+  ollama: {
+    host: string
+    model: string
+  }
+  openai: {
+    model: string
+  }
+  openrouter: {
+    model: string
+  }
+}
+
 export interface Decision {
   id: string
   date: string
@@ -44,6 +65,7 @@ export interface GitEntry {
   date: string
   message: string
   author: string
+  body: string
 }
 
 declare global {
@@ -65,6 +87,13 @@ declare global {
       openScreenSettings(): void
       getToolsStatus(): Promise<Record<string, boolean>>
       streamChat(messages: { role: string; content: string }[], contextBrief?: string): void
+      streamAI(messages: { role: string; content: string }[], contextBrief?: string): void
+      onAIToken(cb: (token: string) => void): () => void
+      onAIDone(cb: () => void): () => void
+      onAIError(cb: (err: string) => void): () => void
+      getSettings(): Promise<Settings>
+      updateSettings(patch: Partial<Settings>): Promise<Settings>
+      checkConnection(provider: string): Promise<boolean>
       selectContext(id: string): void
       onViewSet(cb: (view: string) => void): () => void
       onContextChanged(cb: (id: string) => void): () => void

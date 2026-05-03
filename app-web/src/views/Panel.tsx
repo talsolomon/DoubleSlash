@@ -84,7 +84,7 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
   return (
     <div
       className="w-full h-full rounded-2xl bg-ds-bg border border-ds-border flex flex-col overflow-hidden"
-      style={{ boxShadow: '0 0 0 0.5px rgb(var(--ds-border)), 0 32px 80px rgba(0,0,0,0.6)' }}
+      style={{ boxShadow: `0 0 0 0.5px rgb(var(--ds-border)), 0 32px 80px rgba(0,0,0,${isLight ? 0.12 : 0.6})` }}
     >
       {/* Header */}
       <header className="flex items-center justify-between px-4 h-11 border-b border-ds-border shrink-0 bg-ds-surface/60">

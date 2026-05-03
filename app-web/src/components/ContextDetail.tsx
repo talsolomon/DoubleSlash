@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Context, Space, Phase, PHASE_META, PHASES, Task, Decision, Artifact, apiUpdateContext } from '../types'
 
 interface Props {
@@ -172,26 +172,27 @@ function TasksList({ context, onUpdate }: { context: Context; onUpdate: (p: Part
             <button
               onClick={() => approveTask(task.id)}
               className={`mt-0.5 w-3.5 h-3.5 rounded border shrink-0 flex items-center justify-center transition-all
-                ${task.done ? 'bg-ds-accent/15 border-ds-accent/40' : 'border-ds-border-light hover:border-ds-accent/40'}`}
+                ${task.done ? 'bg-ds-accent/15 border-ds-accent/40 text-ds-accent' : 'border-ds-border-light hover:border-ds-accent/40'}`}
             >
               {task.done && (
                 <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                  <path d="M1.5 4l2 2 3-3" stroke="#4ADE80" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M1.5 4l2 2 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               )}
             </button>
-            <button
-              disabled={task.done}
-              onClick={() => setLauncherTaskId(launcherTaskId === task.id ? null : task.id)}
-              className={`text-sm leading-snug text-left flex-1 transition-colors
-                ${task.done ? 'text-ds-text-dim line-through cursor-default' : 'text-ds-text-secondary hover:text-ds-text'}`}
+            <span className={`text-sm leading-snug flex-1 transition-colors
+              ${task.done ? 'text-ds-text-dim line-through' : 'text-ds-text-secondary'}`}
             >
               {task.name}
-            </button>
+            </span>
             {!task.done && (
-              <span className="text-[10px] font-mono text-ds-text-dim opacity-0 group-hover:opacity-60 transition-opacity shrink-0 mt-0.5">
+              <button
+                onClick={() => setLauncherTaskId(launcherTaskId === task.id ? null : task.id)}
+                className="text-[10px] font-mono text-ds-text-dim opacity-0 group-hover:opacity-100
+                  hover:text-ds-accent transition-all shrink-0 mt-0.5 cursor-pointer"
+              >
                 execute →
-              </span>
+              </button>
             )}
           </div>
 
@@ -255,6 +256,10 @@ function TasksList({ context, onUpdate }: { context: Context; onUpdate: (p: Part
 function BriefEditor({ context, onUpdate }: { context: Context; onUpdate: (p: Partial<Context>) => void }) {
   const [value, setValue] = useState(context.brief)
   const timer = useRef<ReturnType<typeof setTimeout>>()
+
+  useEffect(() => {
+    setValue(context.brief)
+  }, [context.id])
 
   const handleChange = useCallback(
     (val: string) => {

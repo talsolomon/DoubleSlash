@@ -7,6 +7,7 @@ export interface GitEntry {
   date: string
   message: string
   author: string
+  body: string
 }
 
 export async function getGitLog(): Promise<GitEntry[]> {
@@ -18,7 +19,8 @@ export async function getGitLog(): Promise<GitEntry[]> {
       hash: entry.hash.slice(0, 7),
       date: entry.date.slice(0, 10),
       message: entry.message,
-      author: entry.author_name
+      author: entry.author_name,
+      body: entry.body?.trim() ?? ''
     }))
   } catch {
     return []
