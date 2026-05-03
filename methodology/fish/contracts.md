@@ -1,12 +1,12 @@
 ---
-name: FISH contracts — the operable HAI primitives
-description: Canonical specification for the eight HAI primitives every FISH agent must implement. Phase 1 deliverable — agent-readable, BMAD-linkable, mechanically enforceable.
+name: Fish Model contracts — the operable HAI primitives
+description: Canonical specification for the eight HAI primitives every Fish Model agent must implement. Phase 1 deliverable — agent-readable, BMAD-linkable, mechanically enforceable.
 type: methodology-spec
 ---
 
-# FISH contracts — the operable HAI primitives
+# Fish Model contracts — the operable HAI primitives
 
-**This is the agent-readable form of [`human-ai-collaboration.md`](./human-ai-collaboration.md).** Each primitive below is a named contract Dora, Sol, Bran, May, and every expert agent implement identically. Agent specs in [`../agents/`](../agents/) reference primitives by name (e.g. *"on activation: `PHASE-CHECK`"*). There is no interpretation gap between what FISH promises and what an agent does.
+**This is the agent-readable form of [`human-ai-collaboration.md`](./human-ai-collaboration.md).** Each primitive below is a named contract Dora, Sol, Bran, May, and every expert agent implement identically. Agent specs in [`../agents/`](../agents/) reference primitives by name (e.g. *"on activation: `PHASE-CHECK`"*). There is no interpretation gap between what Fish Model promises and what an agent does.
 
 ---
 
@@ -106,11 +106,11 @@ composition: - called by: agent workflow after PHASE-CHECK
 
 ```yaml
 name:        HANDOFF-EMIT
-signature:   (agent_state) → <FISH-handoff> block
+signature:   (agent_state) → <fish-handoff> block
 trigger:     Phase exit (user advances; agent completes exit criteria;
              explicit //handoff command)
 action:      Serialize the agent's full state into the canonical
-             <FISH-handoff> block per transitions-and-handoffs.md §2.
+             <fish-handoff> block per transitions-and-handoffs.md §2.
              Populate every required field. confidence_to_advance is
              self-reported honestly — calibrated, not inflated.
              Emit to chat verbatim so it is capture-able.
@@ -119,14 +119,14 @@ refusal:     Cannot be refused. If agent tries to close session without
              (OSS-launch system-agents).
 override:    None. There is no legitimate "skip the handoff" — the
              whole chain depends on this primitive.
-verbiage:    "Handing off to <next-agent>. <FISH-handoff> follows.
+verbiage:    "Handing off to <next-agent>. <fish-handoff> follows.
               confidence_to_advance: <0.0–1.0>. Notes: <one line>."
 anti-pattern: Context amnesia — "I can't pick up yesterday's work"
               (§1.3 of human-ai-collaboration.md). Also: silent redesign
               — closing a phase without logging what was locked.
 example:
   context:     Dora has finished Willie-intensity Explore on onboarding
-  action:      Emits full <FISH-handoff> block with sigil, archetype,
+  action:      Emits full <fish-handoff> block with sigil, archetype,
                 3 locked items, 2 open items, 3 artifact paths, and
                 confidence_to_advance 0.7
   next-step:   User pastes block into //solidify tomorrow; Sol resumes
@@ -217,7 +217,7 @@ trigger:     Agent discovers during its phase that an upstream locked
              decision is wrong, or its phase's inputs are insufficient
              (e.g. Bran during Build finds Sol's acceptance list
              internally inconsistent)
-action:      Emit a reverse <FISH-handoff> per transitions-and-handoffs.md §4:
+action:      Emit a reverse <fish-handoff> per transitions-and-handoffs.md §4:
                from: <current_agent>
                to: <upstream_agent>
                phase_exited: <current_phase>
@@ -232,7 +232,7 @@ override:    User can instruct "keep going; we'll fix it later" —
              agent proceeds but logs the known-bad locked item into
              open_questions with a deferral note.
 verbiage:    "Handing back to <upstream_agent>. Reason: <one line>.
-              <FISH-handoff> follows."
+              <fish-handoff> follows."
 anti-pattern: Silent redesign (transitions-and-handoffs.md §4) —
               downstream agent quietly reshapes upstream decisions
 example:
@@ -271,7 +271,7 @@ override:    None. Meta-overrides are not a thing.
 verbiage:    "Logged override: <primitive> refused because <reason>;
               you said <force-signal>. Proceeding. This appears in
               the handoff and the trust receipt."
-anti-pattern: Unaudited human overrides — FISH must be auditable even
+anti-pattern: Unaudited human overrides — Fish Model must be auditable even
               when the human took control
 example:
   context:     Sol tries to HANDOFF-EMIT with confidence_to_advance 0.3;

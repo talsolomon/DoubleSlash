@@ -1,12 +1,12 @@
 ---
-name: FISH use cases — worked examples
-description: Four end-to-end scenarios — one per archetype — showing how FISH runs a card from Explore to Ship. Includes sigil selection, method choice per phase, handoff content, and human-AI collaboration notes.
+name: Fish Model use cases — worked examples
+description: Four end-to-end scenarios — one per archetype — showing how Fish Model runs a card from Explore to Ship. Includes sigil selection, method choice per phase, handoff content, and human-AI collaboration notes.
 type: methodology-spec
 ---
 
-# FISH use cases — worked examples
+# Fish Model use cases — worked examples
 
-Four scenarios, one per archetype. Each runs a real-feeling card from sigil to trust receipt. Use these to calibrate what FISH *looks like* in practice before applying it to your own work.
+Four scenarios, one per archetype. Each runs a real-feeling card from sigil to trust receipt. Use these to calibrate what Fish Model *looks like* in practice before applying it to your own work.
 
 The scenarios:
 
@@ -21,7 +21,7 @@ Each scenario follows the same template:
 - **Sigil + archetype** — why this archetype was chosen.
 - **Per phase:** stream followed, method choices, key moves, handoff.
 - **Trust receipt** — what shipped.
-- **What FISH did for the human.**
+- **What Fish Model did for the human.**
 
 ---
 
@@ -50,7 +50,7 @@ Support has flagged that users misinterpret the tooltip on the "Export as CSV" b
 
 **Handoff emitted:**
 ```
-<FISH-handoff>
+<fish-handoff>
 from: explorer → to: solidifier
 card_id: tooltip-csv-export-2026-04-21
 sigil: { size: smaller, certainty: known } · archetype: nemo
@@ -61,7 +61,7 @@ open:
   - "Tooltip rewrite vs. dropdown pattern — which fits our conventions?"
 artifacts: [ notes/tooltip-heuristic-scan.md ]
 confidence_to_advance: 0.9
-</FISH-handoff>
+</fish-handoff>
 ```
 
 ### Phase 2 — Solidify (left body): 20 minutes
@@ -79,7 +79,7 @@ confidence_to_advance: 0.9
 
 **Handoff emitted:**
 ```
-<FISH-handoff>
+<fish-handoff>
 from: solidifier → to: builder
 locked:
   - "New tooltip string: 'Exports the rows currently visible...'"
@@ -87,7 +87,7 @@ locked:
   - "AC: 3 criteria (string, timing, a11y)"
 open: []
 confidence_to_advance: 1.0
-</FISH-handoff>
+</fish-handoff>
 ```
 
 ### Phase 3 — Build (right body): 30 minutes
@@ -115,7 +115,7 @@ Approver: tal@dubleslash.sh (solo)
 Hash: sha256:…
 ```
 
-### What FISH did for the human
+### What Fish Model did for the human
 
 - **2 hours total**, no scope creep. The Explorer refused to wireframe a new dropdown; the Solidifier refused to build a dropdown-rewrite card inside this one.
 - A Nemo with **four handoffs** is still fast — each took 30 seconds to emit. The handoffs make the card resumable if interrupted.
@@ -194,7 +194,7 @@ Approvers: tal, shenhav
 Hash: sha256:…
 ```
 
-### What FISH did for the human
+### What Fish Model did for the human
 
 - **Brief replaced PRD.** The 1-page brief + 14 AC bullets held the whole design ↔ engineering contract. No 30-page PRD.
 - **Shared language across design + engineering.** The storyboard was the meeting material; the AC was the spec; the trust receipt was the QA artifact. No translation layer.
@@ -276,7 +276,7 @@ Approvers: tal, design-lead
 Hash: sha256:…
 ```
 
-### What FISH did for the human
+### What Fish Model did for the human
 
 - **Kept Explore heavy where it belonged.** The Explorer refused to sketch until interviews were in. Without that discipline, the team would have shipped a cosmetic copy fix and missed the actual cause (meter placement).
 - **Measurement plan in Solidify, not in Ship.** Building the instrumentation into Build meant Ship could actually measure; no retrofitted analytics.
@@ -369,7 +369,7 @@ Sub-receipts: 6 linked below
 Hash: sha256:…
 ```
 
-### What FISH did for the human
+### What Fish Model did for the human
 
 - **Willie-sized Explore protected against the "Sarah → Marcus seems simple" trap.** Without the 3-week Explore, the premortem's 3 failure modes would have surfaced as launch bugs instead of design inputs.
 - **Break-into-Tunas kept the Willie build-able.** Six sub-cards, each its own sigil-archetype-phase lifecycle, tracked by the parent.
@@ -380,7 +380,7 @@ Hash: sha256:…
 
 ## Cross-references
 
-- Main FISH spec → [`README.md`](./README.md)
+- Main Fish Model spec → [`README.md`](./README.md)
 - Phase-by-phase streams and method catalog → [`phases-and-methods.md`](./phases-and-methods.md)
 - Why this matters for AI-assisted work → [`human-ai-collaboration.md`](./human-ai-collaboration.md)
 - Handoff block shape → [`transitions-and-handoffs.md`](./transitions-and-handoffs.md)

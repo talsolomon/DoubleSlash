@@ -31,7 +31,7 @@ Experts are **lenses**, not replacements. Nova stays Nova; `@legal-ip` is a cost
 1. Agent announces the lens in chat before responding in that voice.
 2. Response is scoped to the expert's specialty — specific, not generic.
 3. Agent folds findings back into the phase voice on the next turn ("summarizing what @legal-ip flagged before I return to the brief…").
-4. Experts **never** emit `<FISH-handoff>`, commit, push, or gate a transition. They advise.
+4. Experts **never** emit `<Fish Model-handoff>`, commit, push, or gate a transition. They advise.
 
 ---
 
@@ -274,7 +274,7 @@ Each row: `@handle` · title · one-line specialty · primary phase (E/S/B/Sh) �
 
 ### 3.18 Industry verticals (11)
 
-Industry experts carry the domain context FISH's craft experts don't know — regulatory surface, typical stakeholder map, anti-patterns that only bite in-vertical. Loan them in at **Explore or Solidify** when the card names the industry; they rarely help at Build (ship-level engineering is mostly cross-vertical).
+Industry experts carry the domain context Fish Model's craft experts don't know — regulatory surface, typical stakeholder map, anti-patterns that only bite in-vertical. Loan them in at **Explore or Solidify** when the card names the industry; they rarely help at Build (ship-level engineering is mostly cross-vertical).
 
 | # | Handle | Title | Specialty | Phase | Output |
 |---|---|---|---|---|---|
@@ -384,12 +384,12 @@ Key moves:
 
 ---
 
-## 6. Provenance — experts show up in the `<FISH-handoff>` notes
+## 6. Provenance — experts show up in the `<Fish Model-handoff>` notes
 
 Expert consults are recorded in the handoff `notes` field as one-line provenance. They are **not** phase transitions and never appear as `from`/`to`.
 
 ```
-<FISH-handoff>
+<Fish Model-handoff>
 from: builder
 to: shipper
 ...
@@ -397,7 +397,7 @@ notes: |
   Built 4 slices. Order: rate-limit, audit-log, sliding-window, pool-split.
   Consulted @regulated-fin (compliance surface) and @perf-eng (pool split
   sizing). No divergence from spec.
-</FISH-handoff>
+</Fish Model-handoff>
 ```
 
 This lets the next agent (and future-you, and a teammate picking up the card in V1+) know which lenses shaped the work without re-reading the full session.
@@ -429,6 +429,6 @@ The goal is that the roster grows from real demand, not from a designer's imagin
 - Local-agent roster + grammar → [`README.md`](./README.md)
 - The four local agents that load this roster → [`explorer.md`](./explorer.md) · [`solidifier.md`](./solidifier.md) · [`builder.md`](./builder.md) · [`shipper.md`](./shipper.md)
 - Original brainstorm (prior thinking, top-ideas table) → [`planning/brainstorms/brainstorm-expert-shortcuts.md`](../../planning/brainstorms/brainstorm-expert-shortcuts.md)
-- FISH methodology → [`../fish/README.md`](../fish/README.md)
+- Fish Model methodology → [`../fish/README.md`](../fish/README.md)
 - Transitions / handoffs → [`../fish/transitions-and-handoffs.md`](../fish/transitions-and-handoffs.md)
 - All agents (local + system) at a glance → [`../agents-overview.md`](../agents-overview.md)

@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Duble//Slash — The Stack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f5f1;
+      --ink: #0f1115;
+      --ink-2: #2a2d33;
+      --muted: #7a7d85;
+      --hair: #e6e3db;
+      --brand-dark: #0e3a35;
+      --brand-accent: #3dd9b6;
+      --accent: #d98a2b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(circle, rgba(15,17,21,0.07) 1px, transparent 1.2px);
+      background-size: 22px 22px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 32px 80px;
+      gap: 0;
+    }
+
+    .wordmark {
+      position: fixed; top: 22px; left: 28px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
+      color: var(--ink); text-decoration: none; z-index: 100;
+    }
+    .wordmark-mark {
+      width: 20px; height: 20px; border-radius: 6px;
+      background: var(--brand-dark);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .wordmark-slashes { color: var(--brand-accent); font-weight: 700; letter-spacing: -0.04em; }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--brand-accent);
+      background: rgba(14,58,53,0.07);
+      border: 1px solid rgba(61,217,182,0.22);
+      border-radius: 999px; padding: 5px 12px;
+      margin-bottom: 14px;
+    }
+    .eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--brand-accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+    h1 {
+      font-size: 40px; font-weight: 700;
+      letter-spacing: -0.035em; color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+    h1 em { font-style: normal; color: var(--brand-dark); }
+    .sub {
+      font-size: 16px; color: var(--muted);
+      max-width: 400px; line-height: 1.6;
+      margin: 0 auto;
+    }
+    .sub strong { color: var(--ink-2); font-weight: 500; }
+
+    #stack-svg { display: block; overflow: visible; }
+
+    /* Fade + slight translate-up on each group */
+    .slab-g {
+      opacity: 0;
+      animation: fadeUp 480ms cubic-bezier(.22,.9,.28,1.1) forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="wordmark" href="index.html">
+    <span class="wordmark-mark">
+      <svg viewBox="0 0 100 100" width="12" height="12">
+        <path d="M 58 22 L 34 78" stroke="#fff" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M 78 22 L 54 78" stroke="#3dd9b6" stroke-width="14" stroke-linecap="round" fill="none"/>
+      </svg>
+    </span>
+    Duble<span class="wordmark-slashes">//</span>Slash
+  </a>
+
+  <div class="header">
+    <div class="eyebrow"><span class="eyebrow-dot"></span>System Architecture</div>
+    <h1>How <em>Duble//Slash</em> works</h1>
+    <p class="sub">Six layers compose the system.<br><strong>You only touch the top one.</strong></p>
+  </div>
+
+  <svg id="stack-svg" overflow="visible"></svg>
+
+  <script>
+  // Layer data — index 0 = Surface (top), index 5 = System (bottom)
+  const LAYERS = [
+    {
+      num: 6, name: 'Surface',
+      desc: 'Menu bar · // trigger · team sync',
+      fill: '#3dd9b6', side: '#26ae94',
+      text: '#0a2e28',
+      tag: 'You are here',
+    },
+    {
+      num: 5, name: 'Session Agents',
+      desc: 'Activate on // · inject context · run skills',
+      fill: '#23b89c', side: '#1a957e',
+      text: '#fff',
+      tag: null,
+    },
+    {
+      num: 4, name: 'Fish Model',
+      desc: 'AI phase classification · Explore → Ship',
+      fill: '#178770', side: '#116658',
+      text: '#e0fff8',
+      tag: 'Open source',
+    },
+    {
+      num: 3, name: 'Context Cloud',
+      desc: 'Structured project store · briefs · decisions · outputs',
+      fill: '#105d4d', side: '#0c4a3d',
+      text: 'rgba(255,255,255,.92)',
+      tag: null,
+    },
+    {
+      num: 2, name: 'Capture Agents',
+      desc: 'Background monitoring · always on · never invoked',
+      fill: '#0b3e33', side: '#082d25',
+      text: 'rgba(255,255,255,.78)',
+      tag: null,
+    },
+    {
+      num: 1, name: 'System',
+      desc: 'OS hooks · app signals · clipboard · keyboard',
+      fill: '#072820', side: '#041c16',
+      text: 'rgba(255,255,255,.5)',
+      tag: 'Foundation',
+    },
+  ];
+
+  // ── Geometry ──────────────────────────────────────────────
+  const W    = 280;   // top-face width
+  const SH   = 52;    // slab screen-height
+  const GAP  = 12;    // gap between slabs
+  const TILT = 26;    // left edge drops this many px below right (perspective)
+  const DW   = 36;    // right depth-panel width
+  const DY   = 18;    // depth-panel rises this many px above TR
+
+  const PL   = 18;    // left padding inside SVG
+  const PT   = DY + 10;
+
+  const CONN_X = PL + W + DW + 10;
+  const LBL_X  = PL + W + DW + 46;
+  const N      = LAYERS.length;
+
+  function trY(i) { return PT + i * (SH + GAP); }   // top-right Y for layer i
+
+  const SVG_W = LBL_X + 300;
+  const SVG_H = PT + N * (SH + GAP) + TILT + 20;
+
+  const svg = document.getElementById('stack-svg');
+  svg.setAttribute('width',  SVG_W);
+  svg.setAttribute('height', SVG_H);
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const el  = (tag, a={}) => { const e = document.createElementNS(NS, tag); Object.entries(a).forEach(([k,v]) => e.setAttribute(k,v)); return e; };
+  const poly = (pts, a)    => el('polygon', { points: pts.map(p=>p.join(',')).join(' '), ...a });
+  const line = (x1,y1,x2,y2,a) => el('line', {x1,y1,x2,y2,...a});
+  const txt  = (s, x, y, a)    => { const t = el('text', {x, y, ...a}); t.textContent = s; return t; };
+
+  // ── Defs ─────────────────────────────────────────────────
+  const defs = el('defs');
+
+  // Glow for the Surface layer
+  const glow = el('filter', { id:'glow', x:'-20%', y:'-40%', width:'150%', height:'200%' });
+  glow.appendChild(el('feGaussianBlur', { stdDeviation:'12', result:'b' }));
+  const fm = el('feMerge');
+  fm.appendChild(el('feMergeNode', { in:'b' }));
+  fm.appendChild(el('feMergeNode', { in:'SourceGraphic' }));
+  glow.appendChild(fm);
+  defs.appendChild(glow);
+
+  // Per-layer top-face shine gradient
+  LAYERS.forEach((_, i) => {
+    const g = el('linearGradient', { id:`sh${i}`, x1:'0%', y1:'0%', x2:'100%', y2:'100%' });
+    const s1 = el('stop', { offset:'0%' });   s1.setAttribute('stop-color','rgba(255,255,255,.18)');
+    const s2 = el('stop', { offset:'100%' }); s2.setAttribute('stop-color','rgba(0,0,0,.07)');
+    g.appendChild(s1); g.appendChild(s2);
+    defs.appendChild(g);
+  });
+
+  // Side-face shade gradient
+  LAYERS.forEach((layer, i) => {
+    const g = el('linearGradient', { id:`sd${i}`, x1:'0%', y1:'0%', x2:'0%', y2:'100%' });
+    const s1 = el('stop', { offset:'0%' });   s1.setAttribute('stop-color', layer.side); s1.setAttribute('stop-opacity','1');
+    const s2 = el('stop', { offset:'100%' }); s2.setAttribute('stop-color', layer.side); s2.setAttribute('stop-opacity','.7');
+    g.appendChild(s1); g.appendChild(s2);
+    defs.appendChild(g);
+  });
+
+  svg.appendChild(defs);
+
+  // ── Draw ─────────────────────────────────────────────────
+  // Bottom-to-top render order (System first, Surface last — so Surface is on top)
+  const drawOrder = [...LAYERS].reverse();
+
+  drawOrder.forEach((layer, revIdx) => {
+    const i   = N - 1 - revIdx;          // 0=Surface … 5=System
+    const y   = trY(i);
+    const x0  = PL;
+
+    const top = [
+      [x0,      y + TILT],
+      [x0 + W,  y],
+      [x0 + W,  y + SH],
+      [x0,      y + SH + TILT],
+    ];
+    const side = [
+      [x0 + W,      y],
+      [x0 + W + DW, y - DY],
+      [x0 + W + DW, y + SH - DY],
+      [x0 + W,      y + SH],
+    ];
+
+    const g = el('g');
+    g.classList.add('slab-g');
+    // Stagger: bottom layers animate in first
+    g.style.animationDelay = `${revIdx * 70}ms`;
+
+    // Surface glow halo
+    if (i === 0) {
+      const halo = poly(top, { fill: layer.fill, filter: 'url(#glow)', opacity: '0.35' });
+      g.appendChild(halo);
+    }
+
+    // Side face
+    g.appendChild(poly(side, { fill: `url(#sd${i})` }));
+
+    // Top face base
+    g.appendChild(poly(top, { fill: layer.fill }));
+
+    // Top face shine
+    g.appendChild(poly(top, { fill: `url(#sh${i})` }));
+
+    // Edge highlights
+    g.appendChild(line(x0, y+TILT, x0+W, y,
+      { stroke:'rgba(255,255,255,.3)', 'stroke-width':'1.5', 'stroke-linecap':'round' }));
+    g.appendChild(line(x0+W, y, x0+W+DW, y-DY,
+      { stroke:'rgba(255,255,255,.2)', 'stroke-width':'1' }));
+
+    // Bottom edge subtle shadow line
+    g.appendChild(line(x0, y+SH+TILT, x0+W, y+SH,
+      { stroke:'rgba(0,0,0,.12)', 'stroke-width':'1' }));
+
+    // ── Label ────────────────────────────────────────────
+    const cy = y + SH / 2 + TILT / 4;     // visual center of this slab
+
+    // Connector line
+    g.appendChild(line(CONN_X, cy, LBL_X - 8, cy, {
+      stroke: 'rgba(15,17,21,.15)',
+      'stroke-width': '1.5',
+      'stroke-dasharray': '3 5',
+    }));
+
+    // Connector origin dot
+    g.appendChild(el('circle', { cx: CONN_X - 1, cy, r: 3.5, fill: layer.fill }));
+
+    // Number
+    g.appendChild(txt(`${layer.num}.`, LBL_X, cy - 8, {
+      'font-family': 'Inter, -apple-system, sans-serif',
+      'font-size': '13',
+      'font-weight': '700',
+      'fill': '#3dd9b6',
+      'letter-spacing': '-0.02em',
+    }));
+
+    // Name
+    g.appendChild(txt(layer.name, LBL_X + 24, cy - 8, {
+      'font-family': 'Inter, -apple-system, sans-serif',
+      'font-size': '14.5',
+      'font-weight': '600',
+      'fill': '#0f1115',
+      'letter-spacing': '-0.015em',
+    }));
+
+    // Description
+    g.appendChild(txt(layer.desc, LBL_X, cy + 9, {
+      'font-family': 'Inter, -apple-system, sans-serif',
+      'font-size': '11.5',
+      'fill': '#7a7d85',
+    }));
+
+    // Tag badge
+    if (layer.tag) {
+      const tw   = layer.tag.length * 5.9 + 14;
+      const tx   = LBL_X + 218;
+      const ty   = cy - 19;
+      const isFoundation = layer.tag === 'Foundation';
+
+      g.appendChild(el('rect', {
+        x: tx, y: ty, width: tw, height: 15, rx: 4,
+        fill:   isFoundation ? 'rgba(217,138,43,.1)' : 'rgba(61,217,182,.1)',
+        stroke: isFoundation ? 'rgba(217,138,43,.3)' : 'rgba(61,217,182,.28)',
+        'stroke-width': '1',
+      }));
+      g.appendChild(txt(layer.tag.toUpperCase(), tx + 7, ty + 10.5, {
+        'font-family': 'Inter, -apple-system, sans-serif',
+        'font-size': '8.5',
+        'font-weight': '700',
+        'fill': isFoundation ? '#8a5a1a' : '#0e3a35',
+        'letter-spacing': '0.06em',
+      }));
+    }
+
+    svg.appendChild(g);
+  });
+  </script>
+</body>
+</html>

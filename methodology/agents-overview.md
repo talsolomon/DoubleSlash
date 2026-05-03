@@ -1,12 +1,12 @@
 ---
 name: Agents — the full roster
-description: Single-file orientation for all thirteen Duble Slash agents. Differentiates local (foreground, //-invoked) from system (background, event-triggered). Explains layers, ownership, lifecycle, and "which agent do I reach for?" Canonical entry point for designers, PMs, and engineers picking up FLOW.
+description: Single-file orientation for all thirteen Duble Slash agents. Differentiates local (foreground, //-invoked) from system (background, event-triggered). Explains layers, ownership, lifecycle, and "which agent do I reach for?" Canonical entry point for designers, PMs, and engineers picking up Fish Model.
 type: agent-overview
 ---
 
 # Agents — the full roster
 
-Duble Slash ships **thirteen agents** that cooperate through one shared vocabulary (FLOW). This doc is the one-stop map: the four agents you *invoke* and the nine that run *around* you — what they do, who owns each, when each fires, and which one to reach for when you want to get something done.
+Duble Slash ships **thirteen agents** that cooperate through one shared vocabulary (Fish Model). This doc is the one-stop map: the four agents you *invoke* and the nine that run *around* you — what they do, who owns each, when each fires, and which one to reach for when you want to get something done.
 
 > If you have read only one other agent file, make it [`fish/human-ai-collaboration.md`](./fish/human-ai-collaboration.md). It explains *why* any of this exists. This doc explains *which parts* exist and how they fit together.
 
@@ -29,7 +29,7 @@ Duble Slash ships **thirteen agents** that cooperate through one shared vocabula
 │    Sol — the shaper. BR, AC, MP, DL, TA, WF, AD, SK, SB, PT, CT…            │
 │    Bram — the builder. CR, SL, GE, TE, UV, IN, PR…                          │
 │    Sage — the shipper. CM, CH, RN, TG, MS, MR, RP, TR, NL…                  │
-│    You type // → tool adopts ONE persona; explicit <FLOW-handoff> between.  │
+│    You type // → tool adopts ONE persona; explicit <fish-handoff> between.  │
 └────────────────────────────────────┬────────────────────────────────────────┘
                                      │ emits: handoffs · artifacts · invocations · commits
                                      ▼
@@ -55,7 +55,7 @@ Duble Slash ships **thirteen agents** that cooperate through one shared vocabula
 │    (replaces standups)     checks (advisory+enforce)  enforcement           │
 │                                                                             │
 │    Team-scope. Not just plumbing — METHODOLOGY ORCHESTRATORS: they apply   │
-│    FLOW at project scale, classify each card's archetype (Nemo / Tuna /    │
+│    Fish Model at project scale, classify each card's archetype (Nemo / Tuna /    │
 │    Salmon / Willy), set which local agent LEADS the card, and enforce the │
 │    team's flow.yaml. Every action visible in the glass-kitchen audit UI.    │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -74,7 +74,7 @@ The map reads top-down: **you** drive a local agent inside an AI tool; each loca
 
 | | **Local agents** (`local-agents/`) | **System agents** (`system-agents/`) |
 |---|---|---|
-| **What they ARE** | **Specialist personas, each with a deep method catalog.** Nova is *the researcher* — 25+ discovery methods. Sol is *the shaper* — briefs, AC, measurement, ADRs, tradeoff axes. Bram is *the builder*. Sage is *the shipper*. The persona is how you *address* the specialist ("bring in Nova to run a Premortem"); the method catalog is what she *offers* once you do. Neither half works without the other — a toolbox without a voice is a command menu; a voice without methods is a chatbot. | **Methodology orchestrators.** They apply FLOW at *project scope* — classify each card's archetype (Nemo / Tuna / Salmon / Willy), decide which local agent *leads* that card, and enforce the team's `flow.yaml`. Not plumbing. Not just sync. They are what makes FLOW a methodology instead of four prompts. |
+| **What they ARE** | **Specialist personas, each with a deep method catalog.** Nova is *the researcher* — 25+ discovery methods. Sol is *the shaper* — briefs, AC, measurement, ADRs, tradeoff axes. Bram is *the builder*. Sage is *the shipper*. The persona is how you *address* the specialist ("bring in Nova to run a Premortem"); the method catalog is what she *offers* once you do. Neither half works without the other — a toolbox without a voice is a command menu; a voice without methods is a chatbot. | **Methodology orchestrators.** They apply Fish Model at *project scope* — classify each card's archetype (Nemo / Tuna / Salmon / Willy), decide which local agent *leads* that card, and enforce the team's `flow.yaml`. Not plumbing. Not just sync. They are what makes Fish Model a methodology instead of four prompts. |
 | **Where they live** | Inside the user's AI tool (Claude Desktop, Cursor, ChatGPT Desktop) as memory/instructions | Duble Slash desktop client + Context Cloud backend |
 | **How they activate** | User types `//explore`, `//solidify`, `//build`, `//ship` (+ optional method code — e.g. `//explore PM` runs Premortem) | Triggered by events: tool session opens, push requested, handoff lands, cron fires, transition attempted |
 | **Conversational?** | Yes — persona-embodied, dialogic | No — observe, process, emit records; surface UI when they need your attention |
@@ -84,7 +84,7 @@ The map reads top-down: **you** drive a local agent inside an AI tool; each loca
 | **Disable impact** | Switching persona = switching method toolbox; disabling one means you do that phase's methods by hand | Each can be disabled individually; disabling the *orchestration* layer (Gate + Loom) drops the project back to per-card self-direction |
 | **Ships** | All four at OSS launch | Staged: Tally+Cipher OSS → Relay+Beacon+Pack V1 → Echo+Twin V1.5 → Gate+Loom V2 |
 
-**Load-bearing distinction:** local agents talk *to* you and run *methods with* you; system agents work *around* you and run *methodology on* you. Every local-agent action creates events that some system agent may process. The local-agent pipeline keeps working even if every system agent is disabled — you just lose multiplayer continuity, audit, and project-level FLOW orchestration.
+**Load-bearing distinction:** local agents talk *to* you and run *methods with* you; system agents work *around* you and run *methodology on* you. Every local-agent action creates events that some system agent may process. The local-agent pipeline keeps working even if every system agent is disabled — you just lose multiplayer continuity, audit, and project-level Fish Model orchestration.
 
 ---
 
@@ -99,12 +99,12 @@ The map reads top-down: **you** drive a local agent inside an AI tool; each loca
 | S1 | **Capture** · *Tally* | System · personal | On device | OSS | Watch each tool; tag every session with source, model, timestamp, goal. |
 | S2 | **Redaction** · *Cipher* | System · personal | On device | OSS | Auto-detect PII / secrets. Diff preview before anything leaves the device. |
 | S3 | **Sync** · *Relay* | System · personal→team | Hybrid | V1 | Queue + upload approved payloads. Honor push controls. Resolve conflicts. |
-| S4 | **Handoff** · *Beacon* | System · team | Context Cloud | V1 | Route `<FLOW-handoff>` pickups to the next phase's owner. Powers Sarah→Marcus. |
+| S4 | **Handoff** · *Beacon* | System · team | Context Cloud | V1 | Route `<fish-handoff>` pickups to the next phase's owner. Powers Sarah→Marcus. |
 | S5 | **Context Bundler** · *Pack* | System · team | Context Cloud | V1 | Assemble on-demand context packs (pickup, onboarding, catch-up). |
 | S6 | **Digest** · *Echo* | System · team | Context Cloud | V1.5+ | Delta-based team narrative ("today at a glance"). Replaces standups. |
 | S7 | **Personal Twin** · *Twin* | System · personal | On device | V1.5+ | Answer simple async questions in the user's voice while they're offline. |
 | S8 | **Flow Checker** · *Gate* | System · team | Context Cloud | V2 | Apply the team's `flow.yaml` to each card: verify archetype-required attributes, flag mismatches, gate transitions. |
-| S9 | **Process** · *Loom* | System · team | Context Cloud | V2 | Orchestrate FLOW across the project: classify archetype, set which local agent leads each card, enforce transitions. |
+| S9 | **Process** · *Loom* | System · team | Context Cloud | V2 | Orchestrate Fish Model across the project: classify archetype, set which local agent leads each card, enforce transitions. |
 
 Legend: **L** = local (you invoke), **S** = system (event-triggered). Call-signs are the humanized handle used in UI / logs / support; the full name is canonical.
 
@@ -139,19 +139,19 @@ Who can *do* what, who can *stop* it, and what it leaves behind.
 | Capture · Tally | Automatic (per user's opt-in list) | User disables per-tool | A tool in the watched list opens or emits events | Lose session index; all `//` agents still run |
 | Redaction · Cipher | Automatic (any outbound payload) | User (approve / edit / cancel every diff) | Anything queued for outbound: push, PR draft, trust receipt, announcement | Every push requires full manual review |
 | Sync · Relay | User approves push (OSS default) or opt-in auto-sync | User per-push; user per-conflict resolution | Redacted payload ready + user push OR timer (if opted in) | Single-player mode; local state intact |
-| Handoff · Beacon | Automatic when `<FLOW-handoff>` lands in team graph | User mutes; team re-routes | Handoff lands OR user closes tool with in-progress card | Pickups sit in the graph but nobody gets notified |
+| Handoff · Beacon | Automatic when `<fish-handoff>` lands in team graph | User mutes; team re-routes | Handoff lands OR user closes tool with in-progress card | Pickups sit in the graph but nobody gets notified |
 | Context Bundler · Pack | Explicit request (user, teammate, or agent) | User on own cards; team policy across cards | Button press / command / agent request | No curated packs; pickers read the raw card |
 | Digest · Echo | Scheduled (team-configurable) + on-demand | Team admin (schedule, channels) | Cron tick or on-demand request | Team falls back to whatever standup ritual it had |
 | Personal Twin · Twin | Async question addressed to the offline user | User (correct or retract any Twin answer) | Async question arrives while user offline + question is within Twin's trained mandate | Questions wait for the user; no in-voice answers |
 | Flow Checker · Gate | Automatic on card state changes | User per-override; team enables advisory vs enforcing | Phase-transition attempt, artifact add, sigil change | No automated attribute checks; humans self-enforce |
-| Process · Loom | Automatic on card creation + transition attempts | User per-override (reason logged); team sets `flow.yaml` | Card opened, sigil assigned, or `<FLOW-handoff>` requests a phase transition | Transitions always allowed; archetype/lead are set ad-hoc per card; methodology becomes advisory |
+| Process · Loom | Automatic on card creation + transition attempts | User per-override (reason logged); team sets `flow.yaml` | Card opened, sigil assigned, or `<fish-handoff>` requests a phase transition | Transitions always allowed; archetype/lead are set ad-hoc per card; methodology becomes advisory |
 
 **Authority lines** (what can hurt vs. what can only advise):
 
 - **Only two agents write code:** Builder (product code) and Shipper (release plumbing only — version bumps, changelog, tag messages, commit text). Everyone else produces documents, diffs, or decisions.
 - **Only Shipper commits, tags, or publishes** — and only with per-action user confirmation.
 - **Only Loom (V2) can block a transition** — and only when the team has opted into enforcing mode.
-- **Only the system-agent layer applies FLOW at project scope.** Gate + Loom (reading the team's `flow.yaml`) classify each card's archetype (Nemo / Tuna / Salmon / Willy) and assign the *lead local agent* accordingly — Nemo leans on Bram, Tuna on Sol, Salmon and Willy on Nova. Local agents run methods; system agents decide which methods a given card requires and who should run them. Users can override any assignment (reason logged). Until V2 ships, this role is held locally by Explorer's **SA** (Sigil Assist) and team convention; V2 formalizes it.
+- **Only the system-agent layer applies Fish Model at project scope.** Gate + Loom (reading the team's `flow.yaml`) classify each card's archetype (Nemo / Tuna / Salmon / Willy) and assign the *lead local agent* accordingly — Nemo leans on Bram, Tuna on Sol, Salmon and Willy on Nova. Local agents run methods; system agents decide which methods a given card requires and who should run them. Users can override any assignment (reason logged). Until V2 ships, this role is held locally by Explorer's **SA** (Sigil Assist) and team convention; V2 formalizes it.
 - **Only you can push data off the device** — Cipher *gates* but does not initiate; Relay *queues* but does not auto-upload without your approval (OSS default).
 
 ---
@@ -164,7 +164,7 @@ One card's end-to-end journey. **System agents frame the card; local agents run 
       ┌─ USER · "the export tooltip is confusing users"
       ▼
   ┌──────────────────────┐                                   Loom reads the card + team
-  │ FLOW-TYPE CLASSIFY   │── sigil = Salmon ─────────┐       flow.yaml. Classifies the
+  │ Fish Model-TYPE CLASSIFY   │── sigil = Salmon ─────────┐       flow.yaml. Classifies the
   │ (system · Loom/Gate) │── lead  = Nova (Explorer) │       archetype (small + uncertain
   │ or Nova's SA today   │── required: MP before TR ─┤       → Salmon), assigns the lead
   └──────────────────────┘                           │       local agent, and tags the
@@ -176,28 +176,28 @@ One card's end-to-end journey. **System agents frame the card; local agents run 
   │  · Nova  │   (methods Loom flagged for Salmon)   │       Cipher watches for anything
   └──────────┘                                       │       sensitive pasted in chat.
       │                                              │
-      │  <FLOW-handoff> (to: solidifier)             │
+      │  <fish-handoff> (to: solidifier)             │
       ▼                                              │       Handoff stored locally;
   ┌────────────┐                                     │       if user pushes to team,
   │ Solidifier │── runs: BR, AC, MP, DL ────────────┤       Cipher gates the push and
   │   · Sol    │                                     │       Relay queues it. Beacon
   └────────────┘                                     │       routes pickup notifications.
       │                                              │       Gate verifies AC + MP exist
-      │  <FLOW-handoff> (to: builder)                │       (Salmon requires both).
+      │  <fish-handoff> (to: builder)                │       (Salmon requires both).
       ▼                                              │
   ┌──────────┐                                       │       Tally captures the Build
   │ Builder  │── runs: CR, SL, TE, UV, IN ──────────┤       session in whichever tool
   │  · Bram  │                                       │       you're coding in. Gate
   └──────────┘                                       │       checks flow.yaml.
       │                                              │
-      │  <FLOW-handoff> (to: shipper)                │
+      │  <fish-handoff> (to: shipper)                │
       ▼                                              │
   ┌──────────┐                                       │       Cipher co-signs the trust
   │ Shipper  │── runs: CM, CH, RN, TG, MR, RP, TR ──┘       receipt. Relay syndicates
   │  · Sage  │                                              the release to the team
   └──────────┘                                              graph. Echo includes it
       │                                                     in tomorrow's Digest.
-      │  <FLOW-handoff> (to: explorer, next loop)
+      │  <fish-handoff> (to: explorer, next loop)
       ▼
    next card or next loop on this card — Pack assembles a context pack
    for whoever picks it up, whether that's you tomorrow or a teammate.
@@ -206,11 +206,11 @@ One card's end-to-end journey. **System agents frame the card; local agents run 
 **Two tracks, not one.** The left column is the *methods track* — Nova, Sol, Bram, Sage each running the specific method codes (IP, AC, MP, CR, TR…) that the card requires. The right column is the *methodology track* — Loom classifies and assigns, Gate verifies, Beacon routes, Cipher/Relay/Tally/Echo handle capture, privacy, sync, and narration. Remove the methodology track and you still have four competent method toolboxes; remove the methods track and you have a flow.yaml with nothing running inside it.
 
 What stays constant across the whole lifecycle:
-- **Sigil** (certainty × size — certainty decided first, see flow.md §3.1) is set up front — by Loom reading `flow.yaml` (V2) or by Nova's `SA` method (today) — and travels with every handoff.
+- **Sigil** (certainty × size — certainty decided first, see fish-model.md §3.1) is set up front — by Loom reading `flow.yaml` (V2) or by Nova's `SA` method (today) — and travels with every handoff.
 - **Lead agent** is assigned with the sigil and travels with the card. Nemo-leads-Bram, Tuna-leads-Sol, Salmon/Willy-lead-Nova is the default; teams override in `flow.yaml`.
 - **Card ID** is stable across sessions, tools, and teammates.
 - **Trust receipt** exists for every Ship, even solo — it's what makes audit possible later.
-- **Every transition is a `<FLOW-handoff>` block** — the universal mechanism for picking up cold.
+- **Every transition is a `<fish-handoff>` block** — the universal mechanism for picking up cold.
 
 ---
 
@@ -229,7 +229,7 @@ Task-first lookup. If you're trying to do X, start with Y.
 | Figure out whether this work is Nemo / Tuna / Salmon / Willy | **Explorer · Nova** | `//explore SA` (Sigil Assist) |
 | Premortem a risky Willy before committing | **Explorer · Nova** | `//explore PM` |
 | Write a measurement plan for a Salmon | **Solidifier · Sol** | `//solidify MP` |
-| Pick up where I (or a teammate) left off | Whoever the last handoff's `to:` names | Paste the `<FLOW-handoff>` into `//<phase>` |
+| Pick up where I (or a teammate) left off | Whoever the last handoff's `to:` names | Paste the `<fish-handoff>` into `//<phase>` |
 | Reverse a phase because the prior shape was wrong | Current agent's **HB** capability | `//handback` |
 
 ### 6.2 Expert shortcuts — when the card crosses domains
@@ -282,17 +282,17 @@ The four locals each carry a **136-expert roster** they can loan in for one turn
 Six rules that bind every agent on the roster. These are methodology rules, not implementation notes.
 
 1. **Transparent, narratable, overridable.** Every agent explains what it did in plain English when asked. Every user-visible action can be vetoed. No silent data movement, no silent decisions.
-2. **One shared vocabulary.** All thirteen agents read and emit `sigil`, `archetype`, `phase`, and `<FLOW-handoff>`. No agent invents its own terminology.
+2. **One shared vocabulary.** All thirteen agents read and emit `sigil`, `archetype`, `phase`, and `<fish-handoff>`. No agent invents its own terminology.
 3. **Per-action confirmation for destructive or external work.** Commits, tags, pushes, announcements, branch deletions — every one requires explicit user confirmation, per action. Shipper authority does not override this.
 4. **Sigil-aware intensity.** Each agent modulates its depth by archetype (Nemo → concise; Willy → thorough). Agents flag mismatches ("you asked for a full PRD on a Nemo") rather than silently gold-plating or under-investing.
-5. **Handoff, never smuggle.** Phase exits always emit a `<FLOW-handoff>`. Reverse transitions (handback) are normal, not exceptional. Smuggling work across phase boundaries without a handoff is a bug.
+5. **Handoff, never smuggle.** Phase exits always emit a `<fish-handoff>`. Reverse transitions (handback) are normal, not exceptional. Smuggling work across phase boundaries without a handoff is a bug.
 6. **Local works without system; system never works without local.** The local-agent pipeline runs standalone (OSS drop). The system pipeline is built on top of local-agent events and cannot function without them.
 
 ---
 
 ## 8. Reading order for each kind of reader
 
-- **Designer / PM / engineer picking up FLOW for the first time:**
+- **Designer / PM / engineer picking up Fish Model for the first time:**
   1. This file (§§1–3 are enough to orient)
   2. [`fish/human-ai-collaboration.md`](./fish/human-ai-collaboration.md) — why this exists
   3. [`fish/README.md`](./fish/README.md) — axes, archetypes, phases
@@ -306,15 +306,15 @@ Six rules that bind every agent on the roster. These are methodology rules, not 
 - **Team lead writing a `flow.yaml`:**
   1. This file §6 (to see what the agents will enforce)
   2. `system-agents/README.md` §3.8 (Flow Checker) and §3.9 (Process)
-  3. FLOW transitions + gates: [`fish/transitions-and-handoffs.md`](./fish/transitions-and-handoffs.md)
+  3. Fish Model transitions + gates: [`fish/transitions-and-handoffs.md`](./fish/transitions-and-handoffs.md)
 
 ---
 
 ## 9. Cross-references
 
-- **FLOW methodology spec** → [`fish/README.md`](./fish/README.md)
+- **Fish Model methodology spec** → [`fish/README.md`](./fish/README.md)
 - **Phases & methods (the method catalog)** → [`fish/phases-and-methods.md`](./fish/phases-and-methods.md)
-- **Transitions & the `<FLOW-handoff>` contract** → [`fish/transitions-and-handoffs.md`](./fish/transitions-and-handoffs.md)
+- **Transitions & the `<fish-handoff>` contract** → [`fish/transitions-and-handoffs.md`](./fish/transitions-and-handoffs.md)
 - **Worked use cases (one per archetype)** → [`fish/use-cases.md`](./fish/use-cases.md)
 - **Local-agent roster + install mechanics** → [`local-agents/README.md`](./local-agents/README.md)
 - **Per-agent local specs** → [`local-agents/explorer.md`](./local-agents/explorer.md) · [`solidifier.md`](./local-agents/solidifier.md) · [`builder.md`](./local-agents/builder.md) · [`shipper.md`](./local-agents/shipper.md)

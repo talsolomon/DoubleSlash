@@ -1,12 +1,12 @@
 ---
-name: FISH transitions and the `<FISH-handoff>` contract
-description: Phase transition gates, the universal handoff block format, reverse transitions, skip handling, and multi-card session rules. Canonical reference for all FISH agents.
+name: Fish Model transitions and the `<fish-handoff>` contract
+description: Phase transition gates, the universal handoff block format, reverse transitions, skip handling, and multi-card session rules. Canonical reference for all Fish Model agents.
 type: methodology-spec
 ---
 
-# Transitions & the `<FISH-handoff>` contract
+# Transitions & the `<fish-handoff>` contract
 
-Every phase change in FISH is an explicit, loggable event. This doc defines the shape of that event, the gates that qualify it, and the edge cases (reverse transitions, skips, multi-card sessions).
+Every phase change in Fish Model is an explicit, loggable event. This doc defines the shape of that event, the gates that qualify it, and the edge cases (reverse transitions, skips, multi-card sessions).
 
 ---
 
@@ -21,12 +21,12 @@ A Ship → Explore transition starting the next loop is the **normal steady stat
 
 ---
 
-## 2. The `<FISH-handoff>` block
+## 2. The `<fish-handoff>` block
 
 Every transition emits this. It is the single mechanism by which state passes between phases, between sessions, and between collaborators (human or agent).
 
 ```
-<FISH-handoff>
+<fish-handoff>
 from: explorer
 to: solidifier
 card_id: onboarding-redesign-2026-04
@@ -50,7 +50,7 @@ notes: |
   Ran Willie-intensity Explore (5 interviews + competitor scan + premortem).
   Two open items above are blocking Solidify; everything else deferred to follow-ups.
   Recommended Solidify approach: one-pager pitch + two concept validations.
-</FISH-handoff>
+</fish-handoff>
 ```
 
 ### Field contract
@@ -74,7 +74,7 @@ notes: |
 
 - `locked` + `open` together form the minimum state an incoming agent needs to pick up without re-asking.
 - `sigil` + `archetype` let the next agent sanity-check that the phase transition is actually warranted *for this kind of card*.
-- `confidence_to_advance` is the agent's honest read. An Explorer returning `0.3` is saying "I don't think you're done exploring yet." The human may override — FISH is not a gate-keeper, it's a coach.
+- `confidence_to_advance` is the agent's honest read. An Explorer returning `0.3` is saying "I don't think you're done exploring yet." The human may override — Fish Model is not a gate-keeper, it's a coach.
 - Plain text (not JSON) is deliberate: the block must round-trip through Claude Desktop, Cursor, ChatGPT Desktop, a Slack paste, a PR description, and a human skim-read.
 
 ---
@@ -103,17 +103,17 @@ The outgoing agent reports an honest number. The human reads it.
 
 ### 3.2 Four agent moves at gates
 
-Phase transitions aren't the only moments an agent needs to signal upward. Entry-condition failures, scope changes, and mid-phase concerns all require a move. FISH uses four typed moves — the same vocabulary across all four agents — so the human reading chat can tell at a glance whether work can proceed:
+Phase transitions aren't the only moments an agent needs to signal upward. Entry-condition failures, scope changes, and mid-phase concerns all require a move. Fish Model uses four typed moves — the same vocabulary across all four agents — so the human reading chat can tell at a glance whether work can proceed:
 
 | Move | What it means | Blocks work? | Example |
 |---|---|---|---|
 | **Question** | Ask the human; keep working while you wait. | No | Explorer: *"Should I include admin users in this research, or scope to end-users only?"* |
 | **Review** | Hand to the human for explicit approval before continuing. | Soft — work pauses. | Solidifier: *"Brief is drafted — need sign-off before I hand to the Builder."* |
-| **Handoff** | Emit `<FISH-handoff>` to the next-phase agent. | No — this is the normal transition. | Builder → Shipper at Build exit. |
+| **Handoff** | Emit `<fish-handoff>` to the next-phase agent. | No — this is the normal transition. | Builder → Shipper at Build exit. |
 | **Block** | Halt. Cannot proceed without the human resolving this. | Yes — hard stop. | Explorer: *"Scope changed from Salmon to Willie mid-phase. Blocking until you confirm the new sigil."* |
 
 Rules:
-- A move is **always narrated in chat** — never silent. ("Blocking: …" / "Question: …" / emitting `<FISH-handoff>`.)
+- A move is **always narrated in chat** — never silent. ("Blocking: …" / "Question: …" / emitting `<fish-handoff>`.)
 - **Block** is reserved for cases where continuing would cause irreversible consequences (scope change, sigil mismatch, missing required input). Overuse trains humans to ignore it.
 - **Review** is the right move at phase exits where `confidence_to_advance < 0.5` — the human green-lights rather than the agent auto-advancing.
 - **Question** is the default mid-phase move. Use it freely; it's cheap.
@@ -125,10 +125,10 @@ Rules:
 
 Reverse motion is **legitimate and expected** — especially for Salmons and Willies.
 
-A Builder who discovers the shape is wrong hands back to Solidify. A Solidifier who discovers the problem is wrong hands back to Explore. Reverse transitions use the same `<FISH-handoff>` format:
+A Builder who discovers the shape is wrong hands back to Solidify. A Solidifier who discovers the problem is wrong hands back to Explore. Reverse transitions use the same `<fish-handoff>` format:
 
 ```
-<FISH-handoff>
+<fish-handoff>
 from: builder
 to: solidifier
 phase_exited: build              # the phase we're leaving
@@ -138,7 +138,7 @@ notes: |
   decision "password strength meter lives at step 3" conflicts with the
   research finding from Explore that users abandon at step 3 for
   unrelated reasons. Re-opening the step-placement question.
-</FISH-handoff>
+</fish-handoff>
 ```
 
 Rules:
@@ -171,7 +171,7 @@ Repeated skips of the same phase across cards = signal that your team's default 
 
 Legitimate, and Explore is the most common place they happen. The rule:
 
-- **Sigil change is announced explicitly** — current agent emits a partial handoff (or a fresh `<FISH-handoff>` with the new sigil and `phase_exited: same-phase-sigil-change`) before continuing.
+- **Sigil change is announced explicitly** — current agent emits a partial handoff (or a fresh `<fish-handoff>` with the new sigil and `phase_exited: same-phase-sigil-change`) before continuing.
 - **Current phase re-evaluates** against the new archetype's cell in the matrix. A card that was Nemo but is now Salmon needs heavier Explore — the agent extends Explore rather than advancing.
 - **`handoff_log`** on the card preserves the old sigil for audit.
 
@@ -191,7 +191,7 @@ If a user is working on two cards in the same Claude / Cursor / ChatGPT session:
 
 ## 8. Multi-person sessions (V1 multiplayer)
 
-In V1, `<FISH-handoff>` is the **primary mechanism** for cross-teammate pickup:
+In V1, `<fish-handoff>` is the **primary mechanism** for cross-teammate pickup:
 
 - Sarah's Solidifier emits a handoff.
 - Marcus's Builder reads it in his tool (Duble Slash sync'd it there via the Handoff agent).
@@ -223,7 +223,7 @@ These are designed so a solo OSS-launch handoff is forward-compatible — the V1
 
 ## 10. Cross-references
 
-- Main FISH spec → [`README.md`](./README.md)
+- Main Fish Model spec → [`README.md`](./README.md)
 - Phase-level entry/exit criteria and methods → [`phases-and-methods.md`](./phases-and-methods.md)
 - How local agents produce and consume handoffs → [`../local-agents/README.md`](../local-agents/README.md)
 - How the Context Cloud stores and routes handoffs (V1) → [`../system-agents/README.md`](../system-agents/README.md)

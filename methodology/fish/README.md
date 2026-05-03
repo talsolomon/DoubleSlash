@@ -1,20 +1,20 @@
 ---
-name: FISH Methodology — overview
-description: The canonical FISH spec. Defines axes, archetypes (Nemo/Tuna/Salmon/Willie), phases (head/left body/right body/tail), and the archetype × phase intensity matrix. Binding reference for all Duble Slash agents.
+name: Fish Model methodology — overview
+description: The canonical Fish Model spec. Defines axes, archetypes (Nemo/Tuna/Salmon/Willie), phases (head/left body/right body/tail), and the archetype × phase intensity matrix. Binding reference for all Duble Slash agents.
 type: methodology-spec
 ---
 
-# FISH — the method
+# Fish Model
 
 **Owner:** Tal · **Version:** 1.0.0 · **Last revised:** 2026-04-21 · **Source lineage:** <https://www.talsolomonux.com/p/0d2>
 
-FISH is a way of running one unit of design/product/engineering work so that:
+Fish Model is a way of running one unit of design/product/engineering work so that:
 
 1. Everyone involved — human or AI — **shares the same vocabulary** for what phase the work is in and how big/unknown it is.
 2. The **intensity of ritual** (research, shaping, validation, release) **matches the work** instead of applying a uniform process to everything.
 3. **Handoffs are explicit**: every transition emits a small, machine-readable receipt so the next collaborator — a teammate, an agent, or you-tomorrow — can pick up cold.
 
-FISH replaces "everything is a two-week sprint of unknown shape" with: *decide what kind of fish you're catching, then run the lifecycle at the intensity that fish demands.*
+Fish Model replaces "everything is a two-week sprint of unknown shape" with: *decide what kind of fish you're catching, then run the lifecycle at the intensity that fish demands.*
 
 ---
 
@@ -117,7 +117,7 @@ The head is the pre-diamond divergence that makes the first diamond possible (pu
 
 ### Why four, not two (classical Double Diamond)
 
-Classical Double Diamond says *problem space* and *solution space*. FISH splits each into its own phase with **its own agent, artifact, and handoff contract** so that:
+Classical Double Diamond says *problem space* and *solution space*. Fish Model splits each into its own phase with **its own agent, artifact, and handoff contract** so that:
 
 - Humans and AI agents can locate themselves in the lifecycle without jargon.
 - Transitions are explicit events, not blurred regions.
@@ -149,7 +149,7 @@ For the full method catalog mapped into this matrix, see [`phases-and-methods.md
 
 ## 5. Handoffs, transitions, and gates
 
-Every phase transition emits a `<FISH-handoff>` block — a small, tool-agnostic text receipt that the next agent (or the user tomorrow, or a teammate in V1) reads to pick up cold. Gate conditions, reverse transitions, skip handling, and the full handoff shape live in [`transitions-and-handoffs.md`](./transitions-and-handoffs.md).
+Every phase transition emits a `<Fish Model-handoff>` block — a small, tool-agnostic text receipt that the next agent (or the user tomorrow, or a teammate in V1) reads to pick up cold. Gate conditions, reverse transitions, skip handling, and the full handoff shape live in [`transitions-and-handoffs.md`](./transitions-and-handoffs.md).
 
 The headline gates:
 
@@ -164,7 +164,7 @@ The headline gates:
 
 ## 6. Core principle — communication is the method
 
-From the 2024 article: *"Communication is the key to success."* FISH operationalizes this as three rules every phase obeys:
+From the 2024 article: *"Communication is the key to success."* Fish Model operationalizes this as three rules every phase obeys:
 
 1. **Brief, not PRD.** Artifacts are short, problem-focused. A Solidify artifact that needs a table of contents is a bad Solidify artifact.
 2. **Shared language over role handoffs.** Designers, PMs, engineers, and agents all describe work with the same sigil + phase + archetype vocabulary. No translator role, no PRD-translator PM.
@@ -174,9 +174,9 @@ These are methodology rules, not personality traits. Agents enforce them by refu
 
 ---
 
-## 7. What FISH does for humans working with AI
+## 7. What Fish Model does for humans working with AI
 
-Short answer: **FISH is the coach that keeps AI-assisted work from turning into vibes.** AI tools eagerly help; they rarely ask what phase you're in. FISH gives you — and the AI — a way to name the phase, stay in it, and hand off cleanly.
+Short answer: **Fish Model is the coach that keeps AI-assisted work from turning into vibes.** AI tools eagerly help; they rarely ask what phase you're in. Fish Model gives you — and the AI — a way to name the phase, stay in it, and hand off cleanly.
 
 The long answer is in [`human-ai-collaboration.md`](./human-ai-collaboration.md). If you read only one file in this folder, read that one.
 
@@ -184,28 +184,28 @@ The long answer is in [`human-ai-collaboration.md`](./human-ai-collaboration.md)
 
 ## 8. Lineage (what we built on)
 
-FISH stands on three legs:
+Fish Model stands on three legs:
 
 - **Béla H. Bánáthy's divergence–convergence** model (systems thinking; 1960s–70s) — the "diamond shape" inside every phase.
 - **UK Design Council's Double Diamond** (2004, revised 2019) — the two-diamond split between problem and solution space; the direct parent of the left-body/right-body split.
 - **The Fish Model** (Tal, 2024; Redis era) — the species as archetypes; the scope × familiarity axes; "brief not PRD"; journey meetings.
 
-FISH (this spec) is the **agent-operable** evolution: same lineage, newly legible to LLMs and to a multiplayer graph. Specifically, FISH adds:
+Fish Model (this spec) is the **agent-operable** evolution: same lineage, newly legible to LLMs and to a multiplayer graph. Specifically, Fish Model adds:
 
 - Fish anatomy as an explicit pipeline (head → left → right → tail).
 - Sigil as a first-class, machine-readable card field.
 - Archetype × phase intensity matrix (fills the implicit-practice gap in v1).
-- `<FISH-handoff>` as the universal transition receipt.
+- `<Fish Model-handoff>` as the universal transition receipt.
 - Agent-readable prompt contracts (see [`../local-agents/`](../local-agents/)).
 
 ---
 
-## 9. What FISH is *not*
+## 9. What Fish Model is *not*
 
 - **Not a project-management tool.** It runs a *unit* of work; the portfolio view sits above.
 - **Not design-only.** Phases and handoffs apply to code, docs, research, decisions.
 - **Not opinionated about team structure.** Solo, pair, squad — all compatible.
-- **Not tool-prescriptive.** Figma, VS Code, a notebook, a napkin — FISH cares about phase, sigil, and handoff, not filetype.
+- **Not tool-prescriptive.** Figma, VS Code, a notebook, a napkin — Fish Model cares about phase, sigil, and handoff, not filetype.
 - **Not a replacement for Agile sprints or Shape Up cycles.** It describes one card's lifecycle; you can run many cards in parallel on whatever cadence you like.
 
 ---
@@ -217,6 +217,6 @@ FISH (this spec) is the **agent-operable** evolution: same lineage, newly legibl
 - **HAI primitives — agent-operable contracts** → [`contracts.md`](./contracts.md)
 - Four worked scenarios → [`use-cases.md`](./use-cases.md)
 - Handoff contract + transition gates → [`transitions-and-handoffs.md`](./transitions-and-handoffs.md)
-- Agents that enact FISH inside the user's AI tool → [`../local-agents/`](../local-agents/)
-- Background workers that make FISH reliable across sessions and teams → [`../system-agents/`](../system-agents/)
+- Agents that enact Fish Model inside the user's AI tool → [`../local-agents/`](../local-agents/)
+- Background workers that make Fish Model reliable across sessions and teams → [`../system-agents/`](../system-agents/)
 - Task tracking → [`planning/task-board.md`](../../planning/task-board.md)

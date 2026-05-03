@@ -41,11 +41,12 @@ If a loop is firing without producing its artifact, the loop is broken — fix t
 ## What lives where
 
 - `STORY.md` — current pitch narrative. Source of truth for positioning.
-- `methodology/` — FISH + FLOW. The framework Duble//Slash teaches and embodies.
+- `methodology/` — Fish Model. The framework Duble//Slash teaches and embodies.
 - `agents/` — operator + skill manifests. The fabric.
 - `skills/` — reusable Claude skills.
 - `website/` — landing + product surface.
 - `company/` — how we run. Decisions, signal, DRIs, this file.
+  - `company/marketing/` — GTM strategy, channels, campaigns, CMO agent (Vera).
 - `_old/` — archived. Read-only. Pre-2026-04-28 work.
 
 ---

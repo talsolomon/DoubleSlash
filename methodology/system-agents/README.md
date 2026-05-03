@@ -1,6 +1,6 @@
 ---
 name: System agents — Context Cloud workers
-description: The nine background workers that observe, protect, and route Duble Slash sessions. Run in the desktop client + hosted backend. Coexist with local agents; enforce the same FLOW vocabulary without user invocation.
+description: The nine background workers that observe, protect, and route Duble Slash sessions. Run in the desktop client + hosted backend. Coexist with local agents; enforce the same Fish Model vocabulary without user invocation.
 type: agent-roster
 ---
 
@@ -114,17 +114,17 @@ Call-signs humanize each agent in the UI, logs, and support conversations; the f
 - Model (when available).
 - Prompt + response content (always encrypted locally).
 - Inferred goal (extracted from opening prompt).
-- **FLOW sigil + phase + agent** — extracted from `//` invocations and `<FLOW-handoff>` blocks.
+- **Fish Model sigil + phase + agent** — extracted from `//` invocations and `<Fish Model-handoff>` blocks.
 
 **Design rules:**
 - **Local-first encrypted storage.** Data never leaves device by default. OSS-launch capture is entirely local.
 - **Always-visible capture indicator** ("🟢 Capturing · 3 apps · encrypted locally · you control pushes") — the user can see what's being captured at all times.
 - **Opt-in per-tool.** User can disable capture for any tool individually.
-- **Transparent tagging.** When a `<FLOW-handoff>` is detected, Capture indexes it as a first-class event in the card's timeline, not as raw text.
+- **Transparent tagging.** When a `<Fish Model-handoff>` is detected, Capture indexes it as a first-class event in the card's timeline, not as raw text.
 
 **Interaction with local agents:**
-- Every `<FLOW-handoff>` the local agents emit is saved by Capture. The user doesn't have to copy-paste handoffs between sessions — Capture stores them; the next session retrieves.
-- Capture makes FLOW cards **resumable across tool restarts**. The handoff contract + Capture together = "pick up from yesterday."
+- Every `<Fish Model-handoff>` the local agents emit is saved by Capture. The user doesn't have to copy-paste handoffs between sessions — Capture stores them; the next session retrieves.
+- Capture makes Fish Model cards **resumable across tool restarts**. The handoff contract + Capture together = "pick up from yesterday."
 
 **Failure modes to design against:**
 - False negatives (missed sessions) — high cost, breaks the "yesterday" promise.
@@ -139,7 +139,7 @@ model:         {provider}/{model_id} · null if unknown
 started_at:    ISO 8601
 ended_at:      ISO 8601 · null while active
 goal:          string · extracted from opening prompt
-card_id:       string · null if no FLOW card in play
+card_id:       string · null if no Fish Model card in play
 sigil:         {certainty, size} · null if none
 phase:         explore | solidify | build | ship · null if none
 agent:         explorer | solidifier | builder | shipper · null if none
@@ -215,7 +215,7 @@ redaction_receipt (co-signed onto Shipper's trust receipt):
 - **Sync is observable.** Pending pushes, sync failures, conflicts — all visible in the desktop client.
 - **Offline-tolerant.** Pushes queue; sync resumes on reconnect.
 
-**Interaction with FLOW:**
+**Interaction with Fish Model:**
 - Sync is the mechanism by which a Solidifier's handoff in Claude Desktop reaches Marcus's Cursor.
 - Card IDs are stable across tools because Sync maintains the canonical card state in the Context Cloud.
 
@@ -236,18 +236,18 @@ sync_event:
 
 ### 3.4 Handoff agent
 
-**Snapshot:** *Beacon* · trigger: `<FLOW-handoff>` lands in team graph OR user closes a tool mid-card · output: pickup-able notification routed to the next phase's owner · scope: System · ships: V1 · disable impact: handoffs still stored in team graph but nobody gets notified.
+**Snapshot:** *Beacon* · trigger: `<Fish Model-handoff>` lands in team graph OR user closes a tool mid-card · output: pickup-able notification routed to the next phase's owner · scope: System · ships: V1 · disable impact: handoffs still stored in team graph but nobody gets notified.
 
 **Scope:** System (team graph). **Ships:** V1.
 
 **Job:** Detect when a session hits a natural pause and surface it as pickup-able to teammates. *"Alice paused on this card at phase X — want it?"*
 
 **What it detects:**
-- User emits a `<FLOW-handoff>` with `to: <other phase>` → notify the next agent's "owner" on the team if one is assigned.
+- User emits a `<Fish Model-handoff>` with `to: <other phase>` → notify the next agent's "owner" on the team if one is assigned.
 - User closes a tool with a card in mid-Explore and no handoff emitted → prompt the user: *"Emit a handoff for pickup, or keep private?"*
 
 **Design rules:**
-- **Routing honors FLOW phase ownership.** If Sarah is the team's usual Explorer and Marcus the usual Builder, handoffs route accordingly — but any teammate can pick up any handoff.
+- **Routing honors Fish Model phase ownership.** If Sarah is the team's usual Explorer and Marcus the usual Builder, handoffs route accordingly — but any teammate can pick up any handoff.
 - **Quiet by default.** Handoff agent doesn't spam. One notification per handoff per relevant teammate.
 - **V1 handoff fields.** `requester`, `reviewer`, `sla` fields (see [transitions-and-handoffs.md §8](../fish/transitions-and-handoffs.md#8-multi-person-sessions-v1-multiplayer)) are populated automatically where possible.
 
@@ -304,7 +304,7 @@ context_pack:
   expires_at:     ISO 8601 · default: +24h
   redacted_by:    cipher · hash:... · team_policy_version
   contents:
-    handoff_log:   [ <FLOW-handoff> blocks, chronological ]
+    handoff_log:   [ <Fish Model-handoff> blocks, chronological ]
     artifacts:     [ { path, type, bytes, summary } ]
     capture_log:   [ { session_id, tool, goal, ts } ]  # metadata, not content
     sigil_history: [ { sigil, phase, ts, changed_by } ]
@@ -324,12 +324,12 @@ context_pack:
 > *"This morning across your team: 3 Salmons in Explore (led by Sarah), 2 Tunas in Build (with Marcus), 1 Willy entering Solidify (Tal is owning the pitch). Blockers: one reverse-handoff on the billing Tuna — Builder wants Solidify to clarify AC #7."*
 
 **Design rules:**
-- **Sigil-aware.** Uses FLOW vocabulary; teammates read phase + archetype, not "sprint 3 item."
+- **Sigil-aware.** Uses Fish Model vocabulary; teammates read phase + archetype, not "sprint 3 item."
 - **Delta-based.** What changed since the last digest, not a full status dump.
 - **Blocker-first.** Reverse handoffs and stalled cards surface prominently.
 - **Optional channels.** Slack, email, in-app; team picks.
 
-**Why FLOW makes this possible:** because every card carries `sigil + phase + handoffs`, the Digest agent can write status from structured data instead of guessing from chat scroll.
+**Why Fish Model makes this possible:** because every card carries `sigil + phase + handoffs`, the Digest agent can write status from structured data instead of guessing from chat scroll.
 
 **Digest schema:**
 
@@ -368,7 +368,7 @@ digest:
 - **Always narratable.** Every Twin response is logged in the user's activity so they see what was answered in their name.
 - **Overridable.** The user can correct any Twin response; the correction updates the Twin's model.
 
-**FLOW tie-in:** Twins learn from the user's accumulated handoff log. A designer's Twin knows how they Solidify; a developer's Twin knows how they Build.
+**Fish Model tie-in:** Twins learn from the user's accumulated handoff log. A designer's Twin knows how they Solidify; a developer's Twin knows how they Build.
 
 **Twin response schema:**
 
@@ -427,7 +427,7 @@ flow_check:
 
 ### 3.9 Process agent
 
-**Snapshot:** *Loom* · trigger: `<FLOW-handoff>` attempts a phase transition · output: transition decision (allow | block | request-review) with logged reason · scope: System · ships: V2 (`flow.yaml`) · disable impact: all transitions allowed; the methodology becomes advisory rather than enforced.
+**Snapshot:** *Loom* · trigger: `<Fish Model-handoff>` attempts a phase transition · output: transition decision (allow | block | request-review) with logged reason · scope: System · ships: V2 (`flow.yaml`) · disable impact: all transitions allowed; the methodology becomes advisory rather than enforced.
 
 **Scope:** System. **Ships:** V2 (`flow.yaml` milestone).
 
@@ -476,13 +476,13 @@ From the product brief:
 
 This is load-bearing. It is part of the integrity GTM pillar, not separate from it.
 
-### 4.2 Same FLOW vocabulary as local agents
+### 4.2 Same Fish Model vocabulary as local agents
 
 All system agents read:
 - `sigil` (certainty × size — certainty decided first, see flow.md §3.1)
 - `archetype` (Nemo / Tuna / Salmon / Willy)
 - `phase` (Explore / Solidify / Build / Ship)
-- `<FLOW-handoff>` blocks
+- `<Fish Model-handoff>` blocks
 
 System agents do not invent new vocabulary. They operate on the same cards the local agents produce.
 
@@ -562,7 +562,7 @@ How system agents interact in real scenarios. These are the default paths; every
    → Explorer (local) starts a session.
    → Tally sees the session, tags it: tool=claude-desktop, phase=explore.
 
-2. Explorer emits a <FLOW-handoff> to Solidifier.
+2. Explorer emits a <Fish Model-handoff> to Solidifier.
    → Tally indexes the handoff as a first-class event on the card.
 
 3. User closes the laptop. Next morning, opens Cursor and types //solidify.
@@ -582,7 +582,7 @@ How system agents interact in real scenarios. These are the default paths; every
 
 ```
 1. Sarah (designer, Claude Desktop) finishes a Solidify session.
-   Solidifier emits a <FLOW-handoff> to Builder with card_id=billing-2026-05.
+   Solidifier emits a <Fish Model-handoff> to Builder with card_id=billing-2026-05.
 
 2. Sarah hits "push to team".
    → Cipher re-scans the handoff + referenced artifacts. Diff preview.
@@ -651,7 +651,7 @@ the human keeps the last word, and every override is visible.
 ## 8. Cross-references
 
 - Local agents (`//` personas) → [`../local-agents/README.md`](../local-agents/README.md)
-- FLOW spec → [`../fish/README.md`](../fish/README.md)
+- Fish Model spec → [`../fish/README.md`](../fish/README.md)
 - Transitions + handoff contract → [`../fish/transitions-and-handoffs.md`](../fish/transitions-and-handoffs.md)
 - Product brief (source of agent list + milestones) → [`planning/briefs/brief-collab-capture-layer.md`](../../planning/briefs/brief-collab-capture-layer.md)
 - Technical stack → [`planning/research/technical/technical-research-duble-slash-stack.md`](../../planning/research/technical/technical-research-duble-slash-stack.md)

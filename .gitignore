@@ -17,3 +17,10 @@ supabase/bootstrap-users.sql
 
 # Claude Code harness — agent worktrees, never commit.
 .claude/worktrees/
+
+# Node / build artifacts
+**/node_modules/
+**/dist/
+**/build/
+**/out/
+**/.cache/

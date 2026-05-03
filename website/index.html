@@ -747,6 +747,54 @@
       .quicklook { width: 78%; right: 6%; }
       .fish-palette .fp-label { display: none; }
     }
+
+    /* ---------- Layers section ---------- */
+    .layers-section {
+      width: 100%;
+      padding: 100px 24px 120px;
+      display: flex; flex-direction: column; align-items: center;
+      border-top: 1px solid var(--hair);
+    }
+    .layers-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--brand-accent);
+      background: rgba(14,58,53,0.07);
+      border: 1px solid rgba(61,217,182,0.22);
+      border-radius: 999px; padding: 5px 12px;
+      margin-bottom: 16px;
+    }
+    .layers-eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--brand-accent);
+      animation: eyebrow-pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes eyebrow-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.6); }
+    }
+    .layers-h {
+      font-size: 38px; font-weight: 700;
+      letter-spacing: -0.035em; color: var(--ink);
+      line-height: 1.1; margin-bottom: 10px; text-align: center;
+    }
+    .layers-sub {
+      font-size: 16px; color: var(--muted);
+      line-height: 1.6; text-align: center; margin-bottom: 56px;
+    }
+    .layers-sub strong { color: var(--ink-2); font-weight: 500; }
+    .layers-slab-g { opacity: 0; }
+    .layers-section.in-view .layers-slab-g {
+      animation: layerSlabIn 500ms cubic-bezier(.22,.9,.28,1.1) forwards;
+    }
+    @keyframes layerSlabIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @media (max-width: 720px) {
+      .layers-h { font-size: 28px; }
+      #layers-svg { transform: scale(0.72); transform-origin: top center; }
+    }
   </style>
 </head>
 <body>
@@ -957,6 +1005,16 @@
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </main>
+
+  <section class="layers-section" id="layersSection">
+    <span class="layers-eyebrow">
+      <span class="layers-eyebrow-dot"></span>
+      Architecture
+    </span>
+    <h2 class="layers-h">How Duble//Slash works</h2>
+    <p class="layers-sub">Six layers compose the system.<br><strong>You only touch the top one.</strong></p>
+    <svg id="layers-svg" overflow="visible"></svg>
+  </section>
 
   <script>
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
@@ -1269,6 +1327,112 @@
     window.addEventListener('resize', () => {
       if ($('captureLine').classList.contains('visible')) updateCaptureLinePath();
     });
+  </script>
+
+  <script>
+  (function () {
+    const LAYERS = [
+      { num:6, name:'Surface',        desc:'Menu bar · // trigger · team sync',               fill:'#3dd9b6', side:'#26ae94', tag:'You are here' },
+      { num:5, name:'Session Agents', desc:'Activate on // · inject context · run skills',    fill:'#23b89c', side:'#1a957e', tag: null },
+      { num:4, name:'Fish Model',     desc:'AI phase classification · Explore → Ship',         fill:'#178770', side:'#116658', tag:'Open source' },
+      { num:3, name:'Context Cloud',  desc:'Structured store · briefs · decisions · outputs',  fill:'#105d4d', side:'#0c4a3d', tag: null },
+      { num:2, name:'Capture Agents', desc:'Background monitoring · always on · never invoked',fill:'#0b3e33', side:'#082d25', tag: null },
+      { num:1, name:'System',         desc:'OS hooks · app signals · clipboard · keyboard',    fill:'#072820', side:'#041c16', tag:'Foundation' },
+    ];
+
+    const W=280, SH=52, GAP=12, TILT=26, DW=36, DY=18;
+    const PL=18, PT=DY+10;
+    const CONN_X=PL+W+DW+10, LBL_X=PL+W+DW+46;
+    const N=LAYERS.length;
+
+    function trY(i) { return PT + i*(SH+GAP); }
+
+    const SVG_W = LBL_X + 300;
+    const SVG_H = PT + N*(SH+GAP) + TILT + 20;
+
+    const svg = document.getElementById('layers-svg');
+    svg.setAttribute('width',  SVG_W);
+    svg.setAttribute('height', SVG_H);
+
+    const NS='http://www.w3.org/2000/svg';
+    const mk  = (tag,a={}) => { const e=document.createElementNS(NS,tag); Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v)); return e; };
+    const ply = (pts,a)     => mk('polygon',{points:pts.map(p=>p.join(',')).join(' '),...a});
+    const ln  = (x1,y1,x2,y2,a) => mk('line',{x1,y1,x2,y2,...a});
+    const tx  = (s,x,y,a)  => { const t=mk('text',{x,y,...a}); t.textContent=s; return t; };
+
+    const defs = mk('defs');
+
+    const glow = mk('filter',{id:'ly-glow',x:'-20%',y:'-40%',width:'150%',height:'200%'});
+    glow.appendChild(mk('feGaussianBlur',{stdDeviation:'12',result:'b'}));
+    const fm=mk('feMerge');
+    fm.appendChild(mk('feMergeNode',{in:'b'}));
+    fm.appendChild(mk('feMergeNode',{in:'SourceGraphic'}));
+    glow.appendChild(fm);
+    defs.appendChild(glow);
+
+    LAYERS.forEach((_,i)=>{
+      const g=mk('linearGradient',{id:`ly-sh${i}`,x1:'0%',y1:'0%',x2:'100%',y2:'100%'});
+      const s1=mk('stop',{offset:'0%'}); s1.setAttribute('stop-color','rgba(255,255,255,.18)');
+      const s2=mk('stop',{offset:'100%'}); s2.setAttribute('stop-color','rgba(0,0,0,.07)');
+      g.appendChild(s1); g.appendChild(s2); defs.appendChild(g);
+      const sd=mk('linearGradient',{id:`ly-sd${i}`,x1:'0%',y1:'0%',x2:'0%',y2:'100%'});
+      const t1=mk('stop',{offset:'0%'}); t1.setAttribute('stop-color',LAYERS[i].side); t1.setAttribute('stop-opacity','1');
+      const t2=mk('stop',{offset:'100%'}); t2.setAttribute('stop-color',LAYERS[i].side); t2.setAttribute('stop-opacity','.7');
+      sd.appendChild(t1); sd.appendChild(t2); defs.appendChild(sd);
+    });
+    svg.appendChild(defs);
+
+    [...LAYERS].reverse().forEach((layer, revIdx) => {
+      const i   = N-1-revIdx;
+      const y   = trY(i);
+      const x0  = PL;
+      const top = [[x0,y+TILT],[x0+W,y],[x0+W,y+SH],[x0,y+SH+TILT]];
+      const side= [[x0+W,y],[x0+W+DW,y-DY],[x0+W+DW,y+SH-DY],[x0+W,y+SH]];
+
+      const g = mk('g');
+      g.classList.add('layers-slab-g');
+      g.style.animationDelay = `${revIdx*70}ms`;
+
+      if (i===0) g.appendChild(ply(top,{fill:layer.fill,filter:'url(#ly-glow)',opacity:'0.35'}));
+      g.appendChild(ply(side,{fill:`url(#ly-sd${i})`}));
+      g.appendChild(ply(top,{fill:layer.fill}));
+      g.appendChild(ply(top,{fill:`url(#ly-sh${i})`}));
+      g.appendChild(ln(x0,y+TILT,x0+W,y,{stroke:'rgba(255,255,255,.3)','stroke-width':'1.5','stroke-linecap':'round'}));
+      g.appendChild(ln(x0+W,y,x0+W+DW,y-DY,{stroke:'rgba(255,255,255,.2)','stroke-width':'1'}));
+      g.appendChild(ln(x0,y+SH+TILT,x0+W,y+SH,{stroke:'rgba(0,0,0,.12)','stroke-width':'1'}));
+
+      const cy = y+SH/2+TILT/4;
+      g.appendChild(ln(CONN_X,cy,LBL_X-8,cy,{stroke:'rgba(15,17,21,.15)','stroke-width':'1.5','stroke-dasharray':'3 5'}));
+      g.appendChild(mk('circle',{cx:CONN_X-1,cy,r:3.5,fill:layer.fill}));
+      g.appendChild(tx(`${layer.num}.`,LBL_X,cy-8,{'font-family':'Inter,-apple-system,sans-serif','font-size':'13','font-weight':'700',fill:'#3dd9b6','letter-spacing':'-0.02em'}));
+      g.appendChild(tx(layer.name,LBL_X+24,cy-8,{'font-family':'Inter,-apple-system,sans-serif','font-size':'14.5','font-weight':'600',fill:'#0f1115','letter-spacing':'-0.015em'}));
+      g.appendChild(tx(layer.desc,LBL_X,cy+9,{'font-family':'Inter,-apple-system,sans-serif','font-size':'11.5',fill:'#7a7d85'}));
+
+      if (layer.tag) {
+        const isFound = layer.tag==='Foundation';
+        const tw=layer.tag.length*5.9+14, tx0=LBL_X+218, ty0=cy-19;
+        g.appendChild(mk('rect',{x:tx0,y:ty0,width:tw,height:15,rx:4,
+          fill: isFound?'rgba(217,138,43,.1)':'rgba(61,217,182,.1)',
+          stroke: isFound?'rgba(217,138,43,.3)':'rgba(61,217,182,.28)','stroke-width':'1'}));
+        const badge=mk('text',{x:tx0+7,y:ty0+10.5,'font-family':'Inter,-apple-system,sans-serif','font-size':'8.5','font-weight':'700',fill:isFound?'#8a5a1a':'#0e3a35','letter-spacing':'0.06em'});
+        badge.textContent=layer.tag.toUpperCase();
+        g.appendChild(badge);
+      }
+
+      svg.appendChild(g);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.getElementById('layersSection').classList.add('in-view');
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+
+    observer.observe(document.getElementById('layersSection'));
+  })();
   </script>
 </body>
 </html>

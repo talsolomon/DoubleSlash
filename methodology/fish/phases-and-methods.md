@@ -1,10 +1,10 @@
 ---
-name: FISH phases and methods — deep dive
+name: Fish Model phases and methods — deep dive
 description: Per-phase goals, postures, per-archetype streams (step-by-step), applicable methods with definitions, artifacts, entry/exit criteria, anti-patterns, and a full method catalog mapped to phases × archetypes.
 type: methodology-spec
 ---
 
-# FISH phases & methods — the drill-down
+# Fish Model — phases & methods
 
 This doc expands [`README.md`](./README.md) §5 into operational detail. For each phase you get:
 
@@ -35,7 +35,7 @@ At the end: a [full method catalog](#method-catalog) — 50+ UX, research, and d
 
 - A problem statement (can be vague).
 - A proposed sigil (size × certainty). If the user can't provide one, the Explorer helps set it in the first 5 minutes.
-- Optionally, a `<FISH-handoff>` from a prior Ship → Explore loop.
+- Optionally, a `<fish-handoff>` from a prior Ship → Explore loop.
 
 ### Streams — by archetype
 
@@ -94,7 +94,7 @@ Each stream is an ordered checklist. Run top-to-bottom. Use the methods linked �
 
 - `notes/` or `explore/` scratch directory — raw interview transcripts, journey maps, competitor screenshots, HMW reframes, nuggets.
 - One-paragraph framing summary.
-- `<FISH-handoff>` to Solidifier.
+- `<fish-handoff>` to Solidifier.
 
 ### Exit criteria
 
@@ -129,7 +129,7 @@ Each stream is an ordered checklist. Run top-to-bottom. Use the methods linked �
 
 ### Entry criteria
 
-- `<FISH-handoff>` from Explorer with a framing, unknowns list, and artifacts (or — for Nemo / Tuna — a quick one-sentence brief if entering Solidify directly).
+- `<fish-handoff>` from Explorer with a framing, unknowns list, and artifacts (or — for Nemo / Tuna — a quick one-sentence brief if entering Solidify directly).
 - Confirmed sigil + archetype.
 
 ### Streams — by archetype
@@ -222,7 +222,7 @@ Each stream is an ordered checklist. Run top-to-bottom. Use the methods linked �
 
 ### Entry criteria
 
-- `<FISH-handoff>` from Solidifier with shape locked, acceptance criteria written, `open` empty of blockers.
+- `<fish-handoff>` from Solidifier with shape locked, acceptance criteria written, `open` empty of blockers.
 - For any Willie / Salmon: a measurement plan.
 
 ### Streams — by archetype
@@ -264,7 +264,7 @@ Each stream is an ordered checklist. Run top-to-bottom. Use the methods linked �
 2. **Start with a thin vertical slice** — the smallest demo-able path through the full system.
 3. **[Integrated requirements](#integrated-requirements)** — devs involved from spec, not thrown over the wall.
 4. **[Joint product reviews](#joint-product-reviews)** — designer + dev + PM co-review at each slice.
-5. **Roll out staged** — internal → alpha cohort → beta → general. Each stage emits its own `<FISH-handoff>` (intra-Build).
+5. **Roll out staged** — internal → alpha cohort → beta → general. Each stage emits its own `<fish-handoff>` (intra-Build).
 6. **Measure per slice** — the measurement plan from Solidify applies per slice, not just at the end.
 7. **Close:** handoff. `locked` = staged artifact + measurement baseline. `open` = per-slice follow-ups, next-loop scope.
 
@@ -310,7 +310,7 @@ Each stream is an ordered checklist. Run top-to-bottom. Use the methods linked �
 
 ### Entry criteria
 
-- `<FISH-handoff>` from Builder with runnable / reviewable artifact.
+- `<fish-handoff>` from Builder with runnable / reviewable artifact.
 - Any measurement plan from Solidify is implemented in Build.
 
 ### Streams — by archetype
@@ -388,7 +388,7 @@ Each stream is an ordered checklist. Run top-to-bottom. Use the methods linked �
 
 ## Method catalog
 
-Every method the FISH agents may reference. Grouped by purpose, tagged with applicable phase(s). Anchors match §Streams above.
+Every method the Fish Model agents may reference. Grouped by purpose, tagged with applicable phase(s). Anchors match §Streams above.
 
 ### Research methods
 

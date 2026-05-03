@@ -55,7 +55,7 @@ A PM types `//` in Claude: *"Initiate competitive research based on our last dis
 
 Tool-agnostic. Always on. This is not a wrapper inside one tool — it is a **context management system** that lives across them.
 
-The agents and methodology are open. The platform that runs them is what we sell. *[OPEN — pricing shape TBD; revisit when ready]*
+The agents and methodology are open source. The platform — sync, team graph, hosted agents — is what we sell. Free for individuals, paid by teams.
 
 ---
 
@@ -85,7 +85,7 @@ When agents are present in every worker's workflow, they become present in the t
 
 ## THE ASK
 
-We are recruiting our first cohort: **15 Israeli design studios** — including [`STUDIO 1`], [`STUDIO 2`], [`STUDIO 3`] — over the next **8 weeks**, free and hands-on, in exchange for being public references and weekly product feedback. *[OPEN — Tal to reframe numbers + studio names]*
+We are recruiting our first cohort: **4 Israeli design studios** — Firma, Hello Design, Nmore, and Aman Digital — over the next **8 weeks**, free and hands-on, in exchange for being public references and weekly product feedback.
 
 We are not asking you to bet on a vision. We are asking you to look at the gap between where AI tools are and where the average knowledge worker actually is — and tell us you don't see it.
 
