@@ -26,6 +26,8 @@ export interface Session {
   tool: string
   summary: string
   artifactIds: string[]
+  tokens?: number
+  durationMinutes?: number
 }
 
 export interface Context {

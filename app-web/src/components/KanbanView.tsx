@@ -1,5 +1,5 @@
-import { useState, useRef, useCallback } from 'react'
-import { Space, Context, Phase, PHASE_META, PHASES, apiCreateContext } from '../types'
+import { useState } from 'react'
+import { Space, Context, Phase, PHASE_META, PHASES, apiCreateContext, apiUpdateContext } from '../types'
 
 interface Props {
   spaces: Space[]
@@ -37,26 +37,13 @@ export default function KanbanView({ spaces, activeContextId, selectedContextId,
     explore: DEFAULT_WIDTH, solidify: DEFAULT_WIDTH, build: DEFAULT_WIDTH, ship: DEFAULT_WIDTH
   })
 
-  const dragRef = useRef<{ phase: Phase; startX: number; startWidth: number } | null>(null)
+  const [dragOverPhase, setDragOverPhase] = useState<Phase | null>(null)
 
-  const startResize = useCallback((phase: Phase, e: React.MouseEvent) => {
-    e.preventDefault()
-    dragRef.current = { phase, startX: e.clientX, startWidth: widths[phase] }
-
-    function onMove(ev: MouseEvent) {
-      if (!dragRef.current) return
-      const delta = ev.clientX - dragRef.current.startX
-      const next = Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, dragRef.current.startWidth + delta))
-      setWidths(prev => ({ ...prev, [dragRef.current!.phase]: next }))
-    }
-    function onUp() {
-      dragRef.current = null
-      document.removeEventListener('mousemove', onMove)
-      document.removeEventListener('mouseup', onUp)
-    }
-    document.addEventListener('mousemove', onMove)
-    document.addEventListener('mouseup', onUp)
-  }, [widths])
+  async function handleCardDrop(contextId: string, targetPhase: Phase) {
+    setDragOverPhase(null)
+    await apiUpdateContext(contextId, { phase: targetPhase })
+    onRefresh()
+  }
 
   return (
     <div className="h-full flex flex-col">
@@ -70,13 +57,20 @@ export default function KanbanView({ spaces, activeContextId, selectedContextId,
               activeContextId={activeContextId}
               selectedContextId={selectedContextId}
               spaces={spaces}
+              isDragOver={dragOverPhase === phase}
               onSelect={onSelect}
               onSetActive={onSetActive}
               onPushChat={onPushChat}
               onRefresh={onRefresh}
+              onDragOverPhase={() => setDragOverPhase(phase)}
+              onDragLeavePhase={() => setDragOverPhase(null)}
+              onDropCard={contextId => handleCardDrop(contextId, phase)}
             />
             {i < PHASES.length - 1 && (
-              <ResizeHandle phase={phase} onResizeStart={startResize} />
+              <ResizeHandle
+                currentWidth={widths[phase]}
+                onResize={newWidth => setWidths(prev => ({ ...prev, [phase]: newWidth }))}
+              />
             )}
           </div>
         ))}
@@ -85,16 +79,47 @@ export default function KanbanView({ spaces, activeContextId, selectedContextId,
   )
 }
 
-function ResizeHandle({ phase, onResizeStart }: { phase: Phase; onResizeStart: (phase: Phase, e: React.MouseEvent) => void }) {
+function ResizeHandle({ currentWidth, onResize }: {
+  currentWidth: number
+  onResize: (newWidth: number) => void
+}) {
+  const [dragging, setDragging] = useState(false)
+
   return (
     <div
-      className="flex items-start pt-[52px] shrink-0 px-0.5 cursor-col-resize group select-none"
-      onMouseDown={e => onResizeStart(phase, e)}
+      draggable={false}
+      className="relative shrink-0 self-stretch w-8 cursor-col-resize select-none"
+      style={{ touchAction: 'none' }}
+      onPointerDown={e => {
+        if (e.button !== 0) return
+        e.preventDefault()
+        setDragging(true)
+        const startX = e.clientX
+        const startWidth = currentWidth
+
+        function onMove(ev: PointerEvent) {
+          ev.preventDefault()
+          onResize(Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, startWidth + (ev.clientX - startX))))
+        }
+        function onUp() {
+          setDragging(false)
+          window.removeEventListener('pointermove', onMove)
+          window.removeEventListener('pointerup', onUp)
+        }
+        window.addEventListener('pointermove', onMove)
+        window.addEventListener('pointerup', onUp)
+      }}
     >
-      <div className="flex items-center justify-center w-5 h-7">
-        <svg width="20" height="28" viewBox="0 0 20 28" fill="none" className="transition-opacity group-hover:opacity-100 opacity-50">
-          <path d="M3 14 Q10 7 17 14 Q10 21 3 14Z" fill="none" stroke="rgb(var(--ds-border-light))" strokeWidth="1.2" />
-          <path d="M13 14 L17 14" stroke="rgb(var(--ds-border-light))" strokeWidth="1.2" strokeLinecap="round" />
+      {/* vertical drag indicator */}
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-px transition-colors duration-100
+          ${dragging ? 'bg-ds-accent/80' : 'bg-ds-border-light'}`}
+      />
+      {/* fish */}
+      <div className="absolute top-[52px] left-1/2 -translate-x-1/2 pointer-events-none">
+        <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
+          <path d="M3 14 Q10 7 17 14 Q10 21 3 14Z" fill="none" stroke="rgb(var(--ds-text-dim))" strokeWidth="1.2" />
+          <path d="M13 14 L17 14" stroke="rgb(var(--ds-text-dim))" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       </div>
     </div>
@@ -102,7 +127,9 @@ function ResizeHandle({ phase, onResizeStart }: { phase: Phase; onResizeStart: (
 }
 
 function KanbanColumn({
-  phase, width, items, activeContextId, selectedContextId, spaces, onSelect, onSetActive, onPushChat, onRefresh
+  phase, width, items, activeContextId, selectedContextId, spaces,
+  isDragOver, onSelect, onSetActive, onPushChat, onRefresh,
+  onDragOverPhase, onDragLeavePhase, onDropCard,
 }: {
   phase: Phase
   width: number
@@ -110,10 +137,14 @@ function KanbanColumn({
   activeContextId: string
   selectedContextId: string
   spaces: Space[]
+  isDragOver: boolean
   onSelect: (id: string) => void
   onSetActive: (id: string) => void
   onPushChat: (id: string) => void
   onRefresh: () => void
+  onDragOverPhase: () => void
+  onDragLeavePhase: () => void
+  onDropCard: (contextId: string) => void
 }) {
   const meta = PHASE_META[phase]
   const [adding, setAdding] = useState(false)
@@ -129,7 +160,20 @@ function KanbanColumn({
   }
 
   return (
-    <div style={{ width }} className="shrink-0 flex flex-col h-full">
+    <div
+      style={{ width }}
+      className={`shrink-0 flex flex-col h-full rounded-lg transition-colors duration-100
+        ${isDragOver ? 'bg-ds-accent/5 ring-1 ring-inset ring-ds-accent/20' : ''}`}
+      onDragOver={e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; onDragOverPhase() }}
+      onDragLeave={e => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) onDragLeavePhase()
+      }}
+      onDrop={e => {
+        e.preventDefault()
+        const contextId = e.dataTransfer.getData('contextId')
+        if (contextId) onDropCard(contextId)
+      }}
+    >
       <div className="flex items-center gap-2 px-2 py-3 mb-1">
         <span className={`text-sm ${meta.color}`}>{meta.icon}</span>
         <span className="text-xs font-mono font-semibold text-ds-text-secondary uppercase tracking-widest">
@@ -158,11 +202,13 @@ function KanbanColumn({
 
         {items.length === 0 && !adding && (
           <div
-            className={`rounded-xl border border-dashed ${meta.border} p-5 text-center cursor-pointer
-              hover:border-opacity-60 transition-all`}
+            className={`rounded-xl border border-dashed p-5 text-center cursor-pointer transition-all
+              ${isDragOver ? `${meta.border} bg-ds-accent/5` : meta.border}`}
             onClick={() => setAdding(true)}
           >
-            <span className="text-ds-text-dim text-xs font-mono">empty</span>
+            <span className="text-ds-text-dim text-xs font-mono">
+              {isDragOver ? 'drop here' : 'empty'}
+            </span>
           </div>
         )}
 
@@ -213,6 +259,7 @@ function ContextCard({ context, space, isActive, isSelected, onSelect, onSetActi
   const lastArtifact = lastSession
     ? context.artifacts.find(a => lastSession.artifactIds.includes(a.id))
     : context.artifacts[context.artifacts.length - 1]
+  const nextTask = (context.tasks ?? []).find(t => !t.done)
 
   const doneTasks = (context.tasks ?? []).filter(t => t.done).length
   const totalTasks = (context.tasks ?? []).length
@@ -221,10 +268,15 @@ function ContextCard({ context, space, isActive, isSelected, onSelect, onSetActi
 
   return (
     <div
+      draggable
+      onDragStart={e => {
+        e.dataTransfer.setData('contextId', context.id)
+        e.dataTransfer.effectAllowed = 'move'
+      }}
       onClick={onSelect}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`rounded-xl border cursor-pointer transition-all duration-150 relative overflow-hidden
+      className={`rounded-xl border cursor-grab active:cursor-grabbing transition-all duration-150 relative overflow-hidden
         ${isSelected
           ? 'border-ds-accent/50 bg-ds-elevated ring-1 ring-ds-accent/20'
           : isActive
@@ -302,23 +354,61 @@ function ContextCard({ context, space, isActive, isSelected, onSelect, onSetActi
         )}
       </div>
 
-      {/* Hover actions */}
-      {hovered && (
-        <div className="border-t border-ds-border px-3 py-2 flex items-center gap-2">
-          <button
-            onClick={e => { e.stopPropagation(); onPushChat() }}
-            className="text-[10px] font-mono text-ds-accent hover:opacity-80 transition-opacity"
-          >
-            <span className="font-bold">//</span> push chat
-          </button>
-          {!isActive && (
-            <button
-              onClick={e => { e.stopPropagation(); onSetActive() }}
-              className="text-[10px] font-mono text-ds-text-dim hover:text-ds-text-secondary transition-colors ml-auto"
-            >
-              Set active →
-            </button>
+      {/* Agent signal + hover actions */}
+      {(hovered || isActive) && (
+        <div className="border-t border-ds-border px-3 py-2.5">
+          {lastSession && (
+            <div className="mb-2">
+              <p className="text-[10px] text-ds-text-dim leading-relaxed mb-1.5">
+                Paused after "
+                {lastSession.summary.length > 60
+                  ? lastSession.summary.slice(0, 57) + '…'
+                  : lastSession.summary}
+                "
+              </p>
+              <div className="flex flex-wrap gap-x-3 gap-y-1">
+                {nextTask && (
+                  <button
+                    onClick={e => { e.stopPropagation(); onPushChat() }}
+                    className="text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity text-left"
+                  >
+                    → {nextTask.name.split(' ').slice(0, 6).join(' ')}
+                    {nextTask.name.split(' ').length > 6 ? '…' : ''}
+                  </button>
+                )}
+                <button
+                  onClick={e => { e.stopPropagation(); onPushChat() }}
+                  className="text-[10px] font-mono text-ds-text-secondary hover:text-ds-text transition-colors"
+                >
+                  Review summary
+                </button>
+                {lastArtifact && (
+                  <button
+                    onClick={e => { e.stopPropagation(); onPushChat() }}
+                    className="text-[10px] font-mono text-ds-text-secondary hover:text-ds-text transition-colors"
+                  >
+                    See {lastArtifact.name}
+                  </button>
+                )}
+              </div>
+            </div>
           )}
+          <div className="flex items-center gap-2 pt-1 border-t border-ds-border/40">
+            <button
+              onClick={e => { e.stopPropagation(); onPushChat() }}
+              className="text-[10px] font-mono text-ds-accent hover:opacity-80 transition-opacity"
+            >
+              <span className="font-bold">//</span> push chat
+            </button>
+            {!isActive && (
+              <button
+                onClick={e => { e.stopPropagation(); onSetActive() }}
+                className="text-[10px] font-mono text-ds-text-dim hover:text-ds-text-secondary transition-colors ml-auto"
+              >
+                Set active →
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>

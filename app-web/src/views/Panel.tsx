@@ -3,6 +3,7 @@ import { Space, Context, Phase, PHASE_META, GitEntry, apiGetContexts, apiSetActi
 import KanbanView from '../components/KanbanView'
 import ChatView from '../components/ChatView'
 import ContextDetail from '../components/ContextDetail'
+import Dashboard from './Dashboard'
 
 const AGENT_ROSTER: { name: string; phase: Phase; desc: string }[] = [
   { name: 'Dora', phase: 'explore',  desc: 'research & define' },
@@ -29,6 +30,7 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
   const [activeContextId, setActiveContextId] = useState('')
   const [selectedContextId, setSelectedContextId] = useState('')
   const [rightTab, setRightTab] = useState<RightTab>('detail')
+  const [mainView, setMainView] = useState<'map' | 'dash'>('dash')
   const [toolsStatus, setToolsStatus] = useState<Record<string, boolean>>({})
   const [gitLog, setGitLog] = useState<GitEntry[]>([])
 
@@ -87,10 +89,10 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
       style={{ boxShadow: `0 0 0 0.5px rgb(var(--ds-border)), 0 32px 80px rgba(0,0,0,${isLight ? 0.12 : 0.6})` }}
     >
       {/* Header */}
-      <header className="flex items-center justify-between px-4 h-11 border-b border-ds-border shrink-0 bg-ds-surface/60">
+      <header className="flex items-center justify-between px-4 h-11 border-b border-ds-border shrink-0 bg-ds-elevated">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-sm font-bold text-ds-accent">//</span>
           <span className="text-xs font-mono text-ds-text-dim">duble</span>
+          <span className="font-mono text-sm font-bold text-ds-accent">//</span>
           {activeContext && (
             <>
               <span className="text-ds-border text-xs mx-0.5">/</span>
@@ -190,25 +192,54 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
           </SidebarSection>
         </aside>
 
-        {/* Kanban — always visible */}
-        <div className="flex-1 overflow-hidden border-r border-ds-border min-w-0">
-          <KanbanView
-            spaces={spaces}
-            activeContextId={activeContextId}
-            selectedContextId={selectedContextId}
-            onSelect={handleSelectContext}
-            onSetActive={handleSetActive}
-            onPushChat={handlePushChat}
-            onRefresh={loadData}
-          />
+        {/* Main view — map or dash */}
+        <div className="flex-1 overflow-hidden border-r border-ds-border min-w-0 flex flex-col">
+          <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-8 shrink-0 bg-ds-elevated">
+            <button
+              onClick={() => setMainView('dash')}
+              className={`px-2.5 py-1 text-[10px] font-mono rounded transition-all
+                ${mainView === 'dash' ? 'text-ds-text bg-ds-elevated' : 'text-ds-text-dim hover:text-ds-text'}`}
+            >
+              dash
+            </button>
+            <button
+              onClick={() => setMainView('map')}
+              className={`px-2.5 py-1 text-[10px] font-mono rounded transition-all
+                ${mainView === 'map' ? 'text-ds-text bg-ds-elevated' : 'text-ds-text-dim hover:text-ds-text'}`}
+            >
+              map
+            </button>
+          </div>
+          <div className="flex-1 overflow-hidden">
+            {mainView === 'map' ? (
+              <KanbanView
+                spaces={spaces}
+                activeContextId={activeContextId}
+                selectedContextId={selectedContextId}
+                onSelect={handleSelectContext}
+                onSetActive={handleSetActive}
+                onPushChat={handlePushChat}
+                onRefresh={loadData}
+              />
+            ) : (
+              <Dashboard
+                spaces={spaces}
+                activeContextId={activeContextId}
+                selectedContextId={selectedContextId}
+                onSelect={handleSelectContext}
+                onSetActive={handleSetActive}
+                onPushChat={handlePushChat}
+              />
+            )}
+          </div>
         </div>
 
         {/* Right panel */}
-        <div className="w-[300px] shrink-0 flex flex-col overflow-hidden bg-ds-surface/20">
+        <div className="w-[300px] shrink-0 flex flex-col overflow-hidden bg-ds-surface">
           {selectedContext && selectedSpace ? (
             <>
               {/* Right panel tab bar */}
-              <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-9 shrink-0 bg-ds-surface/40">
+              <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-9 shrink-0 bg-ds-elevated">
                 <button
                   onClick={() => setRightTab('detail')}
                   className={`px-3 py-1 text-xs font-mono rounded-md transition-all
@@ -249,7 +280,7 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
             </>
           ) : (
             <>
-              <div className="flex items-center px-4 h-9 border-b border-ds-border shrink-0 bg-ds-surface/40">
+              <div className="flex items-center px-4 h-9 border-b border-ds-border shrink-0 bg-ds-elevated">
                 <span className="text-[10px] font-mono text-ds-text-dim uppercase tracking-widest">Activity</span>
               </div>
               <ActivityLog entries={gitLog} spaces={spaces} />

@@ -4,8 +4,9 @@ import KanbanView from '../components/KanbanView'
 import GitLog from '../components/GitLog'
 import PromptBar from '../components/PromptBar'
 import Connections from './Connections'
+import Dashboard from './Dashboard'
 
-type Tab = 'chat' | 'log' | 'map' | 'connections'
+type Tab = 'dash' | 'chat' | 'log' | 'map' | 'connections'
 
 const AGENT_ROSTER: { name: string; phase: Phase; desc: string }[] = [
   { name: 'Dora', phase: 'explore',  desc: 'research & define' },
@@ -19,7 +20,7 @@ const TOOL_NAMES = ['Claude', 'Cursor', 'Figma']
 export default function Panel() {
   const [spaces, setSpaces] = useState<Space[]>([])
   const [activeContextId, setActiveContextId] = useState('')
-  const [tab, setTab] = useState<Tab>('chat')
+  const [tab, setTab] = useState<Tab>('dash')
   const [screenPermission, setScreenPermission] = useState<string>('not-determined')
   const [toolsStatus, setToolsStatus] = useState<Record<string, boolean>>({})
 
@@ -43,7 +44,6 @@ export default function Panel() {
   async function handleSelectContext(id: string) {
     await window.ds.setActiveContext(id)
     setActiveContextId(id)
-    setTab('chat')
   }
 
   return (
@@ -54,8 +54,8 @@ export default function Panel() {
       {/* Header */}
       <header className="drag flex items-center justify-between px-4 h-11 border-b border-ds-border shrink-0">
         <div className="flex items-center gap-2 no-drag">
-          <span className="font-mono text-sm font-bold text-ds-accent">//</span>
           <span className="text-xs font-mono text-ds-text-dim">duble</span>
+          <span className="font-mono text-sm font-bold text-ds-accent">//</span>
           {activeContext && (
             <>
               <span className="text-ds-border text-xs mx-0.5">/</span>
@@ -96,6 +96,7 @@ export default function Panel() {
               <div>
                 <p className="text-ds-text text-sm font-medium leading-snug mb-2">{activeContext.name}</p>
                 <PhaseBadge phase={activeContext.phase} />
+                <SidebarAgentSignal context={activeContext} />
               </div>
             ) : (
               <p className="text-ds-text-dim text-xs font-mono">no active context</p>
@@ -177,7 +178,7 @@ export default function Panel() {
 
           {/* Tab bar */}
           <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-9 shrink-0">
-            {(['chat', 'log', 'map', 'connections'] as Tab[]).map(t => (
+            {(['dash', 'chat', 'log', 'map', 'connections'] as Tab[]).map(t => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -191,6 +192,17 @@ export default function Panel() {
 
           {/* Tab content */}
           <div className="flex-1 overflow-hidden">
+            {tab === 'dash' && (
+              <Dashboard
+                spaces={spaces}
+                activeContextId={activeContextId}
+                onSelect={handleSelectContext}
+                onSetActive={async (id) => {
+                  await window.ds.setActiveContext(id)
+                  setActiveContextId(id)
+                }}
+              />
+            )}
             {tab === 'chat' && <PromptBar activeContext={activeContext} />}
             {tab === 'log' && <GitLog />}
             {tab === 'map' && (
@@ -219,6 +231,44 @@ function SidebarSection({ label, children }: { label: string; children: React.Re
     <div className="px-3 py-3 border-b border-ds-border">
       <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-2.5">{label}</p>
       {children}
+    </div>
+  )
+}
+
+function SidebarAgentSignal({ context }: { context: Context }) {
+  const lastSession = context.sessions[context.sessions.length - 1]
+  const tasks = context.tasks ?? []
+  const nextTask = tasks.find((t) => !t.done)
+  const lastArtifact = context.artifacts[context.artifacts.length - 1]
+
+  if (!lastSession) return null
+
+  return (
+    <div className="mt-3 pt-3 border-t border-ds-border">
+      <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-1.5">agent</p>
+      <p className="text-[10px] text-ds-text-dim leading-relaxed mb-2">
+        Paused after "
+        {lastSession.summary.length > 52
+          ? lastSession.summary.slice(0, 49) + '…'
+          : lastSession.summary}
+        "
+      </p>
+      <div className="flex flex-col gap-1">
+        {nextTask && (
+          <button className="text-left text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity leading-relaxed">
+            → {nextTask.name.split(' ').slice(0, 5).join(' ')}
+            {nextTask.name.split(' ').length > 5 ? '…' : ''}
+          </button>
+        )}
+        <button className="text-left text-[10px] font-mono text-ds-text-secondary hover:text-ds-text transition-colors">
+          → Review last summary
+        </button>
+        {lastArtifact && (
+          <button className="text-left text-[10px] font-mono text-ds-text-secondary hover:text-ds-text transition-colors">
+            → See {lastArtifact.name}
+          </button>
+        )}
+      </div>
     </div>
   )
 }

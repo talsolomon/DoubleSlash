@@ -7,8 +7,8 @@ export default function Pill() {
           flex items-center gap-2 group"
         onClick={() => window.ds.expandPanel()}
       >
-        <span className="font-mono text-sm font-bold text-ds-accent tracking-tight">//</span>
         <span className="text-ds-text-secondary text-xs font-mono">duble</span>
+        <span className="font-mono text-sm font-bold text-ds-accent tracking-tight">//</span>
         <span className="text-ds-text-dim text-xs ml-1 opacity-0 group-hover:opacity-100 transition-opacity">
           ⌘⇧/
         </span>

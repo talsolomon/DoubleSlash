@@ -25,7 +25,7 @@
             {
               "id": "t3",
               "name": "Write 3 copy variants for step 2",
-              "done": false
+              "done": true
             },
             {
               "id": "t4",
@@ -51,13 +51,42 @@
           ],
           "sessions": [
             {
+              "id": "s8",
+              "date": "2026-04-02",
+              "tool": "Claude Desktop",
+              "summary": "Initial brief review and user journey mapping for onboarding flow",
+              "artifactIds": [],
+              "tokens": 8400,
+              "durationMinutes": 40
+            },
+            {
+              "id": "s9",
+              "date": "2026-04-14",
+              "tool": "Claude Desktop",
+              "summary": "Reviewed heatmap data and identified 3 candidate improvement areas",
+              "artifactIds": [],
+              "tokens": 6800,
+              "durationMinutes": 30
+            },
+            {
+              "id": "s10",
+              "date": "2026-04-25",
+              "tool": "Claude Desktop",
+              "summary": "Finalized copy variants and structured A/B test hypothesis",
+              "artifactIds": [],
+              "tokens": 11200,
+              "durationMinutes": 45
+            },
+            {
               "id": "s1",
               "date": "2026-04-30",
               "tool": "Claude Desktop",
               "summary": "Analyzed drop-off data, identified step 2 as primary failure point",
               "artifactIds": [
                 "a1"
-              ]
+              ],
+              "tokens": 18400,
+              "durationMinutes": 45
             }
           ]
         },
@@ -85,7 +114,17 @@
           ],
           "decisions": [],
           "artifacts": [],
-          "sessions": []
+          "sessions": [
+            {
+              "id": "s20",
+              "date": "2026-05-03",
+              "tool": "Figma",
+              "summary": "Started mapping current Zendesk support flow diagrams",
+              "artifactIds": [],
+              "tokens": 0,
+              "durationMinutes": 60
+            }
+          ]
         },
         {
           "id": "new-social-assets",
@@ -126,13 +165,33 @@
           ],
           "sessions": [
             {
+              "id": "s11",
+              "date": "2026-04-07",
+              "tool": "Figma",
+              "summary": "Collected brand references and organized visual direction board",
+              "artifactIds": [],
+              "tokens": 0,
+              "durationMinutes": 60
+            },
+            {
+              "id": "s12",
+              "date": "2026-04-24",
+              "tool": "Figma",
+              "summary": "Refined moodboard direction 2 based on stakeholder notes",
+              "artifactIds": [],
+              "tokens": 0,
+              "durationMinutes": 75
+            },
+            {
               "id": "s2",
               "date": "2026-05-01",
               "tool": "Figma",
               "summary": "Generated three moodboard directions for brand alignment review",
               "artifactIds": [
                 "a2"
-              ]
+              ],
+              "tokens": 0,
+              "durationMinutes": 90
             }
           ]
         },
@@ -181,17 +240,35 @@
               "name": "Contrast audit report",
               "type": "file",
               "sessionId": "s3",
-              "status": "shipped"
+              "status": "in-flight"
             },
             {
               "id": "a4",
               "name": "New color tokens",
               "type": "note",
               "sessionId": "s4",
-              "status": "in-flight"
+              "status": "shipped"
             }
           ],
           "sessions": [
+            {
+              "id": "s13",
+              "date": "2026-04-09",
+              "tool": "Claude Desktop",
+              "summary": "Initial contrast audit pass — cataloged first 10 failing components",
+              "artifactIds": [],
+              "tokens": 12200,
+              "durationMinutes": 50
+            },
+            {
+              "id": "s14",
+              "date": "2026-04-22",
+              "tool": "Claude Desktop",
+              "summary": "Deep dive on button and form element contrast — proposed new token values",
+              "artifactIds": [],
+              "tokens": 19800,
+              "durationMinutes": 70
+            },
             {
               "id": "s3",
               "date": "2026-04-27",
@@ -199,7 +276,9 @@
               "summary": "Full component audit — 23 failures cataloged with WCAG scores",
               "artifactIds": [
                 "a3"
-              ]
+              ],
+              "tokens": 22100,
+              "durationMinutes": 60
             },
             {
               "id": "s4",
@@ -208,7 +287,9 @@
               "summary": "Drafted updated semantic color token set for AA compliance",
               "artifactIds": [
                 "a4"
-              ]
+              ],
+              "tokens": 31500,
+              "durationMinutes": 75
             }
           ]
         },
@@ -257,13 +338,33 @@
           ],
           "sessions": [
             {
+              "id": "s15",
+              "date": "2026-04-21",
+              "tool": "Figma",
+              "summary": "Sketched initial wireframe concepts for overview grid and list layouts",
+              "artifactIds": [],
+              "tokens": 0,
+              "durationMinutes": 120
+            },
+            {
+              "id": "s16",
+              "date": "2026-04-28",
+              "tool": "Claude Desktop",
+              "summary": "Wrote detailed rationale doc for grid-first decision, prep for stakeholder review",
+              "artifactIds": [],
+              "tokens": 24600,
+              "durationMinutes": 80
+            },
+            {
               "id": "s5",
               "date": "2026-05-01",
               "tool": "Figma",
               "summary": "Created low-fi wireframes for grid and list variants, presented to team",
               "artifactIds": [
                 "a5"
-              ]
+              ],
+              "tokens": 0,
+              "durationMinutes": 120
             }
           ]
         },
@@ -329,13 +430,33 @@
           ],
           "sessions": [
             {
+              "id": "s17",
+              "date": "2026-04-16",
+              "tool": "Figma",
+              "summary": "Completed initial hi-fi pass on Home page, shared for early feedback",
+              "artifactIds": [],
+              "tokens": 0,
+              "durationMinutes": 180
+            },
+            {
+              "id": "s18",
+              "date": "2026-04-19",
+              "tool": "Claude Desktop",
+              "summary": "Revised copy for Product page based on conversion analysis",
+              "artifactIds": [],
+              "tokens": 15300,
+              "durationMinutes": 55
+            },
+            {
               "id": "s6",
               "date": "2026-04-18",
               "tool": "Figma",
               "summary": "Completed hi-fi design for all key pages, ready for stakeholder review",
               "artifactIds": [
                 "a6"
-              ]
+              ],
+              "tokens": 0,
+              "durationMinutes": 180
             },
             {
               "id": "s7",
@@ -344,7 +465,18 @@
               "summary": "Wrote detailed dev handoff notes covering spacing, tokens, and component states",
               "artifactIds": [
                 "a7"
-              ]
+              ],
+              "tokens": 28700,
+              "durationMinutes": 90
+            },
+            {
+              "id": "s19",
+              "date": "2026-05-02",
+              "tool": "Claude Desktop",
+              "summary": "Addressed dev feedback on spacing inconsistencies in Product + Pricing",
+              "artifactIds": [],
+              "tokens": 16900,
+              "durationMinutes": 50
             }
           ]
         }

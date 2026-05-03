@@ -21,6 +21,12 @@ export interface Settings {
   }
 }
 
+export interface Task {
+  id: string
+  name: string
+  done: boolean
+}
+
 export interface Decision {
   id: string
   date: string
@@ -41,6 +47,8 @@ export interface Session {
   tool: string
   summary: string
   artifactIds: string[]
+  tokens?: number
+  durationMinutes?: number
 }
 
 export interface Context {
@@ -48,6 +56,7 @@ export interface Context {
   name: string
   phase: Phase
   brief: string
+  tasks: Task[]
   decisions: Decision[]
   artifacts: Artifact[]
   sessions: Session[]
