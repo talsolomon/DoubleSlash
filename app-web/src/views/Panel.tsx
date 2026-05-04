@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Space, Context, Phase, PHASE_META, GitEntry, apiGetContexts, apiSetActiveContext, apiUpdateContext, apiGetGitLog } from '../types'
 import KanbanView from '../components/KanbanView'
 import ChatView from '../components/ChatView'
 import ContextDetail from '../components/ContextDetail'
 import Dashboard from './Dashboard'
 
-const AGENT_ROSTER: { name: string; phase: Phase; desc: string }[] = [
-  { name: 'Dora', phase: 'explore',  desc: 'research & define' },
-  { name: 'Sol',  phase: 'solidify', desc: 'design & decide' },
-  { name: 'Bran', phase: 'build',    desc: 'build & test' },
-  { name: 'May',  phase: 'ship',     desc: 'ship & capture' },
+interface AgentEntry { name: string; phase?: Phase; desc: string }
+
+const AGENT_ROSTER: AgentEntry[] = [
+  { name: 'Guard', desc: 'orchestrates flow' },
+  { name: 'Dora',  phase: 'explore',  desc: 'research & define' },
+  { name: 'Sol',   phase: 'solidify', desc: 'design & decide' },
+  { name: 'Bran',  phase: 'build',    desc: 'build & test' },
+  { name: 'May',   phase: 'ship',     desc: 'ship & capture' },
 ]
 
 const TOOL_NAMES = ['Claude', 'Cursor', 'Figma']
@@ -22,6 +25,7 @@ async function apiGetToolsStatus(): Promise<Record<string, boolean>> {
 }
 
 type RightTab = 'detail' | 'chat'
+type ActivityTab = 'activity' | 'dash'
 
 interface Props { onCollapse: () => void; isLight: boolean; onToggleTheme: () => void }
 
@@ -30,9 +34,45 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
   const [activeContextId, setActiveContextId] = useState('')
   const [selectedContextId, setSelectedContextId] = useState('')
   const [rightTab, setRightTab] = useState<RightTab>('detail')
-  const [mainView, setMainView] = useState<'map' | 'dash'>('dash')
+  const [activityTab, setActivityTab] = useState<ActivityTab>('activity')
   const [toolsStatus, setToolsStatus] = useState<Record<string, boolean>>({})
   const [gitLog, setGitLog] = useState<GitEntry[]>([])
+  const [leftWidth, setLeftWidth] = useState(180)
+  const [rightWidth, setRightWidth] = useState(300)
+
+  const startDragLeft = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    const startX = e.clientX
+    const startW = leftWidth
+    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = 'none'
+    const onMove = (ev: MouseEvent) => setLeftWidth(Math.max(120, Math.min(400, startW + ev.clientX - startX)))
+    const onUp = () => {
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+      document.removeEventListener('mousemove', onMove)
+      document.removeEventListener('mouseup', onUp)
+    }
+    document.addEventListener('mousemove', onMove)
+    document.addEventListener('mouseup', onUp)
+  }, [leftWidth])
+
+  const startDragRight = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    const startX = e.clientX
+    const startW = rightWidth
+    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = 'none'
+    const onMove = (ev: MouseEvent) => setRightWidth(Math.max(200, Math.min(520, startW - ev.clientX + startX)))
+    const onUp = () => {
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+      document.removeEventListener('mousemove', onMove)
+      document.removeEventListener('mouseup', onUp)
+    }
+    document.addEventListener('mousemove', onMove)
+    document.addEventListener('mouseup', onUp)
+  }, [rightWidth])
 
   async function loadData() {
     try {
@@ -132,25 +172,34 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
       </header>
 
       {/* Body */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden min-h-0">
 
         {/* Left sidebar */}
-        <aside className="w-[180px] shrink-0 border-r border-ds-border flex flex-col overflow-y-auto">
+        <aside className="shrink-0 flex flex-col overflow-y-auto" style={{ width: leftWidth }}>
           <SidebarSection label="agents">
-            {AGENT_ROSTER.map(agent => {
-              const isActive = activeContext?.phase === agent.phase
-              const meta = PHASE_META[agent.phase]
-              return (
-                <div
-                  key={agent.name}
-                  className={`flex items-center gap-2 py-1 transition-opacity ${isActive ? 'opacity-100' : 'opacity-35'}`}
-                >
-                  <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${isActive ? meta.color.replace('text-', 'bg-') : 'bg-ds-border'}`} />
-                  <span className={`text-xs font-mono ${isActive ? 'text-ds-text' : 'text-ds-text-dim'}`}>{agent.name}</span>
-                  <span className="text-[9px] text-ds-text-dim ml-auto truncate">{agent.desc}</span>
-                </div>
-              )
-            })}
+            {/* Guard — lead orchestrator, always active */}
+            <div className="flex items-center gap-2 py-1 mb-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-ds-accent animate-pulse shrink-0" />
+              <span className="text-xs font-mono text-ds-text font-semibold">Guard</span>
+              <span className="text-[9px] font-mono text-ds-accent/70 ml-auto">lead</span>
+            </div>
+            {/* Phase agents indented under Guard */}
+            <div className="ml-3 border-l border-ds-border/50 pl-2 space-y-0.5">
+              {AGENT_ROSTER.filter(a => a.phase).map(agent => {
+                const isActive = activeContext?.phase === agent.phase
+                const meta = PHASE_META[agent.phase!]
+                return (
+                  <div
+                    key={agent.name}
+                    className={`flex items-center gap-2 py-0.5 transition-opacity ${isActive ? 'opacity-100' : 'opacity-35'}`}
+                  >
+                    <span className={`w-1 h-1 rounded-full shrink-0 ${isActive ? meta.color.replace('text-', 'bg-') : 'bg-ds-border'}`} />
+                    <span className={`text-[11px] font-mono ${isActive ? 'text-ds-text' : 'text-ds-text-dim'}`}>{agent.name}</span>
+                    <span className="text-[9px] text-ds-text-dim ml-auto truncate">{agent.desc}</span>
+                  </div>
+                )
+              })}
+            </div>
           </SidebarSection>
 
           <SidebarSection label="tools">
@@ -192,50 +241,36 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
           </SidebarSection>
         </aside>
 
-        {/* Main view — map or dash */}
-        <div className="flex-1 overflow-hidden border-r border-ds-border min-w-0 flex flex-col">
-          <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-8 shrink-0 bg-ds-elevated">
-            <button
-              onClick={() => setMainView('dash')}
-              className={`px-2.5 py-1 text-[10px] font-mono rounded transition-all
-                ${mainView === 'dash' ? 'text-ds-text bg-ds-elevated' : 'text-ds-text-dim hover:text-ds-text'}`}
-            >
-              dash
-            </button>
-            <button
-              onClick={() => setMainView('map')}
-              className={`px-2.5 py-1 text-[10px] font-mono rounded transition-all
-                ${mainView === 'map' ? 'text-ds-text bg-ds-elevated' : 'text-ds-text-dim hover:text-ds-text'}`}
-            >
-              map
-            </button>
+        {/* Drag handle: left */}
+        <div className="w-1 shrink-0 cursor-col-resize relative group" onMouseDown={startDragLeft}>
+          <div className="absolute inset-y-0 left-[1.5px] w-px bg-ds-border group-hover:bg-ds-accent/50 transition-colors" />
+        </div>
+
+        {/* Contexts — Fish Kanban, always visible */}
+        <div className="flex-1 overflow-hidden min-w-0 min-h-0 flex flex-col">
+          <div className="flex items-center px-3 h-8 shrink-0 border-b border-ds-border bg-ds-elevated">
+            <span className="text-[10px] font-mono text-ds-text-dim uppercase tracking-widest">contexts</span>
           </div>
-          <div className="flex-1 overflow-hidden">
-            {mainView === 'map' ? (
-              <KanbanView
-                spaces={spaces}
-                activeContextId={activeContextId}
-                selectedContextId={selectedContextId}
-                onSelect={handleSelectContext}
-                onSetActive={handleSetActive}
-                onPushChat={handlePushChat}
-                onRefresh={loadData}
-              />
-            ) : (
-              <Dashboard
-                spaces={spaces}
-                activeContextId={activeContextId}
-                selectedContextId={selectedContextId}
-                onSelect={handleSelectContext}
-                onSetActive={handleSetActive}
-                onPushChat={handlePushChat}
-              />
-            )}
+          <div className="flex-1 overflow-hidden min-h-0">
+            <KanbanView
+              spaces={spaces}
+              activeContextId={activeContextId}
+              selectedContextId={selectedContextId}
+              onSelect={handleSelectContext}
+              onSetActive={handleSetActive}
+              onPushChat={handlePushChat}
+              onRefresh={loadData}
+            />
           </div>
         </div>
 
+        {/* Drag handle: right */}
+        <div className="w-1 shrink-0 cursor-col-resize relative group" onMouseDown={startDragRight}>
+          <div className="absolute inset-y-0 left-[1.5px] w-px bg-ds-border group-hover:bg-ds-accent/50 transition-colors" />
+        </div>
+
         {/* Right panel */}
-        <div className="w-[300px] shrink-0 flex flex-col overflow-hidden bg-ds-surface">
+        <div className="shrink-0 flex flex-col overflow-hidden bg-ds-surface min-h-0" style={{ width: rightWidth }}>
           {selectedContext && selectedSpace ? (
             <>
               {/* Right panel tab bar */}
@@ -264,7 +299,7 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-hidden">
+              <div className="flex-1 overflow-hidden min-h-0">
                 {rightTab === 'detail' ? (
                   <ContextDetail
                     context={selectedContext}
@@ -280,10 +315,36 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
             </>
           ) : (
             <>
-              <div className="flex items-center px-4 h-9 border-b border-ds-border shrink-0 bg-ds-elevated">
-                <span className="text-[10px] font-mono text-ds-text-dim uppercase tracking-widest">Activity</span>
+              <div className="flex items-center gap-0.5 px-3 h-9 border-b border-ds-border shrink-0 bg-ds-elevated">
+                <button
+                  onClick={() => setActivityTab('activity')}
+                  className={`px-2.5 py-1 text-[10px] font-mono rounded transition-all
+                    ${activityTab === 'activity' ? 'bg-ds-elevated border border-ds-border text-ds-text' : 'text-ds-text-dim hover:text-ds-text'}`}
+                >
+                  activity
+                </button>
+                <button
+                  onClick={() => setActivityTab('dash')}
+                  className={`px-2.5 py-1 text-[10px] font-mono rounded transition-all
+                    ${activityTab === 'dash' ? 'bg-ds-elevated border border-ds-border text-ds-text' : 'text-ds-text-dim hover:text-ds-text'}`}
+                >
+                  dash
+                </button>
               </div>
-              <ActivityLog entries={gitLog} spaces={spaces} />
+              <div className="flex-1 overflow-hidden min-h-0">
+                {activityTab === 'activity' ? (
+                  <ActivityLog entries={gitLog} spaces={spaces} />
+                ) : (
+                  <Dashboard
+                    spaces={spaces}
+                    activeContextId={activeContextId}
+                    selectedContextId={selectedContextId}
+                    onSelect={handleSelectContext}
+                    onSetActive={handleSetActive}
+                    onPushChat={handlePushChat}
+                  />
+                )}
+              </div>
             </>
           )}
         </div>

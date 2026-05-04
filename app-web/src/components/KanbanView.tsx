@@ -46,8 +46,8 @@ export default function KanbanView({ spaces, activeContextId, selectedContextId,
   }
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex-1 flex overflow-x-auto p-3 gap-0">
+    <div className="h-full flex flex-col min-h-0">
+      <div className="flex-1 flex overflow-x-auto p-3 gap-0 min-h-0">
         {PHASES.map((phase, i) => (
           <div key={phase} className="flex items-stretch gap-0 h-full">
             <KanbanColumn
@@ -162,7 +162,7 @@ function KanbanColumn({
   return (
     <div
       style={{ width }}
-      className={`shrink-0 flex flex-col h-full rounded-lg transition-colors duration-100
+      className={`shrink-0 flex flex-col h-full min-h-0 rounded-lg transition-colors duration-100
         ${isDragOver ? 'bg-ds-accent/5 ring-1 ring-inset ring-ds-accent/20' : ''}`}
       onDragOver={e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; onDragOverPhase() }}
       onDragLeave={e => {
@@ -186,7 +186,7 @@ function KanbanColumn({
         )}
       </div>
 
-      <div className="flex flex-col gap-2 flex-1 overflow-y-auto px-1">
+      <div className="flex flex-col gap-2 flex-1 overflow-y-auto px-1 min-h-0 pb-3">
         {items.map(({ context, space }) => (
           <ContextCard
             key={context.id}
