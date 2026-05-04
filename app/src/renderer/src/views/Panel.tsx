@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Space, Context, Phase, PHASE_META } from '../types'
 import KanbanView from '../components/KanbanView'
 import GitLog from '../components/GitLog'
 import PromptBar from '../components/PromptBar'
+import ContextDetail from '../components/ContextDetail'
 import Connections from './Connections'
 import Dashboard from './Dashboard'
 
-type Tab = 'dash' | 'chat' | 'log' | 'map' | 'connections'
+type View = 'dashboard' | 'chat' | 'log' | 'map' | 'connections' | 'context-detail'
 
-const AGENT_ROSTER: { name: string; phase: Phase; desc: string }[] = [
-  { name: 'Dora', phase: 'explore',  desc: 'research & define' },
-  { name: 'Sol',  phase: 'solidify', desc: 'design & decide' },
-  { name: 'Bran', phase: 'build',    desc: 'build & test' },
-  { name: 'May',  phase: 'ship',     desc: 'ship & capture' },
+const SECONDARY_VIEWS: { key: View; label: string }[] = [
+  { key: 'chat',        label: 'chat' },
+  { key: 'log',         label: 'log' },
+  { key: 'map',         label: 'map' },
+  { key: 'connections', label: 'connections' },
 ]
 
 const TOOL_NAMES = ['Claude', 'Cursor', 'Figma']
@@ -20,9 +21,28 @@ const TOOL_NAMES = ['Claude', 'Cursor', 'Figma']
 export default function Panel() {
   const [spaces, setSpaces] = useState<Space[]>([])
   const [activeContextId, setActiveContextId] = useState('')
-  const [tab, setTab] = useState<Tab>('dash')
+  const [view, setView] = useState<View>('dashboard')
+  const [detailContextId, setDetailContextId] = useState<string | null>(null)
   const [screenPermission, setScreenPermission] = useState<string>('not-determined')
   const [toolsStatus, setToolsStatus] = useState<Record<string, boolean>>({})
+  const [leftWidth, setLeftWidth] = useState(196)
+
+  const startDragLeft = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    const startX = e.clientX
+    const startW = leftWidth
+    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = 'none'
+    const onMove = (ev: MouseEvent) => setLeftWidth(Math.max(120, Math.min(400, startW + ev.clientX - startX)))
+    const onUp = () => {
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+      document.removeEventListener('mousemove', onMove)
+      document.removeEventListener('mouseup', onUp)
+    }
+    document.addEventListener('mousemove', onMove)
+    document.addEventListener('mouseup', onUp)
+  }, [leftWidth])
 
   async function loadData() {
     const { spaces, activeContextId } = await window.ds.getContexts()
@@ -39,11 +59,30 @@ export default function Panel() {
     return () => { clearInterval(toolsTimer); unsubCtx() }
   }, [])
 
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && view !== 'dashboard') setView('dashboard')
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [view])
+
   const activeContext = spaces.flatMap(s => s.contexts).find(c => c.id === activeContextId)
+  const allFlatContexts = spaces.flatMap(s => s.contexts.map(c => ({ context: c, space: s })))
+  const detailEntry = detailContextId ? allFlatContexts.find(fc => fc.context.id === detailContextId) : null
 
   async function handleSelectContext(id: string) {
     await window.ds.setActiveContext(id)
     setActiveContextId(id)
+  }
+
+  function navigate(v: View) {
+    setView(v)
+  }
+
+  function openContext(id: string) {
+    setDetailContextId(id)
+    setView('context-detail')
   }
 
   return (
@@ -88,7 +127,7 @@ export default function Panel() {
       <div className="flex-1 flex overflow-hidden no-drag">
 
         {/* Left sidebar */}
-        <aside className="w-[196px] shrink-0 border-r border-ds-border flex flex-col overflow-y-auto">
+        <aside className="shrink-0 flex flex-col overflow-y-auto" style={{ width: leftWidth }}>
 
           {/* Active context */}
           <SidebarSection label="context">
@@ -101,38 +140,6 @@ export default function Panel() {
             ) : (
               <p className="text-ds-text-dim text-xs font-mono">no active context</p>
             )}
-            <button
-              onClick={() => window.ds.showCommand()}
-              className="mt-2.5 text-[10px] font-mono text-ds-text-dim hover:text-ds-accent transition-colors"
-            >
-              switch context →
-            </button>
-          </SidebarSection>
-
-          {/* Agents */}
-          <SidebarSection label="agents">
-            {AGENT_ROSTER.map(agent => {
-              const isActive = activeContext?.phase === agent.phase
-              const meta = PHASE_META[agent.phase]
-              return (
-                <div
-                  key={agent.name}
-                  className={`flex items-center gap-2 py-1 transition-opacity ${isActive ? 'opacity-100' : 'opacity-35'}`}
-                >
-                  <span
-                    className={`w-1.5 h-1.5 rounded-full shrink-0 transition-all
-                      ${isActive
-                        ? `${meta.color.replace('text-', 'bg-')} shadow-[0_0_4px_currentColor]`
-                        : 'bg-ds-border'
-                      }`}
-                  />
-                  <span className={`text-xs font-mono ${isActive ? 'text-ds-text' : 'text-ds-text-dim'}`}>
-                    {agent.name}
-                  </span>
-                  <span className="text-[9px] text-ds-text-dim ml-auto truncate">{agent.desc}</span>
-                </div>
-              )
-            })}
           </SidebarSection>
 
           {/* Running tools */}
@@ -173,39 +180,51 @@ export default function Panel() {
 
         </aside>
 
+        {/* Drag handle */}
+        <div className="w-1 shrink-0 cursor-col-resize relative group" onMouseDown={startDragLeft}>
+          <div className="absolute inset-y-0 left-[1.5px] w-px bg-ds-border group-hover:bg-ds-accent/50 transition-colors" />
+        </div>
+
         {/* Main area */}
         <div className="flex-1 flex flex-col overflow-hidden">
 
-          {/* Tab bar */}
-          <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-9 shrink-0">
-            {(['dash', 'chat', 'log', 'map', 'connections'] as Tab[]).map(t => (
-              <button
-                key={t}
-                onClick={() => setTab(t)}
-                className={`px-3 py-1.5 text-xs font-mono capitalize rounded-md transition-all
-                  ${tab === t ? 'text-ds-text bg-ds-elevated' : 'text-ds-text-secondary hover:text-ds-text'}`}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
+          {/* Secondary nav */}
+          <SecondaryNav view={view} onNavigate={navigate} />
 
-          {/* Tab content */}
+          {/* View content */}
           <div className="flex-1 overflow-hidden">
-            {tab === 'dash' && (
+            {view === 'dashboard' && (
               <Dashboard
                 spaces={spaces}
                 activeContextId={activeContextId}
-                onSelect={handleSelectContext}
                 onSetActive={async (id) => {
                   await window.ds.setActiveContext(id)
                   setActiveContextId(id)
                 }}
+                onOpenContext={openContext}
               />
             )}
-            {tab === 'chat' && <PromptBar activeContext={activeContext} />}
-            {tab === 'log' && <GitLog />}
-            {tab === 'map' && (
+
+            {view === 'context-detail' && detailEntry && (
+              <ContextDetail
+                context={detailEntry.context}
+                space={detailEntry.space}
+                isActive={detailEntry.context.id === activeContextId}
+                onBack={() => setView('dashboard')}
+                onSetActive={() => {
+                  window.ds.setActiveContext(detailEntry.context.id)
+                  setActiveContextId(detailEntry.context.id)
+                }}
+                onUpdate={async (patch) => {
+                  await window.ds.updateContext(detailEntry.context.id, patch)
+                  loadData()
+                }}
+              />
+            )}
+
+            {view === 'chat' && <PromptBar activeContext={activeContext} />}
+            {view === 'log' && <GitLog />}
+            {view === 'map' && (
               <KanbanView
                 spaces={spaces}
                 activeContextId={activeContextId}
@@ -217,7 +236,7 @@ export default function Panel() {
                 onRefresh={loadData}
               />
             )}
-            {tab === 'connections' && <Connections />}
+            {view === 'connections' && <Connections />}
           </div>
 
         </div>
@@ -225,6 +244,41 @@ export default function Panel() {
     </div>
   )
 }
+
+// ── SecondaryNav ──────────────────────────────────────────────────────────────
+
+function SecondaryNav({ view, onNavigate }: { view: View; onNavigate: (v: View) => void }) {
+  const isDashboard = view === 'dashboard'
+
+  return (
+    <div className="flex items-center justify-between px-3 border-b border-ds-border h-9 shrink-0">
+      {isDashboard ? (
+        <span className="text-[10px] font-mono text-ds-text-dim uppercase tracking-widest">dashboard</span>
+      ) : (
+        <button
+          onClick={() => onNavigate('dashboard')}
+          className="text-[10px] font-mono text-ds-text-dim hover:text-ds-text transition-colors uppercase tracking-widest"
+        >
+          ← dashboard
+        </button>
+      )}
+      <div className="flex items-center gap-0.5">
+        {SECONDARY_VIEWS.map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => onNavigate(key)}
+            className={`px-2.5 py-1 text-xs font-mono rounded-md transition-all
+              ${view === key ? 'text-ds-text bg-ds-elevated' : 'text-ds-text-secondary hover:text-ds-text'}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ── Sidebar helpers ───────────────────────────────────────────────────────────
 
 function SidebarSection({ label, children }: { label: string; children: React.ReactNode }) {
   return (

@@ -19,7 +19,7 @@ export default function ContextDetail({ context, space, isActive, onBack, onSetA
           onClick={onBack}
           className="text-ds-text-dim hover:text-ds-text text-sm font-mono transition-colors flex items-center gap-1.5"
         >
-          ← Kanban
+          ← dashboard
         </button>
         <span className="text-ds-border-light text-xs">/</span>
         <span className="text-xs font-mono text-ds-text-dim truncate">{space.client}</span>
