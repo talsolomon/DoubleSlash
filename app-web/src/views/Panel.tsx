@@ -5,15 +5,7 @@ import ChatView from '../components/ChatView'
 import ContextDetail from '../components/ContextDetail'
 import Dashboard from './Dashboard'
 
-interface AgentEntry { name: string; phase?: Phase; desc: string }
-
-const AGENT_ROSTER: AgentEntry[] = [
-  { name: 'Guard', desc: 'orchestrates flow' },
-  { name: 'Dora',  phase: 'explore',  desc: 'research & define' },
-  { name: 'Sol',   phase: 'solidify', desc: 'design & decide' },
-  { name: 'Bran',  phase: 'build',    desc: 'build & test' },
-  { name: 'May',   phase: 'ship',     desc: 'ship & capture' },
-]
+type CenterView = 'dashboard' | 'map'
 
 const TOOL_NAMES = ['Claude', 'Cursor', 'Figma']
 
@@ -25,7 +17,6 @@ async function apiGetToolsStatus(): Promise<Record<string, boolean>> {
 }
 
 type RightTab = 'detail' | 'chat'
-type ActivityTab = 'activity' | 'dash'
 
 interface Props { onCollapse: () => void; isLight: boolean; onToggleTheme: () => void }
 
@@ -33,12 +24,12 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
   const [spaces, setSpaces] = useState<Space[]>([])
   const [activeContextId, setActiveContextId] = useState('')
   const [selectedContextId, setSelectedContextId] = useState('')
+  const [centerView, setCenterView] = useState<CenterView>('dashboard')
   const [rightTab, setRightTab] = useState<RightTab>('detail')
-  const [activityTab, setActivityTab] = useState<ActivityTab>('activity')
   const [toolsStatus, setToolsStatus] = useState<Record<string, boolean>>({})
   const [gitLog, setGitLog] = useState<GitEntry[]>([])
   const [leftWidth, setLeftWidth] = useState(180)
-  const [rightWidth, setRightWidth] = useState(300)
+  const [rightWidth, setRightWidth] = useState(320)
 
   const startDragLeft = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
@@ -175,31 +166,41 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
       <div className="flex-1 flex overflow-hidden min-h-0">
 
         {/* Left sidebar */}
-        <aside className="shrink-0 flex flex-col overflow-y-auto" style={{ width: leftWidth }}>
-          <SidebarSection label="agents">
-            {/* Guard — lead orchestrator, always active */}
-            <div className="flex items-center gap-2 py-1 mb-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-ds-accent animate-pulse shrink-0" />
-              <span className="text-xs font-mono text-ds-text font-semibold">Guard</span>
-              <span className="text-[9px] font-mono text-ds-accent/70 ml-auto">lead</span>
-            </div>
-            {/* Phase agents indented under Guard */}
-            <div className="ml-3 border-l border-ds-border/50 pl-2 space-y-0.5">
-              {AGENT_ROSTER.filter(a => a.phase).map(agent => {
-                const isActive = activeContext?.phase === agent.phase
-                const meta = PHASE_META[agent.phase!]
-                return (
-                  <div
-                    key={agent.name}
-                    className={`flex items-center gap-2 py-0.5 transition-opacity ${isActive ? 'opacity-100' : 'opacity-35'}`}
-                  >
-                    <span className={`w-1 h-1 rounded-full shrink-0 ${isActive ? meta.color.replace('text-', 'bg-') : 'bg-ds-border'}`} />
-                    <span className={`text-[11px] font-mono ${isActive ? 'text-ds-text' : 'text-ds-text-dim'}`}>{agent.name}</span>
-                    <span className="text-[9px] text-ds-text-dim ml-auto truncate">{agent.desc}</span>
-                  </div>
-                )
-              })}
-            </div>
+        <aside className="shrink-0 flex flex-col overflow-y-auto border-r border-ds-border" style={{ width: leftWidth }}>
+
+          {/* Active context signal */}
+          <SidebarSection label="context">
+            {activeContext ? (
+              <div>
+                <p className="text-ds-text text-xs font-semibold leading-snug mb-1.5">{activeContext.name}</p>
+                <PhaseBadge phase={activeContext.phase} />
+                {(() => {
+                  const lastSession = activeContext.sessions[activeContext.sessions.length - 1]
+                  const nextTask = activeContext.tasks?.find(t => !t.done)
+                  if (!lastSession) return null
+                  return (
+                    <div className="mt-2.5 pt-2.5 border-t border-ds-border">
+                      <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-1">agent</p>
+                      <p className="text-[10px] text-ds-text-dim leading-relaxed mb-1.5">
+                        Paused after "
+                        {lastSession.summary.length > 48 ? lastSession.summary.slice(0, 45) + '…' : lastSession.summary}
+                        "
+                      </p>
+                      {nextTask && (
+                        <button
+                          onClick={() => handleSelectContext(activeContextId)}
+                          className="text-left text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity leading-relaxed"
+                        >
+                          → {nextTask.name.split(' ').slice(0, 5).join(' ')}{nextTask.name.split(' ').length > 5 ? '…' : ''}
+                        </button>
+                      )}
+                    </div>
+                  )
+                })()}
+              </div>
+            ) : (
+              <p className="text-ds-text-dim text-xs font-mono">no active context</p>
+            )}
           </SidebarSection>
 
           <SidebarSection label="tools">
@@ -215,30 +216,23 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
             })}
           </SidebarSection>
 
-          {/* Spaces / context list */}
-          <SidebarSection label="spaces">
-            {spaces.map(space => (
-              <div key={space.id} className="mb-2">
-                <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-1.5">{space.client}</p>
-                {space.contexts.map(ctx => (
-                  <button
-                    key={ctx.id}
-                    onClick={() => handleSelectContext(ctx.id)}
-                    className={`w-full text-left px-2 py-1 rounded-md text-xs font-mono truncate transition-all
-                      ${ctx.id === selectedContextId
-                        ? 'text-ds-text bg-ds-elevated'
-                        : ctx.id === activeContextId
-                          ? 'text-ds-accent'
-                          : 'text-ds-text-dim hover:text-ds-text-secondary hover:bg-ds-elevated/50'
-                      }`}
-                  >
-                    {ctx.id === activeContextId && <span className="text-ds-accent mr-1">·</span>}
-                    {ctx.name}
-                  </button>
+          {/* Recent sessions */}
+          {gitLog.length > 0 && (
+            <SidebarSection label="git">
+              <div className="space-y-1">
+                {gitLog.slice(0, 5).map(entry => (
+                  <div key={entry.hash} className="py-1">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <code className="text-ds-accent text-[9px] font-mono">{entry.hash}</code>
+                      <span className="text-ds-text-dim text-[9px] ml-auto">{entry.date}</span>
+                    </div>
+                    <p className="text-[10px] text-ds-text-secondary leading-snug line-clamp-1">{entry.message}</p>
+                  </div>
                 ))}
               </div>
-            ))}
-          </SidebarSection>
+            </SidebarSection>
+          )}
+
         </aside>
 
         {/* Drag handle: left */}
@@ -246,21 +240,47 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
           <div className="absolute inset-y-0 left-[1.5px] w-px bg-ds-border group-hover:bg-ds-accent/50 transition-colors" />
         </div>
 
-        {/* Contexts — Fish Kanban, always visible */}
+        {/* Center: Dashboard or Map */}
         <div className="flex-1 overflow-hidden min-w-0 min-h-0 flex flex-col">
-          <div className="flex items-center px-3 h-8 shrink-0 border-b border-ds-border bg-ds-elevated">
-            <span className="text-[10px] font-mono text-ds-text-dim uppercase tracking-widest">contexts</span>
+          {/* Center nav */}
+          <div className="flex items-center px-4 h-9 shrink-0 border-b border-ds-border bg-ds-elevated gap-1">
+            <button
+              onClick={() => setCenterView('dashboard')}
+              className={`px-2.5 py-1 text-[10px] font-mono rounded-md transition-all
+                ${centerView === 'dashboard' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
+            >
+              dashboard
+            </button>
+            <button
+              onClick={() => setCenterView('map')}
+              className={`px-2.5 py-1 text-[10px] font-mono rounded-md transition-all
+                ${centerView === 'map' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
+            >
+              map
+            </button>
           </div>
+
           <div className="flex-1 overflow-hidden min-h-0">
-            <KanbanView
-              spaces={spaces}
-              activeContextId={activeContextId}
-              selectedContextId={selectedContextId}
-              onSelect={handleSelectContext}
-              onSetActive={handleSetActive}
-              onPushChat={handlePushChat}
-              onRefresh={loadData}
-            />
+            {centerView === 'dashboard' ? (
+              <Dashboard
+                spaces={spaces}
+                activeContextId={activeContextId}
+                selectedContextId={selectedContextId}
+                onSelect={handleSelectContext}
+                onSetActive={handleSetActive}
+                onPushChat={handlePushChat}
+              />
+            ) : (
+              <KanbanView
+                spaces={spaces}
+                activeContextId={activeContextId}
+                selectedContextId={selectedContextId}
+                onSelect={handleSelectContext}
+                onSetActive={handleSetActive}
+                onPushChat={handlePushChat}
+                onRefresh={loadData}
+              />
+            )}
           </div>
         </div>
 
@@ -270,22 +290,21 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
         </div>
 
         {/* Right panel */}
-        <div className="shrink-0 flex flex-col overflow-hidden bg-ds-surface min-h-0" style={{ width: rightWidth }}>
+        <div className="shrink-0 flex flex-col overflow-hidden bg-ds-surface min-h-0 border-l border-ds-border" style={{ width: rightWidth }}>
           {selectedContext && selectedSpace ? (
             <>
-              {/* Right panel tab bar */}
               <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-9 shrink-0 bg-ds-elevated">
                 <button
                   onClick={() => setRightTab('detail')}
                   className={`px-3 py-1 text-xs font-mono rounded-md transition-all
-                    ${rightTab === 'detail' ? 'text-ds-text bg-ds-elevated' : 'text-ds-text-dim hover:text-ds-text'}`}
+                    ${rightTab === 'detail' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
                 >
                   detail
                 </button>
                 <button
                   onClick={() => setRightTab('chat')}
                   className={`px-3 py-1 text-xs font-mono rounded-md transition-all
-                    ${rightTab === 'chat' ? 'text-ds-text bg-ds-elevated' : 'text-ds-text-dim hover:text-ds-text'}`}
+                    ${rightTab === 'chat' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
                 >
                   <span className="text-ds-accent">//</span> chat
                 </button>
@@ -298,7 +317,6 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
                   </svg>
                 </button>
               </div>
-
               <div className="flex-1 overflow-hidden min-h-0">
                 {rightTab === 'detail' ? (
                   <ContextDetail
@@ -314,38 +332,17 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
               </div>
             </>
           ) : (
-            <>
-              <div className="flex items-center gap-0.5 px-3 h-9 border-b border-ds-border shrink-0 bg-ds-elevated">
+            <div className="flex-1 flex flex-col items-center justify-center gap-2 p-6">
+              <p className="text-ds-text-dim text-xs font-mono text-center">Select a context to see details</p>
+              {activeContext && (
                 <button
-                  onClick={() => setActivityTab('activity')}
-                  className={`px-2.5 py-1 text-[10px] font-mono rounded transition-all
-                    ${activityTab === 'activity' ? 'bg-ds-elevated border border-ds-border text-ds-text' : 'text-ds-text-dim hover:text-ds-text'}`}
+                  onClick={() => handleSelectContext(activeContextId)}
+                  className="mt-1 text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity"
                 >
-                  activity
+                  Open active context →
                 </button>
-                <button
-                  onClick={() => setActivityTab('dash')}
-                  className={`px-2.5 py-1 text-[10px] font-mono rounded transition-all
-                    ${activityTab === 'dash' ? 'bg-ds-elevated border border-ds-border text-ds-text' : 'text-ds-text-dim hover:text-ds-text'}`}
-                >
-                  dash
-                </button>
-              </div>
-              <div className="flex-1 overflow-hidden min-h-0">
-                {activityTab === 'activity' ? (
-                  <ActivityLog entries={gitLog} spaces={spaces} />
-                ) : (
-                  <Dashboard
-                    spaces={spaces}
-                    activeContextId={activeContextId}
-                    selectedContextId={selectedContextId}
-                    onSelect={handleSelectContext}
-                    onSetActive={handleSetActive}
-                    onPushChat={handlePushChat}
-                  />
-                )}
-              </div>
-            </>
+              )}
+            </div>
           )}
         </div>
 
@@ -353,6 +350,8 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
     </div>
   )
 }
+
+// ── helpers ───────────────────────────────────────────────────────────────────
 
 function SidebarSection({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -370,76 +369,5 @@ function PhaseBadge({ phase }: { phase: Phase }) {
       ${meta.color} ${meta.bg}`}>
       {meta.icon} {meta.label}
     </span>
-  )
-}
-
-function ActivityLog({ entries, spaces }: { entries: GitEntry[]; spaces: Space[] }) {
-  const allSessions = spaces
-    .flatMap(s => s.contexts.flatMap(ctx =>
-      ctx.sessions.map(session => ({
-        session,
-        contextName: ctx.name,
-        contextId: ctx.id,
-        artifactNames: ctx.artifacts
-          .filter(a => session.artifactIds.includes(a.id))
-          .map(a => a.name)
-      }))
-    ))
-    .sort((a, b) => b.session.date.localeCompare(a.session.date))
-
-  return (
-    <div className="flex-1 overflow-y-auto">
-      {allSessions.length > 0 && (
-        <div className="p-3 border-b border-ds-border">
-          <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-2">Recent sessions</p>
-          <div className="space-y-2">
-            {allSessions.map(({ session, contextName, artifactNames }) => (
-              <div key={session.id} className="px-2 py-2 rounded-lg bg-ds-elevated/50 border border-ds-border/50">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <span className="text-[10px] font-mono text-ds-text-dim px-1.5 py-0.5 rounded bg-ds-elevated border border-ds-border">
-                    {session.tool}
-                  </span>
-                  <span className="text-[10px] text-ds-text-dim ml-auto">{session.date}</span>
-                </div>
-                <p className="text-[11px] text-ds-text-secondary leading-snug mb-1">{session.summary}</p>
-                <p className="text-[10px] text-ds-text-dim font-mono truncate">↳ {contextName}</p>
-                {artifactNames.length > 0 && (
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {artifactNames.map(name => (
-                      <span key={name} className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-ds-accent/10 border border-ds-accent/20 text-ds-accent/80">
-                        {name}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {entries.length > 0 && (
-        <div className="p-3">
-          <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-2">Git log</p>
-          <div className="space-y-1">
-            {entries.slice(0, 12).map(entry => (
-              <div key={entry.hash} className="px-2 py-2 rounded-lg hover:bg-ds-elevated transition-all">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <code className="text-ds-accent text-[10px] font-mono">{entry.hash}</code>
-                  <span className="text-ds-text-dim text-[10px] ml-auto">{entry.date}</span>
-                </div>
-                <p className="text-[11px] text-ds-text-secondary leading-snug line-clamp-2">{entry.message}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {entries.length === 0 && allSessions.length === 0 && (
-        <div className="h-full flex items-center justify-center">
-          <p className="text-ds-text-dim text-xs font-mono">no activity yet</p>
-        </div>
-      )}
-    </div>
   )
 }
