@@ -1,4 +1,30 @@
 export type Phase = 'explore' | 'solidify' | 'build' | 'ship'
+export type Archetype = 'nemo' | 'tuna' | 'salmon' | 'willy'
+
+export interface StreamMethod {
+  id: string
+  name: string
+  status: 'done' | 'in-progress' | 'pending' | 'deferred'
+  deferredReason?: string
+}
+
+export interface StreamProgress {
+  total: number
+  completed: number
+  methods: StreamMethod[]
+}
+
+export interface FishHandoff {
+  from: string
+  to: string
+  phaseExited: Phase
+  locked: string[]
+  open: string[]
+  artifactPaths: string[]
+  confidence: number
+  notes: string
+  emittedAt: string
+}
 
 export interface Task {
   id: string
@@ -28,17 +54,29 @@ export interface Session {
   artifactIds: string[]
   tokens?: number
   durationMinutes?: number
+  model?: string
+}
+
+export interface Sigil {
+  certainty: 'known' | 'unknown'
+  size: 'smaller' | 'bigger'
 }
 
 export interface Context {
   id: string
   name: string
   phase: Phase
+  archetype?: Archetype
+  sigil?: Sigil
   brief: string
   tasks: Task[]
   decisions: Decision[]
   artifacts: Artifact[]
   sessions: Session[]
+  status?: 'active' | 'blocked' | 'at-exit'
+  blockerDescription?: string
+  streamProgress?: StreamProgress
+  lastHandoff?: FishHandoff
 }
 
 export interface Space {
@@ -53,6 +91,20 @@ export interface GitEntry {
   date: string
   message: string
   author: string
+}
+
+export const ARCHETYPE_META: Record<Archetype, { label: string; short: string; cssVar: string; agent: string }> = {
+  nemo:   { label: 'Nemo',   short: 'N', cssVar: '--ds-ship',     agent: 'Bran'  },
+  tuna:   { label: 'Tuna',   short: 'T', cssVar: '--ds-solidify', agent: 'Sol'   },
+  salmon: { label: 'Salmon', short: 'S', cssVar: '--ds-explore',  agent: 'Dora'  },
+  willy:  { label: 'Willy',  short: 'W', cssVar: '--ds-build',    agent: 'Dora'  },
+}
+
+export const PHASE_CSS_VAR: Record<Phase, string> = {
+  explore:  '--ds-explore',
+  solidify: '--ds-solidify',
+  build:    '--ds-build',
+  ship:     '--ds-ship',
 }
 
 export const PHASE_META: Record<Phase, { label: string; icon: string; color: string; bg: string; border: string }> = {
