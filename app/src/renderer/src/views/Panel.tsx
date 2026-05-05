@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Space, Context, Phase, PHASE_META } from '../types'
 import KanbanView from '../components/KanbanView'
 import GitLog from '../components/GitLog'
@@ -7,25 +7,131 @@ import ContextDetail from '../components/ContextDetail'
 import Connections from './Connections'
 import Dashboard from './Dashboard'
 
-type View = 'dashboard' | 'chat' | 'log' | 'map' | 'connections' | 'context-detail'
+type View = 'dashboard' | 'chat' | 'log' | 'kanban' | 'connections' | 'context-detail'
 
 const SECONDARY_VIEWS: { key: View; label: string }[] = [
   { key: 'chat',        label: 'chat' },
   { key: 'log',         label: 'log' },
-  { key: 'map',         label: 'map' },
+  { key: 'kanban',      label: 'kanban' },
   { key: 'connections', label: 'connections' },
 ]
 
-const TOOL_NAMES = ['Claude', 'Cursor', 'Figma']
+// ── ProjectSwitcher ───────────────────────────────────────────────────────────
+
+function ProjectSwitcher({ spaces, selectedId, onChange }: {
+  spaces: Space[]
+  selectedId: string
+  onChange: (id: string) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const selected = spaces.find(s => s.id === selectedId) ?? spaces[0]
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  if (!selected) return null
+
+  if (spaces.length <= 1) {
+    return (
+      <span className="text-xs font-mono font-semibold text-ds-text">
+        {selected.client ?? selected.name}
+      </span>
+    )
+  }
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(v => !v)}
+        className="flex items-center gap-1.5 text-xs font-mono font-semibold text-ds-text hover:text-ds-text-secondary transition-colors"
+      >
+        {selected.client ?? selected.name}
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" className={`transition-transform ${open ? 'rotate-180' : ''}`}>
+          <path d="M1 2.5l3 3 3-3" stroke="currentColor" strokeWidth="1.2" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-1 z-50 min-w-[200px] rounded-xl border border-ds-border bg-ds-elevated shadow-lg overflow-hidden">
+          {spaces.map(s => (
+            <button
+              key={s.id}
+              onClick={() => { onChange(s.id); setOpen(false) }}
+              className={`w-full flex flex-col px-3 py-2.5 text-left hover:bg-ds-surface transition-colors
+                ${s.id === selectedId ? 'bg-ds-surface' : ''}`}
+            >
+              <span className="text-xs font-mono font-semibold text-ds-text">{s.client}</span>
+              <span className="text-[9px] font-mono text-ds-text-dim mt-0.5">
+                {s.contexts.length} context{s.contexts.length !== 1 ? 's' : ''}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── GuardChat ─────────────────────────────────────────────────────────────────
+
+function GuardChat() {
+  const [input, setInput] = useState('')
+
+  function handleSend() {
+    if (!input.trim()) return
+    setInput('')
+  }
+
+  return (
+    <div className="no-drag shrink-0 flex items-center gap-3 px-4 py-2.5 border-t border-ds-border bg-ds-elevated">
+      <div className="flex items-center gap-1.5 shrink-0">
+        <span className="text-ds-accent text-xs font-bold">◆</span>
+        <span className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest">guard</span>
+      </div>
+      <input
+        value={input}
+        onChange={e => setInput(e.target.value)}
+        onKeyDown={e => { if (e.key === 'Enter') handleSend() }}
+        placeholder="What should I focus on next?"
+        className="flex-1 bg-ds-surface border border-ds-border rounded-lg px-3 py-1.5
+          text-[11px] font-mono text-ds-text placeholder-ds-text-dim/60 outline-none
+          focus:border-ds-accent/50 transition-colors"
+      />
+      <button
+        onClick={handleSend}
+        className="text-ds-text-dim hover:text-ds-accent transition-colors p-1 shrink-0"
+      >
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+          <path d="M2 6h8M7 3l3 3-3 3" />
+        </svg>
+      </button>
+    </div>
+  )
+}
+
+// ── Panel ─────────────────────────────────────────────────────────────────────
 
 export default function Panel() {
   const [spaces, setSpaces] = useState<Space[]>([])
   const [activeContextId, setActiveContextId] = useState('')
+  const [selectedProjectId, setSelectedProjectId] = useState('')
   const [view, setView] = useState<View>('dashboard')
   const [detailContextId, setDetailContextId] = useState<string | null>(null)
   const [screenPermission, setScreenPermission] = useState<string>('not-determined')
   const [toolsStatus, setToolsStatus] = useState<Record<string, boolean>>({})
   const [leftWidth, setLeftWidth] = useState(196)
+
+  // Sync selected project when spaces load
+  useEffect(() => {
+    if (spaces.length > 0 && (!selectedProjectId || !spaces.find(s => s.id === selectedProjectId))) {
+      setSelectedProjectId(spaces[0].id)
+    }
+  }, [spaces])
 
   const startDragLeft = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
@@ -95,12 +201,10 @@ export default function Panel() {
         <div className="flex items-center gap-2 no-drag">
           <span className="text-xs font-mono text-ds-text-dim">duble</span>
           <span className="font-mono text-sm font-bold text-ds-accent">//</span>
-          {activeContext && (
+          {spaces.length > 0 && (
             <>
               <span className="text-ds-border text-xs mx-0.5">/</span>
-              <span className="text-xs font-mono text-ds-text-secondary truncate max-w-[220px]">
-                {activeContext.name}
-              </span>
+              <ProjectSwitcher spaces={spaces} selectedId={selectedProjectId} onChange={setSelectedProjectId} />
             </>
           )}
         </div>
@@ -124,7 +228,7 @@ export default function Panel() {
       </header>
 
       {/* Body: sidebar + main */}
-      <div className="flex-1 flex overflow-hidden no-drag">
+      <div className="flex-1 flex overflow-hidden no-drag min-h-0">
 
         {/* Left sidebar */}
         <aside className="shrink-0 flex flex-col overflow-y-auto" style={{ width: leftWidth }}>
@@ -144,7 +248,7 @@ export default function Panel() {
 
           {/* Running tools */}
           <SidebarSection label="tools">
-            {TOOL_NAMES.map(tool => {
+            {['Claude', 'Cursor', 'Figma'].map(tool => {
               const running = toolsStatus[tool] ?? false
               return (
                 <div key={tool} className="flex items-center gap-2 py-0.5">
@@ -186,13 +290,13 @@ export default function Panel() {
         </div>
 
         {/* Main area */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden min-h-0">
 
           {/* Secondary nav */}
           <SecondaryNav view={view} onNavigate={navigate} />
 
           {/* View content */}
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden min-h-0">
             {view === 'dashboard' && (
               <Dashboard
                 spaces={spaces}
@@ -224,14 +328,19 @@ export default function Panel() {
 
             {view === 'chat' && <PromptBar activeContext={activeContext} />}
             {view === 'log' && <GitLog />}
-            {view === 'map' && (
+            {view === 'kanban' && (
               <KanbanView
                 spaces={spaces}
                 activeContextId={activeContextId}
+                selectedProjectId={selectedProjectId}
                 onSelect={handleSelectContext}
                 onSetActive={async (id) => {
                   await window.ds.setActiveContext(id)
                   setActiveContextId(id)
+                }}
+                onUpdate={async (id, patch) => {
+                  await window.ds.updateContext(id, patch)
+                  loadData()
                 }}
                 onRefresh={loadData}
               />
@@ -241,6 +350,9 @@ export default function Panel() {
 
         </div>
       </div>
+
+      {/* Guard — master agent chat */}
+      <GuardChat />
     </div>
   )
 }

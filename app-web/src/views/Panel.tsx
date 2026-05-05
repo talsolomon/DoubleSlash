@@ -1,11 +1,15 @@
-import { useState, useEffect, useCallback } from 'react'
-import { Space, Context, Phase, PHASE_META, GitEntry, apiGetContexts, apiSetActiveContext, apiUpdateContext, apiGetGitLog } from '../types'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import {
+  Space, Context, Phase,
+  PHASE_META, PHASE_CSS_VAR,
+  apiGetContexts, apiSetActiveContext, apiUpdateContext,
+} from '../types'
+import { computeStreamProgress, getNextMethod } from '../data/fish-recipe'
 import KanbanView from '../components/KanbanView'
-import ChatView from '../components/ChatView'
-import ContextDetail from '../components/ContextDetail'
+import DrillDownDrawer from '../components/DrillDownDrawer'
 import Dashboard from './Dashboard'
 
-type CenterView = 'dashboard' | 'map'
+type CenterView = 'kanban' | 'analytics'
 
 const TOOL_NAMES = ['Claude', 'Cursor', 'Figma']
 
@@ -16,28 +20,131 @@ async function apiGetToolsStatus(): Promise<Record<string, boolean>> {
   } catch { return {} }
 }
 
-type RightTab = 'detail' | 'chat'
+// ── ProjectSwitcher ───────────────────────────────────────────────────────────
+
+function ProjectSwitcher({ spaces, selectedId, onChange }: {
+  spaces: Space[]
+  selectedId: string
+  onChange: (id: string) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const selected = spaces.find(s => s.id === selectedId) ?? spaces[0]
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  if (!selected) return null
+
+  if (spaces.length <= 1) {
+    return (
+      <span className="text-xs font-mono font-semibold text-ds-text">
+        {selected.client ?? selected.name}
+      </span>
+    )
+  }
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(v => !v)}
+        className="flex items-center gap-1.5 text-xs font-mono font-semibold text-ds-text hover:text-ds-text-secondary transition-colors"
+      >
+        {selected.client ?? selected.name}
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" className={`transition-transform ${open ? 'rotate-180' : ''}`}>
+          <path d="M1 2.5l3 3 3-3" stroke="currentColor" strokeWidth="1.2" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-1 z-50 min-w-[200px] rounded-xl border border-ds-border bg-ds-elevated shadow-lg overflow-hidden">
+          {spaces.map(s => (
+            <button
+              key={s.id}
+              onClick={() => { onChange(s.id); setOpen(false) }}
+              className={`w-full flex flex-col px-3 py-2.5 text-left hover:bg-ds-surface transition-colors
+                ${s.id === selectedId ? 'bg-ds-surface' : ''}`}
+            >
+              <span className="text-xs font-mono font-semibold text-ds-text">{s.client}</span>
+              <span className="text-[9px] font-mono text-ds-text-dim mt-0.5">
+                {s.contexts.length} context{s.contexts.length !== 1 ? 's' : ''}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── GuardChat ─────────────────────────────────────────────────────────────────
+
+function GuardChat() {
+  const [input, setInput] = useState('')
+
+  function handleSend() {
+    if (!input.trim()) return
+    setInput('')
+  }
+
+  return (
+    <div className="shrink-0 flex items-center gap-3 px-4 py-2.5 border-t border-ds-border bg-ds-elevated">
+      <div className="flex items-center gap-1.5 shrink-0">
+        <span className="text-ds-accent text-xs font-bold">◆</span>
+        <span className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest">guard</span>
+      </div>
+      <input
+        value={input}
+        onChange={e => setInput(e.target.value)}
+        onKeyDown={e => { if (e.key === 'Enter') handleSend() }}
+        placeholder="What should I focus on next?"
+        className="flex-1 bg-ds-surface border border-ds-border rounded-lg px-3 py-1.5
+          text-[11px] font-mono text-ds-text placeholder-ds-text-dim/60 outline-none
+          focus:border-ds-accent/50 transition-colors"
+      />
+      <button
+        onClick={handleSend}
+        className="text-ds-text-dim hover:text-ds-accent transition-colors p-1 shrink-0"
+      >
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+          <path d="M2 6h8M7 3l3 3-3 3" />
+        </svg>
+      </button>
+    </div>
+  )
+}
+
+// ── Panel ─────────────────────────────────────────────────────────────────────
 
 interface Props { onCollapse: () => void; isLight: boolean; onToggleTheme: () => void }
 
 export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
   const [spaces, setSpaces] = useState<Space[]>([])
   const [activeContextId, setActiveContextId] = useState('')
+  const [selectedProjectId, setSelectedProjectId] = useState('')
   const [selectedContextId, setSelectedContextId] = useState('')
-  const [centerView, setCenterView] = useState<CenterView>('dashboard')
-  const [rightTab, setRightTab] = useState<RightTab>('detail')
+  const [centerView, setCenterView] = useState<CenterView>('kanban')
   const [toolsStatus, setToolsStatus] = useState<Record<string, boolean>>({})
-  const [gitLog, setGitLog] = useState<GitEntry[]>([])
-  const [leftWidth, setLeftWidth] = useState(180)
+  const [leftWidth, setLeftWidth] = useState(188)
   const [rightWidth, setRightWidth] = useState(320)
+
+  // Sync selected project when spaces load
+  useEffect(() => {
+    if (spaces.length > 0 && (!selectedProjectId || !spaces.find(s => s.id === selectedProjectId))) {
+      setSelectedProjectId(spaces[0].id)
+    }
+  }, [spaces])
 
   const startDragLeft = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
-    const startX = e.clientX
-    const startW = leftWidth
+    const startX = e.clientX, startW = leftWidth
     document.body.style.cursor = 'col-resize'
     document.body.style.userSelect = 'none'
-    const onMove = (ev: MouseEvent) => setLeftWidth(Math.max(120, Math.min(400, startW + ev.clientX - startX)))
+    const onMove = (ev: MouseEvent) => setLeftWidth(Math.max(140, Math.min(360, startW + ev.clientX - startX)))
     const onUp = () => {
       document.body.style.cursor = ''
       document.body.style.userSelect = ''
@@ -50,11 +157,10 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
 
   const startDragRight = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
-    const startX = e.clientX
-    const startW = rightWidth
+    const startX = e.clientX, startW = rightWidth
     document.body.style.cursor = 'col-resize'
     document.body.style.userSelect = 'none'
-    const onMove = (ev: MouseEvent) => setRightWidth(Math.max(200, Math.min(520, startW - ev.clientX + startX)))
+    const onMove = (ev: MouseEvent) => setRightWidth(Math.max(240, Math.min(520, startW - ev.clientX + startX)))
     const onUp = () => {
       document.body.style.cursor = ''
       document.body.style.userSelect = ''
@@ -76,16 +182,12 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
   useEffect(() => {
     loadData()
     apiGetToolsStatus().then(setToolsStatus)
-    apiGetGitLog().then(setGitLog).catch(() => {})
     const t = setInterval(() => apiGetToolsStatus().then(setToolsStatus), 8000)
     return () => clearInterval(t)
   }, [])
 
   const allContexts = spaces.flatMap(s => s.contexts.map(c => ({ context: c, space: s })))
-  const activeContext = allContexts.find(e => e.context.id === activeContextId)?.context
-  const selectedEntry = allContexts.find(e => e.context.id === selectedContextId)
-  const selectedContext = selectedEntry?.context
-  const selectedSpace = selectedEntry?.space
+  const selectedContext = allContexts.find(e => e.context.id === selectedContextId)?.context
 
   async function handleSetActive(id: string) {
     await apiSetActiveContext(id)
@@ -94,24 +196,7 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
   }
 
   function handleSelectContext(id: string) {
-    setSelectedContextId(id)
-    setRightTab('detail')
-  }
-
-  function handlePushChat(id: string) {
-    setSelectedContextId(id)
-    setRightTab('chat')
-  }
-
-  function handleContextUpdate(patch: Partial<Context>) {
-    if (!selectedContextId) return
-    apiUpdateContext(selectedContextId, patch)
-    setSpaces(prev => prev.map(space => ({
-      ...space,
-      contexts: space.contexts.map(ctx =>
-        ctx.id === selectedContextId ? { ...ctx, ...patch } : ctx
-      )
-    })))
+    setSelectedContextId(id === selectedContextId ? '' : id)
   }
 
   return (
@@ -124,20 +209,17 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono text-ds-text-dim">duble</span>
           <span className="font-mono text-sm font-bold text-ds-accent">//</span>
-          {activeContext && (
+          {spaces.length > 0 && (
             <>
               <span className="text-ds-border text-xs mx-0.5">/</span>
-              <span className="text-xs font-mono text-ds-text-secondary truncate max-w-[200px]">
-                {activeContext.name}
-              </span>
-              <PhaseBadge phase={activeContext.phase} />
+              <ProjectSwitcher spaces={spaces} selectedId={selectedProjectId} onChange={setSelectedProjectId} />
             </>
           )}
         </div>
         <div className="flex items-center gap-1">
           <button
             onClick={onToggleTheme}
-            title={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
+            title={isLight ? 'Dark mode' : 'Light mode'}
             className="text-ds-text-dim hover:text-ds-text p-1.5 rounded hover:bg-ds-elevated transition-all"
           >
             {isLight ? (
@@ -167,72 +249,12 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
 
         {/* Left sidebar */}
         <aside className="shrink-0 flex flex-col overflow-y-auto border-r border-ds-border" style={{ width: leftWidth }}>
-
-          {/* Active context signal */}
-          <SidebarSection label="context">
-            {activeContext ? (
-              <div>
-                <p className="text-ds-text text-xs font-semibold leading-snug mb-1.5">{activeContext.name}</p>
-                <PhaseBadge phase={activeContext.phase} />
-                {(() => {
-                  const lastSession = activeContext.sessions[activeContext.sessions.length - 1]
-                  const nextTask = activeContext.tasks?.find(t => !t.done)
-                  if (!lastSession) return null
-                  return (
-                    <div className="mt-2.5 pt-2.5 border-t border-ds-border">
-                      <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-1">agent</p>
-                      <p className="text-[10px] text-ds-text-dim leading-relaxed mb-1.5">
-                        Paused after "
-                        {lastSession.summary.length > 48 ? lastSession.summary.slice(0, 45) + '…' : lastSession.summary}
-                        "
-                      </p>
-                      {nextTask && (
-                        <button
-                          onClick={() => handleSelectContext(activeContextId)}
-                          className="text-left text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity leading-relaxed"
-                        >
-                          → {nextTask.name.split(' ').slice(0, 5).join(' ')}{nextTask.name.split(' ').length > 5 ? '…' : ''}
-                        </button>
-                      )}
-                    </div>
-                  )
-                })()}
-              </div>
-            ) : (
-              <p className="text-ds-text-dim text-xs font-mono">no active context</p>
-            )}
-          </SidebarSection>
-
-          <SidebarSection label="tools">
-            {TOOL_NAMES.map(tool => {
-              const running = toolsStatus[tool] ?? false
-              return (
-                <div key={tool} className="flex items-center gap-2 py-0.5">
-                  <span className={`w-1.5 h-1.5 rounded-full shrink-0 transition-colors ${running ? 'bg-green-400' : 'bg-ds-border'}`} />
-                  <span className={`text-xs font-mono ${running ? 'text-ds-text-secondary' : 'text-ds-text-dim'}`}>{tool}</span>
-                  {running && <span className="text-[9px] text-green-400/60 ml-auto">live</span>}
-                </div>
-              )
-            })}
-          </SidebarSection>
-
-          {/* Recent sessions */}
-          {gitLog.length > 0 && (
-            <SidebarSection label="git">
-              <div className="space-y-1">
-                {gitLog.slice(0, 5).map(entry => (
-                  <div key={entry.hash} className="py-1">
-                    <div className="flex items-center gap-1.5 mb-0.5">
-                      <code className="text-ds-accent text-[9px] font-mono">{entry.hash}</code>
-                      <span className="text-ds-text-dim text-[9px] ml-auto">{entry.date}</span>
-                    </div>
-                    <p className="text-[10px] text-ds-text-secondary leading-snug line-clamp-1">{entry.message}</p>
-                  </div>
-                ))}
-              </div>
-            </SidebarSection>
-          )}
-
+          <ActiveContextSection
+            spaces={spaces}
+            activeContextId={activeContextId}
+            toolsStatus={toolsStatus}
+            onOpen={() => activeContextId && handleSelectContext(activeContextId)}
+          />
         </aside>
 
         {/* Drag handle: left */}
@@ -240,46 +262,42 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
           <div className="absolute inset-y-0 left-[1.5px] w-px bg-ds-border group-hover:bg-ds-accent/50 transition-colors" />
         </div>
 
-        {/* Center: Dashboard or Map */}
+        {/* Center */}
         <div className="flex-1 overflow-hidden min-w-0 min-h-0 flex flex-col">
           {/* Center nav */}
           <div className="flex items-center px-4 h-9 shrink-0 border-b border-ds-border bg-ds-elevated gap-1">
             <button
-              onClick={() => setCenterView('dashboard')}
+              onClick={() => setCenterView('kanban')}
               className={`px-2.5 py-1 text-[10px] font-mono rounded-md transition-all
-                ${centerView === 'dashboard' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
+                ${centerView === 'kanban' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
             >
-              dashboard
+              board
             </button>
             <button
-              onClick={() => setCenterView('map')}
+              onClick={() => setCenterView('analytics')}
               className={`px-2.5 py-1 text-[10px] font-mono rounded-md transition-all
-                ${centerView === 'map' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
+                ${centerView === 'analytics' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
             >
-              map
+              analytics
             </button>
           </div>
 
           <div className="flex-1 overflow-hidden min-h-0">
-            {centerView === 'dashboard' ? (
-              <Dashboard
-                spaces={spaces}
-                activeContextId={activeContextId}
-                selectedContextId={selectedContextId}
-                onSelect={handleSelectContext}
-                onSetActive={handleSetActive}
-                onPushChat={handlePushChat}
-              />
-            ) : (
+            {centerView === 'kanban' ? (
               <KanbanView
                 spaces={spaces}
                 activeContextId={activeContextId}
-                selectedContextId={selectedContextId}
+                selectedProjectId={selectedProjectId}
                 onSelect={handleSelectContext}
                 onSetActive={handleSetActive}
-                onPushChat={handlePushChat}
+                onUpdate={async (id, patch) => {
+                  await apiUpdateContext(id, patch)
+                  loadData()
+                }}
                 onRefresh={loadData}
               />
+            ) : (
+              <Dashboard spaces={spaces} />
             )}
           </div>
         </div>
@@ -289,57 +307,32 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
           <div className="absolute inset-y-0 left-[1.5px] w-px bg-ds-border group-hover:bg-ds-accent/50 transition-colors" />
         </div>
 
-        {/* Right panel */}
-        <div className="shrink-0 flex flex-col overflow-hidden bg-ds-surface min-h-0 border-l border-ds-border" style={{ width: rightWidth }}>
-          {selectedContext && selectedSpace ? (
-            <>
-              <div className="flex items-center gap-0.5 border-b border-ds-border px-3 h-9 shrink-0 bg-ds-elevated">
-                <button
-                  onClick={() => setRightTab('detail')}
-                  className={`px-3 py-1 text-xs font-mono rounded-md transition-all
-                    ${rightTab === 'detail' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
-                >
-                  detail
-                </button>
-                <button
-                  onClick={() => setRightTab('chat')}
-                  className={`px-3 py-1 text-xs font-mono rounded-md transition-all
-                    ${rightTab === 'chat' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
-                >
-                  <span className="text-ds-accent">//</span> chat
-                </button>
-                <button
-                  onClick={() => setSelectedContextId('')}
-                  className="ml-auto text-ds-text-dim hover:text-ds-text p-1.5 rounded hover:bg-ds-elevated transition-all"
-                >
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M2 2l8 8M10 2L2 10" />
-                  </svg>
-                </button>
-              </div>
-              <div className="flex-1 overflow-hidden min-h-0">
-                {rightTab === 'detail' ? (
-                  <ContextDetail
-                    context={selectedContext}
-                    space={selectedSpace}
-                    isActive={selectedContext.id === activeContextId}
-                    onSetActive={() => handleSetActive(selectedContext.id)}
-                    onUpdate={handleContextUpdate}
-                  />
-                ) : (
-                  <ChatView activeContext={selectedContext} />
-                )}
-              </div>
-            </>
+        {/* Right panel — DrillDown or empty state */}
+        <div
+          className="shrink-0 flex flex-col overflow-hidden min-h-0 border-l border-ds-border bg-ds-bg"
+          style={{ width: rightWidth }}
+        >
+          {selectedContext ? (
+            <DrillDownDrawer
+              context={selectedContext}
+              onClose={() => setSelectedContextId('')}
+              onUpdate={async (id, patch) => {
+                await apiUpdateContext(id, patch)
+                loadData()
+              }}
+              onRefresh={loadData}
+            />
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center gap-2 p-6">
-              <p className="text-ds-text-dim text-xs font-mono text-center">Select a context to see details</p>
-              {activeContext && (
+              <p className="text-ds-text-dim text-xs font-mono text-center leading-relaxed">
+                Select a context<br />to see its detail
+              </p>
+              {activeContextId && (
                 <button
                   onClick={() => handleSelectContext(activeContextId)}
-                  className="mt-1 text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity"
+                  className="mt-2 text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity"
                 >
-                  Open active context →
+                  Open active →
                 </button>
               )}
             </div>
@@ -347,26 +340,98 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
         </div>
 
       </div>
+
+      {/* Guard — master agent chat */}
+      <GuardChat />
+    </div>
+  )
+}
+
+// ── ActiveContextSection ──────────────────────────────────────────────────────
+
+function ActiveContextSection({
+  spaces, activeContextId, toolsStatus, onOpen,
+}: {
+  spaces: Space[]
+  activeContextId: string
+  toolsStatus: Record<string, boolean>
+  onOpen: () => void
+}) {
+  const context = spaces.flatMap(s => s.contexts).find(c => c.id === activeContextId)
+  const progress = context?.archetype ? computeStreamProgress(context) : null
+  const nextMethod = context?.archetype ? getNextMethod(context) : null
+  const lastSession = context?.sessions[context.sessions.length - 1]
+
+  return (
+    <div className="px-3 py-3 border-b border-ds-border">
+      <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-2.5">active</p>
+
+      {context ? (
+        <>
+          <button onClick={onOpen} className="w-full text-left hover:opacity-80 transition-opacity mb-1.5">
+            <p className="text-ds-text text-xs font-semibold leading-snug">{context.name}</p>
+          </button>
+
+          <div className="flex items-center gap-1.5 flex-wrap mb-2">
+            <PhaseBadge phase={context.phase} />
+          </div>
+
+          {progress && progress.total > 0 && (
+            <div className="mb-1.5">
+              <div className="flex items-center gap-2">
+                <div className="flex-1 h-[2px] bg-ds-border rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all"
+                    style={{
+                      width: `${(progress.completed / progress.total) * 100}%`,
+                      backgroundColor: `rgb(var(${PHASE_CSS_VAR[context.phase]}))`,
+                    }}
+                  />
+                </div>
+                <span className="text-[9px] font-mono text-ds-text-dim shrink-0">{progress.completed}/{progress.total}</span>
+              </div>
+              {nextMethod && (
+                <p className="text-[9px] font-mono text-ds-accent mt-1 truncate">→ {nextMethod.name}</p>
+              )}
+            </div>
+          )}
+
+          {lastSession && (
+            <div className="mt-2 pt-2 border-t border-ds-border">
+              <p className="text-[9px] font-mono text-ds-text-dim leading-relaxed line-clamp-2">
+                "{lastSession.summary.length > 60 ? lastSession.summary.slice(0, 57) + '…' : lastSession.summary}"
+              </p>
+            </div>
+          )}
+        </>
+      ) : (
+        <p className="text-ds-text-dim text-xs font-mono">no active context</p>
+      )}
+
+      {/* Tools */}
+      <div className="mt-3 pt-3 border-t border-ds-border">
+        <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-2">tools</p>
+        {['Claude', 'Cursor', 'Figma'].map(tool => {
+          const running = toolsStatus[tool] ?? false
+          return (
+            <div key={tool} className="flex items-center gap-2 py-0.5">
+              <span className={`w-1.5 h-1.5 rounded-full shrink-0 transition-colors ${running ? 'bg-green-400' : 'bg-ds-border'}`} />
+              <span className={`text-xs font-mono ${running ? 'text-ds-text-secondary' : 'text-ds-text-dim'}`}>{tool}</span>
+              {running && <span className="text-[9px] text-green-400/60 ml-auto">live</span>}
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 
-function SidebarSection({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="px-3 py-3 border-b border-ds-border">
-      <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-2.5">{label}</p>
-      {children}
-    </div>
-  )
-}
-
 function PhaseBadge({ phase }: { phase: Phase }) {
   const meta = PHASE_META[phase]
   return (
-    <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono
-      ${meta.color} ${meta.bg}`}>
+    <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono ${meta.color} ${meta.bg}`}>
       {meta.icon} {meta.label}
     </span>
   )
