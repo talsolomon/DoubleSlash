@@ -1,27 +1,72 @@
 ---
 name: duble-slash-agents
-description: Two-layer FLOW agent system — operators (Dora/Sol/Bran/May) + experts (Design/PM/Dev/...) + helpers.
-version: 0.1.0
+description: Three-tier FLOW agent system — orchestrators (Apex/Guard) + sync agents (Echo/Prism) + operators (Dora/Sol/Bran/May) + experts + helpers.
+version: 0.2.0
 method: FLOW
 method_spec: methodology/flow.md
-date: 2026-04-25
+date: 2026-05-08
+---
+
+# Architecture
+
+## Tier 0 — Orchestrators (the brain)
+Super agents. PM-level. Run inside DS, manage all other agents.
+Not invoked per-phase — invoked across phases, across sessions, across cards.
+
+## Tier 1 — Sync Agents (the bloodstream)
+Always-on bridge between LLM sessions and DS knowledge graph.
+Pull context from sessions → DS. Push DS state → sessions.
+Find patterns, prevent duplicate work, rescue orphaned contexts.
+
+## Tier 2 — Methodology Operators (the skilled workforce)
+Phase-bound professionals. One per FLOW phase.
+Each has soul, personality, loop behaviors, and a scheduler.
+
+## Helpers (cross-cutting utilities)
+Shared tools invoked from operator/expert workflow steps.
+
 ---
 
 modules:
+  orchestrators:
+    path: agents/orchestrators
+    type: tier-0
+    description: Apex (Chief Orchestrator — PM of all agents) + Guard (Privacy Warden).
+    agents:
+      - apex: Chief Orchestrator. Context audit, solidify, dispatch, health, priority queue.
+      - guard: Privacy Warden. Handoff scan, session audit, injection detect, data classify, redact.
+    invocation: "//apex, //guard, //orchestrate, //status, //scan, //privacy"
+
+  sync:
+    path: agents/sync
+    type: tier-1
+    description: Echo (Session Bridge) + Prism (Pattern Watcher).
+    agents:
+      - echo: Session bridge. Capture from sessions, push to sessions, diff detect, conflict resolve.
+      - prism: Pattern watcher. Cross-session connections, dedup, orphan rescue, pattern surface.
+    invocation: "//echo, //prism, //sync, //capture, //patterns, //cross-session"
+
   operators:
     path: agents/operators
-    type: layer-1
-    description: Phase-bound operators. One per FLOW phase (head, left body, right body, tail).
+    type: tier-2
+    description: Phase-bound operators. One per FLOW phase (head → left-body → right-body → tail).
+    agents:
+      - dora: Explorer. Discovery methods. Opens the aperture.
+      - sol: Solidifier. Shape and decide. One shape per session.
+      - bran: Builder. Vertical slices against the contract.
+      - may: Shipper. Release, narrate, trust receipt on every release.
+    invocation: "//explore, //solidify, //build, //ship"
+
   experts:
     path: agents/experts
-    type: layer-2
-    status: planned                   # directory not yet authored; the [E] loan-in path in
-                                      # operator menus is reserved for when the first expert ships.
-    description: Domain-bound experts. Loaned in from operator turns via @handle, or invoked directly.
+    type: tier-2
+    status: planned
+    description: Domain-bound experts. Loaned in via [E] from operator turns.
+
   helpers:
     path: agents/helpers
     type: cross-cutting
-    description: Shared utilities invoked from operator or expert workflow steps.
+    description: Shared utilities — handoff compose, handback compose.
 
 config_layering:
   order:
@@ -30,7 +75,27 @@ config_layering:
     - project-context.md                # per-repo context (optional)
   conflict_resolution: later-layers-win-for-non-conflicting-keys
 
+# Agent coordination protocol
+coordination:
+  apex_triggers_guard: true             # Every HO emit routes through Guard for scan
+  apex_notifies_echo: true              # Every SC (solidify) notifies Echo to push
+  echo_notifies_prism: true             # Every new capture triggers Prism similarity pass
+  prism_notifies_apex: true             # Cross-session clusters route to Apex for SC proposal
+  guard_gates_echo: true                # Echo cannot sync without Guard DC clearance
+
+# Shared knowledge base
+knowledge_base:
+  path: planning/knowledge/
+  format: entity-nodes                  # Rowboat-style: typed entities with backlinks, not summary pages
+  entity_types:
+    - patterns                          # recurring themes across sessions
+    - clusters                          # groups of related sessions
+    - cross-links                       # documented session-to-session connections
+    - lessons                           # cross-card behavioral learnings
+    - decisions                         # logged decisions with reversibility
+    - commitments                       # tracked promises and deadlines
+  index: planning/knowledge/index.md
+
 manifests:
-  operators: agents/operator-manifest.csv  # persona-shaped — one row per operator. Helpers
-                                           # are not personas; they're enumerated in skills below.
-  skills: agents/skill-manifest.csv        # full roster: operators + sub-skills + helpers.
+  operators: agents/operator-manifest.csv
+  skills: agents/skill-manifest.csv

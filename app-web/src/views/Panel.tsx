@@ -5,11 +5,13 @@ import {
   apiGetContexts, apiSetActiveContext, apiUpdateContext,
 } from '../types'
 import { computeStreamProgress, getNextMethod } from '../data/fish-recipe'
+import { PHASE_OPERATOR } from '../data/agents'
 import KanbanView from '../components/KanbanView'
 import DrillDownDrawer from '../components/DrillDownDrawer'
 import Dashboard from './Dashboard'
+import AgentsView from './AgentsView'
 
-type CenterView = 'kanban' | 'analytics'
+type CenterView = 'kanban' | 'analytics' | 'agents'
 
 const TOOL_NAMES = ['Claude', 'Cursor', 'Figma']
 
@@ -81,10 +83,18 @@ function ProjectSwitcher({ spaces, selectedId, onChange }: {
   )
 }
 
-// ── GuardChat ─────────────────────────────────────────────────────────────────
+// ── AgentChat ─────────────────────────────────────────────────────────────────
 
-function GuardChat() {
+const CHAT_AGENTS = [
+  { id: 'guard', icon: '◆', label: 'guard', placeholder: 'Scan handoff, classify data…' },
+  { id: 'apex',  icon: '🔺', label: 'apex',  placeholder: 'Priority queue, board status…' },
+  { id: 'echo',  icon: '⟳', label: 'echo',  placeholder: 'Capture session, push context…' },
+]
+
+function AgentChat() {
   const [input, setInput] = useState('')
+  const [agentIdx, setAgentIdx] = useState(0)
+  const agent = CHAT_AGENTS[agentIdx]
 
   function handleSend() {
     if (!input.trim()) return
@@ -92,16 +102,23 @@ function GuardChat() {
   }
 
   return (
-    <div className="shrink-0 flex items-center gap-3 px-4 py-2.5 border-t border-ds-border bg-ds-elevated">
-      <div className="flex items-center gap-1.5 shrink-0">
-        <span className="text-ds-accent text-xs font-bold">◆</span>
-        <span className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest">guard</span>
-      </div>
+    <div className="shrink-0 flex items-center gap-2 px-3 py-2.5 border-t border-ds-border bg-ds-elevated">
+      <button
+        onClick={() => setAgentIdx((agentIdx + 1) % CHAT_AGENTS.length)}
+        className="flex items-center gap-1 shrink-0 hover:opacity-70 transition-opacity"
+        title="Switch agent"
+      >
+        <span className="text-ds-accent text-xs font-bold">{agent.icon}</span>
+        <span className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest">{agent.label}</span>
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" className="text-ds-border ml-0.5">
+          <path d="M1.5 3L4 5.5 6.5 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      </button>
       <input
         value={input}
         onChange={e => setInput(e.target.value)}
         onKeyDown={e => { if (e.key === 'Enter') handleSend() }}
-        placeholder="What should I focus on next?"
+        placeholder={agent.placeholder}
         className="flex-1 bg-ds-surface border border-ds-border rounded-lg px-3 py-1.5
           text-[11px] font-mono text-ds-text placeholder-ds-text-dim/60 outline-none
           focus:border-ds-accent/50 transition-colors"
@@ -266,24 +283,20 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
         <div className="flex-1 overflow-hidden min-w-0 min-h-0 flex flex-col">
           {/* Center nav */}
           <div className="flex items-center px-4 h-9 shrink-0 border-b border-ds-border bg-ds-elevated gap-1">
-            <button
-              onClick={() => setCenterView('kanban')}
-              className={`px-2.5 py-1 text-[10px] font-mono rounded-md transition-all
-                ${centerView === 'kanban' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
-            >
-              board
-            </button>
-            <button
-              onClick={() => setCenterView('analytics')}
-              className={`px-2.5 py-1 text-[10px] font-mono rounded-md transition-all
-                ${centerView === 'analytics' ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
-            >
-              analytics
-            </button>
+            {(['kanban', 'analytics', 'agents'] as CenterView[]).map(v => (
+              <button
+                key={v}
+                onClick={() => setCenterView(v)}
+                className={`px-2.5 py-1 text-[10px] font-mono rounded-md transition-all
+                  ${centerView === v ? 'text-ds-text bg-ds-bg border border-ds-border' : 'text-ds-text-dim hover:text-ds-text'}`}
+              >
+                {v === 'kanban' ? 'board' : v}
+              </button>
+            ))}
           </div>
 
           <div className="flex-1 overflow-hidden min-h-0">
-            {centerView === 'kanban' ? (
+            {centerView === 'kanban' && (
               <KanbanView
                 spaces={spaces}
                 activeContextId={activeContextId}
@@ -296,8 +309,12 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
                 }}
                 onRefresh={loadData}
               />
-            ) : (
-              <Dashboard spaces={spaces} />
+            )}
+            {centerView === 'analytics' && <Dashboard spaces={spaces} />}
+            {centerView === 'agents' && (
+              <AgentsView activePhase={
+                allContexts.find(e => e.context.id === activeContextId)?.context.phase
+              } />
             )}
           </div>
         </div>
@@ -341,8 +358,8 @@ export default function Panel({ onCollapse, isLight, onToggleTheme }: Props) {
 
       </div>
 
-      {/* Guard — master agent chat */}
-      <GuardChat />
+      {/* Agent chat bar */}
+      <AgentChat />
     </div>
   )
 }
@@ -393,6 +410,22 @@ function ActiveContextSection({
               {nextMethod && (
                 <p className="text-[9px] font-mono text-ds-accent mt-1 truncate">→ {nextMethod.name}</p>
               )}
+            </div>
+          )}
+
+          {/* Active operator for this phase */}
+          {context?.phase && (
+            <div className="mt-2 pt-2 border-t border-ds-border">
+              {(() => {
+                const op = PHASE_OPERATOR[context.phase]
+                return (
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px]">{op.icon}</span>
+                    <span className="text-[9px] font-mono text-ds-accent font-semibold">{op.name}</span>
+                    <span className="text-[8px] font-mono text-ds-text-dim ml-auto">{op.invocation}</span>
+                  </div>
+                )
+              })()}
             </div>
           )}
 

@@ -1,19 +1,22 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Space, Context, Phase, PHASE_META } from '../types'
+import { PHASE_OPERATOR } from '../data/agents'
 import KanbanView from '../components/KanbanView'
 import GitLog from '../components/GitLog'
 import PromptBar from '../components/PromptBar'
 import ContextDetail from '../components/ContextDetail'
 import Connections from './Connections'
 import Dashboard from './Dashboard'
+import AgentsView from './AgentsView'
 
-type View = 'dashboard' | 'chat' | 'log' | 'kanban' | 'connections' | 'context-detail'
+type View = 'dashboard' | 'chat' | 'log' | 'kanban' | 'connections' | 'context-detail' | 'agents'
 
 const SECONDARY_VIEWS: { key: View; label: string }[] = [
-  { key: 'chat',        label: 'chat' },
-  { key: 'log',         label: 'log' },
-  { key: 'kanban',      label: 'kanban' },
+  { key: 'chat',        label: 'chat'        },
+  { key: 'log',         label: 'log'         },
+  { key: 'kanban',      label: 'kanban'      },
   { key: 'connections', label: 'connections' },
+  { key: 'agents',      label: 'agents'      },
 ]
 
 // ── ProjectSwitcher ───────────────────────────────────────────────────────────
@@ -77,10 +80,18 @@ function ProjectSwitcher({ spaces, selectedId, onChange }: {
   )
 }
 
-// ── GuardChat ─────────────────────────────────────────────────────────────────
+// ── AgentChat ─────────────────────────────────────────────────────────────────
 
-function GuardChat() {
+const CHAT_AGENTS = [
+  { id: 'guard', icon: '◆', label: 'guard', placeholder: 'Scan handoff, classify data…' },
+  { id: 'apex',  icon: '🔺', label: 'apex',  placeholder: 'Priority queue, board status…' },
+  { id: 'echo',  icon: '⟳', label: 'echo',  placeholder: 'Capture session, push context…' },
+]
+
+function AgentChat() {
   const [input, setInput] = useState('')
+  const [agentIdx, setAgentIdx] = useState(0)
+  const agent = CHAT_AGENTS[agentIdx]
 
   function handleSend() {
     if (!input.trim()) return
@@ -88,16 +99,23 @@ function GuardChat() {
   }
 
   return (
-    <div className="no-drag shrink-0 flex items-center gap-3 px-4 py-2.5 border-t border-ds-border bg-ds-elevated">
-      <div className="flex items-center gap-1.5 shrink-0">
-        <span className="text-ds-accent text-xs font-bold">◆</span>
-        <span className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest">guard</span>
-      </div>
+    <div className="no-drag shrink-0 flex items-center gap-2 px-3 py-2.5 border-t border-ds-border bg-ds-elevated">
+      <button
+        onClick={() => setAgentIdx((agentIdx + 1) % CHAT_AGENTS.length)}
+        className="flex items-center gap-1 shrink-0 hover:opacity-70 transition-opacity"
+        title="Switch agent"
+      >
+        <span className="text-ds-accent text-xs font-bold">{agent.icon}</span>
+        <span className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest">{agent.label}</span>
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" className="text-ds-border ml-0.5">
+          <path d="M1.5 3L4 5.5 6.5 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      </button>
       <input
         value={input}
         onChange={e => setInput(e.target.value)}
         onKeyDown={e => { if (e.key === 'Enter') handleSend() }}
-        placeholder="What should I focus on next?"
+        placeholder={agent.placeholder}
         className="flex-1 bg-ds-surface border border-ds-border rounded-lg px-3 py-1.5
           text-[11px] font-mono text-ds-text placeholder-ds-text-dim/60 outline-none
           focus:border-ds-accent/50 transition-colors"
@@ -346,13 +364,16 @@ export default function Panel() {
               />
             )}
             {view === 'connections' && <Connections />}
+            {view === 'agents' && (
+              <AgentsView activePhase={activeContext?.phase} />
+            )}
           </div>
 
         </div>
       </div>
 
-      {/* Guard — master agent chat */}
-      <GuardChat />
+      {/* Agent chat bar */}
+      <AgentChat />
     </div>
   )
 }
@@ -406,35 +427,42 @@ function SidebarAgentSignal({ context }: { context: Context }) {
   const tasks = context.tasks ?? []
   const nextTask = tasks.find((t) => !t.done)
   const lastArtifact = context.artifacts[context.artifacts.length - 1]
-
-  if (!lastSession) return null
+  const operator = PHASE_OPERATOR[context.phase]
 
   return (
     <div className="mt-3 pt-3 border-t border-ds-border">
-      <p className="text-[9px] font-mono text-ds-text-dim uppercase tracking-widest mb-1.5">agent</p>
-      <p className="text-[10px] text-ds-text-dim leading-relaxed mb-2">
-        Paused after "
-        {lastSession.summary.length > 52
-          ? lastSession.summary.slice(0, 49) + '…'
-          : lastSession.summary}
-        "
-      </p>
-      <div className="flex flex-col gap-1">
-        {nextTask && (
-          <button className="text-left text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity leading-relaxed">
-            → {nextTask.name.split(' ').slice(0, 5).join(' ')}
-            {nextTask.name.split(' ').length > 5 ? '…' : ''}
-          </button>
-        )}
-        <button className="text-left text-[10px] font-mono text-ds-text-secondary hover:text-ds-text transition-colors">
-          → Review last summary
-        </button>
-        {lastArtifact && (
-          <button className="text-left text-[10px] font-mono text-ds-text-secondary hover:text-ds-text transition-colors">
-            → See {lastArtifact.name}
-          </button>
-        )}
+      {/* Active operator for this phase */}
+      <div className="flex items-center gap-1.5 mb-2">
+        <span className="text-[10px]">{operator.icon}</span>
+        <span className="text-[9px] font-mono text-ds-accent font-semibold">{operator.name}</span>
+        <code className="text-[8px] font-mono text-ds-text-dim ml-auto">{operator.invocation}</code>
       </div>
+
+      {lastSession && (
+        <>
+          <p className="text-[10px] text-ds-text-dim leading-relaxed mb-2">
+            "{lastSession.summary.length > 52
+              ? lastSession.summary.slice(0, 49) + '…'
+              : lastSession.summary}"
+          </p>
+          <div className="flex flex-col gap-1">
+            {nextTask && (
+              <button className="text-left text-[10px] font-mono text-ds-accent hover:opacity-75 transition-opacity leading-relaxed">
+                → {nextTask.name.split(' ').slice(0, 5).join(' ')}
+                {nextTask.name.split(' ').length > 5 ? '…' : ''}
+              </button>
+            )}
+            <button className="text-left text-[10px] font-mono text-ds-text-secondary hover:text-ds-text transition-colors">
+              → Review last summary
+            </button>
+            {lastArtifact && (
+              <button className="text-left text-[10px] font-mono text-ds-text-secondary hover:text-ds-text transition-colors">
+                → See {lastArtifact.name}
+              </button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   )
 }

@@ -24,6 +24,16 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 
 <workflow>
 
+<step n="0" goal="Reason through the problem space before generating">
+  <critical>Do not write HMWs from first instinct. The most common failure mode is generating obvious reframings that close the aperture instead of opening it. Thinking before drafting is the gap between a shallow HMW list and one a team actually uses.</critical>
+  <action>Before writing any HMW, internally work through these four questions:
+    1. Who specifically experiences this problem? What is their actual goal, and what is physically/cognitively in their way?
+    2. What assumption about this situation would, if wrong, open a completely different solution space?
+    3. What adjacent domain (different industry, different product, different era) has solved a structurally similar problem?
+    4. What would make the current pain an active feature — something someone would pay for — rather than just a reduced harm?
+  Only after working through these internally should you draft HMWs. The answers to questions 2–4 are where non-obvious reframings come from.</action>
+</step>
+
 <step n="1" goal="Confirm the problem statement">
   <action>Pull the latest problem statement from the card (handoff, HS output, or ask).</action>
   <critical>HMW works from a problem, not a solution. If the input is already solution-shaped ("add a tooltip"), reframe before proceeding.</critical>
@@ -48,6 +58,18 @@ Dora: "That's a solution, not a problem. Let me flip it: the underlying problem 
 
   <action>Aim for 3 minimum, 5 maximum. Quality over quantity. Each must pass the "so what?" test — a team could start sketching against it.</action>
 </step>
+
+<examples label="good-vs-bad-hmw">
+  <context>Problem: Designers lose decision reasoning when moving work from Figma exploration to written specs in Notion.</context>
+
+  <bad label="solution-shaped">"How might we add a Figma plugin that syncs frames to Notion automatically?" — Already a solution. One specific mechanism pre-decided. The aperture closes immediately.</bad>
+  <bad label="too-vague">"How might we make design handoff seamless?" — 'Seamless' and 'handoff' are undefined. No team can sketch against this. It is a goal disguised as a question.</bad>
+  <bad label="answers-itself">"How might we help designers document decisions in their existing tools?" — There is only one obvious answer: add a text field. The HMW answers itself; it is a feature spec in disguise.</bad>
+
+  <good label="goal-lens">"How might we help a designer preserve decision reasoning while moving from exploration to documentation — without adding a separate capture step?" — Names persona, the goal (preserve reasoning), and the constraint (no extra step). Five different solutions emerge immediately.</good>
+  <good label="obstacle-lens">"How might we reduce the loss of 'why we rejected option B' that happens when a Figma frame becomes a Notion page?" — Specific blocker, specific transition moment. A team can start sketching against this in under an hour.</good>
+  <good label="inversion-lens">"How might we make the handoff moment an active knowledge gain instead of a translation tax?" — Reframes the pain as opportunity. Opens a question the team hasn't asked: maybe the handoff itself is the product, not a cost to minimize.</good>
+</examples>
 
 <step n="3" goal="Score each HMW against the sigil">
   <action>For each HMW, flag: aperture (wide / medium / narrow), effort match for the archetype, and whether it's within scope for this card or suggests a sibling card.</action>

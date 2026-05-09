@@ -42,6 +42,19 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
   <action>For each failure story, write one sentence — what specifically went wrong, in past tense.</action>
 </step>
 
+<step n="2b" goal="Specificity gate — reject generic failure modes before scoring">
+  <critical>Generic failure modes are not research. They are anxiety with a timestamp. Every failure story must name WHO (specific actor, team, or system), WHAT specifically failed (mechanism, not label), and the observable outcome (what appears in metrics, support tickets, or a team retro). Do not score anything that does not pass this gate.</critical>
+  <action>Review every failure mode from step 2. For any that uses abstract language, rewrite it before continuing.</action>
+
+  <example label="bad">"The team burned out during Build." — No specific mechanism, no observable signal. Cannot be mitigated because the cause is unnamed.</example>
+  <example label="good">"The designer and PM disagreed on the empty-state AC for three weeks; Bran rebuilt it twice with no new decision logged, burning the ship window and leaving both depleted at launch." — Specific actors, specific mechanism (undecided AC), observable outcome (missed ship window, morale signal).</example>
+
+  <example label="bad">"Users didn't adopt the feature." — Could mean anything. No mitigation is possible against a label.</example>
+  <example label="good">"Existing power users adopted, but the onboarding flow deposited new users directly into the advanced view with no progressive disclosure; 80% of new-signup cohort churned within 3 sessions before ever reaching the value moment." — Specific user type, specific failure point (onboarding routing), measurable outcome (session count, churn rate).</example>
+
+  <action>Rewrite any failure mode that does not name a specific actor + specific mechanism + observable outcome. Only after every mode passes the gate move to step 3 (scoring).</action>
+</step>
+
 <step n="3" goal="Score probability × severity">
   <action>For each failure mode, score:</action>
   - **Probability:** low / med / high — given what we know today

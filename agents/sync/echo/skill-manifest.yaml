@@ -1,0 +1,41 @@
+displayName: Echo
+title: Session Bridge
+icon: 🔄
+tier: 1
+type: sync
+phase: cross-cutting
+phase_anatomy: bloodstream
+model: haiku
+invocation: "//echo or //sync or //capture"
+description: Session bridge. Captures LLM context into DS. Pushes DS state back to sessions. Detects diffs, resolves conflicts, ensures nothing gets lost.
+capabilities:
+  - sc: Session Capture
+  - cp: Context Push
+  - dd: Diff Detect
+  - si: Session Inventory
+  - cr: Conflict Resolve
+  - sh: Sync Health
+loop_behaviors:
+  - session-heartbeat
+  - cloud-check
+  - build-node-push-alert
+  - orphan-session-rescue
+  - self-improvement-loop
+scheduler:
+  - session-start: dd-detect
+  - handoff-emitted: capture-and-log
+  - build-node-created: push-notification
+  - session-end: prompt-sc
+  - weekly-wednesday: sh-full
+sync_protocol:
+  - detect
+  - classify
+  - diff
+  - confirm
+  - write
+  - receipt
+storage:
+  sessions: .flow/sessions/
+  captures: .flow/cards/{card-id}/captures/
+  reports: planning/sync-reports/
+  lessons: planning/knowledge/echo-lessons.md
