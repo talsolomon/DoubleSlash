@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DubleSlash · Product Requirements Document</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f7f8fc;
+      --surface:   #ffffff;
+      --surface2:  #f0f1f8;
+      --border:    #e2e4f0;
+      --text:      #0d0d1e;
+      --muted:     #7a7ca0;
+      --font:      'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --sans:      -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      /* Phase / agent colors */
+      --explore:   #ea580c;
+      --solidify:  #2563eb;
+      --build:     #16a34a;
+      --ship:      #ca8a04;
+      --tier0:     #7c3aed;
+      --tier1:     #0891b2;
+
+      /* Surface badge colors */
+      --s-desktop:  #d97706;
+      --s-claude:   #7c3aed;
+      --s-nodemap:  #2563eb;
+      --s-snapshot: #0891b2;
+      --s-bg:       #64748b;
+
+      /* Tab accents */
+      --t-overview:     #7c3aed;
+      --t-journeys:     #d97706;
+      --t-arch:         #0891b2;
+      --t-uiux:         #2563eb;
+      --t-req:          #16a34a;
+      --t-domain:       #dc2626;
+      --t-integrations: #ea580c;
+      --t-risks:        #db2777;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ───────────────────────────────────────────────── */
+    header {
+      padding: 28px 48px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      background: linear-gradient(180deg, #eeeef8 0%, var(--bg) 100%);
+    }
+    .wordmark { font-family: var(--font); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    header h1 { font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; }
+    header h1 span { color: #7c3aed; }
+    .header-meta { display: flex; gap: 12px; align-items: center; }
+    .meta-badge {
+      font-family: var(--font); font-size: 10px; padding: 3px 9px; border-radius: 4px;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--muted);
+    }
+    .meta-badge strong { color: var(--text); }
+
+    /* ── TAB NAV ──────────────────────────────────────────────── */
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      font-family: var(--font); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 14px 20px; border: none;
+      background: none; color: var(--muted); cursor: pointer;
+      border-bottom: 2px solid transparent; transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--text); }
+    .tab-btn[data-tab="overview"].active    { border-color: var(--t-overview);     color: #7c3aed; }
+    .tab-btn[data-tab="journeys"].active    { border-color: var(--t-journeys);     color: #b45309; }
+    .tab-btn[data-tab="arch"].active        { border-color: var(--t-arch);         color: #0e7490; }
+    .tab-btn[data-tab="uiux"].active        { border-color: var(--t-uiux);         color: #1d4ed8; }
+    .tab-btn[data-tab="req"].active         { border-color: var(--t-req);          color: #15803d; }
+    .tab-btn[data-tab="domain"].active      { border-color: var(--t-domain);       color: #dc2626; }
+    .tab-btn[data-tab="integrations"].active{ border-color: var(--t-integrations); color: #c2410c; }
+    .tab-btn[data-tab="risks"].active       { border-color: var(--t-risks);        color: #be185d; }
+
+    /* ── TAB SECTIONS ─────────────────────────────────────────── */
+    .tab-section { display: none; padding: 40px 48px 60px; max-width: 1280px; }
+    .tab-section.active { display: block; }
+
+    /* ── SECTION LABELS ───────────────────────────────────────── */
+    .sec-label {
+      font-family: var(--font); font-size: 9px; text-transform: uppercase;
+      letter-spacing: 0.2em; color: var(--muted); margin-bottom: 20px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .sub-label {
+      font-family: var(--font); font-size: 9px; text-transform: uppercase;
+      letter-spacing: 0.15em; color: #c0c2d8; margin-bottom: 8px; margin-top: 20px;
+    }
+
+    /* ── CARD GRID ────────────────────────────────────────────── */
+    .card-grid { display: grid; gap: 16px; }
+    .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      border-radius: 12px; border: 1px solid var(--border);
+      background: var(--surface); padding: 20px 22px;
+    }
+    .card h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .card h4 { font-family: var(--font); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
+    .card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .card ul { list-style: none; }
+    .card ul li { font-size: 12px; color: var(--muted); line-height: 1.6; padding: 3px 0; padding-left: 14px; position: relative; }
+    .card ul li::before { content: '—'; position: absolute; left: 0; color: #c8cae8; }
+
+    .card.accent-purple { border-color: #8b5cf6; background: linear-gradient(135deg, #f5f0ff 0%, var(--surface) 60%); }
+    .card.accent-amber  { border-color: #d97706; background: linear-gradient(135deg, #fffbeb 0%, var(--surface) 60%); }
+    .card.accent-cyan   { border-color: #0891b2; background: linear-gradient(135deg, #ecfeff 0%, var(--surface) 60%); }
+    .card.accent-blue   { border-color: #2563eb; background: linear-gradient(135deg, #eff6ff 0%, var(--surface) 60%); }
+    .card.accent-green  { border-color: #16a34a; background: linear-gradient(135deg, #f0fdf4 0%, var(--surface) 60%); }
+    .card.accent-red    { border-color: #dc2626; background: linear-gradient(135deg, #fef2f2 0%, var(--surface) 60%); }
+
+    /* ── QUOTE BLOCK ──────────────────────────────────────────── */
+    .quote-block {
+      border-left: 3px solid #7c3aed; padding: 16px 20px;
+      background: var(--surface2); border-radius: 0 8px 8px 0;
+      margin-bottom: 24px;
+    }
+    .quote-block p { font-size: 14px; line-height: 1.7; color: var(--text); }
+    .quote-block p + p { margin-top: 10px; }
+
+    /* ── PILLS ────────────────────────────────────────────────── */
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .pill {
+      font-family: var(--font); font-size: 10px; padding: 3px 8px;
+      border-radius: 4px; font-weight: 600; letter-spacing: 0.03em;
+    }
+    .pill.purple { background: rgba(124,58,237,0.08); color: #6d28d9; border: 1px solid rgba(124,58,237,0.25); }
+    .pill.amber  { background: rgba(245,158,11,0.1);  color: #b45309; border: 1px solid rgba(245,158,11,0.3); }
+    .pill.cyan   { background: rgba(8,145,178,0.08);  color: #0e7490; border: 1px solid rgba(8,145,178,0.25); }
+    .pill.blue   { background: rgba(37,99,235,0.08);  color: #1d4ed8; border: 1px solid rgba(37,99,235,0.25); }
+    .pill.green  { background: rgba(22,163,74,0.08);  color: #15803d; border: 1px solid rgba(22,163,74,0.25); }
+    .pill.muted  { background: rgba(71,85,105,0.08);  color: #64748b; border: 1px solid rgba(71,85,105,0.25); }
+    .pill.explore  { background: rgba(234,88,12,0.08);  color: #c2410c; border: 1px solid rgba(234,88,12,0.25); }
+    .pill.solidify { background: rgba(37,99,235,0.08);  color: #1d4ed8; border: 1px solid rgba(37,99,235,0.25); }
+    .pill.build    { background: rgba(22,163,74,0.08);  color: #15803d; border: 1px solid rgba(22,163,74,0.25); }
+    .pill.ship     { background: rgba(202,138,4,0.08);  color: #b45309; border: 1px solid rgba(202,138,4,0.25); }
+
+    /* ── TABLES ───────────────────────────────────────────────── */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 12px; }
+    .data-table th {
+      font-family: var(--font); font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted); text-align: left; padding: 10px 12px;
+      border-bottom: 1px solid var(--border); background: var(--surface2);
+    }
+    .data-table td { padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--muted); vertical-align: top; line-height: 1.5; }
+    .data-table td strong { color: var(--text); }
+    .data-table tr:hover td { background: rgba(0,0,0,0.02); }
+    .data-table .id-cell { font-family: var(--font); font-size: 10px; color: #a8aac8; white-space: nowrap; }
+
+    /* ── RISK TABLE ───────────────────────────────────────────── */
+    .risk-low    { color: #15803d; }
+    .risk-medium { color: #b45309; }
+    .risk-high   { color: #dc2626; }
+
+    /* ── ROADMAP TIMELINE ─────────────────────────────────────── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px;
+    }
+    .timeline-meta { min-width: 160px; flex-shrink: 0; }
+    .timeline-meta .milestone { font-family: var(--font); font-size: 11px; font-weight: 600; color: var(--text); }
+    .timeline-meta .date { font-family: var(--font); font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .timeline-content { flex: 1; }
+    .timeline-content p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ── METRICS TABLE ────────────────────────────────────────── */
+    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+    .metric-card {
+      border: 1px solid var(--border); border-radius: 8px; background: var(--surface2);
+      padding: 14px 16px;
+    }
+    .metric-num { font-family: var(--font); font-size: 22px; font-weight: 700; color: var(--text); }
+    .metric-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .metric-target { font-family: var(--font); font-size: 10px; color: #c0c2d8; margin-top: 2px; }
+
+    /* ── JOURNEY ──────────────────────────────────────────────── */
+    .journey-selector { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+    .journey-btn {
+      font-family: var(--font); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--muted); cursor: pointer; transition: all 0.15s;
+    }
+    .journey-btn:hover { border-color: #c8cae8; color: var(--text); }
+    .journey-btn.active { border-color: var(--s-desktop); color: #b45309; background: rgba(245,158,11,0.06); }
+
+    .journey-panel { display: none; }
+    .journey-panel.active { display: block; }
+
+    .journey-meta {
+      display: flex; gap: 12px; align-items: flex-start; margin-bottom: 20px;
+      padding: 16px 20px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--border);
+    }
+    .journey-meta .j-number {
+      font-family: var(--font); font-size: 28px; font-weight: 700; color: #d0d2e8; flex-shrink: 0;
+      line-height: 1;
+    }
+    .journey-meta .j-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .journey-meta .j-persona { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    .journey-table { width: 100%; border-collapse: collapse; }
+    .journey-table th {
+      font-family: var(--font); font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted); text-align: left; padding: 8px 12px;
+      border-bottom: 1px solid var(--border); background: var(--surface2);
+    }
+    .journey-table td {
+      padding: 12px; border-bottom: 1px solid rgba(0,0,0,0.05);
+      vertical-align: top; line-height: 1.5;
+    }
+    .journey-table td:first-child {
+      font-family: var(--font); font-size: 10px; color: #c0c2d8; width: 32px; text-align: center;
+    }
+    .journey-table td:nth-child(2) { width: 200px; }
+    .journey-table td:nth-child(3) { font-size: 13px; color: var(--text); }
+    .journey-table td:nth-child(4) { font-size: 12px; color: var(--muted); }
+    .journey-table tr:hover td { background: rgba(0,0,0,0.02); }
+
+    /* Surface tags */
+    .surf-tag {
+      display: inline-block; font-family: var(--font); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.05em; padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+    }
+    .surf-arrow { font-size: 10px; color: var(--muted); margin: 0 4px; }
+    .surf-desktop  { background: rgba(245,158,11,0.1);  color: #b45309; border: 1px solid rgba(245,158,11,0.3); }
+    .surf-claude   { background: rgba(124,58,237,0.08); color: #6d28d9; border: 1px solid rgba(124,58,237,0.25); }
+    .surf-nodemap  { background: rgba(37,99,235,0.08);  color: #1d4ed8; border: 1px solid rgba(37,99,235,0.25); }
+    .surf-snapshot { background: rgba(8,145,178,0.08);  color: #0e7490; border: 1px solid rgba(8,145,178,0.25); }
+    .surf-bg       { background: rgba(71,85,105,0.08);  color: #64748b; border: 1px solid rgba(71,85,105,0.2); }
+    .surf-both     { background: rgba(37,99,235,0.06);  color: #0284c7; border: 1px solid rgba(37,99,235,0.2); }
+
+    .key-moments {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding: 16px;
+      background: var(--surface2); border-radius: 8px; border: 1px solid var(--border);
+    }
+    .key-moments-label { font-family: var(--font); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); width: 100%; margin-bottom: 4px; }
+    .moment-chip {
+      font-size: 11px; color: var(--muted); padding: 5px 12px; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--surface);
+    }
+    .moment-chip span { color: #b45309; }
+
+    /* ── ARCHITECTURE ─────────────────────────────────────────── */
+    .arch-runtimes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+    .runtime-card {
+      border-radius: 12px; border: 1px solid var(--border); background: var(--surface); overflow: hidden;
+    }
+    .runtime-card .rt-header {
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .runtime-card .rt-title { font-size: 14px; font-weight: 600; color: var(--text); }
+    .runtime-card .rt-subtitle { font-family: var(--font); font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .runtime-card .rt-badge { font-family: var(--font); font-size: 9px; padding: 3px 8px; border-radius: 4px; }
+    .rt-desktop .rt-header { background: linear-gradient(135deg, #fffbeb 0%, var(--surface) 100%); }
+    .rt-desktop .rt-badge { background: rgba(245,158,11,0.1); color: #b45309; border: 1px solid rgba(245,158,11,0.3); }
+    .rt-web .rt-header { background: linear-gradient(135deg, #eff6ff 0%, var(--surface) 100%); }
+    .rt-web .rt-badge { background: rgba(37,99,235,0.08); color: #1d4ed8; border: 1px solid rgba(37,99,235,0.25); }
+    .runtime-card .rt-body { padding: 16px 20px; }
+    .runtime-card .rt-body ul { list-style: none; }
+    .runtime-card .rt-body li {
+      font-size: 12px; color: var(--muted); padding: 5px 0 5px 14px; position: relative;
+      border-bottom: 1px solid rgba(0,0,0,0.04); line-height: 1.5;
+    }
+    .runtime-card .rt-body li:last-child { border-bottom: none; }
+    .runtime-card .rt-body li::before { content: '›'; position: absolute; left: 0; color: #c8cae8; }
+    .runtime-card .rt-body li strong { color: var(--text); }
+
+    .data-flow {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 20px 24px; font-family: var(--font); font-size: 11px; line-height: 2;
+      overflow-x: auto; margin-bottom: 24px;
+    }
+    .data-flow .df-trigger { color: #b45309; }
+    .data-flow .df-system  { color: #0e7490; }
+    .data-flow .df-arrow   { color: #c8cae8; }
+    .data-flow .df-action  { color: var(--muted); }
+    .data-flow .df-store   { color: #6d28d9; }
+    .data-flow .df-guard   { color: #dc2626; }
+
+    .code-block {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px 20px; font-family: var(--font); font-size: 11px; line-height: 1.7;
+      overflow-x: auto; color: var(--muted);
+    }
+    .code-block .kw   { color: #6d28d9; }
+    .code-block .type { color: #0e7490; }
+    .code-block .str  { color: #15803d; }
+    .code-block .cmt  { color: #c8cae8; }
+
+    /* ── UI/UX SURFACES ───────────────────────────────────────── */
+    .surface-card {
+      border: 1px solid var(--border); border-radius: 12px; background: var(--surface);
+      overflow: hidden; margin-bottom: 20px;
+    }
+    .surface-header {
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .surface-icon { font-size: 18px; }
+    .surface-title { font-size: 14px; font-weight: 600; color: var(--text); }
+    .surface-subtitle { font-family: var(--font); font-size: 10px; color: var(--muted); margin-top: 1px; }
+    .surface-badge { font-family: var(--font); font-size: 9px; padding: 3px 8px; border-radius: 4px; margin-left: auto; }
+    .surface-body { padding: 16px 20px; }
+    .surface-body ul { list-style: none; }
+    .surface-body li {
+      font-size: 12px; color: var(--muted); padding: 5px 0 5px 14px; position: relative; line-height: 1.5;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .surface-body li:last-child { border-bottom: none; }
+    .surface-body li::before { content: '›'; position: absolute; left: 0; color: #c8cae8; }
+    .surface-body li strong { color: var(--text); }
+    .surface-body li code { font-family: var(--font); font-size: 10px; color: #7c3aed; background: rgba(124,58,237,0.07); padding: 1px 4px; border-radius: 3px; }
+
+    .ascii-layout {
+      font-family: var(--font); font-size: 10px; color: #a8aac8; line-height: 1.6;
+      background: var(--surface2); border-radius: 6px; padding: 12px 16px; margin: 12px 0;
+      border: 1px solid var(--border);
+    }
+
+    /* ── AGENT TIER MINI ──────────────────────────────────────── */
+    .agent-tiers { display: flex; flex-direction: column; gap: 12px; }
+    .tier-row-mini { display: flex; gap: 0; align-items: stretch; }
+    .tier-label-mini {
+      writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
+      font-family: var(--font); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); padding: 12px 10px; min-width: 32px; display: flex;
+      align-items: center; justify-content: center; border-right: 1px solid var(--border);
+      margin-right: 16px; flex-shrink: 0; border-radius: 0;
+    }
+    .tier-label-mini.t0 { color: #7c3aed; border-color: #8b5cf6; }
+    .tier-label-mini.t1 { color: #0891b2; border-color: #0891b2; }
+    .tier-label-mini.t2 { color: #64748b; }
+    .agents-mini { display: flex; gap: 10px; flex: 1; flex-wrap: wrap; padding: 10px 0; }
+    .agent-mini {
+      border: 1px solid var(--border); border-radius: 8px; background: var(--surface2);
+      padding: 10px 14px; flex: 1; min-width: 120px;
+    }
+    .agent-mini .am-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .agent-mini .am-icon { font-size: 16px; }
+    .agent-mini .am-name { font-size: 13px; font-weight: 600; color: var(--text); }
+    .agent-mini .am-role { font-family: var(--font); font-size: 9px; color: var(--muted); }
+    .agent-mini .am-invoke { font-family: var(--font); font-size: 9px; color: #7c3aed; margin-top: 4px; }
+    .agent-mini .am-caps { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+    .agent-mini .cap { font-family: var(--font); font-size: 8px; padding: 1px 5px; border-radius: 3px; }
+
+    .agent-mini.apex,  .agent-mini.guard { border-color: #8b5cf6; }
+    .agent-mini.echo,  .agent-mini.prism { border-color: #0891b2; }
+    .agent-mini.dora { border-color: #ea580c; }
+    .agent-mini.sol  { border-color: #2563eb; }
+    .agent-mini.bran { border-color: #16a34a; }
+    .agent-mini.may  { border-color: #ca8a04; }
+
+    .cap.t0 { background: rgba(124,58,237,0.08); color: #6d28d9; border: 1px solid rgba(124,58,237,0.25); }
+    .cap.t1 { background: rgba(8,145,178,0.08);  color: #0e7490; border: 1px solid rgba(8,145,178,0.25); }
+    .cap.explore  { background: rgba(234,88,12,0.08);  color: #c2410c; border: 1px solid rgba(234,88,12,0.25); }
+    .cap.solidify { background: rgba(37,99,235,0.08);  color: #1d4ed8; border: 1px solid rgba(37,99,235,0.25); }
+    .cap.build    { background: rgba(22,163,74,0.08);  color: #15803d; border: 1px solid rgba(22,163,74,0.25); }
+    .cap.ship     { background: rgba(202,138,4,0.08);  color: #b45309; border: 1px solid rgba(202,138,4,0.25); }
+
+    /* ── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      padding: 20px 48px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--font); font-size: 10px; color: var(--muted);
+    }
+    .version { color: #c8cae8; }
+
+    /* ── UTIL ─────────────────────────────────────────────────── */
+    .mt-24 { margin-top: 24px; }
+    .mt-16 { margin-top: 16px; }
+    .mb-24 { margin-bottom: 24px; }
+    .spacer { height: 24px; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────────── -->
+<header>
+  <div>
+    <div class="wordmark">Duble//Slash</div>
+    <h1>Product Requirements <span>Document</span></h1>
+  </div>
+  <div class="header-meta">
+    <span class="meta-badge"><strong>v2.0</strong> · 2026-05-09</span>
+    <span class="meta-badge">Author: <strong>Tal Solomon</strong></span>
+    <span class="meta-badge"><strong>B2B SaaS</strong> · Desktop + Web</span>
+    <span class="meta-badge">Fish Model Methodology</span>
+  </div>
+</header>
+
+<!-- ── TAB NAV ────────────────────────────────────────────────── -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="overview">Overview</button>
+  <button class="tab-btn" data-tab="journeys">User Journeys</button>
+  <button class="tab-btn" data-tab="arch">Architecture</button>
+  <button class="tab-btn" data-tab="uiux">UI / UX</button>
+  <button class="tab-btn" data-tab="req">Requirements</button>
+  <button class="tab-btn" data-tab="domain">Domain</button>
+  <button class="tab-btn" data-tab="integrations">Integrations</button>
+  <button class="tab-btn" data-tab="risks">Risks</button>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!--  TAB 1 · OVERVIEW                                            -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="overview" class="tab-section active">
+
+  <div class="sec-label">Executive Summary</div>
+  <div class="quote-block">
+    <p>DubleSlash is a <strong style="color:#7c3aed">methodology engine</strong> that solves AI session continuity — the context that breaks every time a session ends, a tool switches, or a teammate picks up the work. When a user invokes <code style="color:#7c3aed;font-family:var(--font)">//</code> inside any AI tool, DubleSlash injects the current project context automatically: the phase, the decisions made, where the session left off. No re-briefing. No cold starts.</p>
+    <p>On the desktop, DubleSlash lives as a persistent pill — always on, system-wide. Type <code style="color:#7c3aed;font-family:var(--font)">//</code> from any AI tool and the pill opens instantly: APEX surfaces your task landscape across projects, you pick one, context is injected, and the session begins. Behind the scenes, Echo and Prism sync your sessions to the shared cloud automatically — no manual configuration, no sharing step. The web app is the team's brain: a shared context management cloud where every individual's sessions, decisions, artifacts, and phase transitions become collectively visible, searchable, and continuable. Pick up where a teammate left off. See how every thread converges into one project. DubleSlash replaces the stack — Jira, Obsidian, scattered AI configurations — with one methodology-native system that every person on the team feeds into just by doing their work.</p>
+    <p>DubleSlash isn't a memory tool — it's a methodology engine. Context is organized by project, phase, and design process. Agents trained on the Fish Model know what's relevant for each session type, pull only the right context, and inject it at the right moment.</p>
+  </div>
+
+  <div class="sec-label mt-24">What Makes This Special</div>
+  <div class="card-grid cols-3">
+    <div class="card accent-purple">
+      <h3>Methodology Engine</h3>
+      <p>Not a memory tool. Context is organized by Fish Model phase and archetype — not stored as a flat log. The system knows what matters <em>now</em>.</p>
+    </div>
+    <div class="card accent-amber">
+      <h3>Zero Cold Starts</h3>
+      <p>Sessions pick up mid-thought. Not because they remembered everything — because the right things were organized and ready.</p>
+    </div>
+    <div class="card accent-cyan">
+      <h3>The Team's Brain</h3>
+      <p>Every session anyone runs feeds the shared cloud automatically. The web app is where individual work becomes collective intelligence — pick up a teammate's session, trace every decision, see how the whole project converges. Replaces Jira, Obsidian, and scattered AI configs.</p>
+    </div>
+  </div>
+
+  <div class="sec-label mt-24">Success Criteria</div>
+  <div class="card-grid cols-3">
+    <div class="card">
+      <h4>User Success — Individual</h4>
+      <ul>
+        <li>Describes a project → Ollama generates first contexts locally. Zero auth.</li>
+        <li>Connects Claude → executes first task. Depth-2 activation.</li>
+        <li>Sees dot appear on Node Map after session. Map growing = proof.</li>
+        <li>Returns within 48h and picks up without re-briefing.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>User Success — Manager</h4>
+      <ul>
+        <li>Opens DubleSlash → sees full process trail of a running project.</li>
+        <li>Reads decisions, artifacts, and who worked on what without interrupting the team.</li>
+        <li>Walks a client through the project's decision history from the Node Map + Snapshot view.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Business + Technical</h4>
+      <ul>
+        <li>4 first-cohort studios complete the 8-week pilot.</li>
+        <li>3 of 4 convert to team license post-cohort.</li>
+        <li>1,000 team seats by V1.5 (Nov 2026).</li>
+        <li>$300k+ ARR by Q1 2027 (Series A trigger).</li>
+        <li>Ollama onboarding completes in &lt;30s on Apple Silicon.</li>
+        <li>Node Map updates within 10s of session completion.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label mt-24">Measurable Outcomes</div>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-num">&gt;70%</div>
+      <div class="metric-label">Onboarding completion (first node via Ollama)</div>
+      <div class="metric-target">Target at V1 launch</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">&gt;50%</div>
+      <div class="metric-label">Claude connection rate (depth-2 activation)</div>
+      <div class="metric-target">Target at V1 launch</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">&gt;40%</div>
+      <div class="metric-label">7-day retention</div>
+      <div class="metric-target">Target at V1 launch</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">3 / 4</div>
+      <div class="metric-label">Cohort license conversion (studios → team license)</div>
+      <div class="metric-target">After 8-week pilot</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">1,000</div>
+      <div class="metric-label">Seats at paid tier launch</div>
+      <div class="metric-target">Nov 2026 (V1.5)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">$300k</div>
+      <div class="metric-label">ARR (Series A trigger)</div>
+      <div class="metric-target">Q1 2027</div>
+    </div>
+  </div>
+
+  <div class="sec-label mt-24">Product Scope</div>
+  <div class="card-grid cols-3">
+    <div class="card accent-green">
+      <h4>V1 · MVP · Sep 2026</h4>
+      <ul>
+        <li><code style="color:#15803d;font-family:var(--font)">//start</code> onboarding flow</li>
+        <li>Desktop pill — always-on, system-wide project communication</li>
+        <li>Ollama generates first contexts locally</li>
+        <li>Claude Desktop, Cursor, VS Code, ChatGPT Desktop adapters</li>
+        <li>Figma, GitHub, Jira / Linear connectors</li>
+        <li>Daily digest (Supabase + Resend)</li>
+        <li>Execute button opens AI tool with context injected</li>
+        <li>Node Map with phase-colored contexts</li>
+        <li>Right pane: artifact, brief, tasks, reasoning, context .md</li>
+        <li>Snapshot view: Fish-model board, signal strip, recipe panel, drill-down</li>
+        <li>GDPR-compliant, local-first</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>V1.5 · Growth · Nov 2026</h4>
+      <ul>
+        <li>Team sync and handoffs</li>
+        <li>Artifacts gallery (Weevy-style)</li>
+        <li>AI priority surface (Apex surfaces top 2)</li>
+        <li>Paid tier launch</li>
+        <li>1,000 seats target</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>V2+ · Vision</h4>
+      <ul>
+        <li>Node Map replaces Jira as the primary project surface for AI-native teams</li>
+        <li>Foreign tools sync from DubleSlash, not the other way around</li>
+        <li>Fish Kanban as the canonical project board across the industry</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label mt-24">Roadmap</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:#7c3aed"></div>
+      <div class="timeline-meta">
+        <div class="milestone">M0 — PRD + Design</div>
+        <div class="date">May 2026</div>
+      </div>
+      <div class="timeline-content"><p>This PRD + full UX design for all surfaces.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:#ea580c"></div>
+      <div class="timeline-meta">
+        <div class="milestone">M1 — OSS</div>
+        <div class="date">Jun 2026</div>
+      </div>
+      <div class="timeline-content"><p><code style="font-family:var(--font);color:#c2410c">//</code> CLI + methodology agents + context capture. Open source release.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:#16a34a"></div>
+      <div class="timeline-meta">
+        <div class="milestone">M2 — V1</div>
+        <div class="date">Sep 2026</div>
+      </div>
+      <div class="timeline-content"><p>Full app: desktop pill, Node Map, Ollama onboarding, all 8 adapters + connectors (Claude, Cursor, VS Code, ChatGPT, Figma, GitHub, Jira/Linear, Daily digest), Snapshot view, three-tier agent system. First-cohort studios onboarded.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:#ca8a04"></div>
+      <div class="timeline-meta">
+        <div class="milestone">M3 — V1.5</div>
+        <div class="date">Nov 2026</div>
+      </div>
+      <div class="timeline-content"><p>Team sync, artifacts gallery, AI priority surface (Apex top-2), paid tier launch. 1,000 seats target.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:#db2777"></div>
+      <div class="timeline-meta">
+        <div class="milestone">M4 — Series A trigger</div>
+        <div class="date">Q1 2027</div>
+      </div>
+      <div class="timeline-content"><p>$300k+ ARR. Enterprise pilots. Series A fundraise.</p></div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!--  TAB 2 · USER JOURNEYS                                       -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="journeys" class="tab-section">
+
+  <div class="sec-label">User Journeys · Surface-by-Surface Flow</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;font-family:var(--font);font-size:10px;color:var(--muted);">
+    <span>Surfaces:</span>
+    <span class="surf-tag surf-desktop">Desktop pill</span>
+    <span class="surf-tag surf-claude">Claude / AI tool</span>
+    <span class="surf-tag surf-nodemap">Web App — Node Map</span>
+    <span class="surf-tag surf-snapshot">Web App — Snapshot</span>
+    <span class="surf-tag surf-bg">Background (system)</span>
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-bottom:20px;font-family:var(--font);">Node Map and Snapshot are both views inside the web app — the team's shared context management cloud. The desktop pill is the local execution surface. They are distinct products serving distinct purposes.</p>
+
+  <div class="journey-selector">
+    <button class="journey-btn active" data-journey="j1">J1 · Individual Contributor</button>
+    <button class="journey-btn" data-journey="j2">J2 · Manager / Studio Lead</button>
+    <button class="journey-btn" data-journey="j3">J3 · New Team Member</button>
+    <button class="journey-btn" data-journey="j4">J4 · Fish Phase with Operator</button>
+  </div>
+
+  <!-- J1 -->
+  <div class="journey-panel active" id="j1">
+    <div class="journey-meta">
+      <div class="j-number">01</div>
+      <div>
+        <div class="j-title">Individual Contributor: First Use → Habit</div>
+        <div class="j-persona">Designer, PM, or dev at a studio or startup. Works inside Claude, Cursor, or VS Code daily. Starting fresh.</div>
+      </div>
+    </div>
+    <table class="journey-table">
+      <thead>
+        <tr><th>#</th><th>Surface</th><th>Action</th><th>System Response</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span></td>
+          <td>Downloads macOS app. Launches for the first time.</td>
+          <td>Menu bar icon appears. Onboarding prompt: "Describe your first project."</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span></td>
+          <td>Types project name + one-sentence goal.</td>
+          <td>Ollama generates 3–5 initial contexts + task list locally. No external API. No auth prompt.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="surf-tag surf-nodemap">Node Map</span></td>
+          <td>Opens web app to see what was created.</td>
+          <td>First dot appears in the Explore area. Clicks it — right pane shows tasks, next prescribed method, empty brief. <strong>Activation: map is no longer empty.</strong></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span></td>
+          <td>Prompted to connect Claude. Installs adapter.</td>
+          <td>"Start with Dora" button enabled on tasks in the desktop popup.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span> <span class="surf-arrow">→</span> <span class="surf-tag surf-claude">Claude</span></td>
+          <td>Opens <code style="color:#7c3aed;font-family:var(--font)">//start</code>. Selects the first task. Clicks "Start with Claude."</td>
+          <td>Claude opens with full context pre-loaded: project phase, archetype, prior decisions, next prescribed Explore method. Dora is the active operator.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="surf-tag surf-claude">Claude</span></td>
+          <td>Works through the session — Dora guides the Explore method.</td>
+          <td>Dora records decisions, updates stream progress. User works naturally; session captured in the background.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="surf-tag surf-bg">Background</span> <span class="surf-arrow">→</span> <span class="surf-tag surf-desktop">Desktop</span></td>
+          <td>Closes Claude when done.</td>
+          <td>Echo captures session. Guard scans for GDPR flags. Ollama summarizes. Node Map updates within 10s — dot grows, brief auto-generated. Desktop popup badge updates.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="surf-tag surf-nodemap">Node Map</span></td>
+          <td>Opens web app to check what happened.</td>
+          <td>Dot is larger. Right pane shows updated stream progress (e.g., 2/4 Explore methods done), latest brief, decision trail populated.</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span></td>
+          <td>Next day. Opens <code style="color:#7c3aed;font-family:var(--font)">//start</code>.</td>
+          <td>Popup shows task list with stream progress. Next prescribed method shown. <strong>Picks up mid-thought — no re-briefing.</strong></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span> <span class="surf-arrow">→</span> <span class="surf-tag surf-claude">Claude</span></td>
+          <td>Selects next task. All Explore methods done after this session.</td>
+          <td>Dora emits <code style="color:#7c3aed;font-family:var(--font)">&lt;fish-handoff&gt;</code> to Solidify. Guard validates. Apex queues Sol.</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><span class="surf-tag surf-snapshot">Snapshot</span></td>
+          <td>Opens Snapshot view after the session.</td>
+          <td>Context card now in Solidify column. Stream progress reset. Sol's prescribed methods shown. Dot on Node Map shifts to purple (Solidify).</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="key-moments">
+      <div class="key-moments-label">Key Moments</div>
+      <div class="moment-chip"><span>Step 3</span> First dot on Node Map — activation</div>
+      <div class="moment-chip"><span>Step 8</span> Dot grows after session — proof the system is working</div>
+      <div class="moment-chip"><span>Step 9</span> //start picks up mid-thought next day — retention</div>
+      <div class="moment-chip"><span>Step 11</span> Card advances to Solidify without a meeting — methodology running</div>
+    </div>
+  </div>
+
+  <!-- J2 -->
+  <div class="journey-panel" id="j2">
+    <div class="journey-meta">
+      <div class="j-number">02</div>
+      <div>
+        <div class="j-title">Manager / Studio Lead: Project Visibility</div>
+        <div class="j-persona">Studio director or design lead. Does not run sessions. Needs project visibility without interrupting the team. Invited by email.</div>
+      </div>
+    </div>
+    <table class="journey-table">
+      <thead>
+        <tr><th>#</th><th>Surface</th><th>Action</th><th>System Response</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="surf-tag surf-nodemap">Node Map</span></td>
+          <td>Receives invite link. Opens web app in browser.</td>
+          <td>Lands on Node Map — full project arc visible. Dots in various phases and sizes. Reads the shape of the work at a glance. No install required.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="surf-tag surf-nodemap">Node Map</span></td>
+          <td>Clicks a dot in the Solidify cluster.</td>
+          <td>Right pane opens: Brief (AI-generated summary of decisions), Tasks, Reasoning (full decision trail). Reads the decision log without calling anyone.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="surf-tag surf-snapshot">Snapshot</span></td>
+          <td>Switches to Snapshot view to read team signal.</td>
+          <td>Four-column board. Signal strip: "→ 3 at exit" (yellow), "✕ 1 blocked" (red). Immediately knows what needs attention.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="surf-tag surf-snapshot">Snapshot</span></td>
+          <td>Clicks blocked chip. Card highlights. Clicks the card.</td>
+          <td>Drill-down Drawer: blocker description, last handoff with locked decisions and open items, decision log, session history (who worked, when, which tool). No Slack required.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="surf-tag surf-snapshot">Snapshot</span></td>
+          <td>Clicks [Recipe ▸] toggle in the board header.</td>
+          <td>Recipe Panel: archetype × phase matrix. Sees which methods have been run across all contexts vs which are still pending. Answers "are we following the process?" without asking the team.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="surf-tag surf-nodemap">Node Map</span></td>
+          <td>Switches back to Node Map to prepare for a client call.</td>
+          <td>Map gives the full arc in one view — phases, consolidation, project shape.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="surf-tag surf-both">Node Map + Snapshot</span></td>
+          <td>Shares screen. Walks client through the project. Clicks into nodes for depth.</td>
+          <td>Node Map gives the arc. Right pane shows decisions. Snapshot gives methodology signal. <strong>Full process trail visible — no report, no meeting, no prep.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="key-moments">
+      <div class="key-moments-label">Key Moments</div>
+      <div class="moment-chip"><span>Step 1</span> Node Map loads with live project state — trust moment</div>
+      <div class="moment-chip"><span>Step 3–4</span> Signal strip showing blocked + at-exit without digging — urgency moment</div>
+      <div class="moment-chip"><span>Step 7</span> Drill-down decision log for the client, no prep required — deal moment</div>
+    </div>
+  </div>
+
+  <!-- J3 -->
+  <div class="journey-panel" id="j3">
+    <div class="journey-meta">
+      <div class="j-number">03</div>
+      <div>
+        <div class="j-title">Onboarding a New Team Member</div>
+        <div class="j-persona">Junior designer joining a studio mid-project. Admin has sent an invite. No prior context on the project.</div>
+      </div>
+    </div>
+    <table class="journey-table">
+      <thead>
+        <tr><th>#</th><th>Surface</th><th>Action</th><th>System Response</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span></td>
+          <td>Downloads macOS app. Admin sends invite.</td>
+          <td>App installed. Team workspace joined. All contexts and tasks already populated from team sync — no setup required.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="surf-tag surf-nodemap">Node Map</span></td>
+          <td>Opens web app to understand the project before touching anything.</td>
+          <td>Lands on Node Map. Sees which contexts exist, which phases they're in, how consolidated each is. Gets the full picture in under a minute — no briefing meeting required.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="surf-tag surf-snapshot">Snapshot</span></td>
+          <td>Switches to Snapshot view to find their assigned work and understand what to do.</td>
+          <td>Sees context cards. Recipe panel shows what's prescribed for the project's archetype. Knows what the team is supposed to be doing and what methods are next.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span></td>
+          <td>Opens <code style="color:#7c3aed;font-family:var(--font)">//start</code>. Sees tasks assigned to them. Selects one.</td>
+          <td>Task detail: context name, phase, next prescribed method, "Start with {operator}" CTA.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span> <span class="surf-arrow">→</span> <span class="surf-tag surf-claude">Claude</span></td>
+          <td>Clicks "Start with Claude."</td>
+          <td>Context injected: project phase, archetype, prior decisions, current prescribed method. <strong>Starts contributing immediately — no catch-up conversation, no re-briefing.</strong></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="surf-tag surf-nodemap">Node Map</span></td>
+          <td>After the session, opens web app to see what changed.</td>
+          <td>Their dot has grown. Right pane shows their session summarized in the brief. Can see exactly where they fit in the project arc.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="key-moments">
+      <div class="key-moments-label">Key Moments</div>
+      <div class="moment-chip"><span>Step 2</span> Node Map orientation without a briefing meeting</div>
+      <div class="moment-chip"><span>Step 5</span> First session with full context injected — no catch-up required</div>
+      <div class="moment-chip"><span>Step 6</span> Seeing their own dot on the map after contributing</div>
+    </div>
+  </div>
+
+  <!-- J4 -->
+  <div class="journey-panel" id="j4">
+    <div class="journey-meta">
+      <div class="j-number">04</div>
+      <div>
+        <div class="j-title">Running a Fish Phase with an Operator Agent</div>
+        <div class="j-persona">Senior designer. Salmon context (unknown problem, small scope) currently in Solidify. 3 of 6 Solidify methods done. Sol is the active operator.</div>
+      </div>
+    </div>
+    <table class="journey-table">
+      <thead>
+        <tr><th>#</th><th>Surface</th><th>Action</th><th>System Response</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="surf-tag surf-nodemap">Node Map</span></td>
+          <td>Opens web app. Clicks the Salmon context dot in the Solidify area.</td>
+          <td>Right pane: stream progress 3/6, next prescribed method "One Sketch," confidence chip 0.71 — below advance threshold (needs ≥ 0.8).</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="surf-tag surf-snapshot">Snapshot</span></td>
+          <td>Switches to Snapshot to see the full card before starting.</td>
+          <td>Card: Sol is active operator, 3/6 done, handoff exists but confidence too low to advance. Decides to run the remaining methods.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span></td>
+          <td>Opens <code style="color:#7c3aed;font-family:var(--font)">//start</code>. Selects the Salmon context. Task detail: "Run: One Sketch — Sol."</td>
+          <td>Context pre-loaded in popup: archetype, phase, prior 3 methods, locked HMW framing, problem statement, AC placeholders.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="surf-tag surf-desktop">Desktop</span> <span class="surf-arrow">→</span> <span class="surf-tag surf-claude">Claude</span></td>
+          <td>Clicks "Start with Sol."</td>
+          <td>Claude opens. Sol context injected: full prior session history, locked decisions, stream state, prescribed next steps.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="surf-tag surf-claude">Claude</span></td>
+          <td>Sol surfaces 3 sketch directions from the framing. User picks one and refines it.</td>
+          <td>Sol records the decision with rationale. Stream: 4/6.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="surf-tag surf-claude">Claude</span></td>
+          <td>Sol moves to AC Writing. Drafts 3–5 ACs from the chosen direction.</td>
+          <td>User approves 4, edits 1. Sol locks the ACs. Stream: 5/6.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="surf-tag surf-claude">Claude</span> <span class="surf-arrow">→</span> <span class="surf-tag surf-bg">Background</span></td>
+          <td>Closes Claude.</td>
+          <td>Sol checks stream — all 6 done. Emits <code style="color:#7c3aed;font-family:var(--font)">&lt;fish-handoff&gt;</code> to Build: locked decisions, open items, confidence 0.89. Guard scans — no CRITICAL flags. Echo pushes session to cloud within 60s.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="surf-tag surf-snapshot">Snapshot</span></td>
+          <td>Opens Snapshot view to confirm the advance.</td>
+          <td>Solidify card now in <code style="font-family:var(--font);color:#b45309">at-exit</code> state. Apex has queued Build dispatch. Bran is next active operator. Dot on Node Map has shifted to blue (Build). <strong>Manager sees the same update — no notification sent.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="key-moments">
+      <div class="key-moments-label">Key Moments</div>
+      <div class="moment-chip"><span>Steps 1–2</span> Node Map → Snapshot used as a planning surface before starting</div>
+      <div class="moment-chip"><span>Steps 5–6</span> Sol running prescribed methods in Claude — methodology embodiment</div>
+      <div class="moment-chip"><span>Step 7</span> Guard + Apex coordination invisible to the user — trust in the system</div>
+      <div class="moment-chip"><span>Step 8</span> Card advances phases without a meeting — async handoff proof</div>
+    </div>
+  </div>
+
+</div><!-- /journeys -->
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!--  TAB 3 · ARCHITECTURE                                        -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="arch" class="tab-section">
+
+  <div class="sec-label">Two-Runtime Model</div>
+  <div class="arch-runtimes">
+    <div class="runtime-card rt-desktop">
+      <div class="rt-header">
+        <div>
+          <div class="rt-title">Runtime 1 — Desktop</div>
+          <div class="rt-subtitle">Local · macOS menu bar · Always-on</div>
+        </div>
+        <span class="rt-badge">macOS 13+</span>
+      </div>
+      <div class="rt-body">
+        <ul>
+          <li><strong>Shell:</strong> Electron or Tauri (TBD by M1 tech spike)</li>
+          <li><strong>Ollama:</strong> Runs on-device. Handles onboarding context generation + session summarization. Not used for live AI sessions.</li>
+          <li><strong>Local state:</strong> SQLite — contexts, tasks, session summaries, sync state</li>
+          <li><strong>// hotkey:</strong> Registered system-wide. Activates context popup within 500ms.</li>
+          <li><strong>Background sync daemon:</strong> Pulls from Supabase on app open. Pushes node updates within 60s of session completion. Off the main thread — never blocks //.</li>
+          <li><strong>Adapter interface:</strong> Claude Desktop (clipboard + AppleScript), Cursor (.cursorrules), VS Code (extension API). Common ContextAdapter interface.</li>
+          <li><strong>Auth:</strong> Optional. Local-only mode needs no account. JWT in macOS Keychain for team sync.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="runtime-card rt-web">
+      <div class="rt-header">
+        <div>
+          <div class="rt-title">Runtime 2 — Web App</div>
+          <div class="rt-subtitle">Cloud · Browser · No install</div>
+        </div>
+        <span class="rt-badge">Vercel + Supabase</span>
+      </div>
+      <div class="rt-body">
+        <ul>
+          <li><strong>Frontend:</strong> Next.js, deployed on Vercel</li>
+          <li><strong>Database:</strong> Supabase Postgres — contexts, nodes, artifacts, sessions, team</li>
+          <li><strong>Auth:</strong> Supabase Auth — email + magic link at V1; SSO (Google, GitHub) at V1.5. JWT in HTTP-only cookie.</li>
+          <li><strong>Storage:</strong> Supabase Storage — artifacts, context .md files</li>
+          <li><strong>Realtime:</strong> Supabase Realtime — live Node Map updates within 60s of session sync</li>
+          <li><strong>Source of truth:</strong> All project state. Desktop app syncs to/from this.</li>
+          <li><strong>Purpose:</strong> The team's shared context management cloud — every session anyone runs feeds it automatically via Echo + Prism. Any team member can see each other's contexts, pick up a colleague's session, and trace the full project arc. Replaces Jira + Obsidian + manual AI configuration.</li>
+          <li><strong>Access:</strong> All team members — browser, no install required. Desktop pill syncs to and from this; web app is the canonical team view.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label">Session Data Flow</div>
+  <div class="data-flow">
+    <div><span class="df-trigger">User types //start in menu bar</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-system">Desktop popup reads local SQLite</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-action">User selects task — context pre-loaded in task detail</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-system">Adapter injects context .md into host tool (Claude / Cursor / VS Code)</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-action">AI session runs — operator agent (Dora / Sol / Bran / May) active</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-action">Session ends (user closes Claude or finishes)</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-guard">Guard: scans session content for GDPR flags / PII / injection</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-system">Echo: captures session → pushes to local SQLite (non-blocking)</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-system">Ollama: summarizes session → generates brief update</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-store">Dedup check: contextId + sessionHash against local SQLite</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-store">Write to local SQLite (non-blocking — does not delay next //)</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-system">Async push to Supabase cloud (within 60s, with consent)</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-system">Supabase Realtime → Node Map dot updates within 10s</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-action">Prism: similarity pass across all session content for cross-context patterns</span></div>
+    <div><span class="df-arrow">  →</span> <span class="df-system">Apex: updates priority queue — surfaces next 2 most important items</span></div>
+  </div>
+
+  <div class="sec-label">Agent System — Three-Tier Architecture</div>
+  <div class="agent-tiers">
+    <div class="tier-row-mini">
+      <div class="tier-label-mini t0">T0 · Orch.</div>
+      <div class="agents-mini">
+        <div class="agent-mini apex">
+          <div class="am-head"><span class="am-icon">🔺</span><span class="am-name">Apex</span></div>
+          <div class="am-role">Chief Orchestrator · PM of all agents</div>
+          <div class="am-invoke">//apex · //orchestrate · //status</div>
+          <div class="am-caps">
+            <span class="cap t0">CA</span><span class="cap t0">SC</span><span class="cap t0">AD</span>
+            <span class="cap t0">HR</span><span class="cap t0">PQ</span><span class="cap t0">LS</span>
+          </div>
+        </div>
+        <div class="agent-mini guard">
+          <div class="am-head"><span class="am-icon">🛡️</span><span class="am-name">Guard</span></div>
+          <div class="am-role">Privacy Warden · Gates every boundary</div>
+          <div class="am-invoke">//guard · //scan · //privacy</div>
+          <div class="am-caps">
+            <span class="cap t0">HS</span><span class="cap t0">SA</span><span class="cap t0">ID</span>
+            <span class="cap t0">DC</span><span class="cap t0">RD</span><span class="cap t0">PR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tier-row-mini">
+      <div class="tier-label-mini t1">T1 · Sync</div>
+      <div class="agents-mini">
+        <div class="agent-mini echo">
+          <div class="am-head"><span class="am-icon">🔄</span><span class="am-name">Echo</span></div>
+          <div class="am-role">Session Bridge · Never loses context</div>
+          <div class="am-invoke">//echo · //sync · //capture</div>
+          <div class="am-caps">
+            <span class="cap t1">SC</span><span class="cap t1">CP</span><span class="cap t1">DD</span>
+            <span class="cap t1">SI</span><span class="cap t1">CR</span><span class="cap t1">SH</span>
+          </div>
+        </div>
+        <div class="agent-mini prism">
+          <div class="am-head"><span class="am-icon">🔮</span><span class="am-name">Prism</span></div>
+          <div class="am-role">Pattern Watcher · Sees across sessions</div>
+          <div class="am-invoke">//prism · //patterns</div>
+          <div class="am-caps">
+            <span class="cap t1">SM</span><span class="cap t1">CL</span><span class="cap t1">DD</span>
+            <span class="cap t1">OR</span><span class="cap t1">PS</span><span class="cap t1">GR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tier-row-mini">
+      <div class="tier-label-mini t2">T2 · Ops</div>
+      <div class="agents-mini">
+        <div class="agent-mini dora">
+          <div class="am-head"><span class="am-icon">🔭</span><span class="am-name">Dora</span></div>
+          <div class="am-role">Explorer · Opens the aperture</div>
+          <div class="am-invoke">//explore</div>
+          <div class="am-caps">
+            <span class="cap explore">HMW</span><span class="cap explore">PM</span><span class="cap explore">JB</span>
+            <span class="cap explore">CS</span><span class="cap explore">HO</span>
+          </div>
+        </div>
+        <div class="agent-mini sol">
+          <div class="am-head"><span class="am-icon">🧊</span><span class="am-name">Sol</span></div>
+          <div class="am-role">Solidifier · One shape per session</div>
+          <div class="am-invoke">//solidify</div>
+          <div class="am-caps">
+            <span class="cap solidify">TA</span><span class="cap solidify">AC</span><span class="cap solidify">DL</span>
+            <span class="cap solidify">PT</span><span class="cap solidify">HO</span>
+          </div>
+        </div>
+        <div class="agent-mini bran">
+          <div class="am-head"><span class="am-icon">🔨</span><span class="am-name">Bran</span></div>
+          <div class="am-role">Builder · Executes against the contract</div>
+          <div class="am-invoke">//build</div>
+          <div class="am-caps">
+            <span class="cap build">IM</span><span class="cap build">TR</span><span class="cap build">UV</span>
+            <span class="cap build">RF</span><span class="cap build">HO</span>
+          </div>
+        </div>
+        <div class="agent-mini may">
+          <div class="am-head"><span class="am-icon">🚢</span><span class="am-name">May</span></div>
+          <div class="am-role">Shipper · Every release emits a trust receipt</div>
+          <div class="am-invoke">//ship</div>
+          <div class="am-caps">
+            <span class="cap ship">RE</span><span class="cap ship">TR</span><span class="cap ship">RN</span>
+            <span class="cap ship">MS</span><span class="cap ship">NL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <div class="sec-label">Adapter Interface</div>
+  <div class="code-block">
+<span class="kw">interface</span> <span class="type">ContextAdapter</span> {<br>
+&nbsp;&nbsp;<span class="type">name</span>: <span class="kw">string</span>          <span class="cmt">// e.g. "claude", "cursor", "vscode"</span><br>
+&nbsp;&nbsp;<span class="type">inject</span>(<span class="type">context</span>: <span class="kw">string</span>): <span class="type">Promise</span>&lt;<span class="kw">void</span>&gt;<br>
+&nbsp;&nbsp;<span class="type">isAvailable</span>(): <span class="kw">boolean</span><br>
+}<br>
+<br>
+<span class="cmt">// Adapters are loaded at runtime. New adapters can be added</span><br>
+<span class="cmt">// without app update via plugin architecture (V1.5).</span><br>
+<span class="cmt">// Adapter state (connected/disconnected) surfaces on Connectors page.</span>
+  </div>
+
+</div><!-- /arch -->
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!--  TAB 4 · UI / UX                                             -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="uiux" class="tab-section">
+
+  <div class="sec-label">Web App Surfaces</div>
+
+  <!-- Node Map -->
+  <div class="surface-card">
+    <div class="surface-header" style="background:linear-gradient(135deg,#eff6ff,var(--surface));">
+      <span class="surface-icon">◎</span>
+      <div>
+        <div class="surface-title">Node Map</div>
+        <div class="surface-subtitle">Primary view · Default landing · Everyone</div>
+      </div>
+      <span class="surface-badge" style="background:rgba(37,99,235,0.08);color:#1d4ed8;border:1px solid rgba(37,99,235,0.25);">Web App · Primary</span>
+    </div>
+    <div class="surface-body">
+      <ul>
+        <li><strong>Canvas:</strong> Interactive graph. Pan + zoom via trackpad gestures. Nodes position organically by phase and recency.</li>
+        <li><strong>Dot encoding:</strong> Each context = one dot. Size = consolidation score 1–10 (session count + brief completeness). Color = phase: Explore (warm orange), Solidify (purple), Build (blue), Ship (teal).</li>
+        <li><strong>Click a dot:</strong> Selects it and opens the Right Pane. Map remains navigable behind the pane.</li>
+        <li><strong>Hover (300ms dwell):</strong> Tooltip card — context name, phase badge, archetype pill, "Open detail →" quick link. Dismisses on mouse-out.</li>
+        <li><strong>Empty state:</strong> Ghost/faded map overlay with "Start your first context" CTA centered on canvas.</li>
+        <li><strong>Floating priority surface (V1.5):</strong> Two most-important items float mid-canvas as dismissible cards, surfaced by Apex.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Right Pane -->
+  <div class="surface-card">
+    <div class="surface-header" style="background:linear-gradient(135deg,#f4f4f8,var(--surface));">
+      <span class="surface-icon">▤</span>
+      <div>
+        <div class="surface-title">Right Pane — Context Detail</div>
+        <div class="surface-subtitle">Opens on Node Map dot click · Map stays interactive behind it</div>
+      </div>
+      <span class="surface-badge" style="background:rgba(71,85,105,0.15);color:#94a3b8;border:1px solid rgba(71,85,105,0.3);">Contextual Panel</span>
+    </div>
+    <div class="surface-body">
+      <div class="pills" style="margin-bottom:12px;">
+        <span class="pill blue">Artifact</span>
+        <span class="pill muted">Brief</span>
+        <span class="pill muted">Tasks</span>
+        <span class="pill muted">Reasoning</span>
+        <span class="pill muted">Context .md</span>
+      </div>
+      <ul>
+        <li><strong>Artifact tab:</strong> The one deliverable output for this context. Editable. Version history in V1.5.</li>
+        <li><strong>Brief tab:</strong> AI-generated summary — objective, current plan, key decisions. Read-only. Refresh button triggers re-generation from latest session data.</li>
+        <li><strong>Tasks tab:</strong> Two sub-sections — Human tasks (checkbox list) and Agent tasks (checkbox list + "Start with {operator}" button). Shows stream progress bar and next prescribed method.</li>
+        <li><strong>Reasoning tab:</strong> Decision trail — timestamped entries of decisions made and why, auto-populated from session summaries.</li>
+        <li><strong>Context tab:</strong> The <code>.md</code> file the AI loads at session start. Copyable to clipboard in one click. Read-only in-pane (editable via desktop app).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Snapshot View -->
+  <div class="surface-card">
+    <div class="surface-header" style="background:linear-gradient(135deg,#ecfeff,var(--surface));">
+      <span class="surface-icon">◈</span>
+      <div>
+        <div class="surface-title">Snapshot View</div>
+        <div class="surface-subtitle">Fish-model-bound board · Team visibility surface · All team members</div>
+      </div>
+      <span class="surface-badge" style="background:rgba(8,145,178,0.08);color:#0e7490;border:1px solid rgba(8,145,178,0.25);">Secondary View</span>
+    </div>
+    <div class="surface-body">
+      <div class="ascii-layout">┌──────────────────────────────────────────────────────────────────────┐
+│  [Firma Rebrand ▾]            [✕2 blocked] [→3 at exit]   [Recipe ▸] │
+├────────────────┬──────────────┬──────────────┬─────────────────────── │
+│  ◎ EXPLORE · 5 │ ◉ SOLIDIFY·3 │ ▣ BUILD · 2  │ ▶ SHIP · 1            │
+├────────────────┼──────────────┼──────────────┼────────────────────── │
+│  [card]        │  [card]      │  [card ✕]    │  [card →]             │
+│  [card]        │  [card]      │  [card]      │                        │
+│  [card →]      │  [card →]    │              │                        │
+└──────────────────────────────────────────────────────────────────────┘</div>
+      <ul>
+        <li><strong>Four columns:</strong> Explore | Solidify | Build | Ship. Equal width, always visible. Each scrolls independently.</li>
+        <li><strong>Project switcher:</strong> Compact dropdown at top-left. One project at a time. "All projects" toggle shows multi-project summary row.</li>
+        <li><strong>Signal strip:</strong> <code>✕ N blocked</code> (red), <code>→ N at exit</code> (yellow), <code>⏸ N stuck</code> (grey). Clicking a chip dims non-matching cards to 30% opacity.</li>
+        <li><strong>Column header:</strong> Sticky. Phase icon + label + card count + blocked/at-exit badge counts.</li>
+        <li><strong>Card anatomy:</strong> Archetype pill (N/T/S/W), status icon, context name, sigil chip (certainty·size), stream progress bar, next prescribed method, handoff confidence chip, footer (date + artifact count + open items).</li>
+        <li><strong>Card hover (150ms):</strong> Expands ~48px. Reveals last session summary + quick actions: "→ Run next method", "Review handoff", "Resolve blocker", "Set as active".</li>
+        <li><strong>Card click:</strong> Opens Drill-down Drawer from the right.</li>
+        <li><strong>Full component spec:</strong> <code>planning/ux/kanban-prd.md</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Drill-down -->
+  <div class="surface-card">
+    <div class="surface-header" style="background:linear-gradient(135deg,#f4f4f8,var(--surface));">
+      <span class="surface-icon">▷</span>
+      <div>
+        <div class="surface-title">Drill-down Drawer</div>
+        <div class="surface-subtitle">Right-side drawer · Triggered by card click in Snapshot view</div>
+      </div>
+      <span class="surface-badge" style="background:rgba(71,85,105,0.15);color:#94a3b8;border:1px solid rgba(71,85,105,0.3);">Drawer · 7 sections</span>
+    </div>
+    <div class="surface-body">
+      <ul>
+        <li><strong>1. Recipe:</strong> Stream checklist for archetype × phase — done (✓ green), in-progress (● phase color), pending (○ dim), deferred (— strikethrough + reason). Budget estimate (time range for archetype × phase).</li>
+        <li><strong>2. Handoff:</strong> Locked decisions (bordered chips), open items (yellow, checkbox-resolvable), confidence score (color-coded), artifact paths, emitter → receiver. If no handoff: "No handoff yet."</li>
+        <li><strong>3. Artifacts:</strong> Two-column grid grouped by phase bucket. Status badges: ✓ locked / ● draft / ○ not started.</li>
+        <li><strong>4. Decision log:</strong> Timestamped list — date, decision text, author. Empty state: "No decisions logged."</li>
+        <li><strong>5. Session history:</strong> Compact list — date · tool · model. One-line session summary below each. Most recent first.</li>
+        <li><strong>6. Tasks:</strong> Full task list with checkboxes. Agent chip row below (agents that have worked on this context).</li>
+        <li><strong>7. Forward action (sticky bottom bar):</strong> "→ Continue in {tool}" / "→ Advance to {phase}" / "Resolve blocker" / "→ Emit handoff" — CTA changes based on context state.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Recipe Panel -->
+  <div class="surface-card">
+    <div class="surface-header" style="background:linear-gradient(135deg,#f0fdf4,var(--surface));">
+      <span class="surface-icon">▣</span>
+      <div>
+        <div class="surface-title">Recipe Panel</div>
+        <div class="surface-subtitle">Collapsible right sidebar on Snapshot view · Archetype × phase method matrix</div>
+      </div>
+      <span class="surface-badge" style="background:rgba(22,163,74,0.08);color:#15803d;border:1px solid rgba(22,163,74,0.25);">Collapsed by default</span>
+    </div>
+    <div class="surface-body">
+      <ul>
+        <li><strong>Toggled via</strong> <code>[Recipe ▸]</code> in board header. Collapsed by default.</li>
+        <li><strong>Archetype summary row:</strong> N/T/S/W badges with context counts. Clicking an archetype filters the board.</li>
+        <li><strong>Matrix:</strong> 4×4 grid — Phase × Archetype. Each cell shows prescribed methods (truncated, expandable on click). Methods run across the project appear brighter; unrun methods dim.</li>
+        <li><strong>Cell click:</strong> Expands inline — full method list with source/lineage (e.g., Nielsen, Cooper) and archetype applicability.</li>
+        <li><strong>Read-only.</strong> Canonical recipe from <code>fish-model.md §6</code>. Not editable in-board.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Agents Panel -->
+  <div class="surface-card">
+    <div class="surface-header" style="background:linear-gradient(135deg,#f5f0ff,var(--surface));">
+      <span class="surface-icon">🔺</span>
+      <div>
+        <div class="surface-title">Agents Panel</div>
+        <div class="surface-subtitle">Three-tier agent system view · Left sidebar icon</div>
+      </div>
+      <span class="surface-badge" style="background:rgba(124,58,237,0.08);color:#6d28d9;border:1px solid rgba(124,58,237,0.25);">3 tiers · 8 agents</span>
+    </div>
+    <div class="surface-body">
+      <ul>
+        <li><strong>Phase strip:</strong> Four-phase pipeline (Explore → Solidify → Build → Ship) at top. Active phase highlighted in phase color.</li>
+        <li><strong>Active operator banner:</strong> When active context has a known phase, shows the matched T2 operator — name, icon, invocation — with a pulsing accent dot.</li>
+        <li><strong>T0 — Orchestrators:</strong> Apex (<code>//apex</code>), Guard (<code>//guard</code>)</li>
+        <li><strong>T1 — Sync:</strong> Echo (<code>//echo</code>), Prism (<code>//prism</code>)</li>
+        <li><strong>T2 — Operators:</strong> Dora — Explore (<code>//explore</code>), Sol — Solidify (<code>//solidify</code>), Bran — Build (<code>//build</code>), May — Ship (<code>//ship</code>)</li>
+        <li><strong>Agent card:</strong> Name, icon, tagline, model badge (haiku / sonnet), capability codes (label on hover), invocation.</li>
+        <li><strong>Coordination note:</strong> "Apex routes every HO through Guard before emit. Echo captures sessions. Prism surfaces cross-context patterns. Opus is forbidden — Sonnet is the ceiling."</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label mt-24">Desktop Surface</div>
+
+  <!-- Desktop Popup -->
+  <div class="surface-card">
+    <div class="surface-header" style="background:linear-gradient(135deg,#fffbeb,var(--surface));">
+      <span class="surface-icon">◻</span>
+      <div>
+        <div class="surface-title">Menu-Bar Popup</div>
+        <div class="surface-subtitle">Desktop app · Activated by //start global hotkey</div>
+      </div>
+      <span class="surface-badge" style="background:rgba(245,158,11,0.1);color:#b45309;border:1px solid rgba(245,158,11,0.3);">Desktop · Always-on</span>
+    </div>
+    <div class="surface-body">
+      <ul>
+        <li><strong>State 1 — Task list:</strong> Tasks grouped by project, sorted by priority. Each row: task name, context name, phase badge, archetype pill.</li>
+        <li><strong>State 2 — Task detail:</strong> Full task card — objective, context name, next prescribed method from stream, "Start with {operator}" CTA, "Copy context" secondary action.</li>
+        <li><strong>State 3 — Inline context preview:</strong> Expandable .md preview below task detail.</li>
+        <li><strong>Keyboard navigation:</strong> Arrow keys + Enter to select. Escape to close.</li>
+        <li><strong>Behavior:</strong> Always-on-top floating window. Closes on click-outside. Popup badge updates after sessions complete (dot grows = new summary available).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label mt-24">General UI Principles</div>
+  <div class="card-grid cols-2">
+    <div class="card">
+      <h4>Visual Language</h4>
+      <ul>
+        <li>Dark mode by default. Light mode toggle in profile settings.</li>
+        <li>Monospace font for: .md previews, reasoning entries, method names, capability codes, invocations, all 8–10px labels.</li>
+        <li>Phase colors: Explore (ds-explore · warm orange), Solidify (ds-solidify · purple), Build (ds-build · blue), Ship (ds-ship · teal).</li>
+        <li>Archetype colors: Nemo = Ship/teal, Tuna = Solidify/purple, Salmon = Explore/orange, Willy = Build/blue.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Motion + Interaction</h4>
+      <ul>
+        <li>Card hover expansion: 150ms transition-all.</li>
+        <li>Drawer slide-in: 200ms transition-transform.</li>
+        <li>Signal strip filter: 150ms transition-opacity. No other animation.</li>
+        <li>All destructive actions (delete context, remove team member) require explicit confirmation dialog before executing.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /uiux -->
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!--  TAB 5 · REQUIREMENTS                                        -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="req" class="tab-section">
+
+  <div class="sec-label">Functional Requirements — Desktop App</div>
+  <table class="data-table">
+    <thead><tr><th>ID</th><th>Requirement</th></tr></thead>
+    <tbody>
+      <tr><td class="id-cell">FR-D1</td><td><strong>//</strong> hotkey activates context popup within 500ms of keypress when Ollama is loaded.</td></tr>
+      <tr><td class="id-cell">FR-D2</td><td>Onboarding flow: user describes project in natural language → Ollama generates 3–5 contexts + task list locally. No external API required.</td></tr>
+      <tr><td class="id-cell">FR-D3</td><td>Task popup groups active tasks by project; each task shows context name, phase badge, archetype pill, and last-touched timestamp.</td></tr>
+      <tr><td class="id-cell">FR-D4</td><td>"Start with {operator}" button opens the host AI tool (Claude / Cursor / VS Code) with the task's context injected as the opening prompt.</td></tr>
+      <tr><td class="id-cell">FR-D5</td><td>Background sync daemon pulls from cloud on app open and pushes updated nodes within 60 seconds of session completion. Does not block // execution.</td></tr>
+      <tr><td class="id-cell">FR-D6</td><td>After session ends, Node Map dot updated within 10 seconds; brief auto-generated from Ollama session summary.</td></tr>
+      <tr><td class="id-cell">FR-D7</td><td>Context .md file copyable to clipboard from task detail view in one action.</td></tr>
+      <tr><td class="id-cell">FR-D8</td><td>App runs as macOS menu bar process; accessible system-wide without a dedicated window.</td></tr>
+      <tr><td class="id-cell">FR-D9</td><td>Adapter installer: one-click setup for each supported host tool (Claude Desktop, Cursor, VS Code, ChatGPT Desktop).</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label mt-24">Functional Requirements — Web App</div>
+  <table class="data-table">
+    <thead><tr><th>ID</th><th>Requirement</th></tr></thead>
+    <tbody>
+      <tr><td class="id-cell">FR-W1</td><td>Node Map renders all project contexts as dots on an interactive canvas; dot size = consolidation score 1–10; dot color = phase (Explore / Solidify / Build / Ship). Pan + zoom via trackpad.</td></tr>
+      <tr><td class="id-cell">FR-W1b</td><td>Hovering a dot for 300ms shows a tooltip card: context name, phase badge, archetype pill, and "Open detail →" quick link.</td></tr>
+      <tr><td class="id-cell">FR-W2</td><td>Selecting a context dot opens the right pane with five tabs: Artifact, Brief, Tasks (human + agent), Reasoning, Context .md. Map remains navigable while pane is open.</td></tr>
+      <tr><td class="id-cell">FR-W3</td><td>Snapshot view renders a Fish-model-bound board: four phase columns (Explore, Solidify, Build, Ship); each context as a card in its current phase column; card shows archetype pill, status icon, context name, sigil chip, stream progress bar, next prescribed method, confidence chip, and footer (date, artifact count, open items count, one-line session activity).</td></tr>
+      <tr><td class="id-cell">FR-W3b</td><td>Project switcher at top-left of Snapshot view renders one project's board at a time; "all projects" toggle shows compact multi-project summary row.</td></tr>
+      <tr><td class="id-cell">FR-W3c</td><td>Signal strip renders chips for active board signals: ✕ N blocked (red), → N at exit (yellow), ⏸ N stuck (grey). Clicking dims non-matching cards to 30% opacity.</td></tr>
+      <tr><td class="id-cell">FR-W3d</td><td>Clicking a card in Snapshot view opens the Drill-down Drawer with seven sections: stream progress / recipe, handoff block, artifacts, decision log, session history, tasks, forward-action CTA bar.</td></tr>
+      <tr><td class="id-cell">FR-W3e</td><td>Hovering a card for 150ms expands it inline: last session summary (one line) + quick actions (Run next method, Review handoff, Resolve blocker, Set as active).</td></tr>
+      <tr><td class="id-cell">FR-W4</td><td>Connectors page displays live status (active / inactive) and settings for each integration; status updates within 60 seconds of connection state change.</td></tr>
+      <tr><td class="id-cell">FR-W5</td><td>Team page supports user invite by email, role assignment (Individual: full team context read + create/own; Admin: full access + user + billing management), and seat removal.</td></tr>
+      <tr><td class="id-cell">FR-W6</td><td>Artifacts gallery (V1.5): all deliverable outputs across all projects with hover preview; filterable by project and phase.</td></tr>
+      <tr><td class="id-cell">FR-W7</td><td>Brief auto-generates from session data (objective, plan, key decisions); updates within 60 seconds of session sync; no user input required.</td></tr>
+      <tr><td class="id-cell">FR-W8</td><td>Floating priority surface (V1.5): top 2 highest-priority items across active contexts; dismissible per item; surfaced by Apex.</td></tr>
+      <tr><td class="id-cell">FR-W9</td><td>Recipe Panel (collapsible right sidebar on Snapshot view): archetype × phase method matrix (4×4); methods run across the project shown at higher opacity; cell click expands to full method list.</td></tr>
+      <tr><td class="id-cell">FR-W10</td><td>Agents Panel: three-tier agent system (T0: Apex/Guard, T1: Echo/Prism, T2: Dora/Sol/Bran/May); active phase highlighted; active operator banner shown when active context has a known phase.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label mt-24">Functional Requirements — Shared</div>
+  <table class="data-table">
+    <thead><tr><th>ID</th><th>Requirement</th></tr></thead>
+    <tbody>
+      <tr><td class="id-cell">FR-S1</td><td>New context created from natural-language description; AI generates initial brief and task list.</td></tr>
+      <tr><td class="id-cell">FR-S2</td><td>Context phase (Explore → Solidify → Build → Ship) updated by AI based on session activity; user can manually override.</td></tr>
+      <tr><td class="id-cell">FR-S3</td><td>Node write: dedup check on contextId + sessionHash before creating entry; write is non-blocking (does not delay // execution).</td></tr>
+      <tr><td class="id-cell">FR-S4</td><td>Per-host adapter interface: Claude Desktop, Cursor, VS Code, and ChatGPT Desktop each inject context at session start via host-specific mechanism implementing the common ContextAdapter interface.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label mt-24">Non-Functional Requirements — Performance</div>
+  <table class="data-table">
+    <thead><tr><th>ID</th><th>Requirement</th></tr></thead>
+    <tbody>
+      <tr><td class="id-cell">NFR-P1</td><td>// popup renders within 500ms on a loaded system (Ollama already running); measured from hotkey press to popup visible.</td></tr>
+      <tr><td class="id-cell">NFR-P2</td><td>Node Map loads within 2 seconds for projects with up to 200 context nodes; measured from page load to interactive.</td></tr>
+      <tr><td class="id-cell">NFR-P3</td><td>Background sync completes within 60 seconds of session completion under normal network conditions (≥10 Mbps).</td></tr>
+      <tr><td class="id-cell">NFR-P4</td><td>Context injection adds no more than 3 seconds to host tool startup time; measured from "Start with {operator}" click to AI tool open with context loaded.</td></tr>
+      <tr><td class="id-cell">NFR-P5</td><td>Ollama onboarding inference (first context generation) completes within 30 seconds on Apple Silicon (M1 or newer).</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label mt-24">Non-Functional Requirements — Security, Reliability, Scalability</div>
+  <table class="data-table">
+    <thead><tr><th>ID</th><th>Requirement</th></tr></thead>
+    <tbody>
+      <tr><td class="id-cell">NFR-SEC1</td><td>No session content leaves the device without explicit user-initiated push consent; verified by local-only default config.</td></tr>
+      <tr><td class="id-cell">NFR-SEC2</td><td>Cloud sync uses TLS 1.3 in transit; data at rest encrypted with AES-256 via Supabase storage defaults.</td></tr>
+      <tr><td class="id-cell">NFR-SEC3</td><td>GDPR data deletion request fulfilled within 30 days; data export available in .zip format on demand via web app.</td></tr>
+      <tr><td class="id-cell">NFR-SEC4</td><td>macOS app notarized and signed by Apple Developer ID; Gatekeeper compliant at V1 launch.</td></tr>
+      <tr><td class="id-cell">NFR-SEC5</td><td>No ambient capture; all context capture is intent-triggered (// hotkey or explicit app open).</td></tr>
+      <tr><td class="id-cell">NFR-R1</td><td>Desktop app operates fully offline; // flow, Ollama inference, and local context access function without internet.</td></tr>
+      <tr><td class="id-cell">NFR-R2</td><td>Web app achieves 99.5% uptime during business hours (Mon–Fri, 08:00–22:00 user's local time).</td></tr>
+      <tr><td class="id-cell">NFR-R3</td><td>Background sync failure does not block // execution; local state remains usable and sync retries automatically.</td></tr>
+      <tr><td class="id-cell">NFR-SC1</td><td>Web app supports up to 100 concurrent users per team workspace at V1 launch.</td></tr>
+      <tr><td class="id-cell">NFR-SC2</td><td>Web app scales to 1,000 concurrent users per team via horizontal scaling at V1.5.</td></tr>
+      <tr><td class="id-cell">NFR-SC3</td><td>Node Map renders projects with up to 500 context nodes without pagination; beyond 500, virtual rendering applied.</td></tr>
+    </tbody>
+  </table>
+
+</div><!-- /req -->
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!--  TAB 6 · DOMAIN                                              -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="domain" class="tab-section">
+
+  <div class="sec-label">Domain Requirements</div>
+  <div class="card-grid cols-2">
+
+    <div class="card accent-red">
+      <h3>Data Privacy &amp; GDPR</h3>
+      <ul>
+        <li>All context data stored locally by default; nothing leaves the device without explicit user-initiated push consent.</li>
+        <li>Cloud sync requires one-time opt-in per device; consent is re-confirmable and revocable at any time.</li>
+        <li>User data deletion requests completed within 30 days; full data export available in .zip format on demand.</li>
+        <li>Team sync logs include actor, timestamp, and action type for audit trail; accessible to team admins.</li>
+        <li>No session content sent to third-party analytics; only anonymized usage telemetry (opt-out available).</li>
+        <li>Guard agent scans every session and handoff for PII, credentials, and injection before any outbound sync.</li>
+      </ul>
+    </div>
+
+    <div class="card accent-cyan">
+      <h3>Local-First Architecture</h3>
+      <ul>
+        <li>Desktop app operates fully offline; // flow, Ollama inference, and context access function without internet.</li>
+        <li>Cloud sync is additive — app degrades gracefully to local-only mode when sync is unavailable.</li>
+        <li>Ollama model downloaded once; subsequent inference requires no network calls.</li>
+        <li>All captures are intent-triggered — no ambient collection sidesteps MDM and privacy policy concerns.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>macOS Platform</h3>
+      <ul>
+        <li>Minimum macOS 13 (Ventura). Notarized + signed by Apple Developer ID at V1 launch.</li>
+        <li>Menu bar app pattern: no Dock icon by default; accessible via menu bar icon or global // hotkey.</li>
+        <li>Ollama bundled or auto-installed as dependency during onboarding; user prompted if not present.</li>
+        <li>No background processes requiring MDM approval — capture is intent-triggered, not ambient.</li>
+        <li>JWT tokens stored in macOS Keychain; never in plaintext on disk.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>B2B Multi-Tenant</h3>
+      <ul>
+        <li>Each team workspace is isolated; cross-workspace data access is not possible at the data layer.</li>
+        <li>Role-based access: Individual (full read access to all team contexts + create/own contexts; no user or billing management), Admin (full access + user management + billing).</li>
+        <li>Billing at team level; seat counts managed by Admin role.</li>
+        <li>Business model: B2B, Obsidian motion — individual ICP, company pays at team scale. Free solo, Pro $12/mo, Team $24/seat.</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div><!-- /domain -->
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!--  TAB 7 · INTEGRATIONS                                        -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="integrations" class="tab-section">
+
+  <div class="sec-label">V1 — Sep 2026 · All Integrations</div>
+  <table class="data-table">
+    <thead><tr><th>Integration</th><th>Mechanism</th><th>What syncs</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Claude Desktop</strong></td>
+        <td>Clipboard injection + AppleScript keyboard automation</td>
+        <td>Context .md injected as opening prompt at session start</td>
+      </tr>
+      <tr>
+        <td><strong>Cursor</strong></td>
+        <td>.cursorrules file write + workspace reload</td>
+        <td>Context .md written to project root before session</td>
+      </tr>
+      <tr>
+        <td><strong>VS Code</strong></td>
+        <td>Extension API — vscode.workspace.openTextDocument + showTextDocument</td>
+        <td>Context .md opened as active editor context</td>
+      </tr>
+      <tr>
+        <td><strong>ChatGPT Desktop</strong></td>
+        <td>Clipboard injection (same as Claude)</td>
+        <td>Context .md injected as opening prompt</td>
+      </tr>
+      <tr>
+        <td><strong>Figma</strong></td>
+        <td>Figma Plugin API</td>
+        <td>Artifact outputs (frames, specs) synced to context Artifact tab</td>
+      </tr>
+      <tr>
+        <td><strong>GitHub</strong></td>
+        <td>GitHub REST API + webhooks</td>
+        <td>Commit and PR activity synced to context session timeline</td>
+      </tr>
+      <tr>
+        <td><strong>Jira / Linear</strong></td>
+        <td>REST API</td>
+        <td>Task status bidirectional sync — DubleSlash tasks ↔ Jira/Linear tickets</td>
+      </tr>
+      <tr>
+        <td><strong>Daily digest</strong></td>
+        <td>Supabase scheduled function + email via Resend</td>
+        <td>Activity since yesterday, top 3 next tasks, open decisions</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px;color:var(--muted);margin-top:10px;font-family:var(--font);">AI tool adapters (Claude, Cursor, VS Code, ChatGPT) implement the common ContextAdapter interface. Adapter and connector state surfaces on the Connectors page.</p>
+
+  <div class="sec-label mt-24">Out of Scope (V1)</div>
+  <div class="card-grid cols-3">
+    <div class="card">
+      <h4>Slack — V2 consideration</h4>
+      <p>Read-only message search for decision capture. Blocked by API access complexity and MDM concerns at V1 stage.</p>
+    </div>
+    <div class="card">
+      <h4>Notion / Confluence — V2</h4>
+      <p>Export of briefs + artifacts. Low priority versus the primary methodology surface.</p>
+    </div>
+    <div class="card">
+      <h4>Microsoft Teams / Office — Post Series A</h4>
+      <p>Enterprise connector. Requires enterprise contracts and compliance work beyond V1.5 scope.</p>
+    </div>
+  </div>
+
+</div><!-- /integrations -->
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!--  TAB 8 · RISKS                                               -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="risks" class="tab-section">
+
+  <div class="sec-label">Risk Register</div>
+  <table class="data-table">
+    <thead>
+      <tr><th>ID</th><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="id-cell">R1</td>
+        <td><strong>Enterprise MDM blocks unsigned macOS app</strong> — studios on managed devices can't install.</td>
+        <td class="risk-medium">Medium</td>
+        <td class="risk-high">High</td>
+        <td>Notarized + Apple Developer ID signed at V1 launch. Web-only fallback path (Node Map + Snapshot) for restricted environments.</td>
+      </tr>
+      <tr>
+        <td class="id-cell">R2</td>
+        <td><strong>Ollama model quality insufficient</strong> — generated contexts are vague or wrong, users lose trust in first session.</td>
+        <td class="risk-medium">Medium</td>
+        <td class="risk-high">High</td>
+        <td>Pre-launch test with Llama 3.1 8B + Mistral 7B. Claude API fallback for onboarding if quality score &lt;threshold. User rates first-generated contexts (1–5); &lt;3 triggers fallback.</td>
+      </tr>
+      <tr>
+        <td class="id-cell">R3</td>
+        <td><strong>Users don't form // habit</strong> — app installed but not used daily. Node Map stays empty.</td>
+        <td class="risk-medium">Medium</td>
+        <td class="risk-high">High</td>
+        <td>7-day onboarding sequence with daily nudge notifications. In-app streak tracker visible in menu bar popup. "Last session" reminder at // open if &gt;48h since last use.</td>
+      </tr>
+      <tr>
+        <td class="id-cell">R4</td>
+        <td><strong>Context injection breaks on host tool updates</strong> — Claude Desktop, Cursor, VS Code release new versions.</td>
+        <td class="risk-high">High</td>
+        <td class="risk-medium">Medium</td>
+        <td>Per-host adapter abstraction isolates breakage. Integration test suite runs on each host tool release. Out-of-band adapter update channel (no app store review required).</td>
+      </tr>
+      <tr>
+        <td class="id-cell">R5</td>
+        <td><strong>GDPR consent friction reduces team sync adoption</strong> — users opt out of sync to avoid the consent flow.</td>
+        <td class="risk-low">Low</td>
+        <td class="risk-medium">Medium</td>
+        <td>One-time bulk consent at team onboarding covers all sync actions. Explicit data preview screen before first sync shows exactly what will be uploaded. Admin can set workspace-level sync policy.</td>
+      </tr>
+      <tr>
+        <td class="id-cell">R6</td>
+        <td><strong>Supabase Realtime latency causes Node Map to feel stale</strong> — managers see outdated project state.</td>
+        <td class="risk-low">Low</td>
+        <td class="risk-low">Low</td>
+        <td>Optimistic local update on write; Realtime subscription for live corrections. Manual refresh button always available. 10-second SLA for dot update post-session.</td>
+      </tr>
+      <tr>
+        <td class="id-cell">R7</td>
+        <td><strong>Fish Model methodology unfamiliar to first-cohort studios</strong> — archetypes and recipes create friction instead of value.</td>
+        <td class="risk-medium">Medium</td>
+        <td class="risk-medium">Medium</td>
+        <td>Recipe Panel is optional / collapsed by default. Archetype auto-suggested by Apex based on scope signals — user can accept without understanding the model. Methodology revealed progressively.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div><!-- /risks -->
+
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div>DubleSlash · Product Requirements Document · v2.0</div>
+  <div class="version">2026-05-09 · Author: Tal Solomon · Fish Model Methodology · Sonnet ceiling</div>
+</footer>
+
+<script>
+  // ── Tab switching ────────────────────────────────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ── Journey selector ─────────────────────────────────────────
+  document.querySelectorAll('.journey-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.journey-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.journey-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.journey).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
