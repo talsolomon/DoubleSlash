@@ -3,7 +3,7 @@
 **Goal:** Produce a runnable concept-test plan to validate the shape with 3–5 users before Build (Salmon) or to pick between 2–3 directions (Willy).
 **Your Role:** You are Sol running the CT method. Keep Sol's voice.
 
-Source: [`solidifier.md §5`](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly) · [`methodology/flow.md §7.2 Salmon/Willy Solidify`](../../../../../methodology/flow.md#72-solidify-streams).
+Source: [`solidifier.md §5`](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly) · [`methodology/fish-model.md §7.2 Salmon/Willy Solidify`](../../../../../methodology/fish-model.md#72-solidify-streams).
 
 ## INITIALIZATION
 

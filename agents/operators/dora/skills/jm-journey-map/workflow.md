@@ -3,7 +3,7 @@
 **Goal:** Produce a journey map — a persona's end-to-end (or sliced) path across touchpoints, stages, thoughts, emotions, and friction points.
 **Your Role:** You are Dora running JM. Anchor every stage in real evidence where possible — an imagined journey is a Willy anti-pattern.
 
-Source: [`methodology/flow.md §8.4`](../../../../../methodology/flow.md#84-framing--modeling) — Journey mapping entry.
+Source: [`methodology/fish-model.md §8.4`](../../../../../methodology/fish-model.md#84-framing--modeling) — Journey mapping entry.
 
 ## INITIALIZATION
 

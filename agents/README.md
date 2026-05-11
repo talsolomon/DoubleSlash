@@ -28,15 +28,15 @@ agents/
 │   ├── echo/               ← Session Bridge (SC, CP, DD, SI, CR, SH)
 │   └── prism/              ← Pattern Watcher (SM, CL, DD, OR, PS, GR)
 │
-├── operators/              ── Tier 2: FLOW phase workers
+├── operators/              ── Tier 2: Fish Model phase workers
 │   ├── dora/               ← Explorer — Explore phase (HMW, PM, CS, JM, IP…)
 │   ├── sol/                ← Solidifier — Solidify phase (TA, BR, AC, PT, SK…)
 │   ├── bran/               ← Builder — Build phase (GE, SL, TE, UV, IN, PR)
 │   └── may/                ← Shipper — Ship phase (RE, CM, TR, RN, MS, NL…)
 │
 ├── helpers/                ── Shared utilities (used by all operators)
-│   ├── handoff-compose/    ← HO — compose a FLOW handoff
-│   └── handback-compose/   ← HB — compose a FLOW handback
+│   ├── handoff-compose/    ← HO — compose a Fish Model handoff
+│   └── handback-compose/   ← HB — compose a Fish Model handback
 │
 ├── canon/                  ── Book canon (80+ texts, per-agent mappings)
 │   ├── book-canon.md       ← full library organized by domain

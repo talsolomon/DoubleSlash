@@ -29,7 +29,7 @@ At the end of TA you're holding:
 
 ## Where this fits in the Solidify stream
 
-TA is a **Willy move** — per [methodology/flow.md §7.2 Willy Solidify](../../../../../methodology/flow.md#72-solidify-streams) step 3, "Map tradeoffs on spectrum axes (flexibility ↔ usability, cost ↔ speed)." TA usually runs *inside* PT drafting as the second move (after problem framing, before shape), so the shape choice has a principled frame. Occasionally useful on Tuna for a particularly contested component-library decision, but that's rare.
+TA is a **Willy move** — per [methodology/fish-model.md §7.2 Willy Solidify](../../../../../methodology/fish-model.md#72-solidify-streams) step 3, "Map tradeoffs on spectrum axes (flexibility ↔ usability, cost ↔ speed)." TA usually runs *inside* PT drafting as the second move (after problem framing, before shape), so the shape choice has a principled frame. Occasionally useful on Tuna for a particularly contested component-library decision, but that's rare.
 
 ## When TA refuses to emit
 

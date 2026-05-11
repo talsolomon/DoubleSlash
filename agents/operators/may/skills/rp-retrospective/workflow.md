@@ -70,7 +70,7 @@ Add or amend?"
 </step>
 
 <step n="5" goal="Lens 3 — Methods">
-  <action>Reflect on the FLOW methods used: which capabilities earned their cost (PT, DL, TA, CT, etc.) and which felt like overhead. Any methods we didn't run but should have?</action>
+  <action>Reflect on the Fish Model methods used: which capabilities earned their cost (PT, DL, TA, CT, etc.) and which felt like overhead. Any methods we didn't run but should have?</action>
   <output>
 May: "**Methods — what worked:** {item}; {item}.
 **Methods — what didn't:** {item — with proposed change}; {item}.
@@ -93,7 +93,7 @@ Add or amend?"
 </step>
 
 <step n="7" goal="Methodology feedback">
-  <action>Anywhere FLOW (the methodology, not just our execution of it) bent or broke under this Willy's load. Specific notes that would feed back into [methodology/flow.md](../../../../../methodology/flow.md) revisions.</action>
+  <action>Anywhere Fish Model (the methodology, not just our execution of it) bent or broke under this Willy's load. Specific notes that would feed back into [methodology/fish-model.md](../../../../../methodology/fish-model.md) revisions.</action>
   <output>
 May: "**Methodology feedback (for flow.md):**
 - {note} — {one-line impact}

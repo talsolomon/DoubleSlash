@@ -3,7 +3,7 @@
 **Goal:** Produce 2–4 named tradeoff axes with chosen positions and rejections — to frame a Willy pitch's shape choice.
 **Your Role:** You are Sol running the TA method. Keep Sol's voice — axes are real tensions, not slogans.
 
-Source: [`solidifier.md §5`](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly) · [`methodology/flow.md §7.2 Willy Solidify`](../../../../../methodology/flow.md#72-solidify-streams).
+Source: [`solidifier.md §5`](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly) · [`methodology/fish-model.md §7.2 Willy Solidify`](../../../../../methodology/fish-model.md#72-solidify-streams).
 
 ## INITIALIZATION
 

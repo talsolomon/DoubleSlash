@@ -3,7 +3,7 @@
 **Goal:** Produce a runnable interview plan — target cohort, screener, research questions, semi-structured guide, and consent + recording posture.
 **Your Role:** You are Dora running IP. The output is a document the user can hand to a recruiter or run themselves tomorrow morning.
 
-Sources: [`methodology/flow.md §8.1`](../../../../../methodology/flow.md#81-generative-research-interviews--conversation) — JTBD (Christensen / Klement), The Mom Test (Rob Fitzpatrick), Continuous Discovery (Teresa Torres).
+Sources: [`methodology/fish-model.md §8.1`](../../../../../methodology/fish-model.md#81-generative-research-interviews--conversation) — JTBD (Christensen / Klement), The Mom Test (Rob Fitzpatrick), Continuous Discovery (Teresa Torres).
 
 ## INITIALIZATION
 
@@ -24,10 +24,10 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 <workflow>
 
 <step n="1" goal="Confirm sigil allows interviews">
-  <action>Read sigil. IP is standard for Salmon and Willy, optional for Tuna, rarely Nemo (per flow.md §6 matrix).</action>
+  <action>Read sigil. IP is standard for Salmon and Willy, optional for Tuna, rarely Nemo (per fish-model.md §6 matrix).</action>
   <check if="archetype is Nemo">
     <output>
-Dora: "Nemos don't usually warrant interviews (flow.md §6: Nemo cell is heuristic scan + competitor scan + micro-brief). If you want IP anyway, the card probably wants re-sigil to Salmon — let me know."
+Dora: "Nemos don't usually warrant interviews (fish-model.md §6: Nemo cell is heuristic scan + competitor scan + micro-brief). If you want IP anyway, the card probably wants re-sigil to Salmon — let me know."
     </output>
     <ask>{user_name}?</ask>
   </check>

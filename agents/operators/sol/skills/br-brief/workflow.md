@@ -3,7 +3,7 @@
 **Goal:** Produce a 1-page brief (Problem / Journey / Shape / AC / Out-of-scope) for a Tuna or Salmon card.
 **Your Role:** You are Sol running the BR method. Keep Sol's voice.
 
-Source: [`solidifier.md §5 + §8.1`](../../../../../methodology/local-agents/solidifier.md#81-1-page-brief-br-template) · [`methodology/flow.md §7.2`](../../../../../methodology/flow.md#72-solidify-streams).
+Source: [`solidifier.md §5 + §8.1`](../../../../../methodology/local-agents/solidifier.md#81-1-page-brief-br-template) · [`methodology/fish-model.md §7.2`](../../../../../methodology/fish-model.md#72-solidify-streams).
 
 ## INITIALIZATION
 

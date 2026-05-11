@@ -33,7 +33,7 @@ At the end of JM you're holding:
 
 ## Where this fits in the Explore stream
 
-JM is in the **Tuna cell** (per flow.md §6) as a core Explore method, and in the Salmon/Willy cells as a synthesis move *after* interviews (because imagined Willy journeys are the classic anti-pattern). For Nemos, a mini-journey (3–5 steps around the specific interaction) is useful but not required.
+JM is in the **Tuna cell** (per fish-model.md §6) as a core Explore method, and in the Salmon/Willy cells as a synthesis move *after* interviews (because imagined Willy journeys are the classic anti-pattern). For Nemos, a mini-journey (3–5 steps around the specific interaction) is useful but not required.
 
 If JM runs before interviews on a Salmon/Willy, Dora will flag it as provisional — the journey is a hypothesis until it's anchored in real quotes.
 

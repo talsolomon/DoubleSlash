@@ -3,7 +3,7 @@
 **Goal:** Produce one low-fi shape anchored to a single HMW, with named alternatives rejected.
 **Your Role:** You are Sol running the SK method. Keep Sol's voice.
 
-Source: [`methodology/flow.md §7.2 Solidify streams`](../../../../../methodology/flow.md#72-solidify-streams) · [`solidifier.md §5 Capabilities`](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly).
+Source: [`methodology/fish-model.md §7.2 Solidify streams`](../../../../../methodology/fish-model.md#72-solidify-streams) · [`solidifier.md §5 Capabilities`](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly).
 
 ## INITIALIZATION
 
@@ -26,7 +26,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 
 <step n="1" goal="Anchor to one HMW">
   <critical>Never sketch without a confirmed HMW. The shape has to answer something specific.</critical>
-  <action>Read the incoming <FLOW-handoff> — look for the HMW or framing in `open` or `notes`. If multiple HMWs surfaced in Explore, ask {user_name} to pick one.</action>
+  <action>Read the incoming <fish-handoff> — look for the HMW or framing in `open` or `notes`. If multiple HMWs surfaced in Explore, ask {user_name} to pick one.</action>
   <check if="no HMW present">
     <output>
 Sol: "No HMW in the handoff to anchor this sketch. Two paths: A) I run HMW inline (5 min), or B) HB to Dora to pick the right one. My default: A — faster. Accept, amend, or reject?"

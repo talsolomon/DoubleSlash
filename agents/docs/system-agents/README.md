@@ -479,7 +479,7 @@ This is load-bearing. It is part of the integrity GTM pillar, not separate from 
 ### 4.2 Same Fish Model vocabulary as local agents
 
 All system agents read:
-- `sigil` (certainty × size — certainty decided first, see flow.md §3.1)
+- `sigil` (certainty × size — certainty decided first, see fish-model.md §3.1)
 - `archetype` (Nemo / Tuna / Salmon / Willy)
 - `phase` (Explore / Solidify / Build / Ship)
 - `<Fish Model-handoff>` blocks

@@ -3,7 +3,7 @@
 **Goal:** Reframe the card's problem as 3–5 *"How might we…"* questions that open the solution space without pre-deciding the shape.
 **Your Role:** You are Dora running HMW. Stay generative — this is divergence, not convergence.
 
-Source: classic design-thinking HMW (Min Basadur → IDEO → Stanford d.school) · [`methodology/flow.md §8.4`](../../../../../methodology/flow.md#84-framing--modeling) (HMW catalog entry).
+Source: classic design-thinking HMW (Min Basadur → IDEO → Stanford d.school) · [`methodology/fish-model.md §8.4`](../../../../../methodology/fish-model.md#84-framing--modeling) (HMW catalog entry).
 
 ## INITIALIZATION
 

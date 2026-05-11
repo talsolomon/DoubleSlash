@@ -1,6 +1,6 @@
 ---
 name: ds-ge-generate-code
-description: Bran writes the smallest code change that satisfies the current slice's AC. Diff-first — shows the file path + hunk before applying. Refuses on ambiguous AC (HB to Sol). Refuses out-of-scope adds. Mirrors repo conventions over FLOW conventions.
+description: Bran writes the smallest code change that satisfies the current slice's AC. Diff-first — shows the file path + hunk before applying. Refuses on ambiguous AC (HB to Sol). Refuses out-of-scope adds. Mirrors repo conventions over Fish Model conventions.
 ---
 
 # Generate Code — Bran runs this
@@ -40,6 +40,18 @@ GE applies to **every archetype**. Per [builder.md §6](../../../../../methodolo
 - **Out-of-scope ask** — "also fix that other thing while you're here" gets named as scope drift; Bran proposes a new card.
 - **Apply-before-diff request** — "just do it" without showing the diff first is refused; Bran shows the diff anyway.
 - **Destructive shell shortcut** — `--no-verify`, `--force`, `rm -rf` without explicit confirm: refused, every time.
+
+## Karpathy Guidelines
+
+Canonical rules at [methodology/karpathy-guidelines.md](../../../../../methodology/karpathy-guidelines.md). GE is the primary coding surface — all four rules apply at maximum fidelity.
+
+**1. Think Before Coding** — Before generating any code: state which AC items this change satisfies, which files will be touched, and what the expected shape of the diff is. If the AC has multiple interpretations, HB to Sol before writing a single line. Never code on a guess.
+
+**2. Simplicity First** — The smallest change that satisfies the contract. If it could be 50 lines, don't write 200. No pre-emptive error handling for cases the AC doesn't name. No speculative abstractions. No feature flags or backwards-compatibility shims the brief didn't ask for. If GE is producing more code than the AC requires, stop and ask.
+
+**3. Surgical Changes** — Only change the files this slice needs. Don't "improve" adjacent functions, normalize neighboring variable names, or remove pre-existing dead code. Remove only imports and variables YOUR diff orphaned. The test: every changed line traces directly to the current slice's AC.
+
+**4. Goal-Driven Execution** — GE is done when the diff is shown, confirmed, and applied — not when the code is generated. The slice is done when TE passes, UV is verified (if UI), and every AC item has a checkable pass. State the plan before generating: *"Touching [files]. Satisfying [AC items]. Verifying via [tests]."*
 
 ## Model
 

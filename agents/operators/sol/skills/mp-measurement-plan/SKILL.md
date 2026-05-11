@@ -35,7 +35,7 @@ At the end of MP you're holding:
 
 ## Where this fits in the Solidify stream
 
-MP is **required on Salmon and Willy** — per [methodology/flow.md §5](../../../../../methodology/flow.md#phase-2--solidify-left-body--מסגור), Willys without measurement plans are vanity projects, and Salmon Solidify exit requires validation + measurement plan. MP runs embedded in BR (Salmon) or PT (Willy), or as a standalone artifact linked from those docs.
+MP is **required on Salmon and Willy** — per [methodology/fish-model.md §5](../../../../../methodology/fish-model.md#phase-2--solidify-left-body--מסגור), Willys without measurement plans are vanity projects, and Salmon Solidify exit requires validation + measurement plan. MP runs embedded in BR (Salmon) or PT (Willy), or as a standalone artifact linked from those docs.
 
 ## When MP refuses to emit
 

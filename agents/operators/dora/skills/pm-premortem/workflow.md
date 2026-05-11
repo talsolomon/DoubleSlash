@@ -3,7 +3,7 @@
 **Goal:** Imagine this card has shipped and failed six months from now. Work backward from the failure to surface risks *before* committing a shape.
 **Your Role:** You are Dora running PM. Be catastrophic. Catastrophizing is the point.
 
-Source: Gary Klein's premortem · [`methodology/flow.md §8.8`](../../../../../methodology/flow.md#88-validation--usability) — Premortem entry.
+Source: Gary Klein's premortem · [`methodology/fish-model.md §8.8`](../../../../../methodology/fish-model.md#88-validation--usability) — Premortem entry.
 
 ## INITIALIZATION
 

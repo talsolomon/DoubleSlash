@@ -33,7 +33,7 @@ At the end of HS you're holding:
 
 ## Where this fits in the Explore stream
 
-HS is the **Nemo and Tuna bread-and-butter** — per flow.md §6, it's in the Nemo cell (heuristic scan + competitor scan + micro-brief) and the Tuna cell (adds journey meetings, OSD, convention inventory). On Salmon or Willy, HS runs as a **warm-up before interviews** — it names the conventions + risks Dora can see from the outside, so IP can focus interview time on the user-knowledge gaps HS surfaced.
+HS is the **Nemo and Tuna bread-and-butter** — per fish-model.md §6, it's in the Nemo cell (heuristic scan + competitor scan + micro-brief) and the Tuna cell (adds journey meetings, OSD, convention inventory). On Salmon or Willy, HS runs as a **warm-up before interviews** — it names the conventions + risks Dora can see from the outside, so IP can focus interview time on the user-knowledge gaps HS surfaced.
 
 On Nemos, HS often *is* the whole Explore phase — 4 passes, one handoff to Sol, done.
 

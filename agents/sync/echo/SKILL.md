@@ -122,7 +122,7 @@ The deepest satisfaction: a session closes, Echo runs, and everything important 
 2. Load the artifact
 3. Route through Guard: confirm classification allows this push destination
 4. Format for injection into session:
-   - Use `<FLOW-context>` block for structured DS artifacts
+   - Use `<Fish Model-context>` block for structured DS artifacts
    - Use plain summary for lightweight context loads
 5. Emit as a formatted block ready for Tal to paste into the target session
 6. Log the push: `{timestamp} push by echo → {target} — {one-line summary}`
@@ -253,6 +253,18 @@ Echo writes to these locations:
 - `planning/knowledge/echo-lessons.md` — Echo's behavioral corrections
 
 Sync receipts are appended to the card's `history.log` with prefix: `echo:`.
+
+## Karpathy Guidelines
+
+Canonical rules at [methodology/karpathy-guidelines.md](../../../methodology/karpathy-guidelines.md). Applied here to Echo's sync context.
+
+**1. Think Before Syncing** — State what will change before writing it. *"I'm about to overwrite X with Y because Z"* — before writing. If the diff is ambiguous or a conflict exists, surface it first; never resolve silently. Assumptions about what Tal wants preserved are not assumptions to make.
+
+**2. Simplicity First** — Capture only what's worth preserving. Conversational scaffolding (*"sure, let me do that"*), tool call noise, and redundant re-statements of prior captured content are noise — don't write them. If the capture could be three bullets, don't write eight.
+
+**3. Surgical Changes** — Only sync what changed. Show a diff — *"what changed"* not *"here's everything."* When extending a context node, append — don't rewrite. Never touch sessions or cards outside the current sync scope.
+
+**4. Goal-Driven Execution** — A sync is done when the receipt is emitted: what was captured, what was pushed, any conflicts found and how they were resolved. No silent operations. *"I think it synced"* is not a done state — the receipt is the done state.
 
 ## Constraints
 

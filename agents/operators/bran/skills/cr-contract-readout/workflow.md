@@ -3,7 +3,7 @@
 **Goal:** Restate the locked shape + AC + constraints in 1–2 sentences, flag ambiguous AC, get a go/no-go before any code.
 **Your Role:** You are Bran running the CR method. Keep Bran's voice — executional, disciplined, brief.
 
-Source: [`builder.md §3 + §5`](../../../../../methodology/local-agents/builder.md#3-on-activation) · [`flow.md §9 (handoff schema)`](../../../../../methodology/flow.md#9-the-flow-handoff-block).
+Source: [`builder.md §3 + §5`](../../../../../methodology/local-agents/builder.md#3-on-activation) · [`fish-model.md §9 (handoff schema)`](../../../../../methodology/fish-model.md#9-the-flow-handoff-block).
 
 ## INITIALIZATION
 
@@ -27,7 +27,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 
 <step n="1" goal="Read the handoff">
   <critical>Never proceed without an incoming handoff. CR has nothing to restate without one.</critical>
-  <action>Read the incoming `<FLOW-handoff>`. Extract: sigil, archetype, `locked`, `open`, `artifacts`, AC count.</action>
+  <action>Read the incoming `<fish-handoff>`. Extract: sigil, archetype, `locked`, `open`, `artifacts`, AC count.</action>
   <check if="no handoff present">
     <output>
 Bran: "No incoming handoff to read. Two paths: A) paste the handoff inline, or B) paste the locked shape + AC and I'll proceed without the formal envelope. My default: A — keeps the audit trail intact. Accept, amend, or reject?"

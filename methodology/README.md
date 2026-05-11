@@ -18,6 +18,7 @@ methodology/
 ├── methods.md                      ← Pillar 1 · method catalog · ai-mode + skill contracts
 ├── artifacts.md                    ← Pillar 2 · artifact graph · 69 types + schemas
 ├── projections.md                  ← Pillar 3 · Fish Kanban + foreign adapter contracts
+├── karpathy-guidelines.md          ← universal execution principles (all agents, all phases)
 ├── agents-overview.md              ← all 13 agents in one map
 ├── fish/                           ← historical reference; fish-model.md is canonical
 │   ├── README.md

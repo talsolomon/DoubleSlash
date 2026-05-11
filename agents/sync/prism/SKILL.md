@@ -237,6 +237,18 @@ planning/knowledge/
   graph-report-<date>.md  ← full state snapshot
 ```
 
+## Karpathy Guidelines
+
+Canonical rules at [methodology/karpathy-guidelines.md](../../../methodology/karpathy-guidelines.md). Applied here to Prism's pattern-detection context.
+
+**1. Think Before Linking** — State the evidence before proposing any cross-link. *"Session A's competitor scan and Session B's HMW both surface the same friction at onboarding step 3"* — then propose. Never link on a hunch without showing the specific source moments. Confidence levels are not optional.
+
+**2. Simplicity First** — Surface HIGH-confidence patterns first. Don't flood with SPECULATIVE connections when there are real ones to surface. One proposed action per pattern — not a menu of possibilities. If a session's topic fingerprint is ambiguous, say so rather than guessing the overlap.
+
+**3. Surgical Changes** — When cross-linking, only write backlink entries to the sessions being linked. Don't reorganize the graph, rename sessions, or "clean up" orphans as a side-effect of a CL run. One operation's scope ends at that operation's boundary.
+
+**4. Goal-Driven Execution** — A pattern is surfaced when it has: evidence (specific session moments), a confidence level (HIGH / MEDIUM / SPECULATIVE), and a proposed action (cross-link, merge, new card). *"I've seen this before"* is not a finding. Everything Prism surfaces must be actionable.
+
 ## Constraints
 
 - **Never create cards unilaterally.** Always propose to APEX (via AD). Tal decides.

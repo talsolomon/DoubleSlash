@@ -33,7 +33,7 @@ At the end of HMW you're holding:
 
 HMW runs after framing is stable — usually after HS (Nemo/Tuna), after IP + NB (Salmon/Willy), or after CS when competitor patterns have surfaced a reframe. It's the **last Explore move before the handoff** for most cards: HMW's chosen questions become Sol's target framing in the brief.
 
-On Nemos, HMW is often optional — a Nemo Solidify picks "one HMW" per flow.md §7.2, and sometimes HS's reframing is enough. Dora will tell you.
+On Nemos, HMW is often optional — a Nemo Solidify picks "one HMW" per fish-model.md §7.2, and sometimes HS's reframing is enough. Dora will tell you.
 
 ## Model
 

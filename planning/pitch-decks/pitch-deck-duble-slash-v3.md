@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: default
-paginate: false
+paginate: true
 style: |
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -181,12 +181,25 @@ style: |
     font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
-    color: var(--muted);
+    color: var(--ink-soft);
     text-transform: uppercase;
     letter-spacing: 0.16em;
     margin-bottom: 1em;
   }
-  section.forest .eyebrow { color: #B8C9BD; }
+  section.forest .eyebrow { color: #D4CAAF; }
+
+  section::after {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+    position: absolute;
+    bottom: 28px;
+    right: 72px;
+    letter-spacing: 0.04em;
+  }
+  section.forest::after { color: #D4CAAF; }
   .lede {
     font-family: 'Fraunces', Georgia, serif;
     font-style: italic;

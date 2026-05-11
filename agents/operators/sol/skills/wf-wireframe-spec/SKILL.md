@@ -30,7 +30,7 @@ At the end of WF you're holding:
 
 ## Where this fits in the Solidify stream
 
-WF is the **Tuna standard** — per [methodology/flow.md §7.2 Tuna Solidify](../../../../../methodology/flow.md#72-solidify-streams) steps 3–5 and [solidifier.md §5](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly), Tuna needs microspec-level wireframes. WF runs after SB and BR — the storyboard sets the flow, the brief sets the shape, WF sets the per-screen structure and microinteractions. WF does not run on Nemo (sketch is enough), Salmon (CT fixture is the prototype), or Willy (pitch carries structure at higher level, wireframes happen in Build).
+WF is the **Tuna standard** — per [methodology/fish-model.md §7.2 Tuna Solidify](../../../../../methodology/fish-model.md#72-solidify-streams) steps 3–5 and [solidifier.md §5](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly), Tuna needs microspec-level wireframes. WF runs after SB and BR — the storyboard sets the flow, the brief sets the shape, WF sets the per-screen structure and microinteractions. WF does not run on Nemo (sketch is enough), Salmon (CT fixture is the prototype), or Willy (pitch carries structure at higher level, wireframes happen in Build).
 
 ## When WF refuses to emit
 

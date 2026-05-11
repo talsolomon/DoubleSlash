@@ -373,4 +373,4 @@ Agents use these to route pushes without re-lookup.
 
 - **2026-05-02** — complete. Fish Kanban spec, five foreign adapter contracts (Jira, Linear, Figma, Slack, GitHub), projection rules, conflict resolution.
 - **Fish Model methodology trilogy is now complete:** `methods.md` → `artifacts.md` → `projections.md`.
-- **Next:** Fish Model rename sweep — retire remaining `flow.md` / FLOW references across docs; align all fish/ files to "Fish Model" terminology.
+- **2026-05-11** — Fish Model rename sweep complete. All `FLOW` references retired across `agents/`, `app/`, `company/`; `<fish-handoff>` tag in use everywhere.

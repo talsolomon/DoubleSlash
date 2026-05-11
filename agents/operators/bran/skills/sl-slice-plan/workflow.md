@@ -3,7 +3,7 @@
 **Goal:** Produce an ordered list of vertical slices that map every AC, with a starting slice + ETA.
 **Your Role:** You are Bran running the SL method. Keep Bran's voice — sequencing, scope-honest, ETA-realistic.
 
-Source: [`builder.md §4 + §5 + §8.1`](../../../../../methodology/local-agents/builder.md#4-axis-modulation-streams-per-archetype) · [`flow.md §7.3 (Build streams)`](../../../../../methodology/flow.md#73-build-streams).
+Source: [`builder.md §4 + §5 + §8.1`](../../../../../methodology/local-agents/builder.md#4-axis-modulation-streams-per-archetype) · [`fish-model.md §7.3 (Build streams)`](../../../../../methodology/fish-model.md#73-build-streams).
 
 ## INITIALIZATION
 

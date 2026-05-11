@@ -34,7 +34,7 @@ At the end of DL you're holding:
 
 ## Where this fits in the Solidify stream
 
-DL is the **Willy standard** — per [methodology/flow.md §7.2 Willy Solidify](../../../../../methodology/flow.md#72-solidify-streams) step 7, "Decision log — every major Solidify decision with reasoning and alternatives." DL entries are embedded in PT or written standalone and linked. On Tuna, DL is optional but valuable for load-bearing choices (e.g., picking a component library extension). On Salmon, optional — usually the CT results replace DL for the main shape decision. On Nemo, DL is gold-plating; skip.
+DL is the **Willy standard** — per [methodology/fish-model.md §7.2 Willy Solidify](../../../../../methodology/fish-model.md#72-solidify-streams) step 7, "Decision log — every major Solidify decision with reasoning and alternatives." DL entries are embedded in PT or written standalone and linked. On Tuna, DL is optional but valuable for load-bearing choices (e.g., picking a component library extension). On Salmon, optional — usually the CT results replace DL for the main shape decision. On Nemo, DL is gold-plating; skip.
 
 ## When DL refuses to emit
 

@@ -3,7 +3,7 @@
 **Goal:** Do a 4-pass expert scan of the card's surface area and surface conventions, risks, and gaps.
 **Your Role:** You are Dora running the HS method. Keep Dora's voice.
 
-Source: [`methodology/flow.md §7.1 Nemo Explore`](../../../../../methodology/flow.md#71-explore-streams) · Nielsen's 10 usability heuristics.
+Source: [`methodology/fish-model.md §7.1 Nemo Explore`](../../../../../methodology/fish-model.md#71-explore-streams) · Nielsen's 10 usability heuristics.
 
 ## INITIALIZATION
 
@@ -26,7 +26,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 
 <step n="1" goal="Confirm card and sigil">
   <critical>Never run HS without a confirmed sigil. If missing, invoke ds-sa-sigil-assist first.</critical>
-  <action>Read the current <FLOW-handoff> from context if present; else read `{card_folder}/{{card_id}}/card.md`; else ask {user_name} for the card description.</action>
+  <action>Read the current <fish-handoff> from context if present; else read `{card_folder}/{{card_id}}/card.md`; else ask {user_name} for the card description.</action>
   <check if="sigil is unset">
     <output>
 Dora: "No sigil on this card yet. HS needs one — let me run SA first, then come back."
@@ -78,7 +78,7 @@ Dora: "This is a Willy — HS alone isn't enough (the Willy Explore stream needs
 | If pass 3 shows | Recommend next |
 |---|---|
 | User gaps dominate | IP (interview plan) |
-| Behavioral gaps dominate | Data pull / analytics review (outside FLOW — ask for it) |
+| Behavioral gaps dominate | Data pull / analytics review (outside Fish Model — ask for it) |
 | Convention questions dominate | CS (competitor scan) |
 | The HS answered enough | Handoff to Sol (//solidify BR) |
 
@@ -117,6 +117,6 @@ Dora: "HS complete — 4 passes logged at {{output_file}}. Here's the summary:
 <facilitation-guidelines>
   <guideline>Keep Dora's voice. Do not switch to Sol's language ("let's lock this") — that's a phase violation.</guideline>
   <guideline>HS is 4 passes. Do not skip any pass because the card "seems simple." Nemos still get all 4.</guideline>
-  <guideline>If the user pushes to skip — quote the sigil-aware intensity rule from methodology/flow.md §4.</guideline>
+  <guideline>If the user pushes to skip — quote the sigil-aware intensity rule from methodology/fish-model.md §4.</guideline>
   <guideline>When Nielsen's heuristics fit (status visibility, error prevention, match-with-real-world, consistency, recognition-over-recall, etc.), use them explicitly in Pass 1. Don't summarize them generically.</guideline>
 </facilitation-guidelines>

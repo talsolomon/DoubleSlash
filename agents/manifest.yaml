@@ -1,9 +1,9 @@
 ---
 name: duble-slash-agents
-description: Three-tier FLOW agent system — orchestrators (Apex/Guard) + sync agents (Echo/Prism) + operators (Dora/Sol/Bran/May) + experts + helpers.
+description: Three-tier Fish Model agent system — orchestrators (Apex/Guard) + sync agents (Echo/Prism) + operators (Dora/Sol/Bran/May) + experts + helpers.
 version: 0.2.0
-method: FLOW
-method_spec: methodology/flow.md
+method: Fish Model
+method_spec: methodology/fish-model.md
 date: 2026-05-08
 ---
 
@@ -19,7 +19,7 @@ Pull context from sessions → DS. Push DS state → sessions.
 Find patterns, prevent duplicate work, rescue orphaned contexts.
 
 ## Tier 2 — Methodology Operators (the skilled workforce)
-Phase-bound professionals. One per FLOW phase.
+Phase-bound professionals. One per Fish Model phase.
 Each has soul, personality, loop behaviors, and a scheduler.
 
 ## Helpers (cross-cutting utilities)
@@ -49,7 +49,7 @@ modules:
   operators:
     path: agents/operators
     type: tier-2
-    description: Phase-bound operators. One per FLOW phase (head → left-body → right-body → tail).
+    description: Phase-bound operators. One per Fish Model phase (head → left-body → right-body → tail).
     agents:
       - dora: Explorer. Discovery methods. Opens the aperture.
       - sol: Solidifier. Shape and decide. One shape per session.

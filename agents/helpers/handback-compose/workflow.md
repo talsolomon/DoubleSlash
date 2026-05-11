@@ -1,7 +1,7 @@
 # Handback Compose Workflow
 
-**Goal:** Produce a validated reverse `<FLOW-handoff>` block when the current phase surfaces a gap in the previous phase.
-**Your Role:** Stay in the calling operator's persona. A handback is a reverse transition, which per [`methodology/flow.md §11`](../../../methodology/flow.md#11-reverse-transitions-sigil-changes-skips) is **normal, narrated, and expected** — not a failure.
+**Goal:** Produce a validated reverse `<fish-handoff>` block when the current phase surfaces a gap in the previous phase.
+**Your Role:** Stay in the calling operator's persona. A handback is a reverse transition, which per [`methodology/fish-model.md §11`](../../../methodology/fish-model.md#11-reverse-transitions-sigil-changes-skips) is **normal, narrated, and expected** — not a failure.
 
 ## INITIALIZATION
 
@@ -38,7 +38,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
   <action>Compare current sigil to the sigil in the last forward handoff for this card.</action>
   <check if="sigil changed">
     <output>
-{calling_persona}: "This looks like a sigil change ({{old_sigil}} → {{new_sigil}}), not a handback. The rule per flow.md §3.4 is: sigil change is announced, the current agent extends rather than reversing."
+{calling_persona}: "This looks like a sigil change ({{old_sigil}} → {{new_sigil}}), not a handback. The rule per fish-model.md §3.4 is: sigil change is announced, the current agent extends rather than reversing."
     </output>
     <action>HALT — caller should not use HB for sigil changes; extend the current phase instead.</action>
   </check>
@@ -48,7 +48,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
   <action>Confirm (from_phase, to_phase) is a valid reverse: (solidifier, explorer), (builder, solidifier), (builder, explorer — only with explanation), (shipper, builder), (shipper, solidifier — rare), (shipper, explorer — next-loop is a forward handoff, not a handback).</action>
   <check if="to_phase skips a phase">
     <output>
-{calling_persona}: "Reversing past two phases is unusual. Per flow.md §11, this needs an explicit explanation in the notes. I'll add a flag."
+{calling_persona}: "Reversing past two phases is unusual. Per fish-model.md §11, this needs an explicit explanation in the notes. I'll add a flag."
     </output>
     <action>Set `multi_phase_rewind: true` in the block.</action>
   </check>
@@ -70,7 +70,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
   <action>Render the block:</action>
 
 ```
-<FLOW-handoff>
+<fish-handoff>
 type: handback
 from: {{from_phase}}
 to: {{to_phase}}
@@ -89,7 +89,7 @@ what_to_preserve:
 multi_phase_rewind: {{multi_phase_rewind | default false}}
 notes: |
   {{notes}}
-</FLOW-handoff>
+</fish-handoff>
 ```
 </step>
 
@@ -109,7 +109,7 @@ notes: |
 </workflow>
 
 <facilitation-guidelines>
-  <guideline>Handbacks are normal. Do not apologize or frame as failure. Quote flow.md §11 if the user seems embarrassed.</guideline>
+  <guideline>Handbacks are normal. Do not apologize or frame as failure. Quote fish-model.md §11 if the user seems embarrassed.</guideline>
   <guideline>The "preserve" list matters as much as the "gap" list. A handback without preservation is a rewrite, and rewrites should be explicit new cards, not handbacks.</guideline>
   <guideline>Keep the gap specific. "Solidify was wrong" is not a gap; "the AC for the payment flow missed the 3DS redirect path" is a gap.</guideline>
 </facilitation-guidelines>

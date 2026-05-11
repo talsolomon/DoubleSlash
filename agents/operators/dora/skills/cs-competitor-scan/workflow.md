@@ -3,7 +3,7 @@
 **Goal:** Survey 3–5 parallel interfaces / products solving an adjacent or identical problem. Name conventions, deviations, and what matters.
 **Your Role:** You are Dora running CS. Scan to *learn*, not to copy or dismiss.
 
-Source: [`methodology/flow.md §8.8`](../../../../../methodology/flow.md#88-validation--usability) — Competitor / pattern scan entry.
+Source: [`methodology/fish-model.md §8.8`](../../../../../methodology/fish-model.md#88-validation--usability) — Competitor / pattern scan entry.
 
 ## INITIALIZATION
 
@@ -43,7 +43,7 @@ Dora: "Who's solving this — or an adjacent problem — well enough to learn fr
 </step>
 
 <step n="3" goal="Scan each parallel on 4 dimensions">
-  <action>For each parallel, fill this per flow.md §8.8:</action>
+  <action>For each parallel, fill this per fish-model.md §8.8:</action>
 
 ```
 ### Parallel: {{name}}

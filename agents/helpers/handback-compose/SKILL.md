@@ -1,6 +1,6 @@
 ---
 name: ds-handback-compose
-description: The calling operator produces a validated reverse <FLOW-handoff> — phase rewind with a specific named gap and a preservation list. For when the current phase surfaces a real hole in the previous one. Not failure — reverse transitions are normal, narrated, and expected per flow.md §11.
+description: The calling operator produces a validated reverse <fish-handoff> — phase rewind with a specific named gap and a preservation list. For when the current phase surfaces a real hole in the previous one. Not failure — reverse transitions are normal, narrated, and expected per fish-model.md §11.
 ---
 
 # Handback Compose — the calling operator runs this
@@ -11,7 +11,7 @@ description: The calling operator produces a validated reverse <FLOW-handoff> �
 
 At the end of HB you're holding:
 
-- **A validated reverse `<FLOW-handoff>` block** — typed `type: handback`, with a structured `reason`, a `specific_gap`, and a `what_to_preserve` list.
+- **A validated reverse `<fish-handoff>` block** — typed `type: handback`, with a structured `reason`, a `specific_gap`, and a `what_to_preserve` list.
 - **The block on disk** at `.flow/handoffs/<card-id>-<from>-HB-<to>-<date>.handoff.md` — same mechanism as forward handoffs, different filename convention so the audit trail stays legible.
 - **A history entry** on the card — `{date} <from>↩<to> reason=<category>` — the arrow direction makes reverse transitions visible at a glance.
 - **The block displayed inline** — paste into `//<previous-phase>` so the previous operator addresses the gap.
@@ -21,7 +21,7 @@ At the end of HB you're holding:
 
 | Operator (AI) does | You do | We iterate together |
 |---|---|---|
-| Compare current sigil to the last forward handoff's sigil | — | If the sigil changed, this isn't a handback — it's a sigil change. Helper refuses and routes to the sigil-change extend flow (flow.md §11.2) |
+| Compare current sigil to the last forward handoff's sigil | — | If the sigil changed, this isn't a handback — it's a sigil change. Helper refuses and routes to the sigil-change extend flow (fish-model.md §11.2) |
 | Validate direction: `(from, to)` must be a valid reverse transition | — | Multi-phase rewinds (skipping past two phases) are flagged with `multi_phase_rewind: true` and require an explicit explanation |
 | Draft the reason category: `{gap_in_shape, gap_in_framing, sigil_mismatch, scope_creep, technical_constraint_discovered, other}` plus your freeform explanation | Pick the category; write the explanation in your voice | Operator refines if the category doesn't match the explanation |
 | Propose the `specific_gap` — the single, well-scoped thing the previous phase needs to revisit | Sharpen — vague gaps get the handback refused ("Solidify was wrong" is not a gap; "the AC for the payment flow missed the 3DS redirect path" is) | Operator rewrites until the gap is specific |
@@ -41,9 +41,9 @@ Refusals are specific. The helper tells you the rule that's violated and offers 
 
 ## Where this fits
 
-Reverse transitions are **normal** — flow.md §11.1 names them as first-class. Builders hand back to Sol on upstream contradictions; Solidifiers hand back to Dora on framing gaps; Shippers hand back to Build on real defects. The handback is how the card stays coherent instead of silently redesigned.
+Reverse transitions are **normal** — fish-model.md §11.1 names them as first-class. Builders hand back to Sol on upstream contradictions; Solidifiers hand back to Dora on framing gaps; Shippers hand back to Build on real defects. The handback is how the card stays coherent instead of silently redesigned.
 
-HB is always the calling operator's choice — they surface the gap, you confirm or redirect, the helper emits. If the calling operator is tempted to silently patch the upstream gap in their own phase, that's a bug FLOW exists to prevent (§11.1).
+HB is always the calling operator's choice — they surface the gap, you confirm or redirect, the helper emits. If the calling operator is tempted to silently patch the upstream gap in their own phase, that's a bug Fish Model exists to prevent (§11.1).
 
 ## Model
 

@@ -3,7 +3,7 @@
 **Goal:** Produce a multi-section pitch that locks shape, tradeoffs, AC, measurement, and rollout for a Willy card.
 **Your Role:** You are Sol running the PT method. Keep Sol's voice — decisive, narrative, evidence-first.
 
-Source: [`solidifier.md §5 + §8.2`](../../../../../methodology/local-agents/solidifier.md#82-pitch--rfc-pt-template-willy-only) · [`methodology/flow.md §7.2 Willy Solidify`](../../../../../methodology/flow.md#72-solidify-streams).
+Source: [`solidifier.md §5 + §8.2`](../../../../../methodology/local-agents/solidifier.md#82-pitch--rfc-pt-template-willy-only) · [`methodology/fish-model.md §7.2 Willy Solidify`](../../../../../methodology/fish-model.md#72-solidify-streams).
 
 ## INITIALIZATION
 

@@ -1,9 +1,9 @@
 # Handoff Compose Workflow
 
-**Goal:** Produce a validated `<FLOW-handoff>` block for a forward phase transition.
+**Goal:** Produce a validated `<fish-handoff>` block for a forward phase transition.
 **Your Role:** Stay in the calling operator's persona (Dora, Sol, Bran, or May). This helper runs *through* them, not as its own voice.
 
-The canonical schema is in [`methodology/flow.md §9`](../../../methodology/flow.md#9-the-flow-handoff-block). This helper is its executable implementation.
+The canonical schema is in [`methodology/fish-model.md §9`](../../../methodology/fish-model.md#9-the-flow-handoff-block). This helper is its executable implementation.
 
 ## INITIALIZATION
 
@@ -19,7 +19,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 - `from_phase` — explorer | solidifier | builder | shipper
 - `to_phase` — explorer | solidifier | builder | shipper (reverse is the handback helper, not this one)
 - `card_id` — stable card identifier
-- `sigil` — `{certainty, size}` pair (certainty listed first — see flow.md §3.1)
+- `sigil` — `{certainty, size}` pair (certainty listed first — see fish-model.md §3.1)
 - `archetype` — nemo | tuna | salmon | willy
 - `methods_run` — list of method codes executed in this phase
 - `artifacts` — list of file paths (relative to repo root)
@@ -53,7 +53,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 
 <step n="2" goal="Check sigil-method coverage">
   <critical>A handoff is refused if the phase's methods for this archetype haven't been run or explicitly deferred.</critical>
-  <action>Load the phase/archetype cell from `methodology/flow.md §6` (the archetype × phase matrix).</action>
+  <action>Load the phase/archetype cell from `methodology/fish-model.md §6` (the archetype × phase matrix).</action>
   <action>For each method listed in the cell, confirm it appears in `methods_run` OR is listed in `notes` with an explicit deferral reason.</action>
   <check if="any required method is neither run nor deferred">
     <output>
@@ -65,7 +65,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 
 <step n="3" goal="Validate the required fields">
   <action>Confirm every required field is present and non-empty: from_phase, to_phase, card_id, sigil, archetype, phase_exited, locked (≥1 item), artifacts (≥1 path).</action>
-  <action>`open` may be empty ONLY for Nemo Solidify → Build (Nemo Solidify empties the list, per flow.md §7.2).</action>
+  <action>`open` may be empty ONLY for Nemo Solidify → Build (Nemo Solidify empties the list, per fish-model.md §7.2).</action>
   <action>`confidence_to_advance` must be in [0.0, 1.0].</action>
   <check if="any required field is missing or invalid">
     <output>
@@ -86,10 +86,10 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 </step>
 
 <step n="5" goal="Compose the block">
-  <action>Render the block in the canonical format from flow.md §9:</action>
+  <action>Render the block in the canonical format from fish-model.md §9:</action>
 
 ```
-<FLOW-handoff>
+<fish-handoff>
 from: {{from_phase}}
 to: {{to_phase}}
 card_id: {{card_id}}
@@ -110,7 +110,7 @@ decisions:
 confidence_to_advance: {{confidence_to_advance}}
 notes: |
   {{notes}}
-</FLOW-handoff>
+</fish-handoff>
 ```
 
   <action>Strings containing quotes or colons MUST be wrapped in double quotes per YAML rules.</action>

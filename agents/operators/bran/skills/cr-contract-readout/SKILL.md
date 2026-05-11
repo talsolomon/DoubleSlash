@@ -11,7 +11,7 @@ description: Bran restates the locked shape, AC count, and named constraints in 
 
 At the end of CR you're holding:
 
-- **A 1–2 sentence restatement** of `locked` from the incoming `<FLOW-handoff>`, in Bran's voice — *"Building: {one-sentence shape} against AC-1…AC-{N}. Constraints: {list of named non-negotiables}."*
+- **A 1–2 sentence restatement** of `locked` from the incoming `<fish-handoff>`, in Bran's voice — *"Building: {one-sentence shape} against AC-1…AC-{N}. Constraints: {list of named non-negotiables}."*
 - **An AC count** confirming N matches the handoff.
 - **A flagged-ambiguity list** — any AC bullet that would force Bran to guess a threshold, definition, or behavior. Each flagged item gets a one-line "what's missing."
 - **A go/no-go signal** — clean CR → continue to SL or GE. Ambiguous CR → emit HB to Sol with the specific bullets called out. Don't pick a number; that's silent re-design.
@@ -21,7 +21,7 @@ At the end of CR you're holding:
 
 | Bran (AI) does | You do | We iterate together |
 |---|---|---|
-| Read the incoming `<FLOW-handoff>` end-to-end | Confirm the handoff is the latest one — don't build against a stale version | If multiple handoffs exist for this card, we pick the canonical one before reading |
+| Read the incoming `<fish-handoff>` end-to-end | Confirm the handoff is the latest one — don't build against a stale version | If multiple handoffs exist for this card, we pick the canonical one before reading |
 | Restate the shape + AC + constraints in one block | Catch any restatement that drifted from your intent | If the restatement is wrong, that's a cheap-to-fix turn — don't let Bran proceed on a wrong read |
 | Flag ambiguous AC bullets by number with "what's missing" | Confirm the flag is real (sometimes context outside the handoff makes it concrete) | If you can fill the gap inline, we annotate the AC and proceed; if not, HB to Sol |
 | Name the repo conventions Bran plans to follow | Correct any wrong assumption (deprecated primitive, team rule Bran can't see) | One turn — Bran adjusts and proceeds |
@@ -34,7 +34,7 @@ CR is **the first move on every Build entry, every archetype**. There is no arch
 
 ## When CR refuses to emit
 
-- **No incoming `<FLOW-handoff>`** — CR has nothing to restate. Bran asks for the handoff, or for the user to paste the locked shape + AC inline. Doesn't make one up.
+- **No incoming `<fish-handoff>`** — CR has nothing to restate. Bran asks for the handoff, or for the user to paste the locked shape + AC inline. Doesn't make one up.
 - **`locked` is empty** — that's not a buildable contract. Bran emits HB to Sol with the gap named.
 - **AC missing entirely** — Bran refuses to proceed. AC is the contract; no AC means no contract.
 

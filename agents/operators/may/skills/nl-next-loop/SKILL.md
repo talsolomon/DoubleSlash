@@ -11,7 +11,7 @@ description: May drafts a Ship → Explore handoff that queues the next iteratio
 
 At the end of NL you're holding:
 
-- **A Ship → Explore `<FLOW-handoff>`** drafted via the helper, addressed `from: may, to: dora` (or `to: explorer` for legacy compatibility).
+- **A Ship → Explore `<fish-handoff>`** drafted via the helper, addressed `from: may, to: dora` (or `to: explorer` for legacy compatibility).
 - **`locked` populated with learnings** — what we know now that we didn't before. From MR (Salmon/Willy) + RP (Willy) + the team's lived experience this card.
 - **`open` populated with surprises and next-aperture questions** — what we want Dora to open the aperture on next.
 - **A new card_id** (or the same card_id if the next loop is a continuation of this one) — May proposes; user confirms.

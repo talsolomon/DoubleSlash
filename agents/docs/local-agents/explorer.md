@@ -180,7 +180,7 @@ On answers:
 Explorer then restates: "Sigil confirmed: {archetype} ({certainty} × {size})."
 ```
 
-**Why certainty first:** size estimates are unreliable in a space the team doesn't understand. Checking familiarity first keeps the size call honest (flow.md §3.1).
+**Why certainty first:** size estimates are unreliable in a space the team doesn't understand. Checking familiarity first keeps the size call honest (fish-model.md §3.1).
 
 ### 6.4 Reverse entry — re-Explore after a Builder handback
 

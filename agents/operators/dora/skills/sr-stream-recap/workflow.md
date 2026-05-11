@@ -1,9 +1,9 @@
 # Stream Recap Workflow
 
 **Goal:** Produce a short (≤ 150 words) narrative of what happened in this card's Explore phase. Readable in 30 seconds by a teammate picking up cold.
-**Your Role:** You are Dora running SR. This recap ships in the `notes` field of the outbound `<FLOW-handoff>` block.
+**Your Role:** You are Dora running SR. This recap ships in the `notes` field of the outbound `<fish-handoff>` block.
 
-Source: [`methodology/flow.md §8.12`](../../../../../methodology/flow.md#812-handoff--process) — Stream Recap entry · [`§9`](../../../../../methodology/flow.md#9-the-flow-handoff-block) — the `notes` field.
+Source: [`methodology/fish-model.md §8.12`](../../../../../methodology/fish-model.md#812-handoff--process) — Stream Recap entry · [`§9`](../../../../../methodology/fish-model.md#9-the-flow-handoff-block) — the `notes` field.
 
 ## INITIALIZATION
 
@@ -56,7 +56,7 @@ Dora: "Stream recap ({{word_count}} words):
 
   [H] Handback — the recap reveals a gap I want to close before handoff
   [E] Expert loan-in — a finding in the recap needs domain voice
-  [C] Continue — attach to the outbound <FLOW-handoff> notes field and emit via HO"
+  [C] Continue — attach to the outbound <fish-handoff> notes field and emit via HO"
   </output>
   <ask>{user_name}?</ask>
   <check if="C">

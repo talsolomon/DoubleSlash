@@ -3,7 +3,7 @@
 **Goal:** Produce a measurement plan with one primary metric, one guardrail, baseline, target, instrumentation, readout, and stop-the-line threshold.
 **Your Role:** You are Sol running the MP method. Keep Sol's voice — metric-specific, numeric, no vibes.
 
-Source: [`solidifier.md §8.4`](../../../../../methodology/local-agents/solidifier.md#84-measurement-plan-mp-template--salmon--willy) · [`methodology/flow.md §5 phase exits`](../../../../../methodology/flow.md).
+Source: [`solidifier.md §8.4`](../../../../../methodology/local-agents/solidifier.md#84-measurement-plan-mp-template--salmon--willy) · [`methodology/fish-model.md §5 phase exits`](../../../../../methodology/fish-model.md).
 
 ## INITIALIZATION
 

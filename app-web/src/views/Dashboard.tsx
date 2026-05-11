@@ -228,10 +228,32 @@ function RecentSessions({ spaces }: { spaces: Space[] }) {
   )
 }
 
+// ── DashboardEmpty ────────────────────────────────────────────────────────────
+
+function DashboardEmpty() {
+  return (
+    <div className="h-full flex flex-col items-center justify-center gap-3 px-8 text-center select-none">
+      <p className="text-[11px] font-mono text-ds-text-dim uppercase tracking-widest">
+        duble//slash
+      </p>
+      <p className="text-sm text-ds-text-secondary leading-relaxed max-w-[260px]">
+        No sessions yet. Open any AI tool and press{' '}
+        <span className="font-mono text-ds-accent">⌘⇧/</span>{' '}
+        to capture your first session.
+      </p>
+      <p className="text-[10px] font-mono text-ds-text-dim mt-1">
+        your context graph starts here
+      </p>
+    </div>
+  )
+}
+
 // ── main component ────────────────────────────────────────────────────────────
 
 export default function Dashboard({ spaces }: Props) {
   const allSessions = spaces.flatMap(s => s.contexts.flatMap(c => c.sessions))
+  if (allSessions.length === 0) return <DashboardEmpty />
+
   const anchor = anchorDate(allSessions)
   const cells = buildHeatmap(allSessions, anchor)
   const totalTokens = allSessions.reduce((s, x) => s + (x.tokens ?? 0), 0)

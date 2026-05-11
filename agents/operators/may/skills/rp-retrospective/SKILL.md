@@ -14,7 +14,7 @@ At the end of RP you're holding:
 - **A retrospective document** at `planning/retros/rp-<card-id>-<date>.md` structured around four lenses: Process, Shape, Methods, Collaboration.
 - **What worked** — concrete moves the team should repeat.
 - **What didn't** — concrete moves to change next time, with the proposed change.
-- **Methodology feedback** — anywhere FLOW (the methodology) bent or broke under this Willy's load. Feeds back into [`methodology/flow.md`](../../../../../methodology/flow.md) revisions.
+- **Methodology feedback** — anywhere Fish Model (the methodology) bent or broke under this Willy's load. Feeds back into [`methodology/fish-model.md`](../../../../../methodology/fish-model.md) revisions.
 - **Action items** — 3–7 specific, owned, dated changes for the next loop.
 - **A reference for the master TR** — the GA trust receipt cites the retro path.
 

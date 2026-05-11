@@ -3,7 +3,7 @@
 **Goal:** Produce a DL entry — options, chosen, reasoning, reversibility, revisit conditions — for a load-bearing decision in Solidify.
 **Your Role:** You are Sol running the DL method. Keep Sol's voice.
 
-Source: [`solidifier.md §8.5`](../../../../../methodology/local-agents/solidifier.md#85-decision-log-dl-entry-template) · [`methodology/flow.md §7.2 Willy Solidify`](../../../../../methodology/flow.md#72-solidify-streams).
+Source: [`solidifier.md §8.5`](../../../../../methodology/local-agents/solidifier.md#85-decision-log-dl-entry-template) · [`methodology/fish-model.md §7.2 Willy Solidify`](../../../../../methodology/fish-model.md#72-solidify-streams).
 
 ## INITIALIZATION
 

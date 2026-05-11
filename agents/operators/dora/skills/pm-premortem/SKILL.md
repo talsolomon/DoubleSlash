@@ -34,7 +34,7 @@ At the end of PM you're holding a Sol-facing risk register:
 
 ## Where this fits in the Explore stream
 
-PM is in the **Willy cell** as standard (per flow.md §6 — contextual inquiry, JTBD, premortem, scenario planning all run together on Willys). On Salmon it's optional — useful when the research reveals contested shape directions. On Tuna it's rare but earn-its-place when the card has outsized strategic consequence.
+PM is in the **Willy cell** as standard (per fish-model.md §6 — contextual inquiry, JTBD, premortem, scenario planning all run together on Willys). On Salmon it's optional — useful when the research reveals contested shape directions. On Tuna it's rare but earn-its-place when the card has outsized strategic consequence.
 
 PM often runs late in Explore — after interviews, after synthesis — because specificity improves as research accumulates. A Willy premortem with no interview evidence is itself a failure mode.
 

@@ -1,6 +1,6 @@
 ---
 name: ds-sr-stream-recap
-description: Dora produces a ≤150-word narrative recap of what just ran in this card's Explore phase — methods, top findings, the one deferred thing, confidence to advance. Reads in 30 seconds. Lands in the outbound <FLOW-handoff>'s notes field. A teammate picking up cold can orient without reading every method output.
+description: Dora produces a ≤150-word narrative recap of what just ran in this card's Explore phase — methods, top findings, the one deferred thing, confidence to advance. Reads in 30 seconds. Lands in the outbound <fish-handoff>'s notes field. A teammate picking up cold can orient without reading every method output.
 ---
 
 # Stream Recap — Dora runs this
@@ -31,7 +31,7 @@ At the end of SR you're holding:
 
 ## Where this fits in the Explore stream
 
-SR runs **at phase exit, just before HO** — it's the narrative companion to the `<FLOW-handoff>` block. The block carries the structured state (sigil, artifacts, decisions, open items); SR carries the human-readable read-in for the next operator or teammate.
+SR runs **at phase exit, just before HO** — it's the narrative companion to the `<fish-handoff>` block. The block carries the structured state (sigil, artifacts, decisions, open items); SR carries the human-readable read-in for the next operator or teammate.
 
 SR can also run **mid-phase** as a checkpoint — useful on Willies where you've run 5 methods over a week and want to see the trail compressed before deciding whether to run another method or close the phase. Standalone SRs are logged but don't emit a handoff.
 

@@ -2,7 +2,7 @@
 # Read on activation by every operator and expert SKILL.md.
 
 project_name: Duble Slash
-method: FLOW
+method: Fish Model
 
 # User-facing settings (overridable per-install in `.flow/flow.yaml`)
 user_name: Tal
@@ -18,7 +18,7 @@ planning_artifacts: "{project-root}/planning"
 implementation_artifacts: "{project-root}/planning/stories"
 project_knowledge: "{project-root}/planning/research"
 methodology: "{project-root}/methodology"
-flow_spec: "{project-root}/methodology/flow.md"
+flow_spec: "{project-root}/methodology/fish-model.md"
 
 # Output folders (created on demand)
 output_folder: planning

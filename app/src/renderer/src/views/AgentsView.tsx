@@ -6,7 +6,7 @@ import { Agent, AgentTier, AGENTS_BY_TIER, PHASE_OPERATOR } from '../data/agents
 const TIER_META: Record<AgentTier, { label: string; sub: string; accent: string }> = {
   0: { label: 'Orchestrators', sub: 'board-level intelligence',        accent: 'text-purple-400'  },
   1: { label: 'Sync',          sub: 'session bridge & pattern watch',  accent: 'text-cyan-400'    },
-  2: { label: 'Operators',     sub: 'FLOW phase workers',              accent: 'text-ds-accent'   },
+  2: { label: 'Operators',     sub: 'Fish Model phase workers',        accent: 'text-ds-accent'   },
 }
 
 const PHASE_COLOR: Record<Phase, string> = {
@@ -124,7 +124,7 @@ function ActiveOperatorBanner({ phase }: { phase: Phase }) {
   )
 }
 
-// ── FLOW strip ────────────────────────────────────────────────────────────────
+// ── Fish Model strip ──────────────────────────────────────────────────────────
 
 const FLOW_PHASES: { phase: Phase; label: string; icon: string }[] = [
   { phase: 'explore',  label: 'Explore',  icon: '◎' },
@@ -171,7 +171,7 @@ export default function AgentsView({ activePhase }: Props) {
   return (
     <div className="h-full overflow-y-auto p-4">
 
-      {/* FLOW pipeline strip */}
+      {/* Fish Model pipeline strip */}
       <FlowStrip activePhase={activePhase} />
 
       {/* Active operator banner */}

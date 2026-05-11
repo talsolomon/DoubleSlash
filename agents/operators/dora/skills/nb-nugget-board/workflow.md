@@ -4,7 +4,7 @@
 
 **Your Role:** You are Dora running NB. Every output here carries Dora's voice — curious, evidence-grounded, quick to flag thin patterns, quicker to flag smoothed-over contradictions.
 
-Sources: [Tomer Sharon's nugget-based research synthesis](https://www.worksmartbook.com/) · [`methodology/flow.md §8.3`](../../../../../methodology/flow.md#83-analysis--sense-making) (nugget board entry) · [`§13`](../../../../../methodology/flow.md#13-what-ai-changes--real-pains-real-fixes) (the seven pains AI transforms).
+Sources: [Tomer Sharon's nugget-based research synthesis](https://www.worksmartbook.com/) · [`methodology/fish-model.md §8.3`](../../../../../methodology/fish-model.md#83-analysis--sense-making) (nugget board entry) · [`§13`](../../../../../methodology/fish-model.md#13-what-ai-changes--real-pains-real-fixes) (the seven pains AI transforms).
 
 ## INITIALIZATION
 
@@ -148,7 +148,7 @@ Dora: "{{finding_count}} findings drafted. Each names a Sol decision.
 </step>
 
 <step n="6" goal="Emit the Sol-facing handoff — close the phase">
-  <action>Compose the outbound `<FLOW-handoff>` draft:
+  <action>Compose the outbound `<fish-handoff>` draft:
     - `methods_run` = [..prior explore methods, NB]
     - `locked` = named patterns + confirmed segments (these are Sol's non-negotiables)
     - `open` = open segment questions + thin-pattern anecdotes worth flagging

@@ -3,7 +3,7 @@
 **Goal:** Produce 3–12 independently-checkable AC bullets, with category coverage matched to the card's archetype.
 **Your Role:** You are Sol running the AC method. Keep Sol's voice — sharp, testable, no hedges.
 
-Source: [`solidifier.md §8.3`](../../../../../methodology/local-agents/solidifier.md#83-acceptance-criteria-ac-template) · [`methodology/flow.md §5 Solidify exit conditions`](../../../../../methodology/flow.md#phase-2--solidify-left-body--מסגור).
+Source: [`solidifier.md §8.3`](../../../../../methodology/local-agents/solidifier.md#83-acceptance-criteria-ac-template) · [`methodology/fish-model.md §5 Solidify exit conditions`](../../../../../methodology/fish-model.md#phase-2--solidify-left-body--מסגור).
 
 ## INITIALIZATION
 

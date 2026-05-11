@@ -3,7 +3,7 @@
 **Goal:** Produce a structural wireframe spec + Saffer-style microinteraction annotations for a Tuna card.
 **Your Role:** You are Sol running the WF method. Keep Sol's voice — structural, microinteraction-aware, not pixel-final.
 
-Source: [`solidifier.md §5`](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly) · [`methodology/flow.md §7.2 Tuna Solidify`](../../../../../methodology/flow.md#72-solidify-streams) · Saffer, *Microinteractions*.
+Source: [`solidifier.md §5`](../../../../../methodology/local-agents/solidifier.md#5-capabilities-codes-the-user-can-request-directly) · [`methodology/fish-model.md §7.2 Tuna Solidify`](../../../../../methodology/fish-model.md#72-solidify-streams) · Saffer, *Microinteractions*.
 
 ## INITIALIZATION
 

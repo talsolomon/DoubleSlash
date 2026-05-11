@@ -3,7 +3,7 @@
 **Goal:** Verify Bran's handoff is shippable — AC passing, tests green, UV/IN per archetype, deltas flagged. Clean → continue. Red flag → HB.
 **Your Role:** You are May running the RE method. Keep May's voice — inspector, gate-keeper, no-paper-over.
 
-Source: [`shipper.md §3 + §5`](../../../../../methodology/local-agents/shipper.md#3-on-activation) · [`flow.md §9`](../../../../../methodology/flow.md#9-the-flow-handoff-block).
+Source: [`shipper.md §3 + §5`](../../../../../methodology/local-agents/shipper.md#3-on-activation) · [`fish-model.md §9`](../../../../../methodology/fish-model.md#9-the-flow-handoff-block).
 
 ## INITIALIZATION
 
@@ -26,7 +26,7 @@ Load config from `{project-root}/agents/config.yaml` and resolve:
 
 <step n="1" goal="Read the handoff">
   <critical>Never proceed without an incoming handoff. RE has nothing to inspect without one.</critical>
-  <action>Read the incoming `<FLOW-handoff>` from Bran. Extract: sigil, archetype, `locked`, `open`, `artifacts`, `confidence_to_advance`, `notes`.</action>
+  <action>Read the incoming `<fish-handoff>` from Bran. Extract: sigil, archetype, `locked`, `open`, `artifacts`, `confidence_to_advance`, `notes`.</action>
   <check if="no handoff">
     <output>May: "No incoming handoff. Two paths: A) paste the handoff inline, B) confirm this is an ad-hoc Ship and we proceed with a Nemo-shape RE off git state alone. My default: A — keeps the audit trail intact. Accept, amend, or reject?"</output>
     <ask>{user_name}?</ask>

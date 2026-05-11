@@ -19,7 +19,7 @@ At the end of NB you're holding a **Sol-ready pattern board**, not a report:
 
 ## How Dora and you split the work
 
-Per [`methodology/flow.md §13`](../../../../../methodology/flow.md#13-what-ai-changes--real-pains-real-fixes), synthesis is one of the methods AI transforms most — pre-AI, 50+ nuggets from 8 interviews was a two-day whiteboard session. Dora collapses it to two working sessions because the AI does the scale work; you do the judgment work; the two of you iterate.
+Per [`methodology/fish-model.md §13`](../../../../../methodology/fish-model.md#13-what-ai-changes--real-pains-real-fixes), synthesis is one of the methods AI transforms most — pre-AI, 50+ nuggets from 8 interviews was a two-day whiteboard session. Dora collapses it to two working sessions because the AI does the scale work; you do the judgment work; the two of you iterate.
 
 | Dora (AI) does | You do | We iterate together |
 |---|---|---|
@@ -34,7 +34,7 @@ Per [`methodology/flow.md §13`](../../../../../methodology/flow.md#13-what-ai-c
 
 ## Where this fits in the Explore stream
 
-NB is the synthesis move for Salmon and Willy streams (per [flow.md §7.1](../../../../../methodology/flow.md#71-explore-streams)). It runs *after* interviews (IP + interviewing) and *before* the Explore close. On a Tuna it's optional — if there's enough interview data to warrant synthesis, use it; otherwise skip to CS + JM. On a Nemo you won't run it.
+NB is the synthesis move for Salmon and Willy streams (per [fish-model.md §7.1](../../../../../methodology/fish-model.md#71-explore-streams)). It runs *after* interviews (IP + interviewing) and *before* the Explore close. On a Tuna it's optional — if there's enough interview data to warrant synthesis, use it; otherwise skip to CS + JM. On a Nemo you won't run it.
 
 If Dora reaches NB and the input corpus is thinner than the archetype expects (Salmon with 2 interviews instead of 5, Willy with 4 instead of 8+), she'll say so — and offer the nudge: extend interviews, re-sigil, or proceed with documented thin-evidence.
 
