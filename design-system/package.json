@@ -1,0 +1,20 @@
+{
+  "name": "@duble-slash/design-system",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "sync": "node sync.js",
+    "view": "npx serve viewer -p 6006 --no-clipboard",
+    "mcp": "node mcp-server.js",
+    "dev": "npm run view"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

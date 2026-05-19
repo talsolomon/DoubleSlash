@@ -24,3 +24,6 @@ supabase/bootstrap-users.sql
 **/build/
 **/out/
 **/.cache/
+
+# Local Netlify folder
+.netlify

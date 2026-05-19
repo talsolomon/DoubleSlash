@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div id="sidebar-header">
+        <div id="logo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="ds-name">Design System</span>
+        </div>
+        <button id="sync-btn" title="Re-sync from Figma">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M23 4v6h-6M1 20v-6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div id="search-wrap">
+        <input id="search" type="search" placeholder="Search components & tokens…" />
+      </div>
+
+      <nav id="nav">
+        <div class="nav-section">
+          <div class="nav-section-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="15" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="2" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="15" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg>
+            Components
+          </div>
+          <ul id="component-tree"></ul>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Tokens
+          </div>
+          <ul id="token-tree">
+            <li class="tree-item" data-token-tab="colors">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
+              Colors
+            </li>
+            <li class="tree-item" data-token-tab="spacing">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6l3-3m-3 3l3 3M21 18l-3 3m3-3l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Spacing
+            </li>
+            <li class="tree-item" data-token-tab="other">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Other
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div id="sidebar-footer">
+        <span id="synced-at"></span>
+      </div>
+    </aside>
+
+    <!-- Canvas -->
+    <main id="canvas">
+      <div id="canvas-toolbar">
+        <div id="breadcrumb"></div>
+        <a id="figma-link" href="#" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Open in Figma
+        </a>
+      </div>
+      <div id="canvas-content">
+        <div id="welcome">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" opacity=".3"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p>Select a component or token from the sidebar</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Details panel -->
+    <aside id="details">
+      <div id="details-header">Properties</div>
+      <div id="details-content"></div>
+    </aside>
+
+  </div>
+
+  <!-- Empty state (shown before sync) -->
+  <div id="empty-state" hidden>
+    <div id="empty-inner">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/></svg>
+      <h2>No design system synced yet</h2>
+      <p>Run the sync script to pull your Figma design system:</p>
+      <pre><code>FIGMA_TOKEN=&lt;token&gt; node sync.js &lt;figma-url&gt;</code></pre>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

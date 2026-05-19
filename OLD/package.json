@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "deploy:workshop": "cp ux-ai-workshop.html workshop-site/index.html && npx netlify-cli deploy --prod --dir workshop-site"
+  }
+}

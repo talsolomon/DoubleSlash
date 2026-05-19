@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Date:** 2026-05-04  
-**Status:** draft  
+**Status:** shipped  
 **Owner:** Tal
 
 ---
