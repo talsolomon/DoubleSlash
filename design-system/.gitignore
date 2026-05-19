@@ -1,7 +1,2 @@
 node_modules/
-.env
-viewer/data/components.json
-viewer/data/tokens.json
-viewer/data/tokens.css
-viewer/data/manifest.json
-viewer/data/thumbnails/*.png
+data/

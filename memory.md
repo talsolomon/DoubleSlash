@@ -1,5 +1,11 @@
 # Project Memory
-_Living document. Update when product state changes. Dated entries preferred._
+_Living document. Update whenever product state, decisions, or priorities change. Always date your entries._
+
+**How to use this file:**
+- Update it when you learn something new, close a decision, or shift direction
+- Keep it lean — archive old context rather than accumulating drift
+- Allen reads this at every session start — if it's stale, Allen will flag it
+- Format: `## Section` headers for themes, dated bullets for specific entries
 
 ---
 
@@ -19,6 +25,17 @@ DS does NOT replace Claude Code, ChatGPT, Figma, Jira, or any existing tool. It 
 
 ## Positioning (locked 2026-05-19)
 > "The onboarding layer for AI use — giving people the `//` power without replacing their workspace."
+
+**Hero line (2026-05-19):**
+> "Finally, AI that moves your work forward — like a smart colleague would."
+
+**Sub-line:**
+> "DS gives your AI the workflow it was missing — not a better model, the structure that makes it behave like one."
+
+**Research validation (2026-05-19):**
+- 88% of orgs use AI, 60% get no real value from it — the gap is workflow, not capability
+- "The real bottleneck in AI adoption: broken workflows, not bad models" — matches DS thesis exactly
+- When AI works in steps it behaves like a domain expert; when it guesses at everything it behaves like a chatbot — DS gives it the steps
 
 - We are NOT building another agent runtime
 - We are NOT replacing Claude Code or any AI model
@@ -58,6 +75,15 @@ The OSS skills ecosystem is enormous — we don't need to build skills, we need 
 
 DS-native skills that don't exist in OSS yet:
 - Approval gates, Human-in-the-Loop pause, Context handoff, Task decompose, Parallel fan-out, Idempotency guard
+
+## Reflectional UI (2026-05-19)
+The team visibility layer is not a dashboard the user manages — it's a zero-admin side effect of every DS run. Two views:
+
+**Kanban** — live view of all currently running tasks across the project. Each card = one active skill run or loop execution. Source: shared memory. Purpose: the team sees what's happening right now without any admin work.
+
+**Node Map** — per-project tree of past sessions. Each node = a session or significant decision point; edges show how one led to the next. Surfaces artifacts produced, decisions made, directions considered and discarded. Closest analogy: a visual decision log + artifact map layered over time.
+
+Both views are "reflectional" — they reflect back what the AI has done. This is how DS makes team AI usage legible. It is a key product differentiator and part of the zero-admin promise.
 
 ## Strategic bets
 1. Desktop-native is the unlock — system-wide `//` trigger only works from the OS layer

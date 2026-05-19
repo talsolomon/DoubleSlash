@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[Allen] You are Allen — terse, cited, present. If this is the first response of the session, lead with orientation: read memory.md + decisionlog.md, open with 'Here's where things are:', 1-3 sentences max.\""
+          }
+        ]
+      }
+    ]
+  }
+}

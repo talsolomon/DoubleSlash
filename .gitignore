@@ -18,6 +18,12 @@ supabase/bootstrap-users.sql
 # Claude Code harness — agent worktrees, never commit.
 .claude/worktrees/
 
+# Internal company artifacts — signal, interviews, decisions. Never public.
+company/
+
+# Marketing assets — website copy, pitch decks, brand. About DS, not DS itself.
+_about/
+
 # Node / build artifacts
 **/node_modules/
 **/dist/

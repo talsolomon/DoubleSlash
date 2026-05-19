@@ -4,17 +4,19 @@ _The principles and process that govern how we build — and how the agents we b
 ---
 
 ## 1. HAI Principles (Human-AI Interaction)
-_To be written. This is the product's soul and primary differentiator._
+_These govern how every DS agent behaves. Non-negotiable across all agent configurations._
 
-**Draft principles (to be validated):**
+1. **Human intent is the source of truth.** Agents execute. Humans decide. No agent takes an irreversible action without a human checkpoint. When in doubt, stop and ask.
 
-1. **Human intent is the source of truth** — agents execute, humans decide. No agent takes an irreversible action without a human checkpoint.
-2. **Transparency over magic** — every agent action should be visible, traceable, and explainable. The node map is not a nice-to-have; it's a commitment to transparency.
-3. **Agents are personas, not pipelines** — each agent has an identity: a name, a role, communication preferences, working hours. This is intentional. It helps humans trust and manage them.
-4. **Escalation is a first-class skill** — every agent must know when to stop and ask. Failure to escalate is a design defect.
-5. **The team is the product** — individual agents are components. The value is in how they collaborate, hand off, and stay aligned with the human's intent.
+2. **Transparency over magic.** Every agent action must be visible, traceable, and explainable. Agents report what they did, not just what they produced. Black-box outputs are a design defect.
 
-_Status: DRAFT — needs a design session to harden._
+3. **Agents are personas, not pipelines.** Each agent has an identity: a name, a role, a scope, and an escalation path. This is intentional — it helps humans trust, manage, and correct them. An agent with no identity has no accountability.
+
+4. **Escalation is a first-class skill.** Every agent must know when to stop and surface a decision to a human. Failing to escalate when uncertain is the most dangerous failure mode. Build the off-ramp before you build the fast path.
+
+5. **The team is the product.** Individual agents are components. The value is in how they collaborate, hand off context, and stay aligned with the human's stated intent. Optimize for team coherence, not individual agent capability.
+
+6. **Memory is shared by default.** Every agent run writes to shared memory. The team sees what happened. No agent operates in a private silo.
 
 ---
 
@@ -42,7 +44,7 @@ DISCOVER → DEFINE → DEVELOP → DELIVER
 | Develop | What could solve it? | Concepts, prototypes, agent configurations |
 | Deliver | Does it work? | Tested solution, decision log entry, shipped |
 
-**Rule**: Each diamond must close before the next opens. We don't develop solutions to undefined problems.
+**Rule**: Each diamond must close before the next opens. We do not develop solutions to undefined problems.
 
 ---
 
@@ -52,5 +54,6 @@ _Specific to Duble//Slash — how we think about agent team structure._
 - Every team needs a **coordinator agent** responsible for task routing and human escalation
 - Every agent needs a **defined scope**: what it can do, what it cannot do, and what triggers escalation
 - Communication channels are configured per-agent, not per-project
-- Loops (recurring behaviors) must have an explicit off-condition or review cadence
-- A team of 1 agent is valid. Don't require teams.
+- Loops must have an explicit **off-condition** or review cadence — a loop with no exit is a liability
+- A team of 1 agent is valid. Do not require teams.
+- Agent scope must not overlap without a named tie-break rule
