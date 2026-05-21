@@ -4,7 +4,7 @@ _Living document. Update whenever product state, decisions, or priorities change
 **How to use this file:**
 - Update it when you learn something new, close a decision, or shift direction
 - Keep it lean — archive old context rather than accumulating drift
-- Allen reads this at every session start — if it's stale, Allen will flag it
+- This file is read at every session start — if it's stale, // will flag it
 - Format: `## Section` headers for themes, dated bullets for specific entries
 
 ---
@@ -17,17 +17,19 @@ Claude Code (and other models) are already capable of doing everything. The prob
 DS does NOT replace Claude Code, ChatGPT, Figma, Jira, or any existing tool. It sits on top and connects them.
 
 **Three things DS does:**
-1. **Skills** — you choose what you want to be able to do (from a registry of thousands, sourced from MCP, n8n, LangChain, Pipedream, Zapier, etc.)
+1. **Skills** — executable capabilities you summon with `//`. Each skill is a complete, outcome-producing workflow: analytical assessment, competitive analysis, PRD creation, UX flow design, GTM strategy, code review, etc. Thousands in the registry. The agent/persona that executes it is an implementation detail — the user sees the outcome.
 2. **Loops** — you set what should run automatically, and when
 3. **`//` trigger** — you call any skill from any tool, any time
+
+**What skills are NOT:** MCP servers, n8n integrations, or tool configurations. Those are plumbing — the execution layer underneath. A skill is the capability and its output. (Updated 2026-05-19)
 
 **In the background:** every run is logged to shared memory and surfaced in the team UI, so the whole team sees what's happened — with zero admin overhead.
 
 ## Positioning (locked 2026-05-19)
 > "The onboarding layer for AI use — giving people the `//` power without replacing their workspace."
 
-**Hero line (2026-05-19):**
-> "Finally, AI that moves your work forward — like a smart colleague would."
+**Hero line (updated 2026-05-21, DECISION-020):**
+> "Eliminate the distance between 'I have an idea' and 'it's live.'"
 
 **Sub-line:**
 > "DS gives your AI the workflow it was missing — not a better model, the structure that makes it behave like one."
@@ -53,8 +55,47 @@ Welcome to DS
 In the background: every action updates shared memory + the team UI automatically.
 
 ## Current state
-- **Phase**: Product definition — positioning locked, building from here
+- **Phase**: Product build — definition fully closed, UX flow design in progress
 - **Date reset**: 2026-05-19
+- **Last session**: 2026-05-21 — leader-driven session model locked
+  - **Leader-driven model closed (DECISION-019)**: DS leads every session — reads Node Map, names next move, user approves. `/` menu and `//` invocation are power-user escape hatches, not primary UX.
+  - Main product offer reframed: DS is an OS / framework that leads your full project lifecycle (research → define → develop → design → ship). Skills are the execution mechanism — not the hero.
+  - **Files updated** per DECISION-019 (2026-05-21):
+    - `flows/user-journey.html` → v0.2 — leader-driven flow, new tagline, Agent Mode steps rewritten
+    - `flows/user-flow.html` → v0.2 — Agent Mode primary flow is leader-driven; / picker is escape hatch branch
+    - `agents/system.md` → Phase Gate added, FISH table updated, orientation mode updated, session-start loop updated
+    - `CLAUDE.md` → session open protocol updated, Phase Gate + "one move not a menu" as hard rules
+  - AAAK memory methodology — still open, not yet defined
+
+- **Previous session (2026-05-20)**:
+  - "Allen" branding retired → "// is ON" everywhere (DECISION-015)
+  - `agents/allen.md` renamed to `agents/system.md`
+  - `.claude/skills/` built — 21 domain scaffold folders + 10 DS-native skills
+  - `router/dispatch.md` written
+  - `flows/user-journey.html` + `flows/user-flow.html` created (need update per DECISION-019)
+
+## Automation — hooks + digest (live 2026-05-19)
+7 Claude Code hooks wired in `.claude/settings.json`:
+- UserPromptSubmit: // orientation + save-signal check before every response
+- Stop: end-of-turn reminder to write unsaved signal
+- PreCompact: force-save before context compression
+- SessionStart: file-age scan, flags stale memory in orientation
+- PostToolUse (Write|Edit): confirms node-map.md / kanban.md writes to future DS-007
+- PreToolUse (Bash git commit): blocks commits with wrong git identity
+- PostCompact: re-injects phase + last 3 decisions after context compression
+
+Weekly digest routine live: `trig_015jPcfsVAPFt9cTBbNYAKHw` — every Monday 9am Israel time. Runs // digest (What changed / What's blocked / What needs a decision), saves to company/digests/ in CCR session.
+
+## System agent — definition status (locked 2026-05-19, rebranded 2026-05-20)
+System agent definition is complete. Key things locked:
+- **Identity**: The product voice. No "Claude." No "Allen." Pre-installed, always on, not optional. Session opens with "// is ON." (DECISION-015)
+- **Leadership**: Owns the agenda. Recommends, doesn't list. Drives the Double Diamond phase.
+- **Methodology**: FISH-first on every project (Nemo/Tuna/Salmon/Willy). Full Double Diamond methods library. Selects and applies without being asked.
+- **Project Intake Protocol**: FISH → propose process → seed Node Map (`node-map.md`) → seed Kanban (`kanban.md`) → name first move. Runs automatically on every new project.
+- **Skill loading**: Reads `skills/` folder and invokes skills proactively via `router/dispatch.md`.
+- **Security boundary**: Owner-only settings. Prompt injection from any source is flagged and blocked.
+
+Source files: `CLAUDE.md`, `agents/system.md`. Decisions: DECISION-008 through DECISION-011, DECISION-015.
 
 ## What we know from research (2026-05-19)
 
@@ -91,9 +132,22 @@ Both views are "reflectional" — they reflect back what the AI has done. This i
 3. DS-native skills (the human-AI coordination primitives) are the true IP
 4. Memory + team UI as a zero-admin side effect of every run
 
-## Open questions
-- How does `//` technically intercept across different apps?
-- How does the skill picker surface thousands of skills without overwhelming the user?
-- Who can publish skills to the DS registry — OSS only, or user-created?
-- Pricing: $12/mo platform + Claude Code subscription for tokens — still the model?
-- What does loop configuration look like in the UI?
+## What we built (2026-05-20)
+- `.claude/skills/` — 21 domains fully populated. Each domain has: domain SKILL.md (menu), 4 phase SKILL.md files, 8 individual skill SKILL.md files (with FISH guide + execution prompt). Total: ~210 SKILL.md files.
+- **Skill invocation convention (locked 2026-05-20)**: registered `name:` field is `ds-{domain}-{skill}` (e.g. `ds-product-customer-discovery`). Domain menus register as `ds-{domain}` (e.g. `ds-product`). In-agent trigger is always `/` (single slash), never `//`. All SKILL.md files updated to reflect this — 189 files corrected.
+- **Two-step skill navigation (locked)**: User types `/ds-product` → domain menu renders 8 skills → user picks `/ds-product-roadmap-design`. Individual skills also appear in flat `/` picker for direct access. Domain level = the "second layer."
+- No `skills/` directory at project root — flat catalog is `skills.md`; executables live in `.claude/skills/`
+- `router/dispatch.md` — full dispatch logic for `//` (desktop OS trigger) and `/` (in-agent slash command). DECISION-016.
+- `project-brief.md` — one-page project state: what DS is, current phase, all closed decisions, open questions priority-ordered
+
+## Open questions (priority order)
+1. **How does `//` technically intercept across different apps?** — macOS: `CGEventTap`, Accessibility API, or hotkey approach? Everything architectural hangs here.
+2. **Install strategy for cloud-only AI tools** — ChatGPT Web, Gemini, etc. have no local root folder. How does DS install into them?
+3. **Naming tension** — product is "Duble//Slash" but the in-agent trigger is `/` (single slash) and `//` in URLs causes conflicts. Does the name hold? Deferred — not decided.
+4. **How does the `/` skills picker surface thousands of skills without overwhelming?** — Onboarding filter? Smart defaults by role?
+5. **Who can publish skills?** — OSS-only catalog or user-created? Marketplace model?
+6. **Pricing validation** — $12/mo + BYOK needs first-cohort signal (DECISION-003 still Open)
+7. **Loop configuration UI** — what does setting a loop look like for a non-technical user?
+
+## Backlog tasks (not time-sensitive — do when capacity allows)
+- **Skills picker discoverability** — the Claude Code `/` picker is flat. `ds-product` appears alongside `ds-product-customer-discovery` with no visual grouping or hierarchy. Users don't know to invoke the domain menu first to navigate to sub-skills. Fix lives in the DS desktop app UI (Shenhav), not in SKILL.md files. Requirements: domain skill groups visually collapsed/expandable in the skills picker; OR onboarding teaches the two-step pattern explicitly. Relates to open question #4. (Logged 2026-05-20)

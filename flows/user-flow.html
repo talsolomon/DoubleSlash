@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duble//Slash — User Flow Map</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+      background: #F5F5FA;
+      color: #111128;
+      min-height: 100vh;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E4E4F0;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: #111128; }
+    .logo span { color: #6C5CE7; }
+    .badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .badge-purple { color: #5B46D8; background: rgba(108,92,231,0.08); border: 1px solid rgba(108,92,231,0.2); }
+    .badge-green  { color: #059669; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); }
+
+    /* ─── Layout ─── */
+    .page { padding: 0 40px 60px; }
+
+    .section-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: #9999BB; padding: 32px 0 16px;
+    }
+
+    /* ─── Flow Primitives ─── */
+    .flow-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .node {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 8px;
+      padding: 11px 18px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    /* Terminal (start / end) */
+    .node-terminal {
+      background: #6C5CE7;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+      border-radius: 100px;
+      padding: 9px 24px;
+      border: none;
+    }
+
+    /* Regular step */
+    .node-step {
+      background: #FFFFFF;
+      border: 1px solid #D0D0E8;
+      color: #374151;
+    }
+    .node-step strong { color: #0F172A; }
+
+    /* Decision diamond */
+    .node-decision {
+      background: rgba(217,119,6,0.05);
+      border: 1.5px solid #D97706;
+      color: #92400E;
+      font-weight: 600;
+    }
+
+    /* Action (system) */
+    .node-action {
+      background: rgba(16,185,129,0.05);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #065F46;
+      font-size: 11px;
+    }
+
+    /* Output */
+    .node-output {
+      background: rgba(108,92,231,0.05);
+      border: 1px solid rgba(108,92,231,0.3);
+      color: #4C35CA;
+    }
+
+    /* End state */
+    .node-end {
+      background: #F0F0F8;
+      border: 1px dashed #C0C0E0;
+      color: #6B7280;
+      font-size: 11px;
+      border-radius: 100px;
+      padding: 8px 20px;
+    }
+
+    /* Note tag */
+    .node-note {
+      background: transparent;
+      border: none;
+      color: #9CA3AF;
+      font-size: 10px;
+      font-style: italic;
+      padding: 2px 8px;
+    }
+
+    /* Color variants per flow */
+    .desktop .node-terminal { background: #DB2777; }
+    .desktop .node-step { border-color: rgba(219,39,119,0.2); }
+    .desktop .node-decision { border-color: #D97706; background: rgba(217,119,6,0.05); color: #92400E; }
+    .desktop .node-output { border-color: rgba(219,39,119,0.3); color: #9D174D; background: rgba(219,39,119,0.05); }
+
+    .agent .node-terminal { background: #2563EB; }
+    .agent .node-step { border-color: rgba(37,99,235,0.2); }
+    .agent .node-decision { border-color: #D97706; background: rgba(217,119,6,0.05); color: #92400E; }
+    .agent .node-output { border-color: rgba(37,99,235,0.3); color: #1D4ED8; background: rgba(37,99,235,0.05); }
+
+    /* Arrow */
+    .arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2px 0;
+      color: #D0D0E8;
+      font-size: 18px;
+      line-height: 1;
+      user-select: none;
+    }
+    .arrow-line {
+      width: 1px;
+      height: 16px;
+      background: #D0D0E8;
+    }
+    .arrow-head { color: #BBBBDD; font-size: 10px; }
+
+    /* Branch container */
+    .branch-wrap {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .branch-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 120px);
+      height: 1px;
+      background: #D0D0E8;
+    }
+
+    .branch {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding-top: 0;
+    }
+
+    .branch-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 4px; margin-bottom: 8px;
+    }
+    .yes-label { background: rgba(16,185,129,0.08); color: #047857; border: 1px solid rgba(16,185,129,0.2); }
+    .no-label  { background: rgba(239,68,68,0.08);  color: #DC2626; border: 1px solid rgba(239,68,68,0.2); }
+    .alt-label { background: rgba(217,119,6,0.08);  color: #92400E; border: 1px solid rgba(217,119,6,0.2); }
+
+    /* Merge connector */
+    .merge {
+      width: calc(100% - 40px);
+      max-width: 760px;
+      height: 20px;
+      position: relative;
+      margin-bottom: 0;
+    }
+    .merge::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: #D0D0E8;
+    }
+    .merge::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid #D0D0E8;
+    }
+
+    /* ─── Install Flow ─── */
+    .install-flow {
+      background: #FFFFFF;
+      border: 1px solid #E4E4F0;
+      border-radius: 12px;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ─── Two-mode split ─── */
+    .two-modes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 0;
+    }
+
+    .flow-panel {
+      background: #FFFFFF;
+      border: 1px solid #E4E4F0;
+      border-radius: 12px;
+      padding: 28px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .flow-panel.desktop { border-top: 3px solid #DB2777; }
+    .flow-panel.agent   { border-top: 3px solid #2563EB; }
+
+    .flow-panel-header {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 24px;
+    }
+    .flow-panel-type {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .desktop .flow-panel-type { color: #DB2777; }
+    .agent   .flow-panel-type { color: #2563EB; }
+    .flow-panel-title { font-size: 18px; font-weight: 800; }
+    .desktop .flow-panel-title { color: #9D174D; }
+    .agent   .flow-panel-title { color: #1D4ED8; }
+    .flow-panel-sub { font-size: 11px; color: #6B7280; margin-top: 2px; }
+
+    /* spacer */
+    .sp { height: 12px; }
+    .sp-sm { height: 6px; }
+
+    /* ─── Legend ─── */
+    .legend {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 16px 0 0;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 11px; color: #6B7280;
+    }
+    .legend-box {
+      width: 28px; height: 16px; border-radius: 4px; border: 1px solid;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 20px 40px;
+      border-top: 1px solid #E4E4F0;
+      font-size: 11px; color: #9999BB;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">Duble<span>//</span>Slash</div>
+  <div class="badge badge-purple">User Flow Map</div>
+  <div class="badge badge-green">v0.2 · 2026-05-21</div>
+</div>
+
+<div class="page">
+
+  <!-- Legend -->
+  <div class="section-label">Legend</div>
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-box" style="background:#6C5CE7; border-color:#6C5CE7; border-radius:100px;"></div>
+      <span>Start / End</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-box" style="background:#FFFFFF; border-color:#D0D0E8;"></div>
+      <span>User step</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-box" style="background:rgba(217,119,6,0.05); border-color:#D97706;"></div>
+      <span>Decision</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-box" style="background:rgba(16,185,129,0.05); border-color:rgba(16,185,129,0.3);"></div>
+      <span>System action</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-box" style="background:rgba(108,92,231,0.05); border-color:rgba(108,92,231,0.3);"></div>
+      <span>Output / result</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- INSTALL FLOW -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">Install Flow &nbsp;·&nbsp; Runs once</div>
+
+  <div class="install-flow">
+    <div class="flow-col" style="width:100%; max-width:440px;">
+
+      <div class="node node-terminal">START &nbsp;·&nbsp; User downloads Duble//Slash</div>
+      <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+      <div class="node node-step">Run the DS installer</div>
+      <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+      <div class="node node-action">DS scans for installed AI tools<br><span style="font-size:10px; opacity:0.7;">Claude Code · ChatGPT Desktop · Cursor · ...</span></div>
+      <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+      <div class="node node-decision">◆ &nbsp; AI tools found?</div>
+
+      <div class="sp"></div>
+      <div class="branch-wrap" style="max-width:680px;">
+        <div class="branch">
+          <div class="branch-label yes-label">YES — local tools</div>
+          <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+          <div class="node node-action" style="max-width:280px;">Drop root files into each AI tool folder:<br><code style="font-size:10px; color:#6C5CE7;">CLAUDE.md &nbsp;·&nbsp; memory/ &nbsp;·&nbsp; skills/</code><br><code style="font-size:10px; color:#6C5CE7;">method/ &nbsp;·&nbsp; decisionlog/</code></div>
+          <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+          <div class="node node-action" style="max-width:280px;">Register <strong>/</strong> slash command in each tool</div>
+        </div>
+        <div class="branch">
+          <div class="branch-label alt-label">NO — cloud-only (GPT Web…)</div>
+          <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+          <div class="node node-step" style="max-width:280px;">Alternative setup path<br><span class="node-note" style="display:block; font-size:10px; font-style:italic; color:#9CA3AF; margin-top:2px;">⚠ Open Question OQ-03 — strategy TBD</span></div>
+        </div>
+      </div>
+
+      <div class="merge"></div>
+      <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+      <div class="node node-output">Confirmation: <strong>"// is now active in [tool list]"</strong><br><span style="font-size:10px; opacity:0.7;">Zero config — DS is on the next time the user opens any connected tool</span></div>
+      <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+      <div class="node node-action">User opens Claude (or any connected tool)<br>for the first time → CLAUDE.md loads → DS splash fires</div>
+      <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+      <div class="node node-terminal" style="background:#10B981;">// IS ON &nbsp;·&nbsp; Install complete</div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- TWO MODES -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">Two Modes of Operation</div>
+
+  <div class="two-modes">
+
+    <!-- ─── DESKTOP MODE ─── -->
+    <div class="flow-panel desktop">
+      <div class="flow-panel-header">
+        <div class="flow-panel-type">Mode A · Keyboard</div>
+        <div class="flow-panel-title">// Desktop</div>
+        <div class="flow-panel-sub">Press // from anywhere → Pill → Kanban</div>
+      </div>
+
+      <div class="flow-col desktop" style="width:100%;">
+
+        <div class="node node-terminal">User presses <strong>//</strong> keyboard shortcut</div>
+        <div class="node node-note">Works from any app, any window</div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-action">DS Pill lights up in menu bar</div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-action">Kanban opens — reads latest memory state<br><span style="font-size:10px; opacity:0.7;">All projects · Active tasks · Node Map per project</span></div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-decision">◆ &nbsp; Projects exist?</div>
+
+        <div class="sp"></div>
+        <div class="branch-wrap">
+          <!-- YES: projects exist -->
+          <div class="branch">
+            <div class="branch-label yes-label">YES</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-step" style="font-size:11px;">Select a project</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-action" style="font-size:11px;">Project Kanban opens<br><span style="font-size:10px; opacity:0.7;">Tasks + embedded Node Map</span></div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-decision" style="font-size:11px;">◆ Tasks exist?</div>
+            <div class="sp-sm"></div>
+            <div class="branch-wrap" style="max-width:320px;">
+              <div class="branch">
+                <div class="branch-label yes-label">YES</div>
+                <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+                <div class="node node-step" style="font-size:11px;">Select task</div>
+              </div>
+              <div class="branch">
+                <div class="branch-label no-label">NO</div>
+                <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+                <div class="node node-step" style="font-size:11px;">+ New Task<br><span style="font-size:10px; opacity:0.7;">Name, brief it</span></div>
+              </div>
+            </div>
+            <div class="merge" style="max-width:320px; margin-top:8px;"></div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-action" style="font-size:11px;">Claude opens with full context<br><span style="font-size:10px; opacity:0.7;">Project memory + Node Map + constraints injected</span></div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-output" style="font-size:11px;">DS names one next move<br><span style="font-size:10px; opacity:0.7;">"[Phase] → [What]. [Why now]. Ready?"</span></div>
+          </div>
+
+          <!-- NO: no projects -->
+          <div class="branch">
+            <div class="branch-label no-label">NO</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-step" style="font-size:11px;">+ New Project<br><span style="font-size:10px; opacity:0.7;">Name it, pick AI default</span></div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-action" style="font-size:11px;">DS opens Claude (AI default)</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-output" style="font-size:11px;"><strong>"// is ON"</strong> splash renders</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-action" style="font-size:11px;">Project Intake Protocol fires<br><span style="font-size:10px; opacity:0.7;">FISH → Node Map seeded → Kanban seeded</span></div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-output" style="font-size:11px;">First move named</div>
+          </div>
+        </div>
+
+        <div class="merge" style="margin-top:8px;"></div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-action">Task runs in AI</div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-output">Output → memory → Kanban updated → Node Map adds a node</div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-end">Session complete</div>
+
+      </div>
+    </div>
+
+    <!-- ─── AGENT MODE ─── -->
+    <div class="flow-panel agent">
+      <div class="flow-panel-header">
+        <div class="flow-panel-type">Mode B · In-Agent</div>
+        <div class="flow-panel-title">/ Agent</div>
+        <div class="flow-panel-sub">DS names the next move. User confirms. Skill runs.</div>
+      </div>
+
+      <div class="flow-col agent" style="width:100%;">
+
+        <div class="node node-terminal">Session opens in Claude or GPT</div>
+        <div class="node node-note">DS is already present — no invocation needed</div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-action">DS reads full project state<br><span style="font-size:10px; opacity:0.7;">Node Map · Kanban · memory · decisions · brief · constraints</span></div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-action">Phase Gate runs<br><span style="font-size:10px; opacity:0.7;">Current Diamond phase identified · Prior phase completeness checked</span></div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-output"><strong>"[Phase] → [What]. [Why now]. Ready?"</strong><br><span style="font-size:10px; opacity:0.7;">One move · One reason · DS owns the agenda</span></div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-decision">◆ &nbsp; User confirms?</div>
+
+        <div class="sp"></div>
+        <div class="branch-wrap">
+          <div class="branch">
+            <div class="branch-label yes-label">YES — "go" / confirm</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-action" style="font-size:11px;">Skill runs with full project context<br><span style="font-size:10px; opacity:0.7;">No navigation required</span></div>
+          </div>
+          <div class="branch">
+            <div class="branch-label alt-label">NO — types / to deviate</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-action" style="font-size:11px;">/ Skills picker opens<br><span style="font-size:10px; opacity:0.7;">Domain → skill → runs with context</span></div>
+          </div>
+        </div>
+
+        <div class="merge" style="margin-top:8px;"></div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-output">Output rendered inline<br><span style="font-size:10px; opacity:0.7;">Formatted · Cited · Ready to act on</span></div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-action">Memory updated · Kanban + Node Map updated<br><span style="font-size:10px; opacity:0.7;">Phase advances automatically when completion criteria met</span></div>
+        <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+
+        <div class="node node-decision">◆ &nbsp; Session continues?</div>
+
+        <div class="sp"></div>
+        <div class="branch-wrap">
+          <div class="branch">
+            <div class="branch-label yes-label">YES</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-output" style="font-size:11px;">DS names next move in current phase<br><span style="font-size:10px; opacity:0.7;">Loop continues — DS always drives</span></div>
+          </div>
+          <div class="branch">
+            <div class="branch-label no-label">NO</div>
+            <div class="arrow"><div class="arrow-line"></div><div class="arrow-head">▼</div></div>
+            <div class="node node-end" style="font-size:11px;">Session ends<br>Memory + Kanban persist</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /two-modes -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- FULL LOOP: HOW THE MODES CONNECT -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-label">How the Modes Connect &nbsp;·&nbsp; Full Loop</div>
+
+  <div style="background:#FFFFFF; border:1px solid #E4E4F0; border-radius:12px; padding:32px 40px;">
+    <div style="display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:16px; align-items:center;">
+
+      <div style="text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#DB2777; margin-bottom:8px;">Mode A</div>
+        <div style="background:#FDF2F8; border:1px solid rgba(219,39,119,0.2); border-radius:10px; padding:16px 20px;">
+          <div style="font-size:20px; font-weight:800; color:#9D174D; margin-bottom:4px;">// Desktop</div>
+          <div style="font-size:11px; color:#6B7280; line-height:1.5;">Keyboard shortcut from any app<br>→ Pill → Kanban → open project in AI</div>
+        </div>
+      </div>
+
+      <div style="text-align:center; color:#D0D0E8;">
+        <div style="font-size:24px; margin-bottom:2px;">⇄</div>
+        <div style="font-size:9px; color:#9999BB; font-weight:700; letter-spacing:0.5px; text-transform:uppercase;">Shared<br>Memory</div>
+      </div>
+
+      <div style="text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#2563EB; margin-bottom:8px;">Mode B</div>
+        <div style="background:#EFF6FF; border:1px solid rgba(37,99,235,0.2); border-radius:10px; padding:16px 20px;">
+          <div style="font-size:20px; font-weight:800; color:#1D4ED8; margin-bottom:4px;">/ Agent</div>
+          <div style="font-size:11px; color:#6B7280; line-height:1.5;">DS names next move → confirm → runs.<br>Type / to pick a different skill instead.</div>
+        </div>
+      </div>
+
+      <div style="text-align:center; color:#D0D0E8;">
+        <div style="font-size:24px; margin-bottom:2px;">→</div>
+        <div style="font-size:9px; color:#9999BB; font-weight:700; letter-spacing:0.5px; text-transform:uppercase;">Auto<br>Written</div>
+      </div>
+
+      <div style="text-align:center;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#7C6AF7; margin-bottom:8px;">Reflectional UI</div>
+        <div style="background:#F5F3FF; border:1px solid rgba(124,106,247,0.2); border-radius:10px; padding:16px 20px;">
+          <div style="font-size:16px; font-weight:800; color:#5B46D8; margin-bottom:4px;">Kanban + Node Map</div>
+          <div style="font-size:11px; color:#6B7280; line-height:1.5;">Live task state (Kanban)<br>Session history tree (Node Map)<br>Zero admin — always current</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:24px; padding-top:20px; border-top:1px solid #E4E4F0; display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+      <div style="text-align:center; font-size:11px; color:#6B7280; line-height:1.6;">
+        <span style="color:#7C6AF7; font-weight:700;">Loops</span><br>
+        Set once, run automatically.<br>No user action required.
+      </div>
+      <div style="text-align:center; font-size:11px; color:#6B7280; line-height:1.6;">
+        <span style="color:#7C6AF7; font-weight:700;">Memory</span><br>
+        Every run writes to shared memory.<br>The team always knows what's happening.
+      </div>
+      <div style="text-align:center; font-size:11px; color:#6B7280; line-height:1.6;">
+        <span style="color:#7C6AF7; font-weight:700;">Weekly Digest</span><br>
+        What changed · What's blocked ·<br>What needs a decision.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- Footer -->
+<div class="footer">
+  <span>Duble//Slash &nbsp;·&nbsp; User Flow Map &nbsp;·&nbsp; v0.2 &nbsp;·&nbsp; Internal — not for distribution</span>
+  <span>2026-05-21</span>
+</div>
+
+</body>
+</html>
