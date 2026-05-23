@@ -226,3 +226,13 @@ Permission tiers:
 **Decision**: Leaning (B) — $12/mo for platform, tokens on the user (Claude Code subscription or direct API key)  
 **Rationale**: BYOK aligns with power users who already have Claude/OpenAI access. Removes token cost risk from our P&L.  
 **Consequences**: Requires users to have an existing API key. May add friction at onboarding. Revisit if conversion data shows dropoff here.
+
+---
+
+## [DECISION-021] Parallel revenue track — design-team AI working sessions (service business)
+**Date**: 2026-05-23
+**Status**: Closed (offer model decided; pricing numbers still Open)
+**Options considered**: Offer model — done-for-you delivery / done-with-you embed / training & workshops / productized retainer. Buyer — in-house design leaders / studios & agencies / solo designers / founders. Pricing — project fee / retainer / per-workshop-seat / free-to-paid.
+**Decision**: Stand up an independent SERVICE business alongside the DS product build, as a "for the time being" bridge revenue motion. Offer = **done-with-you working session** (Tal embeds with the team and runs AI against their real backlog). Buyer = **in-house design leaders** (Heads of Design / Design Managers at product companies). Pricing = **per-session / per-seat**. Focus = product design / product work. The `//` (Duble//Slash) methodology is the IP/method; the session is the offer.
+**Rationale**: Wedge thesis is owner-stated and matches validated research (memory.md:38 — 88% use AI, ~60% no value; gap is workflow not models): designers don't want to build/babysit agents, they want to do the work. A done-with-you session monetizes the methodology immediately, requires zero product infrastructure, and dog-foods DS on real design teams. Per-seat/per-session keeps it legible to a design-leader budget.
+**Consequences**: This is a service track, distinct from the DS product P&L and from DECISION-003 ($12/mo + BYOK product pricing). Exact session/seat figures are not set — needs first-cohort signal. First cut is in-house (leader's own team on their backlog), not open-enrollment; switching to a public cohort changes the buyer and the brief framing. Brief artifact: `company/design-ai-service-brief.md`.

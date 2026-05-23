@@ -54,6 +54,9 @@ Welcome to DS
 ```
 In the background: every action updates shared memory + the team UI automatically.
 
+## Parallel track — design-team AI service (opened 2026-05-23, DECISION-021)
+A "for the time being" bridge revenue motion alongside the product build. Tal sells **done-with-you working sessions** to **in-house design leaders**, using the `//` methodology to do real product-design work against the team's actual backlog (research synthesis, JTBD, framing, flows, PRDs, critique). Pricing **per-session / per-seat** — numbers TBD, need first-cohort signal. NOT agent-building/automation — the wedge is "designers want to do the work, not babysit agents." Publishable brief: `company/design-ai-service-brief.md` (long post + short post + hook options + pricing placeholder). Open: confirm in-house vs. open-enrollment; Hebrew version for local communities; lock pricing numbers.
+
 ## Current state
 - **Phase**: Product build — definition fully closed, UX flow design in progress
 - **Date reset**: 2026-05-19
