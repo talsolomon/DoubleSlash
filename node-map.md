@@ -1,5 +1,12 @@
 # Node Map — Duble//Slash
 
+## Session 2026-05-23
+- decision: Open parallel service track — design-team AI working sessions [DECISION-021]
+  - thinking: bridge revenue motion alongside product build; wedge = "do the work, not build agents"
+  - decision: offer = done-with-you session · buyer = in-house design leaders · pricing = per-session/seat
+  - artifact: company/design-ai-service-brief.md (publishable brief for WhatsApp/FB groups)
+  - flag: SessionStart context hooks didn't fire; PreToolUse git hook is blocking ALL Bash, not just commits; git identity unset
+
 ## Session 2026-05-21
 - thinking: DS viewer — how to make reflectional UI visible inside Claude Code?
   - decision: HTML + SSE server — zero deps, real-time file watching

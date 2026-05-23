@@ -1,6 +1,10 @@
 # Kanban — Duble//Slash
 
 ## TODO
+- Service track: lock per-session/per-seat pricing numbers — need first-cohort signal [DECISION-021] [2026-05-23]
+- Service track: confirm in-house embed vs. open-enrollment for first cohort [DECISION-021] [2026-05-23]
+- Service track: Hebrew version of brief if local communities [2026-05-23]
+- Fix .claude/settings.json — PreToolUse git hook blocking all Bash; SessionStart context not injecting [2026-05-23]
 - Update flows/user-journey.html — leader-driven model not reflected [DECISION-019] [2026-05-21]
 - Update flows/user-flow.html — leader-driven model not reflected [DECISION-019] [2026-05-21]
 - Update agents/system.md — session open: orientation + next move + confirm [DECISION-019] [2026-05-21]
