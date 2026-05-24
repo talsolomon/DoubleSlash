@@ -1,0 +1,14 @@
+{
+  "name": "ds-engineering-code-review",
+  "domain": "engineering",
+  "phase": "develop",
+  "description": "Reviews code for correctness, security, performance, and maintainability — OWASP Top 10, N+1 detection, cyclomatic complexity, BLOCKER/HIGH/MEDIUM/LOW severity",
+  "tags": ["engineering", "develop", "code-review", "owasp", "security", "performance", "n+1"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-engineering-architecture-design",
+  "next_skill": "ds-engineering-deployment-planning"
+}

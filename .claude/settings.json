@@ -41,8 +41,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '{\"systemMessage\": \"[DS — end of turn] If this turn produced decisions, artifacts, or project state changes not yet written to decisionlog.md or memory.md — write them before the next message arrives.\"}'",
-            "statusMessage": "DS checking for unsaved signal..."
+            "command": "KANBAN_IN_PROGRESS=$(grep -c 'IN PROGRESS' /Users/talsolomon/Documents/dubleslash/kanban.md 2>/dev/null || echo 0); LAST_DECISION=$(grep '## \\[DECISION' /Users/talsolomon/Documents/dubleslash/decisionlog.md 2>/dev/null | tail -1); MSG=$(printf '[DS — end of turn checklist]\\n\\nDo NOT skip this. Update before the next message:\\n\\n  kanban.md    — move any completed work to DONE. IN PROGRESS cards: %s found.\\n  node-map.md  — add nodes for artifacts, decisions, thinking produced this turn.\\n  decisionlog.md — log any locked direction as DECISION-NNN (last: %s).\\n  memory/      — write any new preference, product fact, or project state.\\n\\nThis is automatic. No permission needed. No asking. Just write.' \"$KANBAN_IN_PROGRESS\" \"$LAST_DECISION\"); jq -cn --arg msg \"$MSG\" '{\"systemMessage\": $msg}' 2>/dev/null || echo '{\"systemMessage\":\"[DS] end of turn — update kanban, node-map, decisionlog, memory now\"}'",
+            "statusMessage": "DS checking project state..."
           }
         ]
       }
@@ -82,8 +82,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path // empty' | { read -r f; case \"$f\" in *node-map.md|*kanban.md) printf '{\"systemMessage\":\"[DS] %s written — project view updated. In the DS product this triggers DS-007 Memory Write and the UI refreshes automatically.\"}\\n' \"$f\";; esac; } 2>/dev/null || true",
-            "statusMessage": "DS syncing project views..."
+            "command": "jq -r '.tool_input.file_path // empty' 2>/dev/null | { read -r f; case \"$f\" in *kanban.md) MISSING=$(grep -E '^\\s*-\\s+[^[]' \"$f\" 2>/dev/null | grep -v '\\[x\\]\\|\\[-\\]\\|^#' | grep -v '\\[20[0-9][0-9]-' | head -3); if [ -n \"$MISSING\" ]; then printf '{\"systemMessage\":\"[DS format warning] kanban.md — these cards are missing a [YYYY-MM-DD] session tag (DS write rule):\\n%s\"}\\n' \"$MISSING\"; else printf '{\"systemMessage\":\"[DS] kanban.md written — format OK, viewer updated.\"}\\n'; fi;; *node-map.md) MISSING=$(grep -E '^\\s+-\\s+' \"$f\" 2>/dev/null | grep -v '##\\|:' | head -3); if [ -n \"$MISSING\" ]; then printf '{\"systemMessage\":\"[DS format warning] node-map.md — these lines are missing type: prefix (DS write rule):\\n%s\"}\\n' \"$MISSING\"; else printf '{\"systemMessage\":\"[DS] node-map.md written — format OK, viewer updated.\"}\\n'; fi;; esac; } 2>/dev/null || true",
+            "statusMessage": "DS validating format..."
           }
         ]
       }

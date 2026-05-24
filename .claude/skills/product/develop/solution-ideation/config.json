@@ -1,0 +1,14 @@
+{
+  "name": "ds-product-solution-ideation",
+  "domain": "product",
+  "phase": "develop",
+  "description": "Generates and ranks solution concepts with trade-off analysis",
+  "tags": ["product", "develop", "ideation", "concepts", "trade-offs"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-product-problem-framing",
+  "next_skill": "ds-product-requirements-definition"
+}

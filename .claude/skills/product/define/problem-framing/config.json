@@ -1,0 +1,14 @@
+{
+  "name": "ds-product-problem-framing",
+  "domain": "product",
+  "phase": "define",
+  "description": "Turns research into a precise, buildable problem statement with HMW, POV, RICE score, and north star metric",
+  "tags": ["product", "define", "hmw", "pov", "rice", "north-star"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-product-customer-discovery",
+  "next_skill": "ds-product-solution-ideation"
+}

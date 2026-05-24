@@ -226,3 +226,33 @@ Permission tiers:
 **Decision**: Leaning (B) — $12/mo for platform, tokens on the user (Claude Code subscription or direct API key)  
 **Rationale**: BYOK aligns with power users who already have Claude/OpenAI access. Removes token cost risk from our P&L.  
 **Consequences**: Requires users to have an existing API key. May add friction at onboarding. Revisit if conversion data shows dropoff here.
+
+---
+
+## [DECISION-021] DS viewer architecture — single-file Node.js, SSE, zero dependencies
+**Date**: 2026-05-21  
+**Status**: Closed  
+**Options considered**: (A) React SPA with build step / (B) Single HTML file, polling / (C) Single Node.js file, SSE, CDN-loaded libs  
+**Decision**: (C) — one `server.js`, no npm, no bundler. CDN loads Cytoscape, GSAP, AutoAnimate. SSE for real-time updates.  
+**Rationale**: The zero-admin promise requires zero setup. A build step breaks that. Polling adds latency and network noise. SSE gives sub-2s updates with persistent connections. CDN libs load once and cache; this is not a dependency risk for a localhost tool.  
+**Consequences**: viewer lives at `~/.claude/ds-viewer/server.js`. CDN dependency means offline mode won't render node map or animations (graceful degradation if CDN fails). File format is the canonical spec — viewer breaks if DS stops writing `[YYYY-MM-DD]` on cards.
+
+---
+
+## [DECISION-022] Node map implementation — Cytoscape.js + dagre layout
+**Date**: 2026-05-21  
+**Status**: Closed  
+**Options considered**: (A) Hand-rolled SVG with proportional layout algorithm / (B) D3.js force-directed / (C) Cytoscape.js with dagre hierarchical layout  
+**Decision**: (C) — Cytoscape.js handles node shapes, edge routing, pan/zoom, click targets, and edge-to-boundary intersection natively.  
+**Rationale**: Hand-rolled SVG required maintaining a custom layout algorithm with known gaps (label truncation, arrowhead offset from center). D3 force-directed produces non-deterministic layouts that don't respect session-at-top hierarchy. Cytoscape + dagre gives TB layout, correct edge endpoints at node boundaries (Gap 2 from the spec is resolved natively), and proper pan/zoom.  
+**Consequences**: CDN dependency on unpkg for cytoscape + dagre + cytoscape-dagre. Falls back to `breadthfirst` layout if dagre fails to load.
+
+---
+
+## [DECISION-023] DS distribution — bash install script, not npm package
+**Date**: 2026-05-21  
+**Status**: Closed  
+**Options considered**: (A) npm package with postinstall / (B) Bash install script / (C) Manual copy instructions  
+**Decision**: (B) — `bash install.sh` copies `server.js` → `~/.claude/ds-viewer/`, merges SessionStart hook into `~/.claude/settings.json`. `--init` flag seeds project files.  
+**Rationale**: npm requires node_modules even for a meta-install. Bash is universally available on macOS. The install is three operations (mkdir, cp, json merge) — a 50-line bash script is the right tool. Single source of truth: `install/server.js` in repo.  
+**Consequences**: Windows users need WSL or manual steps (v1 is macOS-only). Future: `npx @ds/install` wraps this script for zero-download flow.

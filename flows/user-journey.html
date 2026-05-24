@@ -218,7 +218,7 @@
 <div class="header">
   <div class="logo">Duble<span>//</span>Slash</div>
   <div class="badge badge-purple">User Journey Map</div>
-  <div class="badge badge-green">v0.2 · 2026-05-21</div>
+  <div class="badge badge-green">v0.3 · 2026-05-24</div>
 </div>
 
 <!-- Journey Table -->
@@ -238,7 +238,7 @@
     <!-- Lane: User Action -->
     <div class="lane-label-cell">User Action</div>
     <div class="cell">Discovers DS, reads landing page, clicks download</div>
-    <div class="cell">Runs installer, selects which AI tools to connect</div>
+    <div class="cell">Runs installer → selects which AI tools to connect → connects integrations (Figma, GitHub, Slack…) in one click — no JSON, no config</div>
     <div class="cell">Opens Claude (or GPT) for the first time after install</div>
     <div class="cell">Presses <strong>//</strong> keyboard shortcut from anywhere on the desktop</div>
     <div class="cell">Types <strong>/</strong> inside Claude or GPT to access skills</div>
@@ -247,7 +247,7 @@
     <!-- Lane: What They See -->
     <div class="lane-label-cell">What They See</div>
     <div class="cell">"Eliminate the distance between 'I have an idea' and 'it's live.'"</div>
-    <div class="cell">Install wizard detects AI tools, shows which root folders will receive DS files</div>
+    <div class="cell">Install wizard detects AI tools, shows which root folders will receive DS files. One-click MCP connector: "Do you use Figma? GitHub? Slack? Connect in one click." No JSON, no copy-paste.</div>
     <div class="cell"><strong>"// is ON."</strong> DS splash. DS reads project state → names one next move → asks <strong>"Ready?"</strong> No setup, no menu.</div>
     <div class="cell">DS Pill lights in menu bar. Kanban opens. All projects visible. Node Map per project.</div>
     <div class="cell">DS names next move in current phase. User confirms → skill runs inline. Type <strong>/</strong> to pick a different skill instead.</div>
@@ -259,7 +259,10 @@
     <div class="cell"><ul>
       <li>Detects installed AI tools</li>
       <li>Drops root files per tool: <code style="font-size:11px; color:#6C5CE7;">CLAUDE.md</code>, <code style="font-size:11px; color:#6C5CE7;">memory/</code>, <code style="font-size:11px; color:#6C5CE7;">skills/</code>, <code style="font-size:11px; color:#6C5CE7;">method/</code>, <code style="font-size:11px; color:#6C5CE7;">decisionlog/</code></li>
+      <li>Presents one-click MCP installer (Figma, GitHub, Slack…)</li>
+      <li>Writes MCP config files automatically — user never sees JSON</li>
       <li>Registers <strong>/</strong> slash command in each AI tool</li>
+      <li>Registers <strong>//</strong> OS-level keyboard shortcut</li>
     </ul></div>
     <div class="cell"><ul>
       <li>CLAUDE.md loads automatically</li>
@@ -424,8 +427,8 @@
 
 <!-- Footer -->
 <div class="footer">
-  <span>Duble//Slash &nbsp;·&nbsp; User Journey Map &nbsp;·&nbsp; v0.2 &nbsp;·&nbsp; Internal — not for distribution</span>
-  <span>2026-05-21</span>
+  <span>Duble//Slash &nbsp;·&nbsp; User Journey Map &nbsp;·&nbsp; v0.3 &nbsp;·&nbsp; Internal — not for distribution</span>
+  <span>2026-05-24</span>
 </div>
 
 </body>

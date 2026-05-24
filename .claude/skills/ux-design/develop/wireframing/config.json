@@ -1,0 +1,14 @@
+{
+  "name": "ds-ux-design-wireframing",
+  "domain": "ux-design",
+  "phase": "develop",
+  "description": "Produces annotated wireframes — Gestalt principles, 8pt grid, interaction states, empty/error/loading states, responsive breakpoints",
+  "tags": ["ux-design", "develop", "wireframing", "gestalt", "interaction-states"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-ux-design-information-architecture",
+  "next_skill": "ds-ux-design-prototype-design"
+}

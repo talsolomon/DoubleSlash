@@ -1,0 +1,14 @@
+{
+  "name": "ds-product-roadmap-design",
+  "domain": "product",
+  "phase": "develop",
+  "description": "Builds a sequenced NOW/NEXT/LATER roadmap with OKRs and dependency map",
+  "tags": ["product", "develop", "roadmap", "okr", "prioritization", "sequencing"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-product-requirements-definition",
+  "next_skill": "ds-product-launch-planning"
+}

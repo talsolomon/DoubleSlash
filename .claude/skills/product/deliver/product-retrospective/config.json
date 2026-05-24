@@ -1,0 +1,14 @@
+{
+  "name": "ds-product-product-retrospective",
+  "domain": "product",
+  "phase": "deliver",
+  "description": "Closes the loop on what shipped — OKR grades, lessons learned, kill/continue/pivot recommendation",
+  "tags": ["product", "deliver", "retrospective", "okr-grading", "lessons-learned", "pivot"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-product-launch-planning",
+  "next_skill": null
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-ux-design-prototype-design",
+  "domain": "ux-design",
+  "phase": "develop",
+  "description": "Designs interactive prototype — fidelity decision, interaction flow, clickable states, test scenarios, transition design",
+  "tags": ["ux-design", "develop", "prototype-design", "fidelity", "test-scenarios"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-ux-design-wireframing",
+  "next_skill": "ds-ux-design-design-handoff"
+}

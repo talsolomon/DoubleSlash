@@ -1,0 +1,14 @@
+{
+  "name": "ds-product-requirements-definition",
+  "domain": "product",
+  "phase": "define",
+  "description": "Writes a buildable spec — PRD, user story map, acceptance criteria, definition of done",
+  "tags": ["product", "define", "prd", "user-stories", "acceptance-criteria", "engineering-handoff"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-product-solution-ideation",
+  "next_skill": "ds-product-roadmap-design"
+}

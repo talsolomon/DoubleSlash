@@ -1,0 +1,14 @@
+{
+  "name": "ds-engineering-technical-spec",
+  "domain": "engineering",
+  "phase": "define",
+  "description": "Writes a complete technical specification — RFC format, data models, API contracts, sequence diagrams, STRIDE threat model, NFRs, acceptance criteria",
+  "tags": ["engineering", "define", "technical-spec", "rfc", "stride", "nfr", "api-contract"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-engineering-tech-landscape-research",
+  "next_skill": "ds-engineering-api-design"
+}

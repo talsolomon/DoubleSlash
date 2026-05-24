@@ -1,0 +1,14 @@
+{
+  "name": "ds-ux-design-usability-testing",
+  "domain": "ux-design",
+  "phase": "discover",
+  "description": "Designs and synthesizes usability tests — SUS scoring, task completion, Jakob Nielsen heuristics, severity-rated findings",
+  "tags": ["ux-design", "discover", "usability-testing", "sus", "nielsen-heuristics"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-ux-design-user-research",
+  "next_skill": "ds-ux-design-ux-brief"
+}

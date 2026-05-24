@@ -1,0 +1,14 @@
+{
+  "name": "ds-product-launch-planning",
+  "domain": "product",
+  "phase": "deliver",
+  "description": "Creates a complete GTM and launch plan — rollout, flags, success metrics, risk assessment",
+  "tags": ["product", "deliver", "gtm", "launch", "rollout", "risk"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-product-roadmap-design",
+  "next_skill": "ds-product-product-retrospective"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-ux-design-design-retrospective",
+  "domain": "ux-design",
+  "phase": "deliver",
+  "description": "Reviews design outcomes post-launch — decision audit, assumption validation, SUS benchmark, handoff effectiveness, pattern library updates",
+  "tags": ["ux-design", "deliver", "design-retrospective", "sus", "decision-audit"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-ux-design-design-handoff",
+  "next_skill": null
+}

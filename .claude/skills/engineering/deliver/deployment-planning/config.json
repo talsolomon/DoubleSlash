@@ -1,0 +1,14 @@
+{
+  "name": "ds-engineering-deployment-planning",
+  "domain": "engineering",
+  "phase": "deliver",
+  "description": "Plans a safe deployment — blue-green/canary/feature-flag strategy, expand/contract DB migrations, runbook, monitoring thresholds, rollback triggers",
+  "tags": ["engineering", "deliver", "deployment", "blue-green", "canary", "feature-flags", "runbook", "zero-downtime"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-engineering-code-review",
+  "next_skill": "ds-engineering-incident-retrospective"
+}

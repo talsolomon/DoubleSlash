@@ -1,0 +1,14 @@
+{
+  "name": "ds-ux-design-design-handoff",
+  "domain": "ux-design",
+  "phase": "deliver",
+  "description": "Prepares design specs for engineering — design tokens, component specs, WCAG checklist, interaction annotations, implementation Q&A",
+  "tags": ["ux-design", "deliver", "design-handoff", "design-tokens", "wcag"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-ux-design-prototype-design",
+  "next_skill": "ds-ux-design-design-retrospective"
+}

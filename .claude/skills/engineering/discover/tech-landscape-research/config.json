@@ -1,0 +1,14 @@
+{
+  "name": "ds-engineering-tech-landscape-research",
+  "domain": "engineering",
+  "phase": "discover",
+  "description": "Surveys the technology landscape — build/buy/OSS decision, scoring matrix, ecosystem health, TRL, 3-year TCO, ADR",
+  "tags": ["engineering", "discover", "tech-landscape", "build-vs-buy", "adr", "tco"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-engineering-system-audit",
+  "next_skill": "ds-engineering-technical-spec"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-product-opportunity-landscape",
+  "domain": "product",
+  "phase": "discover",
+  "description": "Maps and sizes the problem space — TAM/SAM/SOM, whitespace, early adopter profile",
+  "tags": ["product", "discover", "market-sizing", "tam", "whitespace", "early-adopters"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": null,
+  "next_skill": "ds-product-customer-discovery"
+}

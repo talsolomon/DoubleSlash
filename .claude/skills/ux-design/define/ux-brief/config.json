@@ -1,0 +1,14 @@
+{
+  "name": "ds-ux-design-ux-brief",
+  "domain": "ux-design",
+  "phase": "define",
+  "description": "Writes a UX brief — HMW/POV problem statement, user profile, job stories, design goals, WCAG requirements, success metrics",
+  "tags": ["ux-design", "define", "ux-brief", "hmw", "wcag"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-ux-design-user-research",
+  "next_skill": "ds-ux-design-information-architecture"
+}

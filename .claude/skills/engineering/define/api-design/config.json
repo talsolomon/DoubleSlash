@@ -1,0 +1,14 @@
+{
+  "name": "ds-engineering-api-design",
+  "domain": "engineering",
+  "phase": "define",
+  "description": "Designs complete API contracts — resource model, OpenAPI 3.x, OAuth 2.0 + RBAC, cursor pagination, idempotency, webhooks, versioning",
+  "tags": ["engineering", "define", "api-design", "rest", "openapi", "oauth", "idempotency", "pagination"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-engineering-technical-spec",
+  "next_skill": "ds-engineering-architecture-design"
+}

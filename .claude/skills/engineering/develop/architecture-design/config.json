@@ -1,0 +1,14 @@
+{
+  "name": "ds-engineering-architecture-design",
+  "domain": "engineering",
+  "phase": "develop",
+  "description": "Designs system architecture — quality attributes, style selection, C4 model, CAP theorem, failure modes, circuit breakers, DORA scaling plan",
+  "tags": ["engineering", "develop", "architecture", "c4", "cap-theorem", "adr", "dora", "circuit-breaker"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-engineering-api-design",
+  "next_skill": "ds-engineering-code-review"
+}

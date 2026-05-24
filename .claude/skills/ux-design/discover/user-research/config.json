@@ -1,0 +1,14 @@
+{
+  "name": "ds-ux-design-user-research",
+  "domain": "ux-design",
+  "phase": "discover",
+  "description": "Plans and synthesizes user research — JTBD behavioral interviews, affinity mapping, unmet needs ranking, mental models, jobs stories",
+  "tags": ["ux-design", "discover", "user-research", "jtbd", "affinity-mapping"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": null,
+  "next_skill": "ds-ux-design-ux-brief"
+}

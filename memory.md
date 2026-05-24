@@ -55,16 +55,18 @@ Welcome to DS
 In the background: every action updates shared memory + the team UI automatically.
 
 ## Current state
-- **Phase**: Product build — definition fully closed, UX flow design in progress
+- **Phase**: Product build — methodology spec converged, ready for Shenhav design handoff
 - **Date reset**: 2026-05-19
-- **Last session**: 2026-05-21 — leader-driven session model locked
-  - **Leader-driven model closed (DECISION-019)**: DS leads every session — reads Node Map, names next move, user approves. `/` menu and `//` invocation are power-user escape hatches, not primary UX.
-  - Main product offer reframed: DS is an OS / framework that leads your full project lifecycle (research → define → develop → design → ship). Skills are the execution mechanism — not the hero.
-  - **Files updated** per DECISION-019 (2026-05-21):
-    - `flows/user-journey.html` → v0.2 — leader-driven flow, new tagline, Agent Mode steps rewritten
-    - `flows/user-flow.html` → v0.2 — Agent Mode primary flow is leader-driven; / picker is escape hatch branch
-    - `agents/system.md` → Phase Gate added, FISH table updated, orientation mode updated, session-start loop updated
-    - `CLAUDE.md` → session open protocol updated, Phase Gate + "one move not a menu" as hard rules
+- **Last session**: 2026-05-24 — full production spec written, flows updated to v0.3
+  - **Deliverables from this session:**
+    - `planning/ds-production-spec.md` — single source of truth for all design + engineering. Covers: user journey (install → daily use), session methodology, FISH + Phase Gate, skills architecture + OSS model, MCPs/connectors, UI requirements for Shenhav, open questions blocking design
+    - `flows/user-journey.html` → v0.3 — MCP install step, OS shortcut registration added
+    - `flows/user-flow.html` → v0.3 — one-click MCP installer in flow
+  - **What's now clear**: skills OSS model (github.com/dubleslash/skills, PR-based), MCP strategy (DS writes config files, user never sees JSON), full install flow
+  - **What's still open**: AAAK memory methodology, OQ-01 (// OS intercept — blocks Desktop Mode design), OQ-04 (skills picker discoverability), individual skill execution prompts need to be written at mastermind level
+
+- **Previous session (2026-05-21)**: Leader-driven session model locked [DECISION-019]
+  - `flows/user-journey.html` → v0.2, `flows/user-flow.html` → v0.2
   - AAAK memory methodology — still open, not yet defined
 
 - **Previous session (2026-05-20)**:

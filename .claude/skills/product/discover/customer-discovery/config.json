@@ -1,0 +1,13 @@
+{
+  "name": "ds-product-customer-discovery",
+  "domain": "product",
+  "phase": "discover",
+  "description": "Surfaces real user problems through interviews, empathy mapping, and observation",
+  "tags": ["product", "discover", "research", "jtbd", "interviews"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "next_skill": "ds-product-problem-framing"
+}

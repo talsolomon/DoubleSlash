@@ -1,0 +1,14 @@
+{
+  "name": "ds-engineering-system-audit",
+  "domain": "engineering",
+  "phase": "discover",
+  "description": "Audits an existing system for technical debt, gaps, dependencies, and risk — 6-dimension scorecard, C4 mapping, DORA baseline, dependency risk map",
+  "tags": ["engineering", "discover", "system-audit", "tech-debt", "dora", "c4"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": null,
+  "next_skill": "ds-engineering-tech-landscape-research"
+}
