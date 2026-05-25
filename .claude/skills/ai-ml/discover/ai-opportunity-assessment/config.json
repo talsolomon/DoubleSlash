@@ -1,0 +1,14 @@
+{
+  "name": "ds-ai-ml-ai-opportunity-assessment",
+  "domain": "ai-ml",
+  "phase": "discover",
+  "description": "Identifies and prioritizes AI/ML use cases scored on value × feasibility × data readiness, with build-vs-buy analysis, risk screening, and a recommended first initiative.",
+  "tags": ["ai-ml", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-ai-ml-model-retrospective",
+  "next_skill": "ds-ai-ml-data-landscape"
+}

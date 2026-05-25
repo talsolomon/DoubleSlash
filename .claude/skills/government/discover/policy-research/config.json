@@ -1,0 +1,14 @@
+{
+  "name": "ds-government-policy-research",
+  "domain": "government",
+  "phase": "discover",
+  "description": "Evidence-based policy research — legislative scan, comparable jurisdiction analysis, evidence quality scoring (1–5 rubric), political feasibility matrix, and structured policy research brief.",
+  "tags": ["government", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-government-policy-review",
+  "next_skill": "ds-government-stakeholder-mapping"
+}

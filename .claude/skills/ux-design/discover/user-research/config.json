@@ -9,6 +9,6 @@
   "version": "2.0.0",
   "author": "ds-core",
   "updated": "2026-05-24",
-  "prev_skill": null,
-  "next_skill": "ds-ux-design-ux-brief"
+  "prev_skill": "ds-ux-design-design-retrospective",
+  "next_skill": "ds-ux-design-usability-testing"
 }

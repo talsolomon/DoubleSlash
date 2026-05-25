@@ -2,13 +2,13 @@
   "name": "ds-analytics-data-discovery",
   "domain": "analytics",
   "phase": "discover",
-  "description": "Maps available data — source catalog, quality scoring (4 dimensions), lineage mapping, business question readiness",
-  "tags": ["analytics", "discover", "data-discovery", "data-quality", "lineage"],
-  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "description": "Maps available data sources, quality across 4 dimensions, business question readiness, and lineage — produces overall data environment grade (A-D).",
+  "tags": ["analytics", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
   "model": "inherit",
   "version": "2.0.0",
-  "author": "ds-core",
-  "updated": "2026-05-24",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
   "prev_skill": "ds-analytics-analytics-audit",
   "next_skill": "ds-analytics-kpi-definition"
 }

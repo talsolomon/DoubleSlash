@@ -2,13 +2,13 @@
   "name": "ds-analytics-analytics-implementation",
   "domain": "analytics",
   "phase": "develop",
-  "description": "Plans analytics implementation — object-action event taxonomy, tracking spec, pipeline architecture, QA framework",
-  "tags": ["analytics", "develop", "analytics-implementation", "event-taxonomy", "tracking-spec"],
-  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "description": "Plans analytics tracking implementation — event taxonomy (object-action format), per-event tracking spec with example payloads, pipeline architecture, and QA validation framework.",
+  "tags": ["analytics", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
   "model": "inherit",
   "version": "2.0.0",
-  "author": "ds-core",
-  "updated": "2026-05-24",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
   "prev_skill": "ds-analytics-measurement-framework",
   "next_skill": "ds-analytics-dashboard-design"
 }

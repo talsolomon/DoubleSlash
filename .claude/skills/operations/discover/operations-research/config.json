@@ -1,0 +1,16 @@
+{
+  "skill_id": "ds-operations-operations-research",
+  "display_name": "Operations Research",
+  "domain": "operations",
+  "phase": "discover",
+  "diamond_position": 2,
+  "prev_skill": "ds-operations-process-audit",
+  "next_skill": "ds-operations-process-design",
+  "fish_defaults": {
+    "default": "Tuna",
+    "quick_trigger": "Nemo",
+    "deep_trigger": "Salmon"
+  },
+  "output_format": "markdown",
+  "tags": ["operations", "discover", "benchmarking", "apqc", "best-practice"]
+}

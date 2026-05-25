@@ -1,0 +1,14 @@
+{
+  "name": "ds-creative-direction-creative-brief",
+  "domain": "creative-direction",
+  "phase": "define",
+  "description": "Writes a creative brief with objective, audience, message hierarchy, tone descriptors, deliverables, constraints, references, and approval process — enabling the team to produce right work on the first attempt.",
+  "tags": ["creative-direction", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-creative-direction-inspiration-mapping",
+  "next_skill": "ds-creative-direction-concept-development"
+}

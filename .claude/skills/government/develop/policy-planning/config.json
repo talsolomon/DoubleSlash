@@ -1,0 +1,14 @@
+{
+  "name": "ds-government-policy-planning",
+  "domain": "government",
+  "phase": "develop",
+  "description": "Policy implementation planning — milestone sequencing with critical path, resource and budget model, interdependency register, RAID log, accountability framework (RACI), and M&E design with early warning indicators.",
+  "tags": ["government", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-government-regulatory-design",
+  "next_skill": "ds-government-public-consultation"
+}

@@ -9,6 +9,6 @@
   "version": "2.0.0",
   "author": "ds-core",
   "updated": "2026-05-24",
-  "prev_skill": null,
+  "prev_skill": "ds-strategy-strategic-review",
   "next_skill": "ds-strategy-strategic-landscape"
 }

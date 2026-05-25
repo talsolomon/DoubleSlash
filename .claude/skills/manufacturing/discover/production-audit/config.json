@@ -1,0 +1,14 @@
+{
+  "name": "ds-manufacturing-production-audit",
+  "domain": "manufacturing",
+  "phase": "discover",
+  "description": "Production floor audit — OEE measurement, TIMWOOD waste identification, capacity utilization analysis, bottleneck mapping, equipment reliability scoring, and prioritized improvement roadmap with ROI estimates.",
+  "tags": ["manufacturing", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-manufacturing-quality-retrospective",
+  "next_skill": "ds-manufacturing-supply-chain-research"
+}

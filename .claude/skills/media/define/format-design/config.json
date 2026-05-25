@@ -1,0 +1,14 @@
+{
+  "name": "ds-media-format-design",
+  "domain": "media",
+  "phase": "define",
+  "description": "Designs content formats, templates, and production standards — format specs per content type, style guide, naming/tagging taxonomy, quality rubric, and accessibility standards.",
+  "tags": ["media", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-media-editorial-strategy",
+  "next_skill": "ds-media-content-production"
+}

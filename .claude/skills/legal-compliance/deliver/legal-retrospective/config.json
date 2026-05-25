@@ -1,0 +1,14 @@
+{
+  "name": "ds-legal-compliance-legal-retrospective",
+  "domain": "legal-compliance",
+  "phase": "deliver",
+  "description": "Legal and compliance retrospective — incident and enforcement review, program effectiveness KPIs, legal cost breakdown, policy violation root cause analysis, contract dispute patterns, top-5 lessons, and next-period improvement roadmap.",
+  "tags": ["legal-compliance", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-legal-compliance-compliance-audit",
+  "next_skill": "ds-legal-compliance-regulatory-research"
+}

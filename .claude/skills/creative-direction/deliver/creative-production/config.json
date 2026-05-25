@@ -1,0 +1,14 @@
+{
+  "name": "ds-creative-direction-creative-production",
+  "domain": "creative-direction",
+  "phase": "deliver",
+  "description": "Plans and manages creative production from approved concept to delivered assets — asset list with specs, vendor assignments, milestone timeline, quality checkpoints, file naming conventions, and handoff checklist.",
+  "tags": ["creative-direction", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-creative-direction-creative-review",
+  "next_skill": "ds-creative-direction-creative-retrospective"
+}

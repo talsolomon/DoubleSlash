@@ -1,0 +1,16 @@
+{
+  "skill_id": "ds-retail-ecommerce-market-research",
+  "display_name": "Market Research",
+  "domain": "retail-ecommerce",
+  "phase": "discover",
+  "diamond_position": 2,
+  "prev_skill": "ds-retail-ecommerce-customer-journey-mapping",
+  "next_skill": "ds-retail-ecommerce-pricing-framework",
+  "fish_defaults": {
+    "default": "Tuna",
+    "quick_trigger": "Nemo",
+    "deep_trigger": "Salmon"
+  },
+  "output_format": "markdown",
+  "tags": ["retail-ecommerce", "discover", "market-sizing", "competitive-landscape", "channels"]
+}

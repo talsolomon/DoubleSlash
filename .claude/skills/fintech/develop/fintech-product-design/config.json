@@ -1,0 +1,14 @@
+{
+  "name": "ds-fintech-fintech-product-design",
+  "domain": "fintech",
+  "phase": "develop",
+  "description": "Designs the fintech product spec — onboarding/KYC flow, payment rail selection matrix (ACH/RTP/FedNow/Wire), financial API architecture with money-safe design rules, BaaS integration with reconciliation design, 3-layer fraud prevention, and MVP scope with launch criteria.",
+  "tags": ["fintech", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-fintech-product-compliance",
+  "next_skill": "ds-fintech-integration-planning"
+}

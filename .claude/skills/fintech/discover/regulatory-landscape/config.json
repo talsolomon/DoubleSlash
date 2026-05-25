@@ -1,0 +1,14 @@
+{
+  "name": "ds-fintech-regulatory-landscape",
+  "domain": "fintech",
+  "phase": "discover",
+  "description": "Maps the regulatory environment — product activity inventory, regulatory body map (FinCEN/CFPB/OCC/SEC), fastest path to market (BaaS vs. own license), license requirements by jurisdiction, AML/BSA/Reg E requirements, and legal risk scorecard.",
+  "tags": ["fintech", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-fintech-market-opportunity",
+  "next_skill": "ds-fintech-financial-model"
+}

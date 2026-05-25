@@ -1,0 +1,14 @@
+{
+  "name": "ds-creative-direction-creative-execution",
+  "domain": "creative-direction",
+  "phase": "develop",
+  "description": "Produces finished creative assets to brief — copy, scripts, visual direction notes, headlines, CTAs, and alternatives across all required formats, production-ready for review.",
+  "tags": ["creative-direction", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-creative-direction-concept-development",
+  "next_skill": "ds-creative-direction-creative-review"
+}

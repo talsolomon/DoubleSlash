@@ -1,0 +1,14 @@
+{
+  "name": "ds-fintech-financial-model",
+  "domain": "fintech",
+  "phase": "define",
+  "description": "Builds fintech unit economics and financial model — revenue model with take rate analysis, CAC/LTV/payback, cost structure with compliance costs explicitly modeled, break-even analysis, 3-scenario model (bear/base/bull), investor metrics, and sensitivity analysis.",
+  "tags": ["fintech", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-fintech-regulatory-landscape",
+  "next_skill": "ds-fintech-product-compliance"
+}

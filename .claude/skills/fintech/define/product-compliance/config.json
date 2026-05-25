@@ -1,0 +1,14 @@
+{
+  "name": "ds-fintech-product-compliance",
+  "domain": "fintech",
+  "phase": "define",
+  "description": "Translates regulatory requirements into product features — KYC tier specification, AML/transaction monitoring rules, audit trail design (immutable, 5-year retention), consent and disclosure templates, security controls (PCI/GLBA), and compliance testing plan.",
+  "tags": ["fintech", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-fintech-financial-model",
+  "next_skill": "ds-fintech-fintech-product-design"
+}

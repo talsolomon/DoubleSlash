@@ -1,0 +1,14 @@
+{
+  "name": "ds-devops-infrastructure-infrastructure-audit",
+  "domain": "devops-infrastructure",
+  "phase": "discover",
+  "description": "Audits existing infrastructure for reliability, security, cost, and scalability risks — inventory, health scorecard, cost waste analysis, security findings, SPOF analysis, and remediation backlog.",
+  "tags": ["devops-infrastructure", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-devops-infrastructure-incident-management",
+  "next_skill": "ds-devops-infrastructure-dependency-mapping"
+}

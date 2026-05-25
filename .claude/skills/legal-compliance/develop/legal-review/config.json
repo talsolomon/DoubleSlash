@@ -1,0 +1,14 @@
+{
+  "name": "ds-legal-compliance-legal-review",
+  "domain": "legal-compliance",
+  "phase": "develop",
+  "description": "Pre-launch legal review — SEV-1/2/3/4 severity framework, prohibited conduct screening, disclosure and consent architecture audit (GDPR/CCPA/TCPA), IP clearance, liability exposure map, and sign-off checklist.",
+  "tags": ["legal-compliance", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-legal-compliance-contract-design",
+  "next_skill": "ds-legal-compliance-compliance-audit"
+}

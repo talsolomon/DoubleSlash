@@ -1,0 +1,14 @@
+{
+  "name": "ds-creative-direction-concept-development",
+  "domain": "creative-direction",
+  "phase": "define",
+  "description": "Develops 2-3 distinct named creative concepts from a brief — each with a big idea, visual direction, sample copy, tagline options, and brief compliance score.",
+  "tags": ["creative-direction", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-creative-direction-creative-brief",
+  "next_skill": "ds-creative-direction-creative-execution"
+}

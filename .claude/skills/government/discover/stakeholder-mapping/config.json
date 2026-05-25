@@ -1,0 +1,14 @@
+{
+  "name": "ds-government-stakeholder-mapping",
+  "domain": "government",
+  "phase": "discover",
+  "description": "Government stakeholder mapping — influence-interest matrix, position and sentiment scoring, coalition strength score, opposition risk register, and tiered engagement strategy.",
+  "tags": ["government", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-government-policy-research",
+  "next_skill": "ds-government-policy-framework"
+}

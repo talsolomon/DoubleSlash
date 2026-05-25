@@ -1,0 +1,14 @@
+{
+  "name": "ds-devops-infrastructure-deployment-automation",
+  "domain": "devops-infrastructure",
+  "phase": "deliver",
+  "description": "Plans deployment automation — manual deploy audit with toil score, startup/liveness/readiness health check design, progressive rollout config, automated rollback triggers, notification templates, and runbook-to-automation conversion map.",
+  "tags": ["devops-infrastructure", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-devops-infrastructure-infrastructure-as-code",
+  "next_skill": "ds-devops-infrastructure-incident-management"
+}

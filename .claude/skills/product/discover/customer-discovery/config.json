@@ -9,5 +9,6 @@
   "version": "2.0.0",
   "author": "ds-core",
   "updated": "2026-05-24",
-  "next_skill": "ds-product-problem-framing"
+  "prev_skill": "ds-product-product-retrospective",
+  "next_skill": "ds-product-opportunity-landscape"
 }

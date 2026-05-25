@@ -1,0 +1,14 @@
+{
+  "name": "ds-media-audience-analysis",
+  "domain": "media",
+  "phase": "deliver",
+  "description": "Analyzes audience performance data — engagement metrics, content performance ranking, retention/churn trends, platform analytics, topic performance, and actionable editorial strategy recommendations.",
+  "tags": ["media", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-media-content-launch",
+  "next_skill": "ds-media-audience-research"
+}

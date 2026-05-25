@@ -2,13 +2,13 @@
   "name": "ds-engineering-incident-retrospective",
   "domain": "engineering",
   "phase": "deliver",
-  "description": "Blameless post-incident review — SEV classification, 5 Whys RCA, SLO error budget impact, detection/response gaps, action items with owners",
-  "tags": ["engineering", "deliver", "incident-retrospective", "postmortem", "5-whys", "slo", "sev", "blameless"],
-  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "description": "Blameless post-incident review — SEV 1–4 classification, incident summary, blameless timeline, 5 Whys root cause analysis, SLO error budget impact, detection and response gap analysis, action items with owners.",
+  "tags": ["engineering", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
   "model": "inherit",
   "version": "2.0.0",
-  "author": "ds-core",
-  "updated": "2026-05-24",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
   "prev_skill": "ds-engineering-deployment-planning",
-  "next_skill": null
+  "next_skill": "ds-engineering-system-audit"
 }

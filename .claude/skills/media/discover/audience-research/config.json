@@ -1,0 +1,14 @@
+{
+  "name": "ds-media-audience-research",
+  "domain": "media",
+  "phase": "discover",
+  "description": "Researches media audience behavior, consumption patterns, need-states, platform preferences, and topic affinity — producing segment profiles and editorial opportunity map.",
+  "tags": ["media", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-media-audience-analysis",
+  "next_skill": "ds-media-content-landscape"
+}

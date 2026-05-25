@@ -1,0 +1,16 @@
+{
+  "skill_id": "ds-blockchain-web3-token-launch",
+  "display_name": "Token Launch",
+  "domain": "blockchain-web3",
+  "phase": "deliver",
+  "diamond_position": 7,
+  "prev_skill": "ds-blockchain-web3-community-strategy",
+  "next_skill": "ds-blockchain-web3-protocol-retrospective",
+  "fish_defaults": {
+    "default": "Tuna",
+    "quick_trigger": "Nemo",
+    "deep_trigger": "Salmon"
+  },
+  "output_format": "markdown",
+  "tags": ["blockchain-web3", "deliver", "tge", "airdrop", "liquidity"]
+}

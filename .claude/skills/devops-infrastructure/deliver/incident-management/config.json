@@ -1,0 +1,14 @@
+{
+  "name": "ds-devops-infrastructure-incident-management",
+  "domain": "devops-infrastructure",
+  "phase": "deliver",
+  "description": "Designs incident management framework — SEV 1–4 classification, response runbook, Slack/status-page communication templates, escalation matrix, on-call rotation design, blameless post-mortem with 5 Whys, MTTD/MTTR tracking.",
+  "tags": ["devops-infrastructure", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-devops-infrastructure-deployment-automation",
+  "next_skill": "ds-devops-infrastructure-infrastructure-audit"
+}

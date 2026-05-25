@@ -1,0 +1,14 @@
+{
+  "name": "ds-creative-direction-creative-research",
+  "domain": "creative-direction",
+  "phase": "discover",
+  "description": "Researches competitive creative landscape, cultural context, and audience visual preferences to ground creative decisions in evidence before briefing or concepting.",
+  "tags": ["creative-direction", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-creative-direction-creative-retrospective",
+  "next_skill": "ds-creative-direction-inspiration-mapping"
+}

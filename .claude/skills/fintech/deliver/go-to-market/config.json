@@ -1,0 +1,14 @@
+{
+  "name": "ds-fintech-go-to-market",
+  "domain": "fintech",
+  "phase": "deliver",
+  "description": "Plans fintech launch — P0/P1/P2 regulatory readiness checklist, trust signal framework (FDIC/bank partner/social proof), acquisition channels with UDAAP compliance rules, Reg E and disclosure communication templates, soft-launch design with go/no-go KPIs.",
+  "tags": ["fintech", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-fintech-compliance-review",
+  "next_skill": "ds-fintech-market-opportunity"
+}

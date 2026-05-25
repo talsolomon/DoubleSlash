@@ -1,0 +1,14 @@
+{
+  "name": "ds-ai-ml-prompt-engineering",
+  "domain": "ai-ml",
+  "phase": "develop",
+  "description": "Designs and tests prompts for LLM-based features — system prompt design, few-shot examples, chain-of-thought strategy, output format spec, parameter tuning, and pass/fail evaluation suite.",
+  "tags": ["ai-ml", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-ai-ml-model-design",
+  "next_skill": "ds-ai-ml-ai-deployment"
+}

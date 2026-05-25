@@ -1,0 +1,14 @@
+{
+  "name": "ds-fintech-market-opportunity",
+  "domain": "fintech",
+  "phase": "discover",
+  "description": "Sizes the fintech market opportunity — TAM/SAM/SOM (top-down + bottom-up), segment scoring matrix (pain × regulatory feasibility × size), competitive white space map, monetization model survey with take rate benchmarks.",
+  "tags": ["fintech", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-fintech-go-to-market",
+  "next_skill": "ds-fintech-regulatory-landscape"
+}

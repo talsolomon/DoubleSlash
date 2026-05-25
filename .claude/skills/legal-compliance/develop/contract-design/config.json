@@ -1,0 +1,14 @@
+{
+  "name": "ds-legal-compliance-contract-design",
+  "domain": "legal-compliance",
+  "phase": "develop",
+  "description": "Contract design — 11-section term architecture, liability cap structures, indemnification flow, IP allocation matrix, termination rights matrix, dispute resolution ladder, and negotiation redline strategy with must-have/deal-breaker classification.",
+  "tags": ["legal-compliance", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-legal-compliance-policy-writing",
+  "next_skill": "ds-legal-compliance-legal-review"
+}

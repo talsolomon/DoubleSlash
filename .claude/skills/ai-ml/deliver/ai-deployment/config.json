@@ -1,0 +1,14 @@
+{
+  "name": "ds-ai-ml-ai-deployment",
+  "domain": "ai-ml",
+  "phase": "deliver",
+  "description": "Plans production AI/ML deployment — serving architecture, monitoring with drift detection, fallback and circuit breaker design, safety guardrails, phased rollout strategy, and go-live checklist.",
+  "tags": ["ai-ml", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-ai-ml-prompt-engineering",
+  "next_skill": "ds-ai-ml-model-retrospective"
+}

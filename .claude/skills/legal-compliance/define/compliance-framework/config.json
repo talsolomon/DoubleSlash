@@ -1,0 +1,14 @@
+{
+  "name": "ds-legal-compliance-compliance-framework",
+  "domain": "legal-compliance",
+  "phase": "define",
+  "description": "Compliance program design — 7-element DOJ framework, control library by category, compliance maturity scoring (1–5), monitoring cadence with KCIs, training matrix, incident response process, and board reporting structure.",
+  "tags": ["legal-compliance", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-legal-compliance-risk-assessment",
+  "next_skill": "ds-legal-compliance-policy-writing"
+}

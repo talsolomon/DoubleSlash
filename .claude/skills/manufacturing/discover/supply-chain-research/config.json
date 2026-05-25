@@ -1,0 +1,14 @@
+{
+  "name": "ds-manufacturing-supply-chain-research",
+  "domain": "manufacturing",
+  "phase": "discover",
+  "description": "Supply chain landscape research — supplier mapping, cost/speed/resilience trade-off analysis, MOQ and lead time benchmarks, geopolitical risk scoring, nearshore vs. offshore comparison, and sourcing recommendation with dual-source strategy.",
+  "tags": ["manufacturing", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-manufacturing-production-audit",
+  "next_skill": "ds-manufacturing-manufacturing-spec"
+}

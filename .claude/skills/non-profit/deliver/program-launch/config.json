@@ -1,0 +1,14 @@
+{
+  "name": "ds-non-profit-program-launch",
+  "domain": "non-profit",
+  "phase": "deliver",
+  "description": "Non-profit program launch — beneficiary recruitment and onboarding sequence, partner activation plan, launch communications strategy, community engagement design, soft launch vs. hard launch decision, first-month monitoring plan, and funder update template.",
+  "tags": ["non-profit", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-non-profit-fundraising-strategy",
+  "next_skill": "ds-non-profit-impact-retrospective"
+}

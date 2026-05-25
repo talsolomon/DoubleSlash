@@ -2,13 +2,13 @@
   "name": "ds-analytics-kpi-definition",
   "domain": "analytics",
   "phase": "define",
-  "description": "Writes precise KPI definitions — formulas, edge cases, SMART criteria, counter-metrics, targets, owners",
-  "tags": ["analytics", "define", "kpi-definition", "metric-formula", "smart-criteria"],
-  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "description": "Writes precise KPI definitions with formulas, data sources, edge cases, SMART check, counter-metrics, targets, and owners — specific enough that two analysts produce the same number.",
+  "tags": ["analytics", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
   "model": "inherit",
   "version": "2.0.0",
-  "author": "ds-core",
-  "updated": "2026-05-24",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
   "prev_skill": "ds-analytics-data-discovery",
   "next_skill": "ds-analytics-measurement-framework"
 }

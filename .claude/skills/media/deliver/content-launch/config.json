@@ -1,0 +1,14 @@
+{
+  "name": "ds-media-content-launch",
+  "domain": "media",
+  "phase": "deliver",
+  "description": "Plans media property/series launch — pre-launch buildup sequence, day-one content package, partner and press outreach, community activation, early-access design, and first-week monitoring.",
+  "tags": ["media", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-media-distribution-planning",
+  "next_skill": "ds-media-audience-analysis"
+}

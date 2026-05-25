@@ -1,0 +1,14 @@
+{
+  "name": "ds-devops-infrastructure-sla-definition",
+  "domain": "devops-infrastructure",
+  "phase": "define",
+  "description": "Defines SLIs, SLOs, and error budgets — availability/latency/error-rate SLI formulas, error budget policy (traffic light), two-window burn rate alerting, contractual SLA template, and review cadence.",
+  "tags": ["devops-infrastructure", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-devops-infrastructure-infrastructure-design",
+  "next_skill": "ds-devops-infrastructure-ci-cd-pipeline"
+}

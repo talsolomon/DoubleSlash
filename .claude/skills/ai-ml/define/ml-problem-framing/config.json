@@ -1,0 +1,14 @@
+{
+  "name": "ds-ai-ml-ml-problem-framing",
+  "domain": "ai-ml",
+  "phase": "define",
+  "description": "Translates a business problem into a precise ML formulation — task type, input/output spec, success criteria with thresholds, baseline definition, constraints, and failure mode analysis.",
+  "tags": ["ai-ml", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-ai-ml-data-landscape",
+  "next_skill": "ds-ai-ml-data-requirements"
+}

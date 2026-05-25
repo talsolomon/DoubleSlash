@@ -1,0 +1,14 @@
+{
+  "name": "ds-brand-brand-launch",
+  "domain": "brand",
+  "phase": "deliver",
+  "description": "Plans brand launch with phased rollout sequence, full asset migration checklist, internal activation, external announcement, partner briefing, and risk mitigation.",
+  "tags": ["brand", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-brand-brand-guidelines",
+  "next_skill": "ds-brand-brand-governance"
+}

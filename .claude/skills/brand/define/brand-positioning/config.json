@@ -1,0 +1,14 @@
+{
+  "name": "ds-brand-brand-positioning",
+  "domain": "brand",
+  "phase": "define",
+  "description": "Writes brand positioning statement with POD vs. POP analysis, perceptual map, reasons to believe, category design, and tagline candidates.",
+  "tags": ["brand", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-brand-competitive-brand-analysis",
+  "next_skill": "ds-brand-brand-identity-design"
+}

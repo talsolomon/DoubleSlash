@@ -1,0 +1,14 @@
+{
+  "name": "ds-non-profit-impact-research",
+  "domain": "non-profit",
+  "phase": "discover",
+  "description": "Impact research — problem scope and magnitude analysis, evidence quality scoring, existing intervention mapping, cost-effectiveness benchmarking, root cause analysis, gap identification, and highest-leverage entry point recommendation.",
+  "tags": ["non-profit", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-non-profit-impact-retrospective",
+  "next_skill": "ds-non-profit-donor-landscape"
+}

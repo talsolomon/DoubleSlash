@@ -1,0 +1,14 @@
+{
+  "name": "ds-non-profit-impact-retrospective",
+  "domain": "non-profit",
+  "phase": "deliver",
+  "description": "Non-profit impact retrospective — outcome achievement vs. theory of change, cost-per-outcome calculation, beneficiary feedback analysis, assumption audit, partner effectiveness review, fundraising ROI, adaptive management recommendations, and board-ready summary.",
+  "tags": ["non-profit", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-non-profit-program-launch",
+  "next_skill": "ds-non-profit-impact-research"
+}

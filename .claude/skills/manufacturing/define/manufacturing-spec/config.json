@@ -1,0 +1,14 @@
+{
+  "name": "ds-manufacturing-manufacturing-spec",
+  "domain": "manufacturing",
+  "phase": "define",
+  "description": "Manufacturing specification — BOM development, material and tolerance specification, GD&T application, process parameter definition, inspection point design, and supplier qualification requirements for production-ready documentation.",
+  "tags": ["manufacturing", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-manufacturing-supply-chain-research",
+  "next_skill": "ds-manufacturing-quality-framework"
+}

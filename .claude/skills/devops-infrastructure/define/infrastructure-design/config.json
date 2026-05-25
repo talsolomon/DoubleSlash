@@ -1,0 +1,14 @@
+{
+  "name": "ds-devops-infrastructure-infrastructure-design",
+  "domain": "devops-infrastructure",
+  "phase": "define",
+  "description": "Designs target-state infrastructure architecture — pattern selection, compute and data specs, VPC network topology, resilience design, security layers (defense in depth), DR plan, and cost model.",
+  "tags": ["devops-infrastructure", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-devops-infrastructure-dependency-mapping",
+  "next_skill": "ds-devops-infrastructure-sla-definition"
+}

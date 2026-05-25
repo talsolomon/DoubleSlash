@@ -1,0 +1,14 @@
+{
+  "name": "ds-brand-brand-guidelines",
+  "domain": "brand",
+  "phase": "develop",
+  "description": "Writes brand guidelines with voice/tone rules, logo usage, color system, typography hierarchy, imagery do/don'ts, digital application specs, and quick reference card.",
+  "tags": ["brand", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-brand-brand-identity-design",
+  "next_skill": "ds-brand-brand-launch"
+}

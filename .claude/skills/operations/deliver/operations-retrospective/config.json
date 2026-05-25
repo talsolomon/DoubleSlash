@@ -1,0 +1,16 @@
+{
+  "skill_id": "ds-operations-operations-retrospective",
+  "display_name": "Operations Retrospective",
+  "domain": "operations",
+  "phase": "deliver",
+  "diamond_position": 8,
+  "prev_skill": "ds-operations-operations-launch",
+  "next_skill": "ds-operations-process-audit",
+  "fish_defaults": {
+    "default": "Tuna",
+    "quick_trigger": "Nemo",
+    "deep_trigger": "Salmon"
+  },
+  "output_format": "markdown",
+  "tags": ["operations", "deliver", "retrospective", "kpi", "improvement-backlog"]
+}

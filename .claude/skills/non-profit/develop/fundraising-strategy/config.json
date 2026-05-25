@@ -1,0 +1,14 @@
+{
+  "name": "ds-non-profit-fundraising-strategy",
+  "domain": "non-profit",
+  "phase": "develop",
+  "description": "Fundraising strategy design — revenue target setting, channel mix with concentration risk analysis, major gift cultivation system, grant calendar development, individual giving funnel, case for support framework, board fundraising engagement, and 12-month pipeline.",
+  "tags": ["non-profit", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-non-profit-program-planning",
+  "next_skill": "ds-non-profit-program-launch"
+}

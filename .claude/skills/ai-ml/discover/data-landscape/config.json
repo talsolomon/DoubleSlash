@@ -1,0 +1,14 @@
+{
+  "name": "ds-ai-ml-data-landscape",
+  "domain": "ai-ml",
+  "phase": "discover",
+  "description": "Maps data available for AI/ML — dataset inventory, volume and quality assessment, labeling requirements, bias and distribution analysis, and data readiness score per use case.",
+  "tags": ["ai-ml", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-ai-ml-ai-opportunity-assessment",
+  "next_skill": "ds-ai-ml-ml-problem-framing"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-manufacturing-quality-retrospective",
+  "domain": "manufacturing",
+  "phase": "deliver",
+  "description": "Manufacturing quality retrospective — defect rate trend analysis, Pareto of defect types, 5-Why + Fishbone root cause analysis, corrective action effectiveness review, supplier quality assessment, cost of quality calculation, and improvement roadmap for the next period.",
+  "tags": ["manufacturing", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-manufacturing-production-launch",
+  "next_skill": "ds-manufacturing-production-audit"
+}

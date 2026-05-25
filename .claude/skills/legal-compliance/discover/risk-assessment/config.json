@@ -1,0 +1,14 @@
+{
+  "name": "ds-legal-compliance-risk-assessment",
+  "domain": "legal-compliance",
+  "phase": "discover",
+  "description": "Legal risk assessment — 8-category risk sweep, likelihood-impact scoring matrix, IP clearance checklist, contract exposure review, insurance coverage gap analysis, and prioritized 90-day mitigation roadmap.",
+  "tags": ["legal-compliance", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-legal-compliance-regulatory-research",
+  "next_skill": "ds-legal-compliance-compliance-framework"
+}

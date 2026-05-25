@@ -1,0 +1,14 @@
+{
+  "name": "ds-manufacturing-production-launch",
+  "domain": "manufacturing",
+  "phase": "deliver",
+  "description": "Production launch planning — PPAP qualification, first article inspection plan, pilot run design, ramp rate schedule, supplier and equipment readiness verification, go/no-go criteria, and escalation process for the transition from development to mass production.",
+  "tags": ["manufacturing", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-manufacturing-supplier-evaluation",
+  "next_skill": "ds-manufacturing-quality-retrospective"
+}

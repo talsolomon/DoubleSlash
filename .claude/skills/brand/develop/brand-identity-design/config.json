@@ -1,0 +1,14 @@
+{
+  "name": "ds-brand-brand-identity-design",
+  "domain": "brand",
+  "phase": "develop",
+  "description": "Designs visual identity system with logo brief, color palette with psychology and WCAG check, typography pairing, imagery direction, and design rationale.",
+  "tags": ["brand", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-brand-brand-positioning",
+  "next_skill": "ds-brand-brand-guidelines"
+}

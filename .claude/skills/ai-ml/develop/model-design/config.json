@@ -1,0 +1,14 @@
+{
+  "name": "ds-ai-ml-model-design",
+  "domain": "ai-ml",
+  "phase": "develop",
+  "description": "Designs model architecture, training approach, and evaluation methodology — architecture comparison, fine-tune vs. train-from-scratch analysis, experiment plan, infrastructure sizing, and MLOps pipeline design.",
+  "tags": ["ai-ml", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-ai-ml-data-requirements",
+  "next_skill": "ds-ai-ml-prompt-engineering"
+}

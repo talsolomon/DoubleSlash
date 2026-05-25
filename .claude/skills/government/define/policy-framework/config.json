@@ -1,0 +1,14 @@
+{
+  "name": "ds-government-policy-framework",
+  "domain": "government",
+  "phase": "define",
+  "description": "Policy framework design — SMART objectives hierarchy, logic model with assumptions, theory of change, instrument selection matrix, distributional impact assessment, and falsifiability statement.",
+  "tags": ["government", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-government-stakeholder-mapping",
+  "next_skill": "ds-government-regulatory-design"
+}

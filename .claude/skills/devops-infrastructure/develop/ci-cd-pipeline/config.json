@@ -1,0 +1,14 @@
+{
+  "name": "ds-devops-infrastructure-ci-cd-pipeline",
+  "domain": "devops-infrastructure",
+  "phase": "develop",
+  "description": "Designs CI/CD pipelines for fast, safe delivery — stage design with target times, quality gates, deployment strategy selection (blue-green/canary/rolling), automated rollback triggers, secret management, and DORA instrumentation.",
+  "tags": ["devops-infrastructure", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-devops-infrastructure-sla-definition",
+  "next_skill": "ds-devops-infrastructure-infrastructure-as-code"
+}

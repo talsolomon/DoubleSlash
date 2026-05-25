@@ -1,0 +1,14 @@
+{
+  "name": "ds-media-content-production",
+  "domain": "media",
+  "phase": "develop",
+  "description": "Designs the content production pipeline — stage-by-stage workflow, role definitions, briefing template, capacity model, tooling stack, and quality control checkpoints.",
+  "tags": ["media", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-media-format-design",
+  "next_skill": "ds-media-distribution-planning"
+}

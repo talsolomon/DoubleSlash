@@ -1,0 +1,14 @@
+{
+  "name": "ds-fintech-compliance-review",
+  "domain": "fintech",
+  "phase": "deliver",
+  "description": "Reviews fintech regulatory compliance — 10-dimension scorecard, AML/KYC effectiveness (SAR quality, monitoring false-positive rate), audit trail retrieval test, CTR/SAR reporting obligations, CCPA/GLBA data privacy checklist, vendor compliance verification, and remediation roadmap.",
+  "tags": ["fintech", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-fintech-integration-planning",
+  "next_skill": "ds-fintech-go-to-market"
+}

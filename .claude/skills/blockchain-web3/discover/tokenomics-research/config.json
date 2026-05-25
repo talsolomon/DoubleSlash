@@ -1,0 +1,16 @@
+{
+  "skill_id": "ds-blockchain-web3-tokenomics-research",
+  "display_name": "Tokenomics Research",
+  "domain": "blockchain-web3",
+  "phase": "discover",
+  "diamond_position": 2,
+  "prev_skill": "ds-blockchain-web3-web3-landscape",
+  "next_skill": "ds-blockchain-web3-smart-contract-spec",
+  "fish_defaults": {
+    "default": "Tuna",
+    "quick_trigger": "Nemo",
+    "deep_trigger": "Salmon"
+  },
+  "output_format": "markdown",
+  "tags": ["blockchain-web3", "discover", "tokenomics", "incentive-design", "failure-modes"]
+}

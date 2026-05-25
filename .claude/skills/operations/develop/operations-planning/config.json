@@ -1,0 +1,16 @@
+{
+  "skill_id": "ds-operations-operations-planning",
+  "display_name": "Operations Planning",
+  "domain": "operations",
+  "phase": "develop",
+  "diamond_position": 5,
+  "prev_skill": "ds-operations-sop-writing",
+  "next_skill": "ds-operations-resource-planning",
+  "fish_defaults": {
+    "default": "Tuna",
+    "quick_trigger": "Nemo",
+    "deep_trigger": "Salmon"
+  },
+  "output_format": "markdown",
+  "tags": ["operations", "develop", "change-management", "adkar", "rollout"]
+}

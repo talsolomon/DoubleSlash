@@ -1,0 +1,16 @@
+{
+  "skill_id": "ds-blockchain-web3-smart-contract-spec",
+  "display_name": "Smart Contract Spec",
+  "domain": "blockchain-web3",
+  "phase": "define",
+  "diamond_position": 3,
+  "prev_skill": "ds-blockchain-web3-tokenomics-research",
+  "next_skill": "ds-blockchain-web3-dao-framework",
+  "fish_defaults": {
+    "default": "Tuna",
+    "quick_trigger": "Nemo",
+    "deep_trigger": "Salmon"
+  },
+  "output_format": "markdown",
+  "tags": ["blockchain-web3", "define", "smart-contracts", "security", "audit"]
+}

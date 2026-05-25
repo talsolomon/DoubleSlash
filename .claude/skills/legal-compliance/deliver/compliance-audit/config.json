@@ -1,0 +1,14 @@
+{
+  "name": "ds-legal-compliance-compliance-audit",
+  "domain": "legal-compliance",
+  "phase": "deliver",
+  "description": "Compliance audit — control effectiveness testing (design × operating), gap severity scoring (S1–S4), evidence collection standards, audit trail integrity test, vendor compliance review, audit readiness rating (1–5), and remediation roadmap.",
+  "tags": ["legal-compliance", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-legal-compliance-legal-review",
+  "next_skill": "ds-legal-compliance-legal-retrospective"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-ai-ml-model-retrospective",
+  "domain": "ai-ml",
+  "phase": "deliver",
+  "description": "Reviews deployed AI/ML system performance, reliability, and business impact — performance scorecard, drift analysis, incident review, ROI calculation, and retrain/maintain/deprecate recommendation.",
+  "tags": ["ai-ml", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-ai-ml-ai-deployment",
+  "next_skill": "ds-ai-ml-ai-opportunity-assessment"
+}

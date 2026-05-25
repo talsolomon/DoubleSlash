@@ -1,0 +1,14 @@
+{
+  "name": "ds-fintech-integration-planning",
+  "domain": "fintech",
+  "phase": "develop",
+  "description": "Plans fintech infrastructure integrations — BaaS partner evaluation matrix (Unit/Column/Thread), KYC waterfall design, account aggregation (Plaid/MX), integration architecture data flow, per-transaction cost model, fallback/redundancy design per partner, and implementation timeline.",
+  "tags": ["fintech", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-fintech-fintech-product-design",
+  "next_skill": "ds-fintech-compliance-review"
+}

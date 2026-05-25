@@ -1,0 +1,14 @@
+{
+  "name": "ds-brand-competitive-brand-analysis",
+  "domain": "brand",
+  "phase": "discover",
+  "description": "Maps competitive brand landscape with positioning 2x2, visual identity comparison, voice spectrum, archetype mapping, and whitespace opportunities.",
+  "tags": ["brand", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-brand-brand-audit",
+  "next_skill": "ds-brand-brand-positioning"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-manufacturing-quality-framework",
+  "domain": "manufacturing",
+  "phase": "define",
+  "description": "Quality management system design — FMEA with RPN scoring, SPC control chart selection, control plan development, defect classification, corrective action process, ISO 9001 gap analysis, and quality KPI dashboard with targets.",
+  "tags": ["manufacturing", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-manufacturing-manufacturing-spec",
+  "next_skill": "ds-manufacturing-production-planning"
+}

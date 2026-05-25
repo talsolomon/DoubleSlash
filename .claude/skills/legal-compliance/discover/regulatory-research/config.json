@@ -1,0 +1,14 @@
+{
+  "name": "ds-legal-compliance-regulatory-research",
+  "domain": "legal-compliance",
+  "phase": "discover",
+  "description": "Regulatory research — activity characterization, regulatory trigger checklist, applicable law inventory, enforcement body mapping, enforcement history analysis, jurisdiction comparison, and counsel engagement scope.",
+  "tags": ["legal-compliance", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-legal-compliance-legal-retrospective",
+  "next_skill": "ds-legal-compliance-risk-assessment"
+}

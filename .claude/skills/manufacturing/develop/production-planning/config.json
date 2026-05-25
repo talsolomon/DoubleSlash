@@ -1,0 +1,14 @@
+{
+  "name": "ds-manufacturing-production-planning",
+  "domain": "manufacturing",
+  "phase": "develop",
+  "description": "Production planning — master production schedule design, MRP materials requirements, capacity planning with Theory of Constraints, inventory level optimization, demand signal integration, and constraint mitigation with scenario planning.",
+  "tags": ["manufacturing", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-manufacturing-quality-framework",
+  "next_skill": "ds-manufacturing-supplier-evaluation"
+}

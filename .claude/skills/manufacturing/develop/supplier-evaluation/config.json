@@ -1,0 +1,14 @@
+{
+  "name": "ds-manufacturing-supplier-evaluation",
+  "domain": "manufacturing",
+  "phase": "develop",
+  "description": "Supplier evaluation and selection — capability assessment, weighted scoring matrix, TCO model, quality system audit, financial stability review, geopolitical risk scoring, and dual-source strategy with sourcing recommendation.",
+  "tags": ["manufacturing", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-manufacturing-production-planning",
+  "next_skill": "ds-manufacturing-production-launch"
+}

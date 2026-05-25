@@ -1,0 +1,14 @@
+{
+  "name": "ds-non-profit-program-planning",
+  "domain": "non-profit",
+  "phase": "develop",
+  "description": "Non-profit program operations planning — delivery timeline with milestones, staffing model with volunteer engagement, partnership activation plan, M&E framework with indicator targets, program budget development, risk register, and community engagement strategy.",
+  "tags": ["non-profit", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-non-profit-program-design",
+  "next_skill": "ds-non-profit-fundraising-strategy"
+}

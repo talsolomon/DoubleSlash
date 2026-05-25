@@ -1,0 +1,14 @@
+{
+  "name": "ds-devops-infrastructure-infrastructure-as-code",
+  "domain": "devops-infrastructure",
+  "phase": "develop",
+  "description": "Designs IaC strategy — tool selection (Terraform/Pulumi/CDK), three-tier module structure, state backend with locking, environment separation, naming/tagging conventions, policy-as-code rules, and drift detection.",
+  "tags": ["devops-infrastructure", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-devops-infrastructure-ci-cd-pipeline",
+  "next_skill": "ds-devops-infrastructure-deployment-automation"
+}

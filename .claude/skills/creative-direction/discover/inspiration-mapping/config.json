@@ -1,0 +1,14 @@
+{
+  "name": "ds-creative-direction-inspiration-mapping",
+  "domain": "creative-direction",
+  "phase": "discover",
+  "description": "Maps creative inspiration sources into 3 aesthetic territories with curated references, mood profiling, and a recommended direction for briefing the creative team.",
+  "tags": ["creative-direction", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-creative-direction-creative-research",
+  "next_skill": "ds-creative-direction-creative-brief"
+}

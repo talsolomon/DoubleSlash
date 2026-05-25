@@ -1,0 +1,14 @@
+{
+  "name": "ds-brand-brand-governance",
+  "domain": "brand",
+  "phase": "deliver",
+  "description": "Establishes brand governance with RACI approval workflow, guardian roles, exception process, brand health metrics, audit cadence, and violation reporting system.",
+  "tags": ["brand", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-brand-brand-launch",
+  "next_skill": "ds-brand-brand-audit"
+}

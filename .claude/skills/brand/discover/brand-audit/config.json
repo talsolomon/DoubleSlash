@@ -1,0 +1,14 @@
+{
+  "name": "ds-brand-brand-audit",
+  "domain": "brand",
+  "phase": "discover",
+  "description": "Audits brand consistency across touchpoints with scoring, asset inventory, brand equity assessment, perception gap analysis, and prioritized fix list.",
+  "tags": ["brand", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": null,
+  "next_skill": "ds-brand-competitive-brand-analysis"
+}

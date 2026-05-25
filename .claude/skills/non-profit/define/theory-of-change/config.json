@@ -1,0 +1,14 @@
+{
+  "name": "ds-non-profit-theory-of-change",
+  "domain": "non-profit",
+  "phase": "define",
+  "description": "Theory of change development — logic model with inputs/activities/outputs/outcomes/impact, causal pathway mapping, assumption register with falsifiability tests, counterfactual analysis, indicator set design, and stakeholder validation approach.",
+  "tags": ["non-profit", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-non-profit-donor-landscape",
+  "next_skill": "ds-non-profit-program-design"
+}

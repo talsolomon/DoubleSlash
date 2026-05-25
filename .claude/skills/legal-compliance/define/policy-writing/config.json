@@ -1,0 +1,14 @@
+{
+  "name": "ds-legal-compliance-policy-writing",
+  "domain": "legal-compliance",
+  "phase": "define",
+  "description": "Internal policy writing — policy architecture hierarchy, standard template (12 sections), plain-language drafting rules, exception register design, escalation matrix, approval workflow, and legal review checklist.",
+  "tags": ["legal-compliance", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-legal-compliance-compliance-framework",
+  "next_skill": "ds-legal-compliance-contract-design"
+}

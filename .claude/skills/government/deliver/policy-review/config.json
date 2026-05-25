@@ -1,0 +1,14 @@
+{
+  "name": "ds-government-policy-review",
+  "domain": "government",
+  "phase": "deliver",
+  "description": "Policy effectiveness review — outcomes vs. objectives scorecard, cost-per-outcome calculation (BCR), equity disaggregation, unintended consequence audit, and 4-step continue/amend/terminate decision framework.",
+  "tags": ["government", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-government-policy-implementation",
+  "next_skill": "ds-government-policy-research"
+}

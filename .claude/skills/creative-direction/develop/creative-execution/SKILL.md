@@ -1,6 +1,6 @@
 ---
 name: ds-creative-direction-creative-execution
-description: Executes creative work across formats — copy, visual direction, scripts, and content. Use when producing creative assets, writing campaign copy, or asking "write/create this for me". Also triggers on: Copywriting, script writing, visual direction documentation, headline writing, body copy development, CTAs.
+description: Produces finished creative assets to brief — copy, scripts, visual direction notes, headlines, and CTAs across formats. Use when producing campaign assets or asking "write/create this for me".
 tags: [creative-direction, develop]
 model: inherit
 ---
@@ -9,25 +9,114 @@ model: inherit
 **Domain**: Creative Direction | **Phase**: Develop | **Invocation**: `/ds-creative-direction-creative-execution`
 
 ## What this produces
-Completed creative assets ready for review — copy, scripts, visual direction notes, or content — produced to brief.
-
-## Methods
-Copywriting, script writing, visual direction documentation, headline writing, body copy development, CTAs, tagline development, social copy, email copy, ad copy, campaign narrative, creative asset brief
+Completed creative assets ready for review — copy, scripts, visual direction notes, and content — produced to brief spec, labeled by format with alternatives where needed.
 
 ## FISH Guide
-| Fish | Run these methods |
+| Fish | Depth |
 |---|---|
-| Nemo | Primary asset (1 format), 2 headline options |
-| Tuna | Core assets across 2 formats, headlines, body copy, CTAs |
-| Salmon | Full asset suite with copy and visual direction per format |
-| Willy | All methods — complete campaign suite, all formats, multiple copy variants |
+| Nemo | Primary asset (1 format), 2 headline options, CTA |
+| Tuna | Core assets across 2 formats, headlines, body copy, CTAs, visual direction notes |
+| Salmon | Full asset suite with copy and visual direction per format, copy alternatives |
+| Willy | Complete campaign suite — all formats, multiple copy variants, visual specs, production notes |
 
-## Execution prompt
-You are running Creative Execution for [project]. Produce finished creative assets to brief.
+---
 
-Input: approved concept, creative brief, and format requirements.
-FISH classification: [Nemo/Tuna/Salmon/Willy]
+## Execution Prompt
 
-Produce each asset clearly labeled by format. For each: headline, body copy, CTA, and any visual direction notes.
+You are running Creative Execution for [project]. Produce finished creative assets to the approved concept and brief. Every asset must be production-ready — specific, not directional.
 
-Final output: complete creative assets by format, flagged items needing visual execution, any copy alternatives.
+**Input**: approved concept, creative brief, format requirements, brand guidelines.
+
+---
+
+### Pre-Execution Checklist
+
+Before writing, confirm:
+- [ ] Approved concept selected (not drafting from brief alone)
+- [ ] SMP identified: "[Single minded proposition from brief]"
+- [ ] Tone descriptors loaded: [5 words from brief]
+- [ ] Hard constraints flagged: [Legal claims, prohibited language, brand restrictions]
+- [ ] Format specs confirmed for each deliverable
+
+---
+
+### Asset Production — Format by Format
+
+For each format, produce the full asset. Label everything clearly.
+
+---
+
+**FORMAT: [Format name — e.g., Social Static / Hero Ad / Email / Video Script]**
+
+**Specs**: [Dimensions / word count / duration / platform]
+
+**Headline** (write 3, rank them):
+1. [Recommended] — [One word on why: Unexpected / Specific / Emotional]
+2.
+3.
+
+**Body copy** (if applicable):
+> [Write the full body copy. Every word earns its place. No filler. Match the tone descriptors from the brief.]
+
+**CTA**: [Exact CTA text] — [Rationale: action verb choice, urgency level]
+
+**Visual direction note** (for designer/art director):
+> [Describe exactly what the image/video should show. Scene, subject, framing, color treatment, mood. Write it as a shot brief, not an adjective cloud. 3-5 sentences.]
+
+**Accessibility note**: [Alt text for images, caption requirement for video, contrast check flag]
+
+**Legal/compliance flag**: [Any claim needing substantiation / disclaimer needed / restricted language avoided]
+
+---
+
+*(Repeat for each format in the deliverables list)*
+
+---
+
+### Copy Alternatives Bank
+
+For high-stakes formats (hero ad, email subject, paid social), provide a deeper alternatives bank:
+
+**Headline alternatives** (8-10 options total, categorized):
+
+*Direct / benefit-led:*
+- [Option]
+- [Option]
+
+*Emotional / insight-led:*
+- [Option]
+- [Option]
+
+*Question-format:*
+- [Option]
+- [Option]
+
+*Provocative / contrarian:*
+- [Option]
+- [Option]
+
+**Subject line alternatives** (for email):
+- [A/B test pair 1]: [Option A] vs. [Option B] — testing: [Variable]
+- [A/B test pair 2]: [Option A] vs. [Option B] — testing: [Variable]
+
+---
+
+### Production Notes
+
+**Assets flagged for visual execution** (items that require design team input beyond copy):
+- [Asset]: [What the designer needs to solve]
+- [Asset]:
+
+**Copy items needing legal review before final**:
+- [Specific claim]: [Why it needs review]
+
+**Localization flags** (if assets will be translated):
+- [Phrase that may not translate]: [Suggested adaptation approach]
+
+**Asset handoff checklist**:
+- [ ] All formats produced and labeled
+- [ ] Alternatives provided for A/B test formats
+- [ ] Visual direction notes included per asset
+- [ ] Legal flags called out
+- [ ] SMP present in primary asset
+- [ ] Tone consistent across all formats

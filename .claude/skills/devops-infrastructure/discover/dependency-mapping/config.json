@@ -1,0 +1,14 @@
+{
+  "name": "ds-devops-infrastructure-dependency-mapping",
+  "domain": "devops-infrastructure",
+  "phase": "discover",
+  "description": "Maps service, library, and external dependencies to surface hidden risks and failure chains — service graph, blast radius scoring, critical path composite availability, EOL risks, failure cascade simulations.",
+  "tags": ["devops-infrastructure", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-devops-infrastructure-infrastructure-audit",
+  "next_skill": "ds-devops-infrastructure-infrastructure-design"
+}

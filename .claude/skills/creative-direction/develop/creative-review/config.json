@@ -1,0 +1,14 @@
+{
+  "name": "ds-creative-direction-creative-review",
+  "domain": "creative-direction",
+  "phase": "develop",
+  "description": "Reviews creative work against brief, brand guidelines, audience fit, and competitive differentiation — producing P1/P2/P3 revision instructions and an approve/revise/reject recommendation.",
+  "tags": ["creative-direction", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-creative-direction-creative-execution",
+  "next_skill": "ds-creative-direction-creative-production"
+}

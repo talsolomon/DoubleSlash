@@ -1,0 +1,14 @@
+{
+  "name": "ds-media-content-landscape",
+  "domain": "media",
+  "phase": "discover",
+  "description": "Maps competitive content landscape — competitor profiles, format/platform coverage matrix, topic gaps, quality benchmarks, monetization models, and top 3 differentiation opportunities.",
+  "tags": ["media", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-media-audience-research",
+  "next_skill": "ds-media-editorial-strategy"
+}

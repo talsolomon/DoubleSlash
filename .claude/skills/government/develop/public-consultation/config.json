@@ -1,0 +1,14 @@
+{
+  "name": "ds-government-public-consultation",
+  "domain": "government",
+  "phase": "develop",
+  "description": "Public consultation design — legal obligation review, audience segmentation, question design (≤12 questions), channel mix, accessibility checklist, weighted response synthesis, and pre-commitment policy update framework.",
+  "tags": ["government", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-government-policy-planning",
+  "next_skill": "ds-government-policy-implementation"
+}

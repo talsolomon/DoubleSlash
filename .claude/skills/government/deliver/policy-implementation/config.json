@@ -1,0 +1,14 @@
+{
+  "name": "ds-government-policy-implementation",
+  "domain": "government",
+  "phase": "deliver",
+  "description": "Policy implementation monitoring — delivery milestone tracker with traffic lights, compliance and uptake monitoring, early warning indicator dashboard, adaptive management triggers, and ministerial reporting template.",
+  "tags": ["government", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-government-public-consultation",
+  "next_skill": "ds-government-policy-review"
+}

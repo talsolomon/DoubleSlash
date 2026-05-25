@@ -1,0 +1,14 @@
+{
+  "name": "ds-ai-ml-data-requirements",
+  "domain": "ai-ml",
+  "phase": "define",
+  "description": "Specifies data needed for ML training, validation, and inference — feature engineering spec, volume and diversity targets, train/val/test split design, labeling schema, and data governance requirements.",
+  "tags": ["ai-ml", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-ai-ml-ml-problem-framing",
+  "next_skill": "ds-ai-ml-model-design"
+}

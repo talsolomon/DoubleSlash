@@ -1,0 +1,16 @@
+{
+  "skill_id": "ds-blockchain-web3-community-strategy",
+  "display_name": "Community Strategy",
+  "domain": "blockchain-web3",
+  "phase": "develop",
+  "diamond_position": 6,
+  "prev_skill": "ds-blockchain-web3-protocol-design",
+  "next_skill": "ds-blockchain-web3-token-launch",
+  "fish_defaults": {
+    "default": "Tuna",
+    "quick_trigger": "Nemo",
+    "deep_trigger": "Salmon"
+  },
+  "output_format": "markdown",
+  "tags": ["blockchain-web3", "develop", "community", "discord", "governance-participation"]
+}

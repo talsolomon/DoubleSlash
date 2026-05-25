@@ -1,0 +1,14 @@
+{
+  "name": "ds-media-editorial-strategy",
+  "domain": "media",
+  "phase": "define",
+  "description": "Defines editorial direction, voice, and content pillars — mission statement, audience promise, 3-5 content pillars, coverage scope and explicit exclusions, and editorial calendar structure.",
+  "tags": ["media", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-media-content-landscape",
+  "next_skill": "ds-media-format-design"
+}

@@ -9,6 +9,6 @@
   "version": "2.0.0",
   "author": "ds-core",
   "updated": "2026-05-24",
-  "prev_skill": "ds-product-problem-framing",
-  "next_skill": "ds-product-requirements-definition"
+  "prev_skill": "ds-product-requirements-definition",
+  "next_skill": "ds-product-roadmap-design"
 }

@@ -1,0 +1,14 @@
+{
+  "name": "ds-non-profit-donor-landscape",
+  "domain": "non-profit",
+  "phase": "discover",
+  "description": "Donor landscape research — foundation mapping with giving priorities, government grant opportunities, major donor segment profiling, corporate giving analysis, funding gap identification, prospect qualification framework, and prioritized pipeline.",
+  "tags": ["non-profit", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-non-profit-impact-research",
+  "next_skill": "ds-non-profit-theory-of-change"
+}
