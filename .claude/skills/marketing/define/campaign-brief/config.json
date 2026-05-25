@@ -1,0 +1,14 @@
+{
+  "name": "ds-marketing-campaign-brief",
+  "domain": "marketing",
+  "phase": "define",
+  "description": "Writes a campaign brief with SMART objectives, audience targeting spec, message hierarchy, channel plan, timeline, budget, and KPIs.",
+  "tags": ["marketing", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-marketing-market-research",
+  "next_skill": "ds-marketing-messaging-framework"
+}

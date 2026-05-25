@@ -1,0 +1,14 @@
+{
+  "name": "ds-pr-communications-message-architecture",
+  "domain": "pr-communications",
+  "phase": "define",
+  "description": "Builds PR message architecture with SOCO, core messages (max 3), proof points, bridging phrases, audience variants, and spokesperson quick reference guide.",
+  "tags": ["pr-communications", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-pr-communications-media-landscape",
+  "next_skill": "ds-pr-communications-pr-campaign-design"
+}

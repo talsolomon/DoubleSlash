@@ -1,0 +1,14 @@
+{
+  "name": "ds-marketing-performance-analysis",
+  "domain": "marketing",
+  "phase": "deliver",
+  "description": "Analyzes campaign performance with attribution modeling, CPA/ROAS calculations, funnel analysis, and prioritized optimization plan with budget reallocation.",
+  "tags": ["marketing", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-marketing-campaign-launch",
+  "next_skill": "ds-marketing-campaign-brief"
+}

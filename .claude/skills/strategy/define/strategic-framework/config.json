@@ -1,0 +1,14 @@
+{
+  "name": "ds-strategy-strategic-framework",
+  "domain": "strategy",
+  "phase": "define",
+  "description": "Builds a strategic framework — vision, mission, Roger Martin's choice cascade, OKR framework, theory of change",
+  "tags": ["strategy", "define", "strategic-framework", "where-to-play", "okr", "theory-of-change"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-strategy-scenario-planning",
+  "next_skill": "ds-strategy-business-case"
+}

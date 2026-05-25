@@ -1,0 +1,14 @@
+{
+  "name": "ds-analytics-analytics-audit",
+  "domain": "analytics",
+  "phase": "discover",
+  "description": "Audits analytics setup — data trust scores, tracking coverage, funnel integrity, tooling gaps, remediation priorities",
+  "tags": ["analytics", "discover", "analytics-audit", "data-trust", "funnel-integrity"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": null,
+  "next_skill": "ds-analytics-data-discovery"
+}

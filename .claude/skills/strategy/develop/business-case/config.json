@@ -1,0 +1,14 @@
+{
+  "name": "ds-strategy-business-case",
+  "domain": "strategy",
+  "phase": "develop",
+  "description": "Builds a business case — NPV/IRR/payback period, sensitivity analysis, risk matrix, assumptions log, Go/No-go recommendation",
+  "tags": ["strategy", "develop", "business-case", "npv", "irr", "sensitivity-analysis"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-strategy-strategic-framework",
+  "next_skill": "ds-strategy-strategic-roadmap"
+}

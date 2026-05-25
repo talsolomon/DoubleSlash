@@ -1,0 +1,14 @@
+{
+  "name": "ds-content-strategy-content-creation",
+  "domain": "content-strategy",
+  "phase": "develop",
+  "description": "Creates a complete content piece from brief to final draft with SEO optimization, 3 headline options, CTA recommendation, and readability check.",
+  "tags": ["content-strategy", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-content-strategy-content-planning",
+  "next_skill": "ds-content-strategy-content-distribution"
+}

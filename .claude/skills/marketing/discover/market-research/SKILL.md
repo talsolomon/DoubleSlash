@@ -1,6 +1,6 @@
 ---
 name: ds-marketing-market-research
-description: Researches market size, trends, competitors, and customer segments. Use when entering a new market, validating a product idea, or asking "is there a market for this" and "who else is doing it". Also triggers on: TAM/SAM/SOM sizing, competitor analysis, market trend analysis, customer segment identification, search volume analysis, social listening.
+description: Researches market size, trends, competitors, and customer segments with sizing formulas and competitive positioning maps. Use when entering a new market, validating a product idea, or asking "is there a market for this". Also triggers on: TAM/SAM/SOM sizing, competitor positioning matrix, market trend analysis, search demand research, category analysis, pricing benchmarking.
 tags: [marketing, discover]
 model: inherit
 ---
@@ -9,23 +9,186 @@ model: inherit
 **Domain**: Marketing | **Phase**: Discover | **Invocation**: `/ds-marketing-market-research`
 
 ## What this produces
-A market research report with TAM/SAM/SOM, key trends, competitive landscape, and top customer segments.
+A market research report with TAM/SAM/SOM sizing (top-down and bottom-up), competitive positioning map, key trend analysis with strategic implications, and a go-to-market entry opportunity summary.
 
 ## Methods
-TAM/SAM/SOM sizing, competitor analysis, market trend analysis, customer segment identification, search volume analysis, social listening, industry report synthesis, analyst coverage review, job posting analysis (demand signal), pricing benchmarking
+TAM/SAM/SOM sizing (top-down + bottom-up), competitive landscape mapping, positioning 2×2, market trend analysis, search demand research, pricing benchmarking, customer segment sizing, category lifecycle assessment, job posting signal analysis, industry report synthesis
 
 ## FISH Guide
 | Fish | Run these methods |
 |---|---|
-| Nemo | Market sizing (rough), top 3 competitors, 2 customer segments |
-| Tuna | TAM/SAM/SOM, competitor analysis, trend analysis |
-| Salmon | Full research: sizing, competitors, segments, pricing benchmarks |
-| Willy | All methods — social listening, analyst synthesis, job posting signals |
+| Nemo | Rough market sizing, top 3–5 competitors, 2 customer segments |
+| Tuna | TAM/SAM/SOM (both methods), competitive positioning, trend analysis |
+| Salmon | Full research: sizing, competitor map, segments, pricing benchmarks, category lifecycle |
+| Willy | All methods — search demand, job posting signals, analyst synthesis, whitespace identification |
 
 ## Execution prompt
 You are running Market Research for [project]. Produce a market picture that informs positioning and go-to-market decisions.
 
-Input: the product or market being researched.
-FISH classification: [Nemo/Tuna/Salmon/Willy]
+**Input**: the product/service and market being researched, any existing sizing assumptions.
+**FISH classification**: [Nemo/Tuna/Salmon/Willy]
 
-Final output: market size estimate (TAM/SAM/SOM), top 5 competitors with one-line positioning each, 3 key trends, top 2 customer segments with pain points.
+---
+
+### Step 1 — TAM / SAM / SOM Sizing
+
+Run both approaches and triangulate:
+
+```
+TOP-DOWN APPROACH
+─────────────────
+TAM (Total Addressable Market):
+  Source:                        [industry report / analyst estimate]
+  Total market value:            $[X]B (year: [Y])
+  Growth rate:                   [X]% CAGR
+
+SAM (Serviceable Addressable Market):
+  Filter criteria applied:       [geography / segment / use case]
+  TAM × filter %:               $[X]B × [%] = $[X]M
+
+SOM (Serviceable Obtainable Market — realistic 3-year capture):
+  SAM × realistic market share:  $[X]M × [%] = $[X]M
+  Basis for share estimate:      [comparable company benchmarks]
+
+BOTTOM-UP APPROACH
+──────────────────
+  Total target buyers / users in segment:     [N]
+  × % that fit ICP filter:                    [%]
+  × Average contract value / annual spend:    $[X]
+  = Bottom-up SAM:                            $[X]M
+
+  Bottom-up SOM (3-year):
+  Year 1: [N] customers × $[X] ACV = $[X]M
+  Year 2: [N] customers × $[X] ACV = $[X]M
+  Year 3: [N] customers × $[X] ACV = $[X]M
+
+TRIANGULATION
+─────────────
+  Top-down SOM:    $[X]M
+  Bottom-up SOM:   $[X]M
+  Agreed estimate: $[X]M
+  Key assumption:  [The biggest variable that changes this most]
+```
+
+### Step 2 — Competitive Landscape
+
+Profile top 5 competitors:
+
+```
+Competitor Profile Template:
+────────────────────────────────────────────────────────────────
+Name:             [Company]
+Category:         [Direct / Adjacent / Substitute]
+Positioning:      [Their core claim in one sentence]
+Primary segment:  [Who they're really selling to]
+Price point:      [Freemium / $X/mo / Enterprise custom]
+Strengths:        [2–3 genuine advantages]
+Weaknesses:       [2–3 genuine gaps — from customer reviews, not opinion]
+Market signal:    [Funding / headcount growth / customer logos / recent launch]
+────────────────────────────────────────────────────────────────
+```
+
+### Step 3 — Competitive Positioning 2×2
+
+Select the two dimensions that matter most to buyers (not your strengths):
+
+```
+Dimension X: [e.g., Ease of use ↔ Power/depth]
+Dimension Y: [e.g., Breadth of use case ↔ Point solution]
+
+Map each competitor:
+  [Competitor A]: High X, Low Y   → [quadrant label]
+  [Competitor B]: Low X, High Y   → [quadrant label]
+  [Competitor C]: High X, High Y  → [quadrant label]
+  [Us / Target]:  [X position], [Y position] → [quadrant label]
+
+Whitespace: [Describe the quadrant(s) with light competition]
+```
+
+### Step 4 — Market Trend Analysis
+
+```
+Trend format:
+  Trend:              [Name / description]
+  Direction:          [Growing / Declining / Emerging]
+  Evidence:           [3-5 data points — search volume, funding, headlines]
+  Strategic implication: [What this means for go-to-market timing or positioning]
+  Time horizon:       [Now / 12 months / 2–3 years]
+
+Trend 1: [...]
+Trend 2: [...]
+Trend 3: [...]
+```
+
+### Step 5 — Search Demand Signal
+
+```
+Keyword Demand Map:
+────────────────────────────────────────────────────────────────
+Keyword / phrase         Monthly searches  Trend    Intent
+────────────────────────────────────────────────────────────────
+[Problem-aware terms]
+[Solution-aware terms]
+[Category terms]
+[Brand terms (competitors)]
+────────────────────────────────────────────────────────────────
+High-volume + growing + problem-aware = highest-priority SEO targets
+```
+
+### Step 6 — Pricing Benchmarks
+
+```
+Pricing Model Comparison:
+────────────────────────────────────────────────────────────────
+Competitor       Model            Entry price    Mid tier    Enterprise
+────────────────────────────────────────────────────────────────
+[A]
+[B]
+[C]
+[D]
+[Us / Target]
+────────────────────────────────────────────────────────────────
+Pricing signal: [Is market anchored high/low? Where is the gap?]
+```
+
+### Step 7 — Category Lifecycle Assessment
+
+```
+Category stage: [Emerging / Growth / Maturity / Decline]
+Evidence:       [Funding pace, media coverage, adoption rates]
+
+GTM implication:
+  Emerging:  Educate the market, define the category, own the language
+  Growth:    Win on differentiation, capture demand being created by others
+  Maturity:  Compete on price/experience, win through displacement
+  Decline:   Target underserved niches or drive disruption
+```
+
+### Step 8 — Whitespace & Entry Opportunity
+
+```
+Whitespace identified:
+  [Segment underserved by current competitors]
+  [Use case not addressed]
+  [Price point or delivery model gap]
+
+Entry opportunity summary:
+  Best entry segment:    [ICP most ready to switch / underserved]
+  Why now:               [What has changed in market to create the opening]
+  Key risk:              [What could block entry — regulatory, switching cost, entrenched player]
+  Go-to-market wedge:    [The specific angle: channel / segment / use case to win first]
+```
+
+---
+
+## Final Output
+- TAM/SAM/SOM (top-down + bottom-up, triangulated)
+- Top 5 competitor profiles with positioning and gaps
+- Positioning 2×2 with whitespace identified
+- 3 key market trends with strategic implications
+- Search demand signal map (keyword categories)
+- Pricing benchmark table
+- Category lifecycle stage + GTM implication
+- Whitespace and entry opportunity summary
+
+**Recommended next skill**: `/ds-marketing-messaging-framework` — translates market positioning gaps into a message architecture that owns the whitespace.

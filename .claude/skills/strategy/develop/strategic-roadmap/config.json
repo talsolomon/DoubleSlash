@@ -1,0 +1,14 @@
+{
+  "name": "ds-strategy-strategic-roadmap",
+  "domain": "strategy",
+  "phase": "develop",
+  "description": "Translates strategy to execution — NOW/NEXT/LATER, OKR cascade, dependency map, capacity model, risk-adjusted sequencing",
+  "tags": ["strategy", "develop", "strategic-roadmap", "now-next-later", "okr", "dependencies"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-strategy-business-case",
+  "next_skill": "ds-strategy-strategy-execution"
+}

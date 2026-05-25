@@ -1,0 +1,14 @@
+{
+  "name": "ds-strategy-competitive-analysis",
+  "domain": "strategy",
+  "phase": "discover",
+  "description": "Analyzes competitors — positioning map, SWOT, Porter's Five Forces, win/loss patterns, gap opportunities",
+  "tags": ["strategy", "discover", "competitive-analysis", "porter-five-forces", "swot"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": null,
+  "next_skill": "ds-strategy-strategic-landscape"
+}

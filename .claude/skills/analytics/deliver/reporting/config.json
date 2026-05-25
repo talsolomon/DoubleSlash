@@ -1,0 +1,14 @@
+{
+  "name": "ds-analytics-reporting",
+  "domain": "analytics",
+  "phase": "deliver",
+  "description": "Produces analytics reports — insight pyramid (observation-insight-recommendation), cohort analysis, anomaly detection, segment comparison",
+  "tags": ["analytics", "deliver", "reporting", "insight-pyramid", "cohort-analysis"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-analytics-dashboard-design",
+  "next_skill": "ds-analytics-data-retrospective"
+}

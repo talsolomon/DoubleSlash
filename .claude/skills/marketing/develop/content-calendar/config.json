@@ -1,0 +1,14 @@
+{
+  "name": "ds-marketing-content-calendar",
+  "domain": "marketing",
+  "phase": "develop",
+  "description": "Builds a content calendar with pillar-cluster SEO structure, format mix, publishing cadence, owner assignments, and content recycling plan.",
+  "tags": ["marketing", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-marketing-campaign-planning",
+  "next_skill": "ds-marketing-campaign-launch"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-pr-communications-media-landscape",
+  "domain": "pr-communications",
+  "phase": "discover",
+  "description": "Maps the media landscape with outlet tier ranking, journalist beat analysis, editorial calendars, podcast/newsletter layer, and priority 20-contact outreach list.",
+  "tags": ["pr-communications", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-pr-communications-reputation-audit",
+  "next_skill": "ds-pr-communications-message-architecture"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-content-strategy-editorial-guidelines",
+  "domain": "content-strategy",
+  "phase": "define",
+  "description": "Writes editorial guidelines with voice/tone rules, writing standards, format templates, SEO writing checklist, sourcing rules, and review workflow.",
+  "tags": ["content-strategy", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-content-strategy-content-strategy",
+  "next_skill": "ds-content-strategy-content-planning"
+}

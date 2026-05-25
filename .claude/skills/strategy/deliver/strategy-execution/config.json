@@ -1,0 +1,14 @@
+{
+  "name": "ds-strategy-strategy-execution",
+  "domain": "strategy",
+  "phase": "deliver",
+  "description": "Designs strategy execution system — RACI, DACI decision rights, governance cadence, OKR tracking, blocker escalation",
+  "tags": ["strategy", "deliver", "strategy-execution", "raci", "daci", "governance"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-strategy-strategic-roadmap",
+  "next_skill": "ds-strategy-strategic-review"
+}

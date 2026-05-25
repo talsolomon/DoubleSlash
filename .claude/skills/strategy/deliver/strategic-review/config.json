@@ -1,0 +1,14 @@
+{
+  "name": "ds-strategy-strategic-review",
+  "domain": "strategy",
+  "phase": "deliver",
+  "description": "Reviews strategy progress — OKR grading, assumption audit, bet reassessment, kill/continue/pivot, next period priorities",
+  "tags": ["strategy", "deliver", "strategic-review", "okr-grading", "kill-continue-pivot"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-strategy-strategy-execution",
+  "next_skill": null
+}

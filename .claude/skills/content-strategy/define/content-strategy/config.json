@@ -1,0 +1,14 @@
+{
+  "name": "ds-content-strategy-content-strategy",
+  "domain": "content-strategy",
+  "phase": "define",
+  "description": "Defines content mission, pillars, format mix, distribution channels, SEO strategy, thought leadership positioning, and measurement framework.",
+  "tags": ["content-strategy", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-content-strategy-content-audit",
+  "next_skill": "ds-content-strategy-editorial-guidelines"
+}

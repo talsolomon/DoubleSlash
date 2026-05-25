@@ -1,0 +1,14 @@
+{
+  "name": "ds-content-strategy-content-performance",
+  "domain": "content-strategy",
+  "phase": "deliver",
+  "description": "Analyzes content performance with top/bottom performer breakdown, SEO rank movement, content decay detection, format comparison, and optimization roadmap.",
+  "tags": ["content-strategy", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-content-strategy-content-distribution",
+  "next_skill": "ds-content-strategy-content-planning"
+}

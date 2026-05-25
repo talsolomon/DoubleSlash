@@ -1,0 +1,14 @@
+{
+  "name": "ds-strategy-strategic-landscape",
+  "domain": "strategy",
+  "phase": "discover",
+  "description": "Maps the strategic environment — PESTLE, Porter's Five Forces, 3-horizon megatrends, weak signals, industry lifecycle",
+  "tags": ["strategy", "discover", "strategic-landscape", "pestle", "megatrends"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-strategy-competitive-analysis",
+  "next_skill": "ds-strategy-strategic-framework"
+}

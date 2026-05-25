@@ -1,0 +1,14 @@
+{
+  "name": "ds-marketing-market-research",
+  "domain": "marketing",
+  "phase": "discover",
+  "description": "Researches market size with TAM/SAM/SOM, competitive positioning map, trend analysis, and go-to-market entry opportunity.",
+  "tags": ["marketing", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-marketing-audience-analysis",
+  "next_skill": "ds-marketing-campaign-brief"
+}

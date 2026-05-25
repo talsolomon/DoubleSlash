@@ -1,0 +1,14 @@
+{
+  "name": "ds-analytics-dashboard-design",
+  "domain": "analytics",
+  "phase": "develop",
+  "description": "Designs analytics dashboards — decision-first design, chart type guide, alert thresholds, drill-down paths, layout hierarchy",
+  "tags": ["analytics", "develop", "dashboard-design", "decision-first", "chart-types"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-analytics-analytics-implementation",
+  "next_skill": "ds-analytics-reporting"
+}

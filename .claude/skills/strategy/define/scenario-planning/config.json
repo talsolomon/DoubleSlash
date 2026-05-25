@@ -1,0 +1,14 @@
+{
+  "name": "ds-strategy-scenario-planning",
+  "domain": "strategy",
+  "phase": "define",
+  "description": "Develops future scenarios — 2×2 scenario matrix, narratives, strategy stress-test, pre-mortem, early indicators",
+  "tags": ["strategy", "define", "scenario-planning", "pre-mortem", "uncertainty"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-strategy-strategic-landscape",
+  "next_skill": "ds-strategy-strategic-framework"
+}

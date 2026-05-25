@@ -1,0 +1,14 @@
+{
+  "name": "ds-analytics-data-retrospective",
+  "domain": "analytics",
+  "phase": "deliver",
+  "description": "Reviews analytics infrastructure — data quality scorecard, pipeline reliability, incident review, metric drift analysis, improvement roadmap",
+  "tags": ["analytics", "deliver", "data-retrospective", "data-quality", "pipeline-reliability"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-analytics-reporting",
+  "next_skill": null
+}

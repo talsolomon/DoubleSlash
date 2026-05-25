@@ -1,0 +1,14 @@
+{
+  "name": "ds-content-strategy-content-audit",
+  "domain": "content-strategy",
+  "phase": "discover",
+  "description": "Audits existing content with quality scoring, SEO health, gap analysis, cannibalization detection, and KUDA recommendations per piece.",
+  "tags": ["content-strategy", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-content-strategy-audience-research",
+  "next_skill": "ds-content-strategy-content-strategy"
+}

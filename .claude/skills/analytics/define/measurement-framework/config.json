@@ -1,0 +1,14 @@
+{
+  "name": "ds-analytics-measurement-framework",
+  "domain": "analytics",
+  "phase": "define",
+  "description": "Defines metric hierarchy — north star, input/output/outcome/impact levels, leading/lagging indicators, counter-metrics, instrumentation requirements",
+  "tags": ["analytics", "define", "measurement-framework", "north-star", "metric-hierarchy"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-analytics-kpi-definition",
+  "next_skill": "ds-analytics-analytics-implementation"
+}

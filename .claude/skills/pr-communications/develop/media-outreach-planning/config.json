@@ -1,0 +1,14 @@
+{
+  "name": "ds-pr-communications-media-outreach-planning",
+  "domain": "pr-communications",
+  "phase": "develop",
+  "description": "Plans targeted media outreach with personalized pitch templates, tiered contact list, outreach sequence, embargo management, and follow-up cadence.",
+  "tags": ["pr-communications", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-pr-communications-pr-campaign-design",
+  "next_skill": "ds-pr-communications-pr-execution"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ds-marketing-campaign-launch",
+  "domain": "marketing",
+  "phase": "deliver",
+  "description": "Executes campaign launch with go/no-go checklist, UTM audit, tracking verification, monitoring thresholds, and first-48-hours response plan.",
+  "tags": ["marketing", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-marketing-content-calendar",
+  "next_skill": "ds-marketing-performance-analysis"
+}

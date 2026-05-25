@@ -1,0 +1,14 @@
+{
+  "name": "ds-content-strategy-content-distribution",
+  "domain": "content-strategy",
+  "phase": "deliver",
+  "description": "Plans multi-channel content distribution with channel-specific copy, UTM tracking, publishing sequence, paid amplification, and community seeding.",
+  "tags": ["content-strategy", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-content-strategy-content-creation",
+  "next_skill": "ds-content-strategy-content-performance"
+}

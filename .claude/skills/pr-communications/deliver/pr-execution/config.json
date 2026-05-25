@@ -1,0 +1,14 @@
+{
+  "name": "ds-pr-communications-pr-execution",
+  "domain": "pr-communications",
+  "phase": "deliver",
+  "description": "Executes a PR campaign with hour-by-hour launch runbook, monitoring dashboard, journalist inquiry SLAs, rapid response protocols, and escalation triggers.",
+  "tags": ["pr-communications", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-pr-communications-media-outreach-planning",
+  "next_skill": "ds-pr-communications-communications-retrospective"
+}

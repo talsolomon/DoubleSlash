@@ -1,0 +1,14 @@
+{
+  "name": "ds-content-strategy-content-planning",
+  "domain": "content-strategy",
+  "phase": "develop",
+  "description": "Plans a content production program with topic briefs, editorial calendar, capacity model, content series design, and repurposing matrix.",
+  "tags": ["content-strategy", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-content-strategy-editorial-guidelines",
+  "next_skill": "ds-content-strategy-content-creation"
+}

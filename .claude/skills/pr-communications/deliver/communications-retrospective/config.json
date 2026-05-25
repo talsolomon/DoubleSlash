@@ -1,0 +1,14 @@
+{
+  "name": "ds-pr-communications-communications-retrospective",
+  "domain": "pr-communications",
+  "phase": "deliver",
+  "description": "Reviews communications performance with coverage quality scoring, message pull-through, share-of-voice movement, relationship health, and strategy refinements.",
+  "tags": ["pr-communications", "deliver"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-pr-communications-pr-execution",
+  "next_skill": "ds-pr-communications-reputation-audit"
+}

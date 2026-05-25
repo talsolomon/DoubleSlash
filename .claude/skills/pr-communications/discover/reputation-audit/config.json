@@ -1,0 +1,14 @@
+{
+  "name": "ds-pr-communications-reputation-audit",
+  "domain": "pr-communications",
+  "phase": "discover",
+  "description": "Audits current reputation with PESO coverage map, sentiment scoring, share-of-voice benchmarking, and a prioritized gap remediation plan.",
+  "tags": ["pr-communications", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": null,
+  "next_skill": "ds-pr-communications-media-landscape"
+}

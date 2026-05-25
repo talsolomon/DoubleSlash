@@ -1,0 +1,14 @@
+{
+  "name": "ds-marketing-messaging-framework",
+  "domain": "marketing",
+  "phase": "define",
+  "description": "Builds a messaging hierarchy with Geoffrey Moore positioning statement, value props, proof points, objection handling, and audience-specific variants.",
+  "tags": ["marketing", "define"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-marketing-campaign-brief",
+  "next_skill": "ds-marketing-campaign-planning"
+}

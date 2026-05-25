@@ -1,0 +1,14 @@
+{
+  "name": "ds-content-strategy-audience-research",
+  "domain": "content-strategy",
+  "phase": "discover",
+  "description": "Builds a content audience profile with search intent map, format preferences, channel behaviors, community listening, and content triggers.",
+  "tags": ["content-strategy", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": null,
+  "next_skill": "ds-content-strategy-content-audit"
+}

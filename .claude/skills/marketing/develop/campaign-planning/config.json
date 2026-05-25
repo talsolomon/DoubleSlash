@@ -1,0 +1,14 @@
+{
+  "name": "ds-marketing-campaign-planning",
+  "domain": "marketing",
+  "phase": "develop",
+  "description": "Plans a multi-channel campaign with channel mix, content matrix, email nurture sequence, A/B test design, budget model, and risk flags.",
+  "tags": ["marketing", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-marketing-messaging-framework",
+  "next_skill": "ds-marketing-content-calendar"
+}

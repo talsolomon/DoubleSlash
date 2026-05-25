@@ -1,0 +1,14 @@
+{
+  "name": "ds-pr-communications-pr-campaign-design",
+  "domain": "pr-communications",
+  "phase": "develop",
+  "description": "Designs a PR campaign with news hook formula, asset plan, embargo/exclusive strategy, media tier targeting, owned channel integration, and campaign timeline.",
+  "tags": ["pr-communications", "develop"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": "ds-pr-communications-message-architecture",
+  "next_skill": "ds-pr-communications-media-outreach-planning"
+}

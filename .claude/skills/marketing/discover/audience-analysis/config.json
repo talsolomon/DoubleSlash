@@ -1,0 +1,14 @@
+{
+  "name": "ds-marketing-audience-analysis",
+  "domain": "marketing",
+  "phase": "discover",
+  "description": "Builds a research-backed audience model with ICPs, behavioral segments, channel preference maps, and targeting priority matrix.",
+  "tags": ["marketing", "discover"],
+  "fish": ["Nemo", "Tuna", "Salmon", "Willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "Duble//Slash",
+  "updated": "2026-05-25",
+  "prev_skill": null,
+  "next_skill": "ds-marketing-market-research"
+}

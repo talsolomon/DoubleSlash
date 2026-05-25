@@ -1,0 +1,14 @@
+{
+  "name": "ds-analytics-analytics-implementation",
+  "domain": "analytics",
+  "phase": "develop",
+  "description": "Plans analytics implementation — object-action event taxonomy, tracking spec, pipeline architecture, QA framework",
+  "tags": ["analytics", "develop", "analytics-implementation", "event-taxonomy", "tracking-spec"],
+  "fish": ["nemo", "tuna", "salmon", "willy"],
+  "model": "inherit",
+  "version": "2.0.0",
+  "author": "ds-core",
+  "updated": "2026-05-24",
+  "prev_skill": "ds-analytics-measurement-framework",
+  "next_skill": "ds-analytics-dashboard-design"
+}
