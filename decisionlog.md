@@ -219,6 +219,26 @@ Permission tiers:
 
 ---
 
+## [DECISION-024] DS Brain architecture — 5-tier folder structure
+**Date**: 2026-05-26
+**Status**: Closed
+**Options considered**: (A) Flat project-level files (current) / (B) 5-tier hierarchy: Root → Team → Project → Decision → Task, each with its own Brain folder
+**Decision**: (B) — full 5-tier Brain hierarchy. Project state in `brain/`, decisions in `decisions/<slug>/`, tasks in `decisions/<slug>/tasks/<slug>/brief.md`.
+**Rationale**: Flat files don't scale to multi-project, multi-team use. The Task tier (brief.md as hook target) unlocks autonomous AI execution — an agent can read a brief and act without asking questions. Each tier having its own memory means context is always scoped correctly and new projects never pollute existing project state.
+**Consequences**: CLAUDE.md becomes a thin 3-rule on/off switch. All methodology and context lives in Brain folders. Settings.json hooks read from `brain/memory.md`. New project detection is a first-class ds-dubleslash behavior. Task briefs are machine-readable by design.
+
+---
+
+## [DECISION-025] Skill voice — unapologetically brilliant, expert in domain, friend/mentor
+**Date**: 2026-05-26
+**Status**: Closed
+**Options considered**: (A) No explicit voice definition — skills write as they see fit / (B) Defined voice persona injected into all skills
+**Decision**: (B) — all DS skills speak as a trusted domain expert who is also a friend and mentor. Direct. Real answers. No hedging. No consultant-speak. Injected as a `## Voice` section into all 273 domain SKILL.md files.
+**Rationale**: The product promise is "AI that behaves like a smart colleague." A smart colleague doesn't say "there are several approaches to consider" — they tell you what they'd do. The voice makes the product feel like a person, not a chatbot.
+**Consequences**: All new skills must include the Voice section. CLAUDE.md now defines skill voice as a project-wide rule.
+
+---
+
 ## [DECISION-003] Monetization model — platform fee + BYOK
 **Date**: 2026-05-19  
 **Status**: Open (needs validation)  

@@ -1,5 +1,21 @@
 # Node Map — Duble//Slash
 
+## Session 2026-05-26
+- thinking: DS architecture v2 — 5-tier Brain folder structure + behavioral feedback batch
+  - decision: 5-tier Brain architecture adopted (Root/Team/Project/Decision/Task) → folder contract defined and built
+  - decision: Skill voice = unapologetically brilliant, expert in domain, friend/mentor — injected into all 273 skills
+  - decision: CLAUDE.md → thin 3-rule on/off switch; all methodology moves to brain/
+  - artifact: brain/memory.md, brain/project-plan.md, brain/mcp-credentials.md, brain/links.md
+  - artifact: decisions/ folder with README (decision lifecycle contract)
+  - artifact: ~/.claude/teams/dubleslash/ — team tier with memory-wings.md
+  - artifact: ds-dubleslash (rewrite) — intent-first, no FISH, new project detection
+  - artifact: ds-new-request — any request → classified plan
+  - artifact: ds-project — session-end sync skill
+  - artifact: ds-decision — decision lifecycle skill
+  - artifact: ds-task — hook-ready task brief skill
+  - feedback-processed: 7 behavioral rules (session intent first, no FISH labels, kanban as HTML, auto-update kanban, starters not cold questions, new project = new folder, no relative time claims from memory)
+- connects-to: Session 2026-05-24
+
 ## Session 2026-05-24
 - thinking: converge DS methodology for Shenhav handoff — user journey, session model, skills architecture, MCPs
   - artifact: planning/ds-production-spec.md — full production spec (8 sections): user journey, session methodology, FISH, Phase Gate, skills architecture + OSS model, MCPs/connectors, UI requirements for Shenhav, open questions blocking design
