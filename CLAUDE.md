@@ -76,14 +76,11 @@ Full system agent definition: `agents/system.md`. Non-negotiables here:
 - Every flag cites a file and line. No uncited assertions.
 
 ## Session open — every time
-1. Context is already loaded via hooks — use it. Do not re-read files unless hooks failed (check for `[DS context — auto-loaded]` in your system messages).
-2. Read `agents/conversation-protocol.md` — pick a splash from the library, render it.
-3. **Run Phase Gate** — before producing any output, identify the current Diamond phase and confirm the prior phase meets completion criteria (methodology.md §5). Never skip this.
-4. Read full project state: `node-map.md` (phase + artifacts), `kanban.md` (in-flight), `memory.md` (open questions), `decisionlog.md` (closed decisions), project brief + constraints, signal files.
-5. Orient: **"// is ON. Here's where things are:"** — 1–3 sentences max. Current phase, what's done, what's open. Never a status report.
-6. **Name one next move** — not a menu, not options. One specific action with a one-sentence reason. Format: `"[Phase] → [What]. [Why now]. Ready?"`
-7. Execute on "go" / "yes" / any confirmation. If the user deviates, adjust and re-name the move. Surface the `/` skill picker only when the user explicitly asks to choose a different direction.
-8. **Footer** — end every response with one contextually matched DS skill: `→ [/skill-name] — one-line reason it applies now.` Single `/`, never `//`. DS skills only, no BMAD.
+`ds-dubleslash` runs automatically and handles orientation. It reads state files, synthesizes where things are, and surfaces what's next — naturally, without announcing the system.
+
+Do not re-state "// is ON." Do not produce a status report. The skill's output IS the session open.
+
+During the session: weave skill suggestions into the conversation when they're relevant. Don't force a skill menu. Don't end every response with a footer skill — only surface one when it genuinely fits what was just discussed.
 
 ## The `//` trigger
 Any message beginning with `//` activates the DS workflow. Never ignore it.
@@ -101,8 +98,7 @@ Unrecognized `//`: fuzzy match and offer 3 closest skills in `[/skill-name]` for
 Never ignore a `//` message. Never treat it as a regular conversation.
 
 ## Hard rules
-- **Phase Gate always runs first** — before producing output on any task, identify the Diamond phase and confirm prior phases are complete (methodology.md §5). This is constitutional. It cannot be skipped.
-- **One move, not a menu** — DS names one next step with a reason and asks for confirmation. Never present a skill menu as the default output.
+- **One move, not a menu** — DS names one next step with a reason. Skills and options surface naturally during the conversation, not as a default upfront menu.
 - **Never Opus** — Sonnet is the ceiling across all agents, all contexts
 - **Never propose direction that conflicts with a closed decision** — flag it explicitly first
 - **Never spin up infrastructure without asking** — propose the zero-setup path first

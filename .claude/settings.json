@@ -23,16 +23,6 @@
             "statusMessage": "DS loading context..."
           }
         ]
-      },
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "STATE=$(awk '/## Current state/{found=1} found{print} /^## [A-Z]/{if(found && !/## Current state/)exit}' /Users/talsolomon/Documents/dubleslash/memory.md 2>/dev/null | head -25); QUESTIONS=$(awk '/## Open questions/{found=1} found{print}' /Users/talsolomon/Documents/dubleslash/memory.md 2>/dev/null | head -30); POSITIONING=$(awk '/## Positioning/{found=1} found{print} /^## [A-Z]/{if(found && !/## Positioning/)exit}' /Users/talsolomon/Documents/dubleslash/memory.md 2>/dev/null | head -15); DECISIONS=$(grep -A8 '## \\[DECISION' /Users/talsolomon/Documents/dubleslash/decisionlog.md 2>/dev/null | tail -50); MSG=$(printf '[DS context]\\n\\n=== CURRENT STATE ===\\n%s\\n\\n=== POSITIONING ===\\n%s\\n\\n=== OPEN QUESTIONS ===\\n%s\\n\\n=== RECENT DECISIONS ===\\n%s\\n\\nContext loaded. No file reads needed. If first message: render splash, orient as a MOVE, present skill menu. Never ask what we are working on.' \"$STATE\" \"$POSITIONING\" \"$QUESTIONS\" \"$DECISIONS\"); jq -cn --arg msg \"$MSG\" '{\"systemMessage\": $msg}' 2>/dev/null || echo '{\"systemMessage\":\"[DS] context loaded\"}'",
-            "statusMessage": "DS loading context..."
-          }
-        ]
       }
     ],
     "Stop": [
@@ -41,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "KANBAN_IN_PROGRESS=$(grep -c 'IN PROGRESS' /Users/talsolomon/Documents/dubleslash/kanban.md 2>/dev/null || echo 0); LAST_DECISION=$(grep '## \\[DECISION' /Users/talsolomon/Documents/dubleslash/decisionlog.md 2>/dev/null | tail -1); MSG=$(printf '[DS — end of turn checklist]\\n\\nDo NOT skip this. Update before the next message:\\n\\n  kanban.md    — move any completed work to DONE. IN PROGRESS cards: %s found.\\n  node-map.md  — add nodes for artifacts, decisions, thinking produced this turn.\\n  decisionlog.md — log any locked direction as DECISION-NNN (last: %s).\\n  memory/      — write any new preference, product fact, or project state.\\n\\nThis is automatic. No permission needed. No asking. Just write.' \"$KANBAN_IN_PROGRESS\" \"$LAST_DECISION\"); jq -cn --arg msg \"$MSG\" '{\"systemMessage\": $msg}' 2>/dev/null || echo '{\"systemMessage\":\"[DS] end of turn — update kanban, node-map, decisionlog, memory now\"}'",
+            "command": "jq -cn '{\"systemMessage\": \"[DS] Write: kanban.md, node-map.md, decisionlog.md, memory/ — no asking, no permission needed.\"}' 2>/dev/null",
             "statusMessage": "DS checking project state..."
           }
         ]
