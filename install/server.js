@@ -70,7 +70,7 @@ function parseNodeMap(text) {
     const m = line.match(/^(\s*)[-*]\s+(.+)$/);
     if (!m) continue;
     const depth = m[1].length + 1, raw = m[2].trim();
-    const tm = raw.match(/^(\w+):\s*(.+)$/);
+    const tm = raw.match(/^([\w-]+):\s*(.+)$/);
     const type = tm ? tm[1].toLowerCase() : 'note', label = tm ? tm[2] : raw;
     const id = ++seq;
     nodes.push({ id, label, type, depth, session: currentSession });
@@ -277,8 +277,8 @@ nav button:hover:not(.active){color:var(--text);background:var(--bg)}
 // ─── State ────────────────────────────────────────────────────────────────────
 let state = null, activeTab = 'kanban', nmMode = 'graph', selId = null;
 
-const TC = {session:'#2563eb',decision:'#d97706',artifact:'#15803d',task:'#7c3aed',thinking:'#9ca3af',note:'#c9c5bf',feedback:'#ea580c',user:'#0891b2',project:'#7c3aed',reference:'#059669'};
-const TI = {session:'◎',decision:'◆',artifact:'●',task:'◈',thinking:'◌',note:'○'};
+const TC = {session:'#2563eb',decision:'#d97706',artifact:'#15803d',task:'#7c3aed',thinking:'#9ca3af',note:'#c9c5bf',feedback:'#ea580c',user:'#0891b2',project:'#7c3aed',reference:'#059669',open:'#dc2626'};
+const TI = {session:'◎',decision:'◆',artifact:'●',task:'◈',thinking:'◌',note:'○',open:'?'};
 // Node shapes for Cytoscape
 const TS = {session:'ellipse',decision:'diamond',artifact:'round-rectangle',task:'hexagon',thinking:'ellipse',note:'ellipse'};
 

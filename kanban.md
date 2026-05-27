@@ -9,6 +9,7 @@
 - Pricing validation — first-cohort signal for $12/mo + BYOK [DECISION-003] [2026-05-19]
 - Define AAAK memory methodology — Shenhav owns this [2026-05-21]
 - Fix skill permission prompts — skills should not prompt when project root is in allow list [2026-05-26]
+- Close OQ-05: who can publish skills? — blocks public repo URL in install script [2026-05-26]
 
 ## IN PROGRESS
 
@@ -30,6 +31,12 @@
 - [x] Update flows/user-journey.html → v0.3 [2026-05-24]
 - [x] Update flows/user-flow.html → v0.3 [2026-05-24]
 - [x] Build DS live viewer — kanban + node-map + memory feed [DECISION-021] [DECISION-022] [2026-05-21]
+- [x] Rewrite install.sh — full 6-step installer: viewer + 291 skills + CLAUDE.md + team brain + hooks + --init brain scaffold [2026-05-26]
+- [x] Add all 18 ds-* operational skills to repo (.claude/skills/) — distributable complete [2026-05-26]
+- [x] Create templates/ — CLAUDE.md + brain/ + decisions/ + kanban + decisionlog + node-map + team brain starters [2026-05-26]
+- [x] node-map declared generated artifact — ds-project regenerates from decisionlog each session [2026-05-26]
+- [x] Team brain wired — ds-dubleslash reads memory-wings.md at orient, ds-project writes cross-project insights [2026-05-26]
+- [x] DS viewer fixed — hyphenated type parsing, open node color, canonical source in install/server.js [2026-05-26]
 - [x] Wire install.sh — zero-dep bash installer [DECISION-023] [2026-05-21]
 - [x] Lock leader-driven session model [DECISION-019] [2026-05-21]
 - [x] Build .claude/skills/ — 21 domain folders, ~210 SKILL.md files [2026-05-20]

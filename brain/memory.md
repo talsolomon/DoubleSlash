@@ -19,7 +19,8 @@ The problem is not capability — it's access. Most people don't know how to har
 
 ## Current state
 - **Phase:** Product build — production spec ready, design handoff to Shenhav in progress
-- **Session 2026-05-26:** DS architecture v2 built — 5-tier Brain folder structure (Root/Team/Project/Decision/Task), 5 new operational skills (ds-new-request, ds-project, ds-decision, ds-task, rewritten ds-dubleslash), voice layer injected into all 273 domain skills, CLAUDE.md thinned to 3-rule on/off switch, hooks updated to read brain/
+- **Session 2026-05-26 (2):** Distributable package complete — install.sh rewritten (6 steps: viewer + 291 skills + CLAUDE.md + team brain + hooks + --init), all 18 ds-* operational skills added to repo, templates/ created, node-map declared generated artifact from decisionlog, team brain (memory-wings.md) populated + wired into ds-dubleslash and ds-project, ds-viewer fixed (hyphenated types, open node color). `bash install.sh` now gives a new user a working DS from zero.
+- **Session 2026-05-26 (1):** DS architecture v2 built — 5-tier Brain folder structure (Root/Team/Project/Decision/Task), 5 new operational skills (ds-new-request, ds-project, ds-decision, ds-task, rewritten ds-dubleslash), voice layer injected into all 273 domain skills, CLAUDE.md thinned to 3-rule on/off switch, hooks updated to read brain/
 - **Last session:** 2026-05-24 — full production spec written, flows updated to v0.3
 
 ### What's done

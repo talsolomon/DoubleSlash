@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# DS Install — wires the DS viewer and hooks into ~/.claude
-# Usage: bash install.sh              — install viewer globally
-#        bash install.sh --init       — also seed project files in cwd
+# Duble//Slash Install
+# Usage:
+#   bash install.sh              — global install (viewer, skills, CLAUDE.md, hooks)
+#   bash install.sh --init       — also seed project brain in current directory
+#   bash install.sh --upgrade    — reinstall product files, preserve all user data
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VIEWER_SRC="$SCRIPT_DIR/install/server.js"
-VIEWER_DEST="$HOME/.claude/ds-viewer/server.js"
-SETTINGS="$HOME/.claude/settings.json"
+CLAUDE_DIR="$HOME/.claude"
 INIT=false
 [[ "${1:-}" == "--init" ]] && INIT=true
 
@@ -15,20 +15,64 @@ echo ""
 echo "  // DS Install"
 echo ""
 
-# ── 1. Copy viewer ────────────────────────────────────────────────────────────
-mkdir -p "$HOME/.claude/ds-viewer"
+# ── 1. Viewer ─────────────────────────────────────────────────────────────────
+VIEWER_SRC="$SCRIPT_DIR/install/server.js"
+VIEWER_DEST="$CLAUDE_DIR/ds-viewer/server.js"
+mkdir -p "$CLAUDE_DIR/ds-viewer"
 cp "$VIEWER_SRC" "$VIEWER_DEST"
 chmod +x "$VIEWER_DEST"
-echo "  ✓  viewer  →  $VIEWER_DEST"
+echo "  ✓  viewer     →  $VIEWER_DEST"
 
-# ── 2. Merge SessionStart hook into ~/.claude/settings.json ──────────────────
+# ── 2. Skills ─────────────────────────────────────────────────────────────────
+SKILLS_SRC="$SCRIPT_DIR/.claude/skills"
+SKILLS_DEST="$CLAUDE_DIR/skills"
+if [[ -d "$SKILLS_SRC" ]]; then
+  mkdir -p "$SKILLS_DEST"
+  rsync -a --delete "$SKILLS_SRC/" "$SKILLS_DEST/"
+  COUNT=$(find "$SKILLS_SRC" -name "SKILL.md" | wc -l | tr -d ' ')
+  echo "  ✓  skills     →  $SKILLS_DEST  ($COUNT skills)"
+else
+  echo "  ·  skills dir not found — skipped"
+fi
+
+# ── 3. CLAUDE.md ──────────────────────────────────────────────────────────────
+TEMPLATE_CLAUDE="$SCRIPT_DIR/templates/CLAUDE.md"
+TARGET_CLAUDE="$CLAUDE_DIR/CLAUDE.md"
+if [[ -f "$TEMPLATE_CLAUDE" ]]; then
+  if [[ ! -f "$TARGET_CLAUDE" ]]; then
+    cp "$TEMPLATE_CLAUDE" "$TARGET_CLAUDE"
+    echo "  ✓  CLAUDE.md  →  $TARGET_CLAUDE"
+  elif grep -q "ds-dubleslash" "$TARGET_CLAUDE" 2>/dev/null; then
+    echo "  ·  CLAUDE.md  DS block present — skipped"
+  else
+    TMPFILE=$(mktemp)
+    cat "$TEMPLATE_CLAUDE" > "$TMPFILE"
+    printf "\n---\n\n" >> "$TMPFILE"
+    cat "$TARGET_CLAUDE" >> "$TMPFILE"
+    mv "$TMPFILE" "$TARGET_CLAUDE"
+    echo "  ✓  CLAUDE.md  →  DS block merged into existing file"
+  fi
+fi
+
+# ── 4. Team brain ─────────────────────────────────────────────────────────────
+TEAM_SRC="$SCRIPT_DIR/templates/teams/brain/memory-wings.md"
+TEAM_DEST="$CLAUDE_DIR/teams/dubleslash/brain/memory-wings.md"
+mkdir -p "$(dirname "$TEAM_DEST")"
+if [[ ! -f "$TEAM_DEST" ]]; then
+  cp "$TEAM_SRC" "$TEAM_DEST"
+  echo "  ✓  team brain →  $TEAM_DEST"
+else
+  echo "  ·  team brain already exists — skipped"
+fi
+
+# ── 5. SessionStart hook ──────────────────────────────────────────────────────
 python3 - <<'PYEOF'
-import json, os, sys
+import json, os
 
 settings_path = os.path.expanduser("~/.claude/settings.json")
 new_hook = {
     "type": "command",
-    "command": 'if ! lsof -ti:3333 >/dev/null 2>&1; then nohup node ~/.claude/ds-viewer/server.js --project="$PWD" >/tmp/ds-viewer.log 2>&1 & disown; fi; exit 0',
+    "command": "if ! lsof -ti:3333 >/dev/null 2>&1; then nohup node ~/.claude/ds-viewer/server.js --project=\"$PWD\" >/tmp/ds-viewer.log 2>&1 & disown; fi; exit 0",
     "statusMessage": "DS viewer starting..."
 }
 
@@ -50,64 +94,69 @@ hooks = settings.setdefault("hooks", {})
 session_start = hooks.setdefault("SessionStart", [])
 
 if has_viewer_hook(session_start):
-    print("  ✓  viewer hook already present — skipped")
+    print("  ·  hooks      SessionStart viewer hook present — skipped")
 else:
-    # Append as a standalone hook entry (works with both flat and matcher styles)
     session_start.append({"matcher": "", "hooks": [new_hook]})
     with open(settings_path, "w") as f:
         json.dump(settings, f, indent=2)
-    print("  ✓  hooks  →  ~/.claude/settings.json")
+    print("  ✓  hooks      →  ~/.claude/settings.json")
 PYEOF
 
-# ── 3. Seed project files (--init only) ───────────────────────────────────────
+# ── 6. Project brain (--init only) ───────────────────────────────────────────
 if $INIT; then
   PROJECT_DIR="$(pwd)"
+  PROJECT_NAME="$(basename "$PROJECT_DIR")"
+  TEMPLATES="$SCRIPT_DIR/templates"
+  TODAY=$(date +%Y-%m-%d)
 
-  if [[ ! -f "$PROJECT_DIR/kanban.md" ]]; then
-    TODAY=$(date +%Y-%m-%d)
-    cat > "$PROJECT_DIR/kanban.md" <<EOF
-# Kanban — $(basename "$PROJECT_DIR")
+  echo ""
+  echo "  Seeding project brain in $PROJECT_NAME..."
+  echo ""
 
-## TODO
+  seed_file() {
+    local src="$1"
+    local dest="$2"
+    mkdir -p "$(dirname "$dest")"
+    if [[ ! -f "$dest" ]]; then
+      sed "s/{{PROJECT}}/$PROJECT_NAME/g; s/{{DATE}}/$TODAY/g" "$src" > "$dest"
+      echo "  ✓  $(basename "$dest")"
+    else
+      echo "  ·  $(basename "$dest") already exists — skipped"
+    fi
+  }
 
-## IN PROGRESS
+  seed_file "$TEMPLATES/brain/memory.md"       "$PROJECT_DIR/brain/memory.md"
+  seed_file "$TEMPLATES/brain/project-plan.md" "$PROJECT_DIR/brain/project-plan.md"
+  seed_file "$TEMPLATES/decisions/README.md"   "$PROJECT_DIR/decisions/README.md"
+  seed_file "$TEMPLATES/kanban.md"             "$PROJECT_DIR/kanban.md"
+  seed_file "$TEMPLATES/decisionlog.md"        "$PROJECT_DIR/decisionlog.md"
+  seed_file "$TEMPLATES/node-map.md"           "$PROJECT_DIR/node-map.md"
 
-## DONE
-EOF
-    echo "  ✓  kanban.md created"
-  else
-    echo "  ·  kanban.md already exists — skipped"
-  fi
-
-  if [[ ! -f "$PROJECT_DIR/node-map.md" ]]; then
-    TODAY=$(date +%Y-%m-%d)
-    cat > "$PROJECT_DIR/node-map.md" <<EOF
-## Session $TODAY
-- note: Project initialized
-EOF
-    echo "  ✓  node-map.md created"
-  else
-    echo "  ·  node-map.md already exists — skipped"
-  fi
-
-  # Wire project-level .claude/settings.json if missing
+  # Project .claude/settings.json
   LOCAL_SETTINGS="$PROJECT_DIR/.claude/settings.json"
   if [[ ! -f "$LOCAL_SETTINGS" ]]; then
     mkdir -p "$PROJECT_DIR/.claude"
-    cat > "$LOCAL_SETTINGS" <<'EOF'
+    cat > "$LOCAL_SETTINGS" <<'SETTINGS_EOF'
 {
   "permissions": {
     "allow": ["Bash(*)", "Write(*)", "Edit(*)", "Read(*)", "WebSearch(*)", "WebFetch(*)", "Agent(*)", "TodoWrite(*)", "MultiEdit(*)"]
   }
 }
-EOF
-    echo "  ✓  .claude/settings.json created"
+SETTINGS_EOF
+    echo "  ✓  .claude/settings.json"
   else
     echo "  ·  .claude/settings.json already exists — skipped"
   fi
 fi
 
+# ── Done ──────────────────────────────────────────────────────────────────────
 echo ""
-echo "  DS is installed. The viewer launches automatically on the next Claude Code session."
-echo "  To start manually:  node ~/.claude/ds-viewer/server.js --project=$(pwd)"
+if $INIT; then
+  echo "  // DS is ready. Open Claude Code in this directory."
+  echo "  The viewer starts automatically. Type // to orient."
+else
+  echo "  // DS is installed."
+  echo "  Run 'bash install.sh --init' in any project to seed its brain."
+fi
+echo "  Viewer:  node ~/.claude/ds-viewer/server.js --project=\$(pwd)"
 echo ""

@@ -1,0 +1,31 @@
+- generic [ref=e2]:
+  - generic [ref=e7]:
+    - button "Close" [ref=e8] [cursor=pointer]:
+      - img [ref=e9]
+    - img [ref=e16]
+    - heading "בלוג על מוצר וחוויית משתמש / טל סולומון" [level=1] [ref=e17]
+    - paragraph [ref=e18]: My personal Substack
+    - generic [ref=e19]: Launched 5 months ago
+    - generic [ref=e21]:
+      - generic [ref=e25]:
+        - textbox "Type your email..." [active] [ref=e28]
+        - button "Subscribe" [disabled] [ref=e29]
+      - generic [ref=e32]:
+        - text: By subscribing, you agree Substack's
+        - link "Terms of Use" [ref=e33] [cursor=pointer]:
+          - /url: https://substack.com/tos
+        - text: ", and acknowledge its"
+        - link "Information Collection Notice" [ref=e34] [cursor=pointer]:
+          - /url: https://substack.com/ccpa#personal-data-collected
+        - text: and
+        - link "Privacy Policy" [ref=e35] [cursor=pointer]:
+          - /url: https://substack.com/privacy
+        - text: .
+    - button "No thanks" [ref=e36] [cursor=pointer]:
+      - text: No thanks
+      - img [ref=e37]
+  - iframe
+  - link "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e39] [cursor=pointer]:
+    - /url: /
+  - region "Notifications (F8)":
+    - list

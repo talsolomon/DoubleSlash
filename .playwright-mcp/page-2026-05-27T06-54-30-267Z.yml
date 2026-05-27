@@ -1,0 +1,662 @@
+- generic [ref=e2]:
+  - iframe
+  - generic [ref=e3]:
+    - generic [ref=e7]:
+      - link "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e13]
+      - heading "בלוג על מוצר וחוויית משתמש / טל סולומון" [level=1] [ref=e15]:
+        - link "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e16] [cursor=pointer]:
+          - /url: /
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - button "Search" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+          - button "Share Publication" [ref=e26] [cursor=pointer]:
+            - img [ref=e27]
+        - button "Subscribe" [ref=e30] [cursor=pointer]
+        - button "Sign in" [ref=e31] [cursor=pointer]
+    - main "Post" [ref=e34]:
+      - article [ref=e38]:
+        - dialog "Subscribe modal" [ref=e40]:
+          - generic [ref=e41]:
+            - button "close" [ref=e42] [cursor=pointer]:
+              - img [ref=e43]
+            - generic "User" [ref=e48]:
+              - img "User's avatar" [ref=e50]
+            - generic [ref=e51]:
+              - generic [ref=e52]: Discover more from בלוג על מוצר וחוויית משתמש / טל סולומון
+              - generic [ref=e53]: My personal Substack
+            - generic [ref=e55]:
+              - textbox "Enter your email..." [ref=e57]
+              - button "Subscribe" [ref=e58] [cursor=pointer]
+              - generic [ref=e61]:
+                - text: By subscribing, you agree Substack's
+                - link "Terms of Use" [ref=e62] [cursor=pointer]:
+                  - /url: https://substack.com/tos
+                - text: ", and acknowledge its"
+                - link "Information Collection Notice" [ref=e63] [cursor=pointer]:
+                  - /url: https://substack.com/ccpa#personal-data-collected
+                - text: and
+                - link "Privacy Policy" [ref=e64] [cursor=pointer]:
+                  - /url: https://substack.com/privacy
+                - text: .
+          - generic [ref=e66]: Already have an account? Sign in
+        - region "Post header" [ref=e67]:
+          - heading "מודל הדגים - על דגים מוזרים ויהלומים כפולים" [level=1] [ref=e68]
+          - region "Post UFI" [ref=e69]:
+            - generic [ref=e71]:
+              - link "View בלוג על מוצר וחוויית משתמש's profile" [ref=e76] [cursor=pointer]:
+                - /url: https://substack.com/@talsolomon
+                - generic "בלוג על מוצר וחוויית משתמש" [ref=e78]:
+                  - img "בלוג על מוצר וחוויית משתמש's avatar" [ref=e80]
+              - generic [ref=e81]:
+                - link "בלוג על מוצר וחוויית משתמש" [ref=e84] [cursor=pointer]:
+                  - /url: https://substack.com/@talsolomon
+                - generic [ref=e86]: Jan 07, 2026
+            - generic [ref=e87]:
+              - generic [ref=e88]:
+                - button "Like (2)" [ref=e90] [cursor=pointer]:
+                  - img [ref=e91]:
+                    - img [ref=e93]
+                  - generic [ref=e95]: "2"
+                - button "View comments (0)" [ref=e96] [cursor=pointer]:
+                  - img [ref=e97]:
+                    - img [ref=e99]
+                - button [ref=e101] [cursor=pointer]:
+                  - img [ref=e102]
+              - button "Share" [ref=e106] [cursor=pointer]:
+                - generic [ref=e107]: Share
+        - generic [ref=e108]:
+          - button "Table of Contents" [ref=e109] [cursor=pointer]
+          - generic [ref=e119]:
+            - heading "נתחיל בתודות Link" [level=2] [ref=e120]:
+              - strong [ref=e121]: נתחיל בתודות
+              - button "Link" [ref=e124] [cursor=pointer]:
+                - img [ref=e125]
+            - paragraph [ref=e128]:
+              - text: בנובמבר 24׳ הצגתי בכנס
+              - link "COM.PL" [ref=e129] [cursor=pointer]:
+                - /url: http://com.pl/
+              - text: EX את
+              - emphasis [ref=e130]: מודל הדגים
+              - text: שהמצאתי במהלך התקופה שלי בחברת
+              - link "רדיס" [ref=e131] [cursor=pointer]:
+                - /url: https://redis.io/
+              - text: (Redis).
+            - paragraph [ref=e132]:
+              - text: יצא לי להרצות בכנס או שניים בארץ ובחו״ל וכמובן עשור של הרצאות באקדמיה או עבור קהלים פרטיים, אבל הכנס הזה היה חוויה אישית יוצאת דופן. מעבר להרצאה שלי (שהרגשתי שהייתה לא רעה 😅),
+              - strong [ref=e133]: כל
+              - text: "ההרצאות שניתנו בכנס הציגו סיפורים שזורים באנקדוטות מרתקות בצורה יפהפייה ומלאת ביטחון ורצון להעביר מסר פרקטי איכותי. לכן לפני שאני מסכם לכםן את ההרצאה שלי, אני מאוד אשמח להודות לכל מי שעזר לי לדייק את ההרצאה שלי:"
+            - list [ref=e134]:
+              - listitem [ref=e135]:
+                - paragraph [ref=e136]: ברק דנין, סר הכנסים של קהילת ה- UX,
+              - listitem [ref=e137]:
+                - paragraph [ref=e138]: שירלי ארמלנד-חן, נסיכת המצגות והמבקרת הראשית של ההרצאה שלי,
+              - listitem [ref=e139]:
+                - paragraph [ref=e140]: ויטלי מיז’יריצקי, אולי אחד הא.נשים שאני הכי מעריך במקצוע שלנו שהיה המבקר החיצוני הראשון של ההרצאה ועזר לי להעיף חלקים מיותרים,
+              - listitem [ref=e141]:
+                - paragraph [ref=e142]: הדס ענתבי, המעצבת הכי טובה בישראל שהתמזל מזלי לנהל אותה ולקבל ממנה פידבק כשההרצאה עוד הייתה בחיתוליה,
+              - listitem [ref=e143]:
+                - paragraph [ref=e144]: וכמובן נועה אשתיייי המהממת שהייתה הקהל הכי אובייקטיבי ומקצועי שיכולתי לבקש מבת-זוג.
+            - paragraph [ref=e145]: ותודה ענקית לכל מי שנכחו בכנס 🙏
+            - heading "יאללה, לעניין Link" [level=2] [ref=e146]:
+              - strong [ref=e147]: יאללה, לעניין
+              - button "Link" [ref=e150] [cursor=pointer]:
+                - img [ref=e151]
+            - paragraph [ref=e154]:
+              - text: אתנצל מראש, אני לא הולך להעלות לכאן את המצגת המלאה. מצגות מתאימות להרצאות, לא למאמרים או בלוג-פוסטים ולכן אתמקד כאן בעיקרה של ההרצאה, שהוא כמובן
+              - emphasis [ref=e155]: מודל הדגים
+              - text: ", ואתבל בכל מיני screenshots רלוונטיים מתוך ההרצאה. אתםן מוזמניםות להמשיך לשלוח לי שאלות (עדיף פה בתגובות) במידה ומשהו לא ברור."
+            - paragraph [ref=e156]:
+              - text: במידה ואתםן מעוניינים/ות לשמוע יותר על ההרצאה או לעבור סדנה בנושא ביחד עם הצוותים שלכםן (לאו דווקא רק המעצביםות!) אנא פנו אליי ב
+              - link "מייל" [ref=e157] [cursor=pointer]:
+                - /url: "https://mail.google.com/mail/?view=cm&fs=1&to=talsolomon21@gmail.com&su=%D7%90%D7%A0%D7%99+%D7%A4%D7%94+%D7%91%D7%A7%D7%A9%D7%A8+%D7%9C%D7%99%D7%94%D7%9C%D7%95%D7%9E%D7%99%D7%9D+%F0%9F%92%8E&body=%D7%94%D7%99+%D7%98%D7%9C,%0A%D7%A8%D7%A6%D7%99%D7%AA%D7%99+%D7%9C%D7%A9%D7%90%D7%95%D7%9C+%D7%9E%D7%A9%D7%94%D7%95+%D7%91%D7%A0%D7%95%D7%92%D7%A2+%D7%9C%D7%94%D7%A8%D7%A6%D7%90%D7%94+%D7%A9%D7%9C%D7%9A+%D7%91+Complex+2024:"
+              - text: או ב
+              - link "לינקדאין" [ref=e158] [cursor=pointer]:
+                - /url: https://linkedin.com/in/solomontal/
+              - text: .
+            - paragraph [ref=e159]: במהלך החודשים הקרובים אפרסם פה חלקים מההרצאה שישלימו את התמונה המלאה למודל כולו. זה לא יקרה בבת אחת וטוב שכך - מדובר על מודל ענף, עם תכנים שונים ומגוונים שעל כל אחד אפשר לכתוב ספר. קחו את הזמן ללמוד וליישם בחלקים - לא צריך לעשות הכל בבת אחת (סמכו עליי, הייתי שם..).
+            - paragraph [ref=e160]:
+              - text: אוקיי, אז למי שאין מושג על מה אני מדבר בכלל, בהרצאה הצגתי את המודל שלי שנקרא
+              - emphasis [ref=e161]: מודל הדגים
+              - text: . מודל הדגים מבוסס על
+              - link "גישת היהלום הכפול" [ref=e162] [cursor=pointer]:
+                - /url: https://www.designcouncil.org.uk/our-resources/the-double-diamond/
+              - text: (the Double Diamond) בה אני משתמש בערך עשור, תוך שאני מייעל אותה לכדי תהליכים מאוד מוגדרים עבור 4 סוגי פרויקטים שונים המיוצגים על ידי 4 דגים.
+            - heading "יהלומים כפולים Link" [level=2] [ref=e163]:
+              - strong [ref=e164]: יהלומים כפולים
+              - button "Link" [ref=e167] [cursor=pointer]:
+                - img [ref=e168]
+            - paragraph [ref=e171]: "כשהגעתי לרדיס במטרה להקים את צוות עיצוב המוצר (תוך שאני יורש מעצבת ומעצב קיימים) נתקלתי בכמה נקודות שהרגשתי שהגבילו את היכולת של הצוות לדלוור עיצובים בצורה אג׳ילית ויעילה:"
+            - list [ref=e172]:
+              - listitem [ref=e173]:
+                - paragraph [ref=e174]:
+                  - text: המעצבים/ות
+                  - strong [ref=e175]: לא היו מעורבים בספרינטים
+                  - text: של צוותי הפיתוח ובגדול לא היו מעורבים במה שמכונה באג׳ייל
+                  - link "Squad" [ref=e176] [cursor=pointer]:
+                    - /url: https://daily.dev/blog/agile-squad-model-explained
+                  - text: .
+              - listitem [ref=e177]:
+                - paragraph [ref=e178]:
+                  - strong [ref=e179]: חוסר בשפה משותפת
+                  - text: בין הפיתוח למעצבים/ות, עם טלפון שבור בדמות מנהלי/ות מוצר שמעבירים את המידע מצד לצד תוך עדכון שוטף של PRD מפלצתי.
+              - listitem [ref=e180]:
+                - paragraph [ref=e181]:
+                  - strong [ref=e182]: מיקבול לא נכון של משימות עיצוב
+                  - text: . אמנם המעצבת המובילה מיקבלה משימות בעל-כורחה (מעצם העובדה שעד חצי שנה לפני שהצטרפתי היא הייתה המעצבת היחידה) אולם האופן בו משימות מוקבלו היה על-בסיס רודמאפ ולא על בסיס זמינות או לוגיקה שתמקסם את היכולת של המעצבת.
+            - figure [ref=e184]:
+              - link "ree" [ref=e185]:
+                - /url: https://substackcdn.com/image/fetch/$s_!g_nI!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F984db956-fb9b-4073-bd96-d2296d902ab9_1056x594.png
+                - generic [ref=e186]:
+                  - img "ree" [ref=e188]
+                  - generic [ref=e190]:
+                    - button [ref=e191] [cursor=pointer]:
+                      - img [ref=e192]
+                    - button [ref=e194] [cursor=pointer]:
+                      - img [ref=e195]
+            - paragraph [ref=e196]: רדיס מפתחת מוצר מאוד טכני, דאטהבייסים, שלי אישית (ולכל המעצבים/ות שגייסתי) לא היה ניסיון מוקדם בתחום. המשתמשים העיקריים של רדיס הם Dev-ops, אותםן חבר׳ה שדואגים שכל היבטי הפיתוח ינגנו יפה יחד (כולל הדאטהבייסים הנדרשים לשמור את המידע שיושב או נכתב באפליקציה שמחוברת לאותו דאטהבייס).
+            - paragraph [ref=e197]:
+              - text: כשהגעתי, לא היה לשותפים שלנו (מפתחות, מנהלי מוצר וכו׳) ניסיון עם תהליכי עיצוב מוכווני-משתמש. עיקר העבודה (אז) הייתה להוריד לנייר (בצורה שמישה לחלוטין) את הפתרונות של מנהלי המוצר לחוסרים ביכולות שמשרתים בעיקר את ה- Design partners של רדיס.
+              - strong [ref=e198]: שלב קריטי בחיים של כל סטרטאפ שאי פעם הוקם
+              - text: . אממה, ניכר היה שבשיחות שלנו עם השותפים אנחנו בעיקר מדברים על פתרונות או צרכים טכנולוגיים ופחות על צרכי משתמשים הנובעים מחוויית משתמש (UX) לא טובה (לעומת חוסרים פונקציונליים יבשים).
+            - paragraph [ref=e199]: אני, לעומת זאת, תומך נלהב של גישות עיצוב מוכוונות-משתמשים ובפרט בגישת היהלום הכפול ואני משתדל עד מוודא שאנחנו ניישם את הגישה בכל מקום עבודה אני מגיע אליו (שאוט-אאוט בנק הפועלים! אוטודסק! האניבוק!).
+            - figure "המקום היחיד שתראו דאבל דיאמונד מימין לשמאל" [ref=e201]:
+              - link "ree" [ref=e202]:
+                - /url: https://substackcdn.com/image/fetch/$s_!QfpV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F774b0adb-5c9e-45e8-8e2f-6f389148008c_1056x594.png
+                - generic [ref=e203]:
+                  - img "ree" [ref=e205]
+                  - generic [ref=e207]:
+                    - button [ref=e208] [cursor=pointer]:
+                      - img [ref=e209]
+                    - button [ref=e211] [cursor=pointer]:
+                      - img [ref=e212]
+              - generic [ref=e213]: המקום היחיד שתראו דאבל דיאמונד מימין לשמאל
+            - paragraph [ref=e214]: "הגישה משתמשת ב- 2 יהלומים המייצגים 2 ״מרחבים״:"
+            - list [ref=e215]:
+              - listitem [ref=e216]:
+                - paragraph [ref=e217]: מרחב הבעיה, בו נרצה להבין למה משהו קורה.
+              - listitem [ref=e218]:
+                - paragraph [ref=e219]: מרחב הפתרון, בו נרצה לייצר את הפתרון הטוב ביותר לבעיה שמצאנו ביהלום הראשון.
+            - paragraph [ref=e220]:
+              - text: אליבא דדאבל דיאמונד, הדרך שלנו
+              - strong [ref=e221]: להבין בעיה
+              - text: היא ללמוד אותה כמו שצריך ואז למסגר אותה באופן מאוד ממוקד כדי לפקס את העוסקים במלאכה. הדרך שלנו
+              - strong [ref=e222]: לייצר פתרון
+              - text: טוב היא לעצב פתרון אפשרי לאורה של הבעיה ואז להיכנס למעגלי איטרציה של ניסוי וטעייה.
+            - figure [ref=e224]:
+              - link "ree" [ref=e225]:
+                - /url: https://substackcdn.com/image/fetch/$s_!APHh!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4c343a4-c47d-43ad-9d44-994a67bc1c08_1056x594.png
+                - generic [ref=e226]:
+                  - img "ree" [ref=e228]
+                  - generic [ref=e230]:
+                    - button [ref=e231] [cursor=pointer]:
+                      - img [ref=e232]
+                    - button [ref=e234] [cursor=pointer]:
+                      - img [ref=e235]
+            - paragraph [ref=e236]: "והשוס של הדאבל דיימונד, משהו שהוספתי לו במהלך השנים ואתם בטוח תאהבו לראות, זה שלכל שלב כזה אנחנו יכולים לצמד המון מתודות שיעזרו לדחוף את התהליך קדימה בצורה מוכוונת משתמשים, למשל:"
+            - figure "חלק מהשיטות הן המצאות שלי שפיתחתי במהלך הדרך (ט.ס.)" [ref=e238]:
+              - link "ree" [ref=e239]:
+                - /url: https://substackcdn.com/image/fetch/$s_!oyIn!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F750240ca-a82e-403e-88e9-ae6e0333e191_1056x592.png
+                - generic [ref=e240]:
+                  - img "ree" [ref=e242]
+                  - generic [ref=e244]:
+                    - button [ref=e245] [cursor=pointer]:
+                      - img [ref=e246]
+                    - button [ref=e248] [cursor=pointer]:
+                      - img [ref=e249]
+              - generic [ref=e250]: חלק מהשיטות הן המצאות שלי שפיתחתי במהלך הדרך (ט.ס.)
+            - paragraph [ref=e251]: מה שאתם רואים כאן אלו רק חלק מהמתודות וכמובן אפשר להוסיף ולהחליף מתודות שמתאימות לכל שלב ביהלום הכפול. עם זאת, יש כמה בעיות בגישת היהלום הכפול. למשל הליניאריות שלה או חוסר הגמישות שלה (לפחות כפי שמשתקף מהצורה ומהתפיסה הכללית של ה- UK Design Council).
+            - code [ref=e253]:
+              - strong [ref=e254]: עובדה חביבה (fun fact)
+              - text: ה- UK Design Council העומדים מאחורי הדאבל דיאמונד, למעשה ביססו את המודל שלהםן על
+              - link "מודל ה״פתיחה-סגירה״" [ref=e255] [cursor=pointer]:
+                - /url: https://link.springer.com/book/10.1007/978-1-4757-9981-1
+              - text: (the divergence-convergence model) שהוצג לעולם על-ידי Béla H. Bánáthy, איש תנועת הצופים (וחוקר שפה) אמריקאי-הונגרי, שהמציא את המודל שלו עבור קורסי הדרכה בתנועת הצופים האמריקאית. כבוגר ומרכז לשעבר בתנועת הצופים, אני מוצא את זה משעשע במיוחד. הייה נכון!
+            - heading "דגים מוזרים Link" [level=2] [ref=e256]:
+              - strong [ref=e257]: דגים מוזרים
+              - button "Link" [ref=e260] [cursor=pointer]:
+                - img [ref=e261]
+            - paragraph [ref=e264]: בפגישת העבודה הראשונה שלי עם מנהלי המוצר הם הציגו לי 2 בעיות שהם לא היו בטוחים כיצד לפתור. אולם בעוד הבעיה הראשונה מבוססת על היוריסטיקות וכללי שמישות שיכולים לעזור לי לזהות את הכשלים העיצוביים מבלי להיכנס לאזורים הטכנולוגיים שקשורים לרדיס עצמה, הבעיה השנייה שהוצגה לי הייתה מורכבת, טכנית (מבוססת טכנולוגיה ספציפית למשתמשי רדיס) וכזו שהפתרון אליה צפוי לכלול מספר שלבים ומספר אזורים במערכת.
+            - paragraph [ref=e265]: "כאמור, את הבעיה הראשונה יכולתי לפתור ״על המקום״ באמצעות הדאבל דיאמונד:"
+            - figure [ref=e267]:
+              - link "ree" [ref=e268]:
+                - /url: https://substackcdn.com/image/fetch/$s_!0eVE!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd570edd1-21ae-4467-b9cb-891857025c45_1056x592.png
+                - generic [ref=e269]:
+                  - img "ree" [ref=e271]
+                  - generic [ref=e273]:
+                    - button [ref=e274] [cursor=pointer]:
+                      - img [ref=e275]
+                    - button [ref=e277] [cursor=pointer]:
+                      - img [ref=e278]
+            - paragraph [ref=e279]: ביצעתי מחקר היוריסטי וספציפית זיהיתי את חוק היקס כסופר רלוונטי, שכן היה על המשתמש למצוא כפתור קטן בתוך מסך עם המון אזורי לחיצה אפשריים.
+            - blockquote [ref=e280]:
+              - paragraph [ref=e281]: חוק היקס אומר שככל שמספר האפשרויות על המסך גדל, זמן התגובה של המשתמש עולה.
+            - paragraph [ref=e282]: אח״כ ביצעתי יחד עם הצוות HMW (How Might We) מהיר שעזר לנו להבין טוב יותר את מוקד הבעיה ולג׳נרט פתרונות ״מעוצבים״ עוד לפני שגיבשנו הגדרת בעיה סופית.
+            - blockquote [ref=e283]:
+              - paragraph [ref=e284]: "שיטת ה- HMW מאפשרת לדמיין פתרונות אפשריים לבעיות הנכונות על-ידי שאילת השאלה How Might We שהמשכה מסנתז בעיה ופתרון. למשל (בעברית): ״איך נוכל לגרום למשתמשיםות להרגיש בטוחים בזמן שהם מכניסים את פרטיהםן לאתר שלנו בתהליך ההרשמה אליו״."
+            - paragraph [ref=e285]:
+              - text: הצעת הפתרון שלי הסתמכה על יצירת Tooltip שישמש כמעין ״שלט״ שמצביע (או צועק)
+              - strong [ref=e286]: הי! זה השלב הבא! תלחצי פה!
+              - text: "וזה נראה משהו כזה:"
+            - figure [ref=e288]:
+              - link "ree" [ref=e289]:
+                - /url: https://substackcdn.com/image/fetch/$s_!j18-!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9a538d7a-8529-447c-8de6-c5f0bc85b358_1056x592.png
+                - generic [ref=e290]:
+                  - img "ree" [ref=e292]
+                  - generic [ref=e294]:
+                    - button [ref=e295] [cursor=pointer]:
+                      - img [ref=e296]
+                    - button [ref=e298] [cursor=pointer]:
+                      - img [ref=e299]
+            - paragraph [ref=e300]: לאחר דיזיין ספרינט קצר בו יצרנו מספר אפשרויות יכולנו כבר להגיע עם 2 עיצובים שייבדקו באמצעות A/B test. תהליך קלאסי של עיצוב קצר המבוסס על ההיכרות שלנו עם היוריסטיקות וכללי שמישות. אין כאן שום דבר שמתקשר לעולם התוכן של רדיס, מה שאיפשר לנו לבצע את המשימה בצורה מהירה ובלי עזרה מהשותפים שלנו. כל מה שהיינו צריכים זה קצת זמן עבור המעצבת לשבת ולסגור את העיצוב, כולל האינטראקציות (כיצד יופיע הטולטיפ, לכמה זמן יוצג, האם יוצג בשנית לאחר שמשתמש דיסמס אותו, וכו׳).
+            - paragraph [ref=e301]: "כאתגר UXי, זה אתגר מאוד פשוט:"
+            - paragraph [ref=e302]:
+              - text: אם נראה שאפילו כשיש שלט (טולטיפ) המשתמשים עדיין לא לוחצים על כפתור החיבור, נבין שזו לא בעיית שמישות אלא
+              - emphasis [ref=e303]: בעיית ערך
+              - text: "- המשתמשים רואים את הכפתור אבל לא רואים את הערך בללחוץ עליו."
+            - paragraph [ref=e304]: הפרויקט השני, לעומת זאת, היה שונה בתכלית.
+            - paragraph [ref=e305]: זה היהה פרויקט שהתחיל עבורי בללמוד מושג חדש (שהיווה את שם הפרויקט, משהו עם Access Control) והמשיך עם עוד עשרות מושגים חדשים שמעולם לא שמעתי (או קראתי) בחיי, כמוgeo-distribution, regions, replicas, active-passive, ועוד.
+            - paragraph [ref=e306]: הדבר הראשון שעבר לי בראש היה שאני צריך פה ראיונות ומחקר מתחרים והגדרת בעיה וניתוח פעולות וריבוי קונספטים ולולאות מישוב .... -
+            - paragraph [ref=e307]: "יש פה הרבה יותר שלבים עד שנוכל להתחיל לדבר על ״פתרונות״:"
+            - figure [ref=e309]:
+              - link "ree" [ref=e310]:
+                - /url: https://substackcdn.com/image/fetch/$s_!3zha!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ad53491-ad01-4804-a900-693c96307238_1056x594.png
+                - generic [ref=e311]:
+                  - img "ree" [ref=e313]
+                  - generic [ref=e315]:
+                    - button [ref=e316] [cursor=pointer]:
+                      - img [ref=e317]
+                    - button [ref=e319] [cursor=pointer]:
+                      - img [ref=e320]
+            - paragraph [ref=e321]: "ואז מנהל המוצר אמר את המשפט שהיה כל מה שחסר לי כדי לארוז את המודל שלי:"
+            - blockquote [ref=e322]:
+              - paragraph [ref=e323]: ״אז זה בעצם... וואחד יהלום?!״
+            - paragraph [ref=e324]: כן, וואחד יהלום indeed.
+            - paragraph [ref=e325]: אין לי שום יכולת או דרך להסתמך כאן על הרקע הענף שלי בפסיכולוגיה, בעיצוב, במחקר, באפיון - כלום לא יעזור לי פה פשוט כי אני לא מכיר את החומר שמדברים עליו. זה כמו לאמן קבוצת כדורגל מבלי לדעת מה זה נבדל.
+            - paragraph [ref=e326]: "פה הבנתי שאני יכול לחלק את כל הפרויקטים שעשיתי ושנעשה בהמשך ל- 2 צירים מרכזיים:"
+            - paragraph [ref=e327]: היכרות מוקדמת והיקף.
+            - 'figure "צד שמאל למעלה: פרויקט קטן (היכרות גבוהה והיקף מצומצם) צד ימין למטה: פרויקט גדול( היכרות נמוכה והיקף רחב)" [ref=e329]':
+              - link "ree" [ref=e330]:
+                - /url: https://substackcdn.com/image/fetch/$s_!vac9!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe5334025-12ed-48ea-9670-eb2ec6ca2b47_1056x588.png
+                - generic [ref=e331]:
+                  - img "ree" [ref=e333]
+                  - generic [ref=e335]:
+                    - button [ref=e336] [cursor=pointer]:
+                      - img [ref=e337]
+                    - button [ref=e339] [cursor=pointer]:
+                      - img [ref=e340]
+              - generic [ref=e341]: "צד שמאל למעלה: פרויקט קטן (היכרות גבוהה והיקף מצומצם) צד ימין למטה: פרויקט גדול( היכרות נמוכה והיקף רחב)"
+            - paragraph [ref=e342]: ציר ההיכרות המוקדמת משקף, ובכן, את ההיכרות המוקדמת של המעצבים או של השותפים הלא-מעצבים שלנו, עם צרכי המשתמשים והטכנולוגיה שבמוקד הפרויקט הזה. ככל שההיכרות גבוהה יותר, משמע שאני יכול לפתור את הבעיה ביתר קלות, שכן ״אני דובר את שפת המקום״. ככל שההיכרות נמוכה יותר, אתקשה לפתור את הבעיה ״על המקום״ שכן עליי לחקור ולהבין מה עומד במרכזה.
+            - paragraph [ref=e343]:
+              - text: הציר השני, ציר ההיקף, מתייחס למספר המסכים שהפרויקט הזה
+              - emphasis [ref=e344]: צפוי
+              - text: "לדרוש מאיתנו לעצב. איך יודעים? חישבו על הבעיות כלוקאליות או גלובליות:"
+            - paragraph [ref=e345]: פנצ׳ר בגלגל? בעיה לוקלית, ברגע שנחליף את הגלגל הספציפי (הנקור) הבעיה תיפתר.
+            - paragraph [ref=e346]: זיהום אוויר? בעיה גלובלית, גם אם נטפל במיכלי האמוניה שבעיר חיפה, עדיין יהיה זיהום גבוה מאוד בישראל ובשאר העולם (שככל הנראה לא יושפע מאוד מהשיפור באיכות האוויר החיפאי).
+            - paragraph [ref=e347]: ובאנלוגיה לעולם שלנו, בעיה מקומית היא בעיה שתיפתר באופן נקודתי, בד״כ עם רכיב אחד או שניים הממוקמים באזור אחד (מקסימום שניים). למשל, הבעיה הראשונה שהצגתי פה שנפתרה באמצעות הטולטיפ. מדובר על בעיה מאוד מקומית (עמוד מסוים) בה המשתמש לא מצליח לבצע משימה באותו העמוד. הפתרון, אפוא, יהיה מקומי גם הוא.
+            - paragraph [ref=e348]:
+              - text: הבעיה השנייה, לעומת זאת, היא בעיה גלובלית. היא משלבת מספר אזורים, הרבה שלבי עבודה ואפילו מספר משתמשים שעובדים עליה במקביל. כמובן שכשהתחלנו לעבוד על הבעיה לא ידענו מה יהיה הפתרון, אבל
+              - strong [ref=e349]: הבעיה
+              - text: עצמה התייחסה לחוסר מסוים בתהליך שחייב להיפרס על פני כמה אזורים במערכת ולגעת במספר משתמשים שונים, מה שאיפשר לנו לדעת מראש שמדובר על בעיה גלובלית ולפיכך היקף המסכים הצפוי עבורה יהיה גבוה.
+            - figure [ref=e351]:
+              - link "ree" [ref=e352]:
+                - /url: https://substackcdn.com/image/fetch/$s_!jQUr!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7546ddf-ca9e-4889-83a3-01c960489f56_1056x590.png
+                - generic [ref=e353]:
+                  - img "ree" [ref=e355]
+                  - generic [ref=e357]:
+                    - button [ref=e358] [cursor=pointer]:
+                      - img [ref=e359]
+                    - button [ref=e361] [cursor=pointer]:
+                      - img [ref=e362]
+            - paragraph [ref=e363]: נשארו לנו כרגע 2 רבעונים במודל שטרם הזכרנו.
+            - paragraph [ref=e364]:
+              - text: נתחיל עם הרבעון הימני העליון (בעיה מוכרת + היקף מסכים צפוי גדול). שוו בנפשכםן הוספה או עיצוב מחדש של מערכת תשלומים חדשה (billing system). מערכת תשלומים היא פתרון שקיים בכל מערכת SAAS ולכן סביר להניח שכבר עיצבתםן כזה בחייכםן המקצועיים, וחשוב מכך - סביר שהמשתמשים שלנו כבר פגשו מערכת כזו באחד המוצרים האחרים שהם עובדים איתו. למעשה, מכיוון שאנחנו יודעים שמדובר על סוג של פיצ׳ר שיהיה נוכח בכל מערכת SAAS, אנחנו נרצה
+              - strong [ref=e365]: לא
+              - text: להמציא את הגלגל מחדש ולהשתמש במה שאנחנו קוראים לו
+              - strong [ref=e366]: קונבנציה
+              - text: . אנחנו נעצב את מערכת התשלומים שלנו על בסיס אלו שהמשתמשים שלנו כבר ראו ופגשו. משמע שתהליך המחקר המקדים יהיה ממוקד מאוד וככל הנראה גם קצר, שכן אנחנו בעיקר נסקור את המערכות שהמשתמשים עובדים איתן ונוודא שהן עונות על כל צרכי המשתמשים שלנו.
+            - paragraph [ref=e367]: אממה, תהליך העיצוב ייקח יותר זמן מהפרויקטים הקטנים, שהצגתי ברבעון השמאלי-עליון, שכן מההיכרות שלנו עם מערכות תשלומים, מדובר בד״כ על לא מעט מסכים בשל ריבוי האינטראקציות, המצבים, השלבים וכדומה.
+            - figure [ref=e369]:
+              - link "ree" [ref=e370]:
+                - /url: https://substackcdn.com/image/fetch/$s_!IYHk!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1eedb18c-eec9-4896-bdf0-c04281c5f051_1056x592.png
+                - generic [ref=e371]:
+                  - img "ree" [ref=e373]
+                  - generic [ref=e375]:
+                    - button [ref=e376] [cursor=pointer]:
+                      - img [ref=e377]
+                    - button [ref=e379] [cursor=pointer]:
+                      - img [ref=e380]
+            - paragraph [ref=e381]: וברבעון האחרון (שמאלי-תחתון) אנחנו נמצא את הפרויקטים הפותרים בעיה מקומית שלנו כמעצבים יש רמת היכרות מאוד נמוכה איתה, מה שידרוש מאיתנו לבצע לא מעט מחקר מקדים.
+            - paragraph [ref=e382]: דוגמה טובה תהיה פרויקט שקראנו לו - Maintenance window, ובעברית - חלון תחזוקה.
+            - paragraph [ref=e383]: זה פרויקט שהחליף עבורנו תהליך תחזוקה שעד כה נעשה באופן ידני על ידי שירות הלקוחות הטכני שלנו (SA) ותואם ישירות מול הלקוחות. במילים אחרות, מעבר לחלון תחזוקה דיגיטלי יחסוך עבורנו שעות על גבי שעות של עבודת SAים ויאפשר למשתמשים לא להתכתב איתנו במיילים אלא פשוט לגשת לאזור המתאים ולעדכן את הזמן המתאים להם ביותר לבצע תחזוקת מערכת.
+            - paragraph [ref=e384]: אבל! תהליך תחזוקה כולל זמן Down-time בו האפליקציה של הלקוחות שלנו תהיה מושבתת (זו הסיבה שאת רוב חלונות התחזוקה עושים בסופי-שבוע או בשעות הקטנות של הלילה). בשל זאת ועוד, אנחנו רצינו לוודא שאנחנו ״מחקים״ את התהליך של ה- CSעם מול הלקוחות שלנו ובכך מונעים השבתה לא מתוכננת של האפליקציות שלהםן.
+            - paragraph [ref=e385]: ומרגע שסיימנו ללמוד על התהליך, תהליך העיצוב יהיה מהיר, משום ש
+            - list [ref=e386]:
+              - listitem [ref=e387]:
+                - paragraph [ref=e388]: מדובר על בעיה לוקלית, ומשום כך גם הפתרון יהיה לוקלי.
+              - listitem [ref=e389]:
+                - paragraph [ref=e390]: תהליך הלמידה (המחקר והאפיון) מאפשרים לנו כבר לדמיין את הפתרון בצורה יחסית ברורה, ולכן שלב העיצוב יהיה בעיקר להעביר את המחשבות לנייר (בניגוד להתמודדות עם קנבס ריק).
+            - figure [ref=e392]:
+              - link "ree" [ref=e393]:
+                - /url: https://substackcdn.com/image/fetch/$s_!RPXR!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F41dcc7a7-87d9-404f-a2a7-36f3e3850e3d_1056x590.png
+                - generic [ref=e394]:
+                  - img "ree" [ref=e396]
+                  - generic [ref=e398]:
+                    - button [ref=e399] [cursor=pointer]:
+                      - img [ref=e400]
+                    - button [ref=e402] [cursor=pointer]:
+                      - img [ref=e403]
+            - paragraph [ref=e404]: בשלב הזה התחלתי לחשוב איך אני מוכר את הגריד הזה (שתיכף יהפוך למודל) לחברה, לצוות שלי וכמובן לשותפים שלי (המפתחים ומנהלי המוצר). איך אני מצליח לשכנע אותםן שזו הדרך הנכונה להסתכל על משימות? הפרצוף היפה שלי לא יציל אותי הפעם ולכן הייתי חייב hook שיכניס את המודל לא.נשים לתוך הראש ובין אם הם יאהבו אותו או לא, הם לא יוכלו לשכוח אותו.
+            - paragraph [ref=e405]: ואז הסתכלתי עליו ופשוט ראיתי את זה..
+            - figure [ref=e407]:
+              - link "ree" [ref=e408]:
+                - /url: https://substackcdn.com/image/fetch/$s_!U_mx!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F32cc43c8-5bae-4373-b2fd-f10fdf0f1341_1056x590.png
+                - generic [ref=e409]:
+                  - img "ree" [ref=e411]
+                  - generic [ref=e413]:
+                    - button [ref=e414] [cursor=pointer]:
+                      - img [ref=e415]
+                    - button [ref=e417] [cursor=pointer]:
+                      - img [ref=e418]
+            - paragraph [ref=e419]:
+              - strong [ref=e420]: דגים.
+            - paragraph [ref=e421]: הכל הזכיר לי דגים פתאום.
+            - figure [ref=e423]:
+              - link "ree" [ref=e424]:
+                - /url: https://substackcdn.com/image/fetch/$s_!jAQm!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F37d1bee7-000d-48dd-be04-fbb473ca4780_1056x590.png
+                - generic [ref=e425]:
+                  - img "ree" [ref=e427]
+                  - generic [ref=e429]:
+                    - button [ref=e430] [cursor=pointer]:
+                      - img [ref=e431]
+                    - button [ref=e433] [cursor=pointer]:
+                      - img [ref=e434]
+            - heading "מודל הדגים Link" [level=2] [ref=e435]:
+              - strong [ref=e436]: מודל הדגים
+              - button "Link" [ref=e439] [cursor=pointer]:
+                - img [ref=e440]
+            - paragraph [ref=e443]: "במודל הדגים יש לנו 4 דגים שמייצגים 4 סוגי פרויקטים:"
+            - figure [ref=e445]:
+              - link "ree" [ref=e446]:
+                - /url: https://substackcdn.com/image/fetch/$s_!8QXR!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff75ae8e0-8f1d-4304-9ad2-38474bb40aa0_1056x590.png
+                - generic [ref=e447]:
+                  - img "ree" [ref=e449]
+                  - generic [ref=e451]:
+                    - button [ref=e452] [cursor=pointer]:
+                      - img [ref=e453]
+                    - button [ref=e455] [cursor=pointer]:
+                      - img [ref=e456]
+            - paragraph [ref=e457]:
+              - strong [ref=e458]: נמו
+              - text: .
+            - paragraph [ref=e459]: נמו מצייג את הפרויקטים הקטנים והמהירים. בשבילו אנחנו לא צריכים PRD או ישיבות ארוכות, אנחנו בעיקר צריכים לפנות למעצבת את הזמן והיא תסיים את המשימה תוך פחות מספרינט.
+            - paragraph [ref=e460]:
+              - strong [ref=e461]: טונה
+              - text: .
+            - paragraph [ref=e462]: פרויקטים מסוג טונה מאוד דומים לנימו, רק גדולים יותר. הם קלילים יחסית מבחינת עיצוב מוכוון-משתמשים, כלומר מאפשרים לנו להישען על קונבנציות וחוקי בסיס של עיצוב חוויית משתמש כדי להשלים אותם בהצלחה.
+            - paragraph [ref=e463]:
+              - strong [ref=e464]: סלמון
+              - text: .
+            - paragraph [ref=e465]: דגי סלמון מייצגים את הפרויקטים שידרש בהם הרבה מחקר, אלו שאנחנו יוצאים אליהם די טאבולה ראסה, ואנחנו נצטרך מעורבות גבוהה של השותפים הלא מעצבים שלנו - מנהלות המוצר, המפתחות, אנשי שירות הלקוחות וכמובן - המשתמשים.
+            - paragraph [ref=e466]:
+              - strong [ref=e467]: ווילי
+              - text: .
+            - paragraph [ref=e468]: ווילי מייצג את הפרויקטים האסטרטגיים, פרויקטים כבדים וארוכים שאף פעם לא נצליח לשחרר - בדיוק כמו את הווילי ההוא מהסרט בשנות ה- 90. וכן, אני יודע שטכנית לא מדובר בדג (שי, זה בשבילך 🫶).
+            - figure [ref=e470]:
+              - link "ree" [ref=e471]:
+                - /url: https://substackcdn.com/image/fetch/$s_!j_FR!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff1868993-482c-4e9e-94a5-a88405f4efde_700x978.jpeg
+                - generic [ref=e472]:
+                  - img "ree" [ref=e474]
+                  - generic [ref=e476]:
+                    - button [ref=e477] [cursor=pointer]:
+                      - img [ref=e478]
+                    - button [ref=e480] [cursor=pointer]:
+                      - img [ref=e481]
+            - paragraph [ref=e482]: באמצעות הדגים אני יודע להעריך בביטחון כמה זמן ייקח לי כל פרויקט.
+            - paragraph [ref=e483]: איך?
+            - paragraph [ref=e484]: "אה, כי אני יודע (כמעט) בדיוק איך יראה תהליך העבודה עליהם. לכל דג יש את המתודות שלו שהופכות אותו לדג שהוא:"
+            - paragraph [ref=e485]:
+              - strong [ref=e486]: נמו
+              - text: .
+            - paragraph [ref=e487]: עבור נימו אנחנו נסתמך הרבה על מתחרים ועל היוריסטיקות, אנחנו נמסגר את הבעיה אבל לא נגדיר אותה לעומק או נעשה ניתוח פעולות. ואנחנו נעשה בריינסטורמס ודיזיין ספרינטס עם השותפים הלא-מעצבים שלנו כדי להגיע כמה שיותר מהר למסכים שאפשר לבחון בזריזות.
+            - figure [ref=e489]:
+              - link "ree" [ref=e490]:
+                - /url: https://substackcdn.com/image/fetch/$s_!uHG6!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5383e283-493b-4939-992b-d0735a65292f_1056x592.png
+                - generic [ref=e491]:
+                  - img "ree" [ref=e493]
+                  - generic [ref=e495]:
+                    - button [ref=e496] [cursor=pointer]:
+                      - img [ref=e497]
+                    - button [ref=e499] [cursor=pointer]:
+                      - img [ref=e500]
+            - paragraph [ref=e501]:
+              - strong [ref=e502]: טונה
+              - text: .
+            - paragraph [ref=e503]: בטונה, אנחנו נשקיע קצת יותר ב״מסע״ ובמה שהמשתמש יעבור בהמשך - הרי מדובר על הרבה מסכים לעבור ביניהם… אנחנו לא נצטרך לצלול לעובי הבעיה כי היא לא בעיה מורכבת, אבל אנחנו כן נרצה לייצר סטוריבורדים ברורים כדי לוודא שאנחנו לא מפספסים שום ״מצב״ בין שלל המסכים שאנחנו עומדים לעצב.
+            - figure [ref=e505]:
+              - link "ree" [ref=e506]:
+                - /url: https://substackcdn.com/image/fetch/$s_!o8b0!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe2837ae1-a4f7-4ecd-9505-564652f23dbf_1056x592.png
+                - generic [ref=e507]:
+                  - img "ree" [ref=e509]
+                  - generic [ref=e511]:
+                    - button [ref=e512] [cursor=pointer]:
+                      - img [ref=e513]
+                    - button [ref=e515] [cursor=pointer]:
+                      - img [ref=e516]
+            - paragraph [ref=e517]:
+              - strong [ref=e518]: סלמון
+              - text: .
+            - paragraph [ref=e519]: "בפרויקטים מסוג סלמון שאותם תוביל החוקרת שלנו, נשים דגש על הפן המחקרי:"
+            - paragraph [ref=e520]: נדבר עם משתמשים, עם שותפים לא-מעצבים ולמעשה עם כל stakeholder שנוכל.
+            - paragraph [ref=e521]: אח״כ ננתח לעומק את מסע המשתמש ונגדיר את הבעיה. אנחנו לא נעצב פה הרבה מסכים אלא בעיקר נתמקד בלוודא שהמסכים המעטים שאנחנו כן מעצבים אכן פותרים את הבעיה בצורה מושלמת עוד לפני שאנחנו משיקים את הפתרון.
+            - figure [ref=e523]:
+              - link "ree" [ref=e524]:
+                - /url: https://substackcdn.com/image/fetch/$s_!vKmw!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbced23db-5896-402e-91b6-bb8a014fe2c5_1056x592.png
+                - generic [ref=e525]:
+                  - img "ree" [ref=e527]
+                  - generic [ref=e529]:
+                    - button [ref=e530] [cursor=pointer]:
+                      - img [ref=e531]
+                    - button [ref=e533] [cursor=pointer]:
+                      - img [ref=e534]
+            - paragraph [ref=e535]:
+              - strong [ref=e536]: ווילי
+              - text: .
+            - paragraph [ref=e537]: ווילי כאמור אלו אותם פרויקטים אסטרטגיים שאנחנו מתחייבים להם ברודמאפ ועובדים עליהם סביב השעון.
+            - paragraph [ref=e538]: הם יקחו לנו לפחות חודש וכולם יהיו מעורבים בהם בצורה כזו או אחרת. לכן אנחנו נרצה להתכונן לפרויקטים כאלו הרבה זמן מראש וננסה להספיק כמה שיותר מתודות כדי להיות כמה שיותר בטוחים בפתרון שלנו.
+            - figure [ref=e540]:
+              - link "ree" [ref=e541]:
+                - /url: https://substackcdn.com/image/fetch/$s_!8zAz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fddbb72c5-fea0-44d8-aed0-7a3bbdbd9015_1056x590.png
+                - generic [ref=e542]:
+                  - img "ree" [ref=e544]
+                  - generic [ref=e546]:
+                    - button [ref=e547] [cursor=pointer]:
+                      - img [ref=e548]
+                    - button [ref=e550] [cursor=pointer]:
+                      - img [ref=e551]
+            - paragraph [ref=e552]: "תסתכלו על השקף הזה:"
+            - figure [ref=e554]:
+              - link "ree" [ref=e555]:
+                - /url: https://substackcdn.com/image/fetch/$s_!Rd--!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F03c20f1a-d186-4980-8b53-76dd8eb9c8ee_1056x592.png
+                - generic [ref=e556]:
+                  - img "ree" [ref=e558]
+                  - generic [ref=e560]:
+                    - button [ref=e561] [cursor=pointer]:
+                      - img [ref=e562]
+                    - button [ref=e564] [cursor=pointer]:
+                      - img [ref=e565]
+            - paragraph [ref=e566]: זה שקף שהצגתי לכל החברה בסיום של אחד הרבעונים שלנו ברדיס. אנחנו רואים פה את מספר המשימות שהצוות שלי (צוות עיצוב המוצר) הצליח לסיים ברבעון הראשון בו השתמשנו במודל הדגים.
+            - paragraph [ref=e567]: לא המון משימות. האמת, משימות בודדות שרובן המוחלט מתוכננות מראש, כלומר חלק מהרודמאפ.
+            - paragraph [ref=e568]: "אבל תראו מה קרה ברבעון שאחריו:"
+            - figure [ref=e570]:
+              - link "ree" [ref=e571]:
+                - /url: https://substackcdn.com/image/fetch/$s_!9uhf!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F04addf08-d648-4477-b872-af3b54a6a1b9_1056x592.png
+                - generic [ref=e572]:
+                  - img "ree" [ref=e574]
+                  - generic [ref=e576]:
+                    - button [ref=e577] [cursor=pointer]:
+                      - img [ref=e578]
+                    - button [ref=e580] [cursor=pointer]:
+                      - img [ref=e581]
+            - paragraph [ref=e582]: לא רק שהצלחנו להכניס יותר משימות רודמפאיות (מתוכננות) אלא גם הצלחנו להתמודד עם המון משימות שלא היו מתוכננות בכלל או משימות איטרציה - שלבי ב׳ של משימות שלא הצלחנו להגיע אליהן עד כה…!
+            - heading "יוצאים מהמים Link" [level=2] [ref=e583]:
+              - strong [ref=e584]: יוצאים מהמים
+              - button "Link" [ref=e587] [cursor=pointer]:
+                - img [ref=e588]
+            - paragraph [ref=e591]: "זוכרים איך התחלתי? עם כל הבעיות שזיהיתי כשהגעתי לרדיס? אז חשוב להגיד שכמובן לא לי כל הפתרונים וכמובן שיש עוד המון בעיות שצריך לפתור כשניגשים לייצר תהליכי עיצוב איכותיים (וכמובן לא רק ברדיס) אבל כשעזבתי את רדיס:"
+            - list [ref=e592]:
+              - listitem [ref=e593]:
+                - paragraph [ref=e594]:
+                  - strong [ref=e595]: "עיצוב אג׳ילי:"
+                  - text: הבלבול לגבי שיטת העבודה שלנו, לגבי מתי דברים יהיו מוכנים, וכל השאלות הבאמת טריוויאליות האלו התפייד לגמרי. מפתחים ומנהלי מוצר ידעו בדיוק מה אנחנו הולכים לעשות והאם יהיה לנו גם זמן למשימות מפתיעות או משימות איטרציה.
+              - listitem [ref=e596]:
+                - paragraph [ref=e597]:
+                  - strong [ref=e598]: "שפה משותפת:"
+                  - text: מרגע שכולנו דיברנו באותה שפה, השותפים ידעו להתכונן בהתאם - בין אם בלגייס צוות שיבנה ספריית קומפוננטות עבורנו (component library) - אגב, בלי שביקשנו אפילו, ובין אם להפנות משתמשים לחוקרת ה- UX או לפגוש את המעצביםות כדי לרדת לעומקן של נקודות טכניות שהקשו עלינו לייצר עיצובים ״מתקדמים״ ובכך הם בעצם הפכו להיות שותפים מלאים שלנו לתהליך העיצוב.
+              - listitem [ref=e599]:
+                - paragraph [ref=e600]:
+                  - strong [ref=e601]: "רק מיקבול משימות:"
+                  - text: ברגע שיש שפה משותפת ואנחנו עובדים באג׳ייל, מאוד קל להכניס עוד משימות נמו קטנות, למשל לטובת growth או כל מיני ניסויים, מה שבתורו מאפשר גם להגדיל את הקשר עם לקוחות ה- Low touch ובכך לתמוך עוד יותר במה שאנחנו קוראים לו עיצוב מוכוון-משתמשים 💪.
+            - paragraph [ref=e602]: ונסיים עם איך אתםן יכולים לקחת את מודל הדגים אליכם למוצר.
+            - figure [ref=e604]:
+              - link "ree" [ref=e605]:
+                - /url: https://substackcdn.com/image/fetch/$s_!drqK!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F632803eb-0e21-462c-b59f-6a42a1ca6807_1056x590.png
+                - generic [ref=e606]:
+                  - img "ree" [ref=e608]
+                  - generic [ref=e610]:
+                    - button [ref=e611] [cursor=pointer]:
+                      - img [ref=e612]
+                    - button [ref=e614] [cursor=pointer]:
+                      - img [ref=e615]
+            - paragraph [ref=e616]:
+              - text: חשוב שתבינו - במודל כזה
+              - strong [ref=e617]: תקשורת היא המפתח שלנו להצלחה
+              - text: . אנחנו צריכים לעשות הכל כדי להיפטר מכל תהליך שלא מעודד תקשורת פתוחה וגמישה. למשל להחליף את ה- PRDים שלנו בבריפים קצרים (micro-brief) וישיבות ייעודיות לפרויקט.
+            - paragraph [ref=e618]: במקום ישיבות ארוכות על פיצ׳רים ופתרונות שאנחנו (רק) חושבים שעשויים לעבוד, נעבור לישיבות קצרות וממוקדות בבעיות, תוך שאנחנו מדברים ליטרלי על מסע המשתמש מחוץ ובתוך האפליקציה (״פגישות מסע״).
+            - paragraph [ref=e619]:
+              - text: כדי להטמיע מודל בחברה שלכםן, אתם צריכים
+              - strong [ref=e620]: חברות חזקה עם השותפים הלא-מעצבים שלכם
+              - text: .
+            - paragraph [ref=e621]: תקשורת היא הצעד הראשון, אבל חברות ושותפות אמיתית נוצרת כשמבלים הרבה זמן יחד. תאכלו איתם, תעבירו איתם שעות בזום, תלמדו על העבודה שלהם ותלמדו אותם על העבודה שלכם - בלעדיהם מודל הדגים וכל מודל עיצוב-מוכוון-משתמשים לא שווים כלום.
+            - paragraph [ref=e622]:
+              - text: וכמובן -
+              - strong [ref=e623]: תראו לחברה עד כמה זה עוזר
+              - text: . תתחילו עם פרויקט קטן, נימו - ותשתפו את הצוותים שלכםן בתהליך שאתםן מתכננים לעשות כולל כל המתודות הצפויות. נסו לתת להם חלק במתודות ותחגגו ביחד כשתסיימו אותו בהצלחה 🦄.
+            - figure [ref=e625]:
+              - link "ree" [ref=e626]:
+                - /url: https://substackcdn.com/image/fetch/$s_!CD2_!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50cbb74a-1db3-4b8f-aa6c-4d43e1f6bdc5_1056x792.jpeg
+                - generic [ref=e627]:
+                  - img "ree" [ref=e629]
+                  - generic [ref=e631]:
+                    - button [ref=e632] [cursor=pointer]:
+                      - img [ref=e633]
+                    - button [ref=e635] [cursor=pointer]:
+                      - img [ref=e636]
+            - paragraph [ref=e637]: "ולסיום, שאלת בונוס:"
+            - paragraph [ref=e638]: למה קראתי להרצאה ״דגים מוזרים״ ואיך זה מתקשר ללהקה האהובה עליי בתבל?
+            - paragraph [ref=e639]:
+              - text: בהמשך אוציא מספר מאמרים שישלימו את התמונה הגדולה לכל המודל. אם אתםן מרגישים שאתםן לא סגורים על משהו, אני מזמין אתכםן לקיים את הדיון כאן בתגובות או
+              - link "בקבוצת הפייסבוק של" [ref=e640] [cursor=pointer]:
+                - /url: https://facebook.com/GestalUX
+              - strong [ref=e641]:
+                - link "גשטלט UX" [ref=e642] [cursor=pointer]:
+                  - /url: https://facebook.com/GestalUX
+              - text: .
+            - paragraph [ref=e643]: בשורות טובות 🙏
+            - list [ref=e644]:
+              - listitem [ref=e645]:
+                - paragraph
+          - separator [ref=e646]
+          - generic [ref=e647]:
+            - generic [ref=e648]:
+              - heading "Subscribe to בלוג על מוצר וחוויית משתמש / טל סולומון" [level=4] [ref=e649]
+              - generic [ref=e650]: Launched 5 months ago
+              - generic [ref=e651]: My personal Substack
+            - generic [ref=e652]:
+              - generic [ref=e657]:
+                - textbox "Type your email..." [ref=e660]
+                - button "Subscribe" [disabled] [ref=e661]
+              - generic [ref=e664]:
+                - text: By subscribing, you agree Substack's
+                - link "Terms of Use" [ref=e665] [cursor=pointer]:
+                  - /url: https://substack.com/tos
+                - text: ", and acknowledge its"
+                - link "Information Collection Notice" [ref=e666] [cursor=pointer]:
+                  - /url: https://substack.com/ccpa#personal-data-collected
+                - text: and
+                - link "Privacy Policy" [ref=e667] [cursor=pointer]:
+                  - /url: https://substack.com/privacy
+                - text: .
+          - generic [ref=e669]:
+            - link "View shubhbaniii's profile" [ref=e673] [cursor=pointer]:
+              - /url: https://substack.com/profile/449873497-shubhbaniii
+              - generic "shubhbaniii" [ref=e675]:
+                - img "shubhbaniii's avatar" [ref=e677]
+            - generic [ref=e679]:
+              - generic [ref=e680] [cursor=pointer]: 2 Likes
+              - generic:
+                - link:
+                  - /url: https://substack.com/note/p-183767376/restacks?utm_source=substack&utm_content=facepile-restacks
+          - generic [ref=e682]:
+            - generic [ref=e683]:
+              - button "Like (2)" [ref=e685] [cursor=pointer]:
+                - img [ref=e686]:
+                  - img [ref=e688]
+                - generic [ref=e690]: "2"
+              - button "View comments (0)" [ref=e691] [cursor=pointer]:
+                - img [ref=e692]:
+                  - img [ref=e694]
+              - button [ref=e696] [cursor=pointer]:
+                - img [ref=e697]
+            - button "Share" [ref=e701] [cursor=pointer]:
+              - generic [ref=e702]: Share
+      - generic [ref=e703]:
+        - generic [ref=e704]:
+          - generic [ref=e705]:
+            - heading "Discussion about this post" [level=4] [ref=e706]
+            - tablist "Select discussion type" [ref=e710]:
+              - tab "Comments" [selected] [ref=e711] [cursor=pointer]
+              - tab "Restacks" [ref=e712] [cursor=pointer]
+          - generic [ref=e717]:
+            - generic "User" [ref=e719]:
+              - img "User's avatar" [ref=e721]
+            - textbox "Write a comment..." [ref=e724]
+        - region "Top Posts Footer" [ref=e727]:
+          - navigation "Archive sort tabs" [ref=e729]:
+            - tablist "Tabs" [ref=e732]:
+              - tab "Top" [selected] [ref=e733] [cursor=pointer]
+              - tab "Latest" [ref=e734] [cursor=pointer]
+            - button "Search" [ref=e736] [cursor=pointer]:
+              - img [ref=e737]
+        - generic [ref=e756]:
+          - heading "Ready for more?" [level=3] [ref=e757]
+          - generic [ref=e760]:
+            - textbox "Type your email..." [ref=e763]
+            - button "Subscribe" [disabled] [ref=e764]
+    - generic [ref=e767]:
+      - generic [ref=e768]:
+        - generic [ref=e769]: © 2026 Tal Solomon
+        - text: ·
+        - link "Privacy" [ref=e770] [cursor=pointer]:
+          - /url: https://substack.com/privacy
+        - text: ∙
+        - link "Terms" [ref=e771] [cursor=pointer]:
+          - /url: https://substack.com/tos
+        - text: ∙
+        - link "Collection notice" [ref=e772] [cursor=pointer]:
+          - /url: https://substack.com/ccpa#personal-data-collected
+      - generic [ref=e773]:
+        - link "Start your Substack" [ref=e774] [cursor=pointer]:
+          - /url: https://substack.com/signup?utm_source=substack&utm_medium=web&utm_content=footer
+          - img [ref=e775]
+          - text: Start your Substack
+        - link "Get the app" [ref=e780] [cursor=pointer]:
+          - /url: https://substack.com/app/app-store-redirect?utm_campaign=app-marketing&utm_content=web-footer-button
+      - generic [ref=e781]:
+        - link "Substack" [ref=e782] [cursor=pointer]:
+          - /url: https://substack.com
+        - text: is the home for great culture
+  - region "Notifications (F8)":
+    - list
