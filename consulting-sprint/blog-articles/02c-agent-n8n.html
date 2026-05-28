@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בנה אייג׳נט אחד: חלק ג׳ — n8n בלי שורת קוד</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 24px;
+    color: #1a1a1a;
+    direction: rtl;
+    text-align: right;
+  }
+  h2 { font-size: 22px; font-weight: bold; margin-top: 48px; margin-bottom: 12px; }
+  p { margin: 0 0 20px 0; }
+  blockquote {
+    border-right: 3px solid #1a1a1a;
+    margin: 24px 0;
+    padding: 4px 20px 4px 0;
+    color: #333;
+  }
+  pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    direction: rtl;
+    text-align: right;
+    margin: 24px 0;
+  }
+  pre.code-ltr { direction: ltr; text-align: left; }
+  code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    direction: ltr;
+    unicode-bidi: embed;
+  }
+  hr { border: none; border-top: 1px solid #ddd; margin: 40px 0; }
+  img.screenshot {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin: 24px 0;
+    display: block;
+  }
+  figure { margin: 28px 0; }
+  figcaption {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+    text-align: center;
+  }
+  .placeholder {
+    background: #fff8e6;
+    border: 2px dashed #f0b429;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 28px 0;
+    font-size: 14px;
+    direction: ltr;
+    text-align: left;
+  }
+  .placeholder::before {
+    content: "📸 SCREENSHOT NEEDED";
+    display: block;
+    font-weight: bold;
+    font-size: 12px;
+    color: #b7791f;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .placeholder .what { font-weight: bold; color: #1a1a1a; margin-bottom: 4px; }
+  .placeholder .how { color: #555; font-size: 13px; }
+  .youtube-embed {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 28px 0;
+    font-size: 15px;
+    color: #555;
+    direction: ltr;
+    text-align: left;
+  }
+  .youtube-embed a { color: #cc0000; word-break: break-all; }
+  .youtube-embed::before {
+    content: "▶ YouTube — paste this URL into Substack embed: ";
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<p>מישהי בקבוצת הווטסאפ של חברת הסטארטאפ שלה, אחרי שהתקינה n8n, שאלה: "אוקיי אבל מה זה node?" מישהו ענה: "כמו לגו." היא ענתה: "אוקיי אבל מה זה לגו?" הפסקתי לדמיין את המשך השיחה, כי המוח שלי לא מסוגל לשם.</p>
+
+<p>המציאות היא שרוב האנשים שבונים אייג׳נטים היום לא באמת מבינים מה קורה מתחת למכסה המנוע, ואין להם צורך להבין. n8n בנויה בדיוק בשבילן/הם.</p>
+
+<p>יאללה, בואו נצלול.</p>
+
+<hr>
+
+<h2>n8n: זה לא "עוד כלי no-code", זה הרבה יותר מזה</h2>
+
+<blockquote><strong>n8n</strong>: פלטפורמת אוטומציה ויזואלית שמאפשרת לחבר בין שירותים, לוגיקה, ו-AI agents בלי לכתוב קוד גרידא. כל "block" עושה דבר אחד, ואתם/ן מחברות/ים אותם בקנבס.</blockquote>
+
+<figure>
+  <img src="screenshots/04-n8n-homepage.png" alt="n8n.io — עמוד הבית" class="screenshot">
+  <figcaption>n8n.io — "AI Workflow Automation Platform". מסביר את עצמו.</figcaption>
+</figure>
+
+<p>המודל המנטלי: במקום לכתוב קוד שאומר "כשיקרה X, עשה Y, ואז Z", אתם/ן מגררות/ים בלוקים לקנבס ומחברות/ים אותם בקווים. כל בלוק (node) עושה דבר אחד בלבד. Trigger מפעיל. HTTP Request שולח בקשה. AI Agent חושב. Gmail שולח מייל. השרשרת הזאת היא ה-workflow.</p>
+
+<pre>עובדה חביבה: n8n היא open-source ויש לה מעל 400 integrations מובנות.
+Zapier, לשם השוואה, עולה פי 5-10 יותר עבור אותו נפח אוטומציות.</pre>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=GuaKeDS6UKU">https://www.youtube.com/watch?v=GuaKeDS6UKU</a></div>
+
+<hr>
+
+<h2>ההחלטה הראשונה: Cloud או Self-Hosted</h2>
+
+<p><strong>n8n.cloud</strong> היא הגרסה המנוהלת. נרשמות/ים, נכנסות/ים, מתחילות/ים לבנות. הטריאל בחינם ל-14 יום, אחרי זה כ-20 דולר בחודש לשימוש אישי. בשביל המדריך הזה, זה מה שנשתמש בו.</p>
+
+<p><strong>Self-hosted</strong>: מורידות/ים את n8n ומריצות/ים אותה על המחשב או שרת. ה-community edition חינמית לגמרי. אם עובדות/ים עם נתונים עסקיים רגישים, זו הדרך. שרת של DigitalOcean עולה כ-6 דולר בחודש.</p>
+
+<hr>
+
+<h2>הרשמה ל-n8n.cloud</h2>
+
+<figure>
+  <img src="screenshots/06-n8n-signup.png" alt="n8n.cloud — עמוד ההרשמה" class="screenshot">
+  <figcaption>app.n8n.cloud/register — הרשמה פשוטה. אימייל וסיסמה, בלי כרטיס אשראי.</figcaption>
+</figure>
+
+<p>אחרי הכניסה, מגיעות/ים ל-dashboard הראשי:</p>
+
+<div class="placeholder">
+  <div class="what">n8n Dashboard — לאחר כניסה ראשונה</div>
+  <div class="how">Screenshot the main n8n dashboard after logging in. Shows the left sidebar with "Workflows", the empty workspace, and the "Create new workflow" button. This is the starting point readers will see.</div>
+</div>
+
+<hr>
+
+<h2>סיור בממשק: מה רואים ולמה זה חשוב</h2>
+
+<div class="placeholder">
+  <div class="what">n8n Canvas — ממשק ריק עם Manual Trigger</div>
+  <div class="how">Create a new workflow. Screenshot the empty canvas with the "When clicking Test workflow" Manual Trigger node in the center. Annotate: (1) Left sidebar, (2) Canvas area, (3) The + button, (4) Save/Run/Activate buttons at top.</div>
+</div>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=TKnaDGpN7Ns">https://www.youtube.com/watch?v=TKnaDGpN7Ns</a></div>
+
+<hr>
+
+<h2>Node ראשון: ה-Trigger שמפעיל הכל</h2>
+
+<blockquote><strong>Trigger</strong>: ה-node הראשון בכל workflow. מגדיר מה גורם לאוטומציה להתחיל לרוץ.</blockquote>
+
+<p>שלושה סוגי triggers עיקריים:</p>
+
+<p><strong>Manual Trigger:</strong> כבר מחכה בקנבס. לוחצות/ים "Test workflow" ו-n8n מריצה עכשיו.</p>
+
+<p><strong>Schedule Trigger:</strong> מריץ אוטומטית בזמן קבוע. יש UI ויזואלי שבונה את ה-cron בשבילכן/ם — לוחצות/ים "Every Day" ומגדירות/ים שעה.</p>
+
+<p><strong>Webhook Trigger:</strong> מחכה לאות מחוץ. לשימוש מתקדם יותר.</p>
+
+<div class="placeholder">
+  <div class="what">Schedule Trigger — הגדרת "כל יום ב-8:00"</div>
+  <div class="how">Add a Schedule Trigger node. Screenshot the configuration panel open on the right showing "Every Day" selected and 08:00 set as the time. This is what "production" looks like.</div>
+</div>
+
+<hr>
+
+<h2>Node שני: ה-AI Agent, הלב</h2>
+
+<p>לוחצות/ים על כפתור ה-+ מימין ל-trigger node. בחיפוש: "AI Agent". לוחצות/ים.</p>
+
+<div class="placeholder">
+  <div class="what">AI Agent Node מופיע בקנבס, configuration panel פתוח</div>
+  <div class="how">Screenshot after adding the AI Agent node — shows the node on canvas connected to the trigger, and the right-side configuration panel open with System Prompt field, Model field, and Max Iterations visible.</div>
+</div>
+
+<p>ב-System Prompt מדביקות/ים:</p>
+
+<pre class="code-ltr">אתה אייג׳נט בוקר. המשימה שלך: כל פעם שמריצים אותך, תבצע:
+
+1. קרא את 10 המיילים האחרונים מ-Gmail (אל תקרא ספאם).
+2. סכם כל מייל בשתי שורות: נושא ופעולה נדרשת.
+3. שמור את הסיכום ב-Google Sheets תחת התאריך של היום.
+4. אם יש מייל דחוף, סמן אותו בתגית "URGENT".
+
+כללים:
+- אל תשלח מיילים בלי לשאול.
+- אל תמחק כלום.
+- אם משהו לא ברור, כתוב "לא הצלחתי לעבד" ועבור הלאה.</pre>
+
+<div class="placeholder">
+  <div class="what">System Prompt מלא ב-AI Agent Node</div>
+  <div class="how">Screenshot the AI Agent configuration panel with the full system prompt pasted in. Shows the Hebrew text in the System Prompt field. This is Tal's "CLAUDE.md equivalent" in n8n.</div>
+</div>
+
+<p>ב-MODEL: לוחצות/ים "Add credential", בוחרות/ים Anthropic (Claude), מכניסות/ים API key:</p>
+
+<div class="placeholder">
+  <div class="what">Credentials dialog — הוספת Anthropic API key</div>
+  <div class="how">Screenshot the "Create Credential" dialog for Anthropic API. Shows the API key input field. Blur/redact the actual key value. This is the connection to Claude's brain.</div>
+</div>
+
+<hr>
+
+<h2>Node שלישי: הכלים שנותנים לאייג׳נט ידיים</h2>
+
+<blockquote><strong>Tool Node</strong>: node שמחובר ל-AI Agent דרך חיבור מיוחד מסוג "Tools". מייצג יכולת: לשלוח מייל, לקרוא גיליון, לבצע HTTP request.</blockquote>
+
+<div class="placeholder">
+  <div class="what">Gmail Tool מחובר ל-AI Agent</div>
+  <div class="how">Screenshot showing the Gmail tool node connected to the AI Agent via the Tools port (different color than regular connections). The configuration panel shows the Gmail credential and "Read Emails" operation selected.</div>
+</div>
+
+<div class="placeholder">
+  <div class="what">Google Sheets Tool מחובר ל-AI Agent</div>
+  <div class="how">Screenshot showing the Google Sheets tool node connected. Configuration shows "Append Row" operation — this is where the summaries get saved.</div>
+</div>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=Pqp4qJ5sS5g">https://www.youtube.com/watch?v=Pqp4qJ5sS5g</a></div>
+
+<hr>
+
+<h2>Memory Node: זיכרון בין ריצות</h2>
+
+<blockquote><strong>Window Buffer Memory</strong>: node שמחבר ל-AI Agent ושומר את ה-context של השיחה הפנימית בתוך ריצה אחת.</blockquote>
+
+<div class="placeholder">
+  <div class="what">Window Buffer Memory מחובר ל-AI Agent</div>
+  <div class="how">Screenshot showing the Window Buffer Memory node connected to the AI Agent's Memory port. Configuration panel shows Session ID set to "morning-agent-v1" and Window Size set to 20.</div>
+</div>
+
+<hr>
+
+<h2>ה-Workflow המלא: כל הnodes מחוברים</h2>
+
+<div class="placeholder">
+  <div class="what">Workflow מלא — כל הnodes על הקנבס</div>
+  <div class="how">Screenshot the complete workflow: Manual Trigger → AI Agent ← Gmail Tool, Google Sheets Tool, Window Buffer Memory. All nodes connected, canvas zoomed out enough to see everything. This is the "money shot" of the article.</div>
+</div>
+
+<hr>
+
+<h2>ריצה ראשונה: מה לצפות</h2>
+
+<p>לוחצות/ים "Test workflow". תראו את ה-workflow רץ בזמן אמת:</p>
+
+<div class="placeholder">
+  <div class="what">Workflow רץ בזמן אמת — nodes מאירים</div>
+  <div class="how">Screenshot during execution — nodes lighting up green as they complete. The AI Agent node should show the spinning indicator. This is the visual payoff that makes n8n exciting.</div>
+</div>
+
+<div class="placeholder">
+  <div class="what">AI Agent Node — תוצאות הריצה פתוחות</div>
+  <div class="how">Screenshot after clicking the AI Agent node post-execution. Shows the "Output" panel with each tool call the agent made, the results it received, and the final summary it produced. Readers need to see the inner thinking.</div>
+</div>
+
+<hr>
+
+<h2>Debugging: כשמשהו נשבר</h2>
+
+<div class="placeholder">
+  <div class="what">לשונית ה-Executions — היסטוריית ריצות</div>
+  <div class="how">Screenshot the Executions tab in the left sidebar showing a list of past runs — one green (success) and one red (failed). This shows readers where to look when things break.</div>
+</div>
+
+<div class="placeholder">
+  <div class="what">ריצה כושלת: node אדום עם הודעת שגיאה</div>
+  <div class="how">Screenshot a failed execution with a red node. Click the red node and screenshot the error message panel. Shows readers what debugging looks like in practice.</div>
+</div>
+
+<hr>
+
+<h2>סיכום הסדרה</h2>
+
+<p>בחלק הראשון הסברנו מה זה בכלל אייג׳נט. בחלק השני בנינו אחד ב-Claude Code. בחלק הזה בנינו אותו שוב ב-n8n, בלי שורת קוד.</p>
+
+<p>הכלי לא חשוב. מה שחשוב הן ארבע השאלות: מה ה-Trigger, מה ה-"עשה", מה הגבול, ומה ה-"סיים". אלה ארבע השאלות שיבדלו בין אייג׳נט שעובד לאייג׳נט שמוחק לכן/ם מיילים ב-3 בלילה.</p>
+
+<p>אכן.</p>
+
+<hr>
+
+<p>כמה מכן/ם כבר בנו agent, ומה הייתה הבעיה הכי מוזרה שנתקלתם/ן בה? כותבות/ים לי. 🙏</p>
+
+</body>
+</html>

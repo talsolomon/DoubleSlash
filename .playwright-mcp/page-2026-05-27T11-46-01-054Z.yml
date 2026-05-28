@@ -1,0 +1,486 @@
+- generic [ref=e2]:
+  - iframe
+  - generic [ref=e3]:
+    - generic [ref=e7]:
+      - link "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e13]
+      - heading "בלוג על מוצר וחוויית משתמש / טל סולומון" [level=1] [ref=e15]:
+        - link "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e16] [cursor=pointer]:
+          - /url: /
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - button "Search" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+          - button "Share Publication" [ref=e26] [cursor=pointer]:
+            - img [ref=e27]
+        - button "Subscribe" [ref=e30] [cursor=pointer]
+        - button "Sign in" [ref=e31] [cursor=pointer]
+    - main "Post" [ref=e34]:
+      - article [ref=e38]:
+        - dialog "Subscribe modal" [ref=e40]:
+          - generic [ref=e41]:
+            - button "close" [ref=e42] [cursor=pointer]:
+              - img [ref=e43]
+            - generic "User" [ref=e48]:
+              - img "User's avatar" [ref=e50]
+            - generic [ref=e51]:
+              - generic [ref=e52]: Discover more from בלוג על מוצר וחוויית משתמש / טל סולומון
+              - generic [ref=e53]: My personal Substack
+            - generic [ref=e55]:
+              - textbox "Enter your email..." [ref=e57]
+              - button "Subscribe" [ref=e58] [cursor=pointer]
+              - generic [ref=e61]:
+                - text: By subscribing, you agree Substack's
+                - link "Terms of Use" [ref=e62] [cursor=pointer]:
+                  - /url: https://substack.com/tos
+                - text: ", and acknowledge its"
+                - link "Information Collection Notice" [ref=e63] [cursor=pointer]:
+                  - /url: https://substack.com/ccpa#personal-data-collected
+                - text: and
+                - link "Privacy Policy" [ref=e64] [cursor=pointer]:
+                  - /url: https://substack.com/privacy
+                - text: .
+          - generic [ref=e66]: Already have an account? Sign in
+        - region "Post header" [ref=e67]:
+          - 'heading "מנהל/ת המוצר ב-2026: הכל השתנה אבל כלום לא השתנה" [level=1] [ref=e68]'
+          - region "Post UFI" [ref=e69]:
+            - generic [ref=e71]:
+              - link "View בלוג על מוצר וחוויית משתמש's profile" [ref=e76] [cursor=pointer]:
+                - /url: https://substack.com/@talsolomon
+                - generic "בלוג על מוצר וחוויית משתמש" [ref=e78]:
+                  - img "בלוג על מוצר וחוויית משתמש's avatar" [ref=e80]
+              - generic [ref=e81]:
+                - link "בלוג על מוצר וחוויית משתמש" [ref=e84] [cursor=pointer]:
+                  - /url: https://substack.com/@talsolomon
+                - generic [ref=e86]: May 27, 2026
+            - generic [ref=e87]:
+              - generic [ref=e88]:
+                - button "Like" [ref=e90] [cursor=pointer]:
+                  - img [ref=e91]:
+                    - img [ref=e93]
+                - button "View comments (0)" [ref=e95] [cursor=pointer]:
+                  - img [ref=e96]:
+                    - img [ref=e98]
+                - button [ref=e100] [cursor=pointer]:
+                  - img [ref=e101]
+              - button "Share" [ref=e105] [cursor=pointer]:
+                - generic [ref=e106]: Share
+        - generic [ref=e107]:
+          - button "Table of Contents" [ref=e108] [cursor=pointer]
+          - generic [ref=e122]:
+            - paragraph [ref=e123]: פתחו LinkedIn. חפשו “Product Manager”. קראו 2-3 job descriptions.
+            - paragraph [ref=e124]: “כתיבת PRDs. ניהול backlog. עבודה עם stakeholders. אנליזה של data. הגדרת metrics.”
+            - paragraph [ref=e125]: "שמעתי על PM שהכניס לקלוד את ה-JD שקיבל, ביקש שיעדכן אותה ל-2026. קיבל בחזרה את אותו הדבר עם שורה שנוספה בסוף: “ניסיון עם כלי AI - יתרון.” הוא לא פרסם אותה. הוא גם לא ידע מה לשנות."
+            - paragraph [ref=e126]: יאללה, בואו נצלול.
+            - 'heading "Discovery: כשניתוח 40 ראיונות לוקח שעתיים Link" [level=2] [ref=e127]':
+              - text: "Discovery: כשניתוח 40 ראיונות לוקח שעתיים"
+              - button "Link" [ref=e130] [cursor=pointer]:
+                - img [ref=e131]
+            - paragraph [ref=e134]: שלב ה-discovery הוא כנראה זה שהושפע הכי הרבה. לא ה-interview עצמו, אבל כל מה שסביבו ואחריו.
+            - paragraph [ref=e135]: הראיון עצמו עדיין דורש אדם. הניואנס של מה שהמשתמש/ת לא אמרה, שפת הגוף, הרגע שבו עצרת לפני תשובה על שאלה ספציפית. AI לא תופס את זה עדיין. וזה לא חסרון זמני, זה הבדל מהותי גרידא.
+            - paragraph [ref=e136]: אבל ניתוח? שם הכל השתנה.
+            - paragraph [ref=e137]: 40 ראיונות זה בערך 40 שעות הקלטה, כלומר 200 עמודים של תמלול. בעולם הישן, שניים מאנשי צוות מוצר ישבו שבוע-שבועיים על affinity mapping. פוסט-איטים על קיר, clusters, pain points, themes. עבודה חשובה ומתישה בו-זמנית.
+            - paragraph [ref=e138]: "היום: מעלים את התמלולים ל-Dovetail (שיש לו AI synthesis מובנה ומחובר ישירות לממשק ה-research), או ל-Notion עם Notion AI, או עובדים ישירות עם קלוד עם prompt מוגדר. מבקשים: “מצא את חמשת ה-pain points החוזרים הכי הרבה, ציטוט לכל אחד, וכמה משתמשים/ות ציינו כל אחד.” תוך שעה מקבלים תמצות ב-95% דיוק."
+            - blockquote [ref=e139]:
+              - paragraph [ref=e140]:
+                - strong [ref=e141]: Dovetail
+                - text: הוא כלי UX research שמובנה בו AI synthesis. אפשר להעלות הקלטות, תמלולים וציורי screen ולקבל insights, pattern recognition ו-highlight reel. הוא לא מחליף את שיקול הדעת של researcher, אבל חוסך 60-70% מה-grunt work (הניתוח המכני, לא הפרשנות).
+            - paragraph [ref=e142]: זה לא אומר שהניתוח נעשה ב-autopilot. זה אומר שהזמן שה-PM מבלה/ת ב-validation, ב-cross-referencing ובהצגת ממצאים עלה. הזמן ב-mechanical synthesis ירד.
+            - code [ref=e144]:
+              - code [ref=e145]: "עובדה חביבה: מחקר של Lenny Rachitsky הראה שה-PM הממוצע/ת מבלה 15-20% מזמנה ב-synthesis ו-documentation. עד 2025, המספר הזה ירד לפחות מ-8% בצוותים שאימצו AI. הזמן לא נעלם — הוא עבר ל-validation ולדיאלוג עם stakeholders."
+            - iframe [ref=e148]:
+              - generic [active] [ref=f13e1]:
+                - generic "YouTube Video Player" [ref=f13e3]
+                - generic [ref=f13e5]:
+                  - generic:
+                    - generic:
+                      - button "Play video" [ref=f13e10] [cursor=pointer]:
+                        - generic [ref=f13e13]:
+                          - img
+                      - button "Hide player controls" [ref=f13e14] [cursor=pointer]
+                      - generic [ref=f13e16]:
+                        - generic [ref=f13e21]:
+                          - generic [ref=f13e22]:
+                            - link "AI is Transforming UX Research" [ref=f13e23] [cursor=pointer]:
+                              - /url: https://www.youtube.com/watch?v=tycUeUs_ykg
+                            - link "UXLx - User Experience Lisbon" [ref=f13e24] [cursor=pointer]:
+                              - /url: /channel/UCvoEJgCYu1e6kvUvx7lN7kw
+                              - generic [ref=f13e25]: UXLx - User Experience Lisbon
+                          - generic [ref=f13e26]:
+                            - button [ref=f13e27] [cursor=pointer]
+                            - generic [ref=f13e29]:
+                              - generic: UXLx - User Experience Lisbon
+                              - generic: 4.34K subscribers
+                        - generic [ref=f13e30]:
+                          - button "Copy link" [ref=f13e33] [cursor=pointer]:
+                            - generic [ref=f13e37]:
+                              - img
+                          - link "Watch on YouTube" [ref=f13e44] [cursor=pointer]:
+                            - /url: https://www.youtube.com/watch?v=tycUeUs_ykg
+                            - generic [ref=f13e47]:
+                              - text: Watch on
+                              - img [ref=f13e49]:
+                                - generic [ref=f13e51]:
+                                  - img
+            - 'heading "PRD: שלא תגיעו למצב ש- “AI כותב את זה” Link" [level=2] [ref=e149]':
+              - text: "PRD: שלא תגיעו למצב ש- “AI כותב את זה”"
+              - button "Link" [ref=e152] [cursor=pointer]:
+                - img [ref=e153]
+            - paragraph [ref=e156]: "יש תפיסה מוטעית נפוצה: “עכשיו AI כותב PRDs”. זה לא מה שקורה בצוותים שעובדים טוב."
+            - paragraph [ref=e157]: מה שקורה זה שונה ויותר מעניין.
+            - paragraph [ref=e158]: ה-PM עושה/ת שיחה. לפעמים עם קלוד, לפעמים עם ChatGPT, לפעמים עם עצמה ועם doc ריק. אבל בשיחה, לא בדף ריק. השיחה מחלצת thinking. “מה אנחנו בונים? למה? מה success נראה כמו? מה ה-scope שלא נגע בו עכשיו?”
+            - paragraph [ref=e159]: "אחרי שה-thinking ברור, ה-crystallization נעשה עם AI: ה-PM מאכיל/ה context (על המוצר, על המשתמשים, על ההחלטות שכבר התקבלו), ה-AI מייצר מבנה ראשוני, ה-PM מגיב/ה ומדייק/ת. אחרי שלושה סבבים יש draft שמייצג נאמנה את מה שה-PM חשב/ה."
+            - paragraph [ref=e160]: ה-documentation הוא ה-last step. לא ה-first.
+            - paragraph [ref=e161]: "זה ה-flip האמיתי: לפני, כתיבת PRD הייתה חלק מה-thinking process. עכשיו, ה-thinking process קורה בשיחה, וה-PRD הוא output שלה."
+            - paragraph [ref=e162]: מי שמנסה “ל-prompt AI לכתוב PRD” בלי ה-thinking שקדם לזה מקבל/ת artifact יפה שלא שווה כלום. זה כמו לבקש ממישהו לצייר מפה בלי לספר לו לאן אתם הולכים.
+            - iframe [ref=e165]:
+              - generic [active] [ref=f14e1]:
+                - generic "YouTube Video Player" [ref=f14e3]
+                - generic [ref=f14e5]:
+                  - generic:
+                    - generic:
+                      - button "Play video" [ref=f14e10] [cursor=pointer]:
+                        - generic [ref=f14e13]:
+                          - img
+                      - button "Hide player controls" [ref=f14e14] [cursor=pointer]
+                      - generic [ref=f14e16]:
+                        - generic [ref=f14e21]:
+                          - generic [ref=f14e22]:
+                            - link "Make Your Claude Code 10x Smarter (My PRD.md Tricks)" [ref=f14e23] [cursor=pointer]:
+                              - /url: https://www.youtube.com/watch?v=tLXKKQTvC44
+                            - link "Solo Swift Crafter" [ref=f14e24] [cursor=pointer]:
+                              - /url: /channel/UCnveGtpTMr6QpHaC_Q_d6rg
+                              - generic [ref=f14e25]: Solo Swift Crafter
+                          - generic [ref=f14e26]:
+                            - button [ref=f14e27] [cursor=pointer]
+                            - generic [ref=f14e29]:
+                              - generic: Solo Swift Crafter
+                              - generic: 8.03K subscribers
+                        - generic [ref=f14e30]:
+                          - button "Copy link" [ref=f14e33] [cursor=pointer]:
+                            - generic [ref=f14e37]:
+                              - img
+                          - link "Watch on YouTube" [ref=f14e44] [cursor=pointer]:
+                            - /url: https://www.youtube.com/watch?v=tLXKKQTvC44
+                            - generic [ref=f14e47]:
+                              - text: Watch on
+                              - img [ref=f14e49]:
+                                - generic [ref=f14e51]:
+                                  - img
+            - 'heading "Prioritization: קלוד לא עושה פוליטיקה Link" [level=2] [ref=e166]':
+              - text: "Prioritization: קלוד לא עושה פוליטיקה"
+              - button "Link" [ref=e169] [cursor=pointer]:
+                - img [ref=e170]
+            - paragraph [ref=e173]: אחד השימושים הכי underrated של AI ב-product management הוא כ-thinking partner לprioritization.
+            - paragraph [ref=e174]: RICE scoring, MoSCoW, opportunity sizing - כולם frameworks שרוב ה-PMs מכירים, אבל כשמנסים ליישם אותם בנסיבות אמיתיות, הפוליטיקה נכנסת. “ה-CEO ביקש את הפיצ’ר הזה.” “ה-feature הזה חשוב ל-big customer.” “ה-eng team מעדיף/ת את זה כי הם כבר יודעים איך לבנות.”
+            - paragraph [ref=e175]: קלוד לא עושה פוליטיקה. hell, הוא לא יודע בכלל מי ה-CEO. תנו לו את הנתונים, תנו לו את ה-framework, תנו לו את ה-business context, ובקשו ממנו לאתגר את ה-assumptions שלכם.
+            - paragraph [ref=e176]: “לפי הנתונים שנתתי לך, feature X מקבל Reach גבוה אבל Impact נמוך. מה הסיבות הסבירות שהצוות עשוי לdebate זאת?” - זו שאלה שAI עונה עליה בלי שיקולים פוליטיים, ואז ה-PM יכול/ה לקחת את ה-output לדיון עם ראש צלול.
+            - paragraph [ref=e177]: זה לא מחליף את ה-judgment. זה מנקה את ה-playing field לפני שה-judgment נכנס.
+            - iframe [ref=e180]:
+              - generic [active] [ref=f15e1]:
+                - generic "YouTube Video Player" [ref=f15e3]
+                - generic [ref=f15e5]:
+                  - generic:
+                    - generic:
+                      - button "Play video" [ref=f15e10] [cursor=pointer]:
+                        - generic [ref=f15e13]:
+                          - img
+                      - button "Hide player controls" [ref=f15e14] [cursor=pointer]
+                      - generic [ref=f15e16]:
+                        - generic [ref=f15e21]:
+                          - generic [ref=f15e22]:
+                            - link "How AI Changes Prioritization - Troy Magennis" [ref=f15e23] [cursor=pointer]:
+                              - /url: https://www.youtube.com/watch?v=fNVy4ubvbuA
+                            - link "Agile LnL (Agile Lunch & Learn)" [ref=f15e24] [cursor=pointer]:
+                              - /url: /channel/UCUncfakfFudO7IYcIpMVySQ
+                              - generic [ref=f15e25]: Agile LnL (Agile Lunch & Learn)
+                          - generic [ref=f15e26]:
+                            - button [ref=f15e27] [cursor=pointer]
+                            - generic [ref=f15e29]:
+                              - generic: Agile LnL (Agile Lunch & Learn)
+                              - generic: 1.57K subscribers
+                        - generic [ref=f15e30]:
+                          - button "Copy link" [ref=f15e33] [cursor=pointer]:
+                            - generic [ref=f15e37]:
+                              - img
+                          - link "Watch on YouTube" [ref=f15e44] [cursor=pointer]:
+                            - /url: https://www.youtube.com/watch?v=fNVy4ubvbuA
+                            - generic [ref=f15e47]:
+                              - text: Watch on
+                              - img [ref=f15e49]:
+                                - generic [ref=f15e51]:
+                                  - img
+            - 'heading "Delivery: פחות glamour, יותר leverage Link" [level=2] [ref=e181]':
+              - text: "Delivery: פחות glamour, יותר leverage"
+              - button "Link" [ref=e184] [cursor=pointer]:
+                - img [ref=e185]
+            - paragraph [ref=e188]: כתיבת tickets. dependency mapping. sprint planning. ה”עבודות הכפופות” של delivery.
+            - paragraph [ref=e189]: תכלס, הרבה מזה שעמם PMs לאורך שנים. “תתאר task ל-developer” - כמה פעמים כתבתם את אותו הריקוויירמנט עם קצת שינויים?
+            - paragraph [ref=e190]: AI הפך את זה ל-leverage נקי. ה-PM מגדיר/ה ב-natural language מה צריך לקרות. קלוד ממיר/ה ל-structured ticket עם acceptance criteria, edge cases שצריך לחשוב עליהם (כולל כאלה שה-PM לא חשב/ה עליהם), ו-dependencies שכדאי לוולידציה. ה-PM מדייק/ת. ה-developer מקבל/ת משהו שאפשר לעבוד איתו.
+            - paragraph [ref=e191]: לא כל ticket יוצא מושלם. אבל ה-baseline עלה משמעותית, וה-PM מבלה/ת 30 דקות במקום שעתיים.
+            - code [ref=e193]:
+              - code [ref=e194]: "עובדה חביבה: טכניקה נקראת \"pre-mortem על tickets\". לפני שמעבירים ticket ל-eng, שואלים AI: \"מה יכול להשתבש ב-implementation הזה?\" הרבה bugs נמצאים בשלב הזה, לפני שנכתב שורת קוד."
+            - 'heading "Analytics ו-Retrospective: כשה-data מספר סיפור לבד Link" [level=2] [ref=e195]':
+              - text: "Analytics ו-Retrospective: כשה-data מספר סיפור לבד"
+              - button "Link" [ref=e198] [cursor=pointer]:
+                - img [ref=e199]
+            - paragraph [ref=e202]: הרבה PMs מקבלים dashboard עמוס נתונים וצריכים להתכונן משהו כמ 30 דקות לפני quarterly review כדי להגיד משהו חכם.
+            - paragraph [ref=e203]: "בעולם ה-AI זה נראה אחרת. מייצאים data (בד”כ CSV פשוט, לא צריך יותר מזה), נותנים לקלוד לנתח trends, ומבקשים: “מה שלושת ה-patterns הכי מפתיעים ב-data הזה? מה ה-hypotheses שמסבירות אותם?” ה-PM מקבל/ת נקודות פתיחה לניתוח, לא דף ריק. אנחנו לא משתמשים בזה as is כמובן.. אתםן צריכים לעבור על זה, לדייק, לאמת ולוודא שמפעם לפעם קלוד מוציא לכםן סיכום טוב יותר ומדויק יותר שאתםן (וכל שאר הנמענים) יכולים ״לעכל״ בקלות."
+            - paragraph [ref=e204]: ב-retrospective זה אותו הדבר. “הנה ה-sprint data, הנה ה-velocity, הנה ה-bugs שנסגרו. מה שאלות טובות לשאול ב-retro?” זה לא מחליף את ה-retro, זה מכין אותו. (ועל context ו-memory של AI כתבתי מאמר נפרד בבלוג.)
+            - heading "מה מחכה לבני האדם Link" [level=2] [ref=e205]:
+              - text: מה מחכה לבני האדם
+              - button "Link" [ref=e208] [cursor=pointer]:
+                - img [ref=e209]
+            - paragraph [ref=e212]: כאן הדברים נהיים מעניינים.
+            - paragraph [ref=e213]: כל מה שתיארתי למעלה הוא leverage על tasks. אבל יש set שלם של skills שלא רק שלא הפכו פחות חשובים, הם הפכו יותר חשובים.
+            - paragraph [ref=e214]:
+              - strong [ref=e215]: "ניהול stakeholders:"
+              - text: שימו לב ש- AI לא יודע לנהל/ת את ה-dynamic עם CTO שחושב שה-feature שלו חייב להיות Q1. AI לא יודע לקרוא את ה-room כשה-board member מביע/ה תמיכה פומבית אבל ספקנות פרטית. זה human skill, תמיד יהיה.
+            - paragraph [ref=e216]:
+              - strong [ref=e217]: "לומר לא:"
+              - text: זה תמיד היה הדבר הכי קשה ב-product management, ו-AI לא עושה אותו קל יותר. ה-PM צריך/ה vision ברור ו-conviction אמיתית. לא prompts.
+            - paragraph [ref=e218]:
+              - strong [ref=e219]: הגדרת vision
+              - text: ": המוקד הוא Where are we going and why does it matter? זה לא תמלול של user research, זה synthesis של market, users, business ו-timing. כשה-AI יכול להכין את ה-inputs, אבל ה-synthesis הוא human judgment גרידא."
+            - paragraph [ref=e220]:
+              - strong [ref=e221]: Empathy עם users
+              - text: ": שימו לב לניואנס: AI יכול לנתח ראיונות, אבל ה-awareness שמגיעה מלשבת שעה עם משתמש/ת ולראות אותה טובעת בממשק שחשבתם שהוא ברור, זה לא ב-dataset."
+            - heading "Workflow אמיתי לאורך cycle מלא Link" [level=2] [ref=e222]:
+              - text: Workflow אמיתי לאורך cycle מלא
+              - button "Link" [ref=e225] [cursor=pointer]:
+                - img [ref=e226]
+            - paragraph [ref=e229]:
+              - strong [ref=e230]: "שבוע ראשון של sprint:"
+              - text: ה-PM מריץ/ה synthesis על ה-user interviews החדשים ב-Dovetail. מקבל/ת 5 themes. מוולידציה 3 מהם עם quantitative data. עובד/ת עם קלוד לבנות hypothesis doc. מציג/ה לצוות ב-15 דקות במקום שעה.
+            - paragraph [ref=e231]:
+              - strong [ref=e232]: "הגדרת scope:"
+              - text: שיחת thinking עם קלוד שמחלצת את ה-product decisions הסמויים ב-feature request. כותב/ת brief. מבקש/ת מ-AI לייצר PRD draft. מדייק/ת. שולח/ת ל-review.
+            - paragraph [ref=e233]:
+              - strong [ref=e234]: "Backlog grooming:"
+              - text: RICE scoring עם AI כ-thinking partner. בקשת אתגורים על הנחות. מוצאת/ת עמדה. מביאה/ה לדיון עם צוות ו-stakeholders.
+            - paragraph [ref=e235]:
+              - strong [ref=e236]: "כתיבת tickets:"
+              - text: template עם AI. validation של edge cases (כולל pre-mortem). העברה ל-engineering עם context מלא.
+            - paragraph [ref=e237]:
+              - strong [ref=e238]: "Mid-sprint check:"
+              - text: data dashboard עם AI synthesis. anomalies? pattern שמסמן בעיה? מגיב/ה מהר, לא מחכה ל-retro.
+            - paragraph [ref=e239]:
+              - strong [ref=e240]: "Retro + planning:"
+              - text: AI מכין שאלות ל-retro, מסכם learning, מציע hypotheses ל-sprint הבא.
+            - paragraph [ref=e241]: "מה שנשאר human בכל אחד מהשלבים האלה: ה-judgment calls, ה-stakeholder conversations, ה-vision וה-conviction. אלה לא השתנו. הזמן שנפנה לקראתם כן."
+            - iframe [ref=e244]:
+              - generic [active] [ref=f16e1]:
+                - generic "YouTube Video Player" [ref=f16e3]
+                - generic [ref=f16e5]:
+                  - generic:
+                    - generic:
+                      - button "Play video" [ref=f16e10] [cursor=pointer]:
+                        - generic [ref=f16e13]:
+                          - img
+                      - button "Hide player controls" [ref=f16e14] [cursor=pointer]
+                      - generic [ref=f16e16]:
+                        - generic [ref=f16e21]:
+                          - generic [ref=f16e22]:
+                            - link "How to Use AI in UX Research Analysis, Synthesis, and Reporting" [ref=f16e23] [cursor=pointer]:
+                              - /url: https://www.youtube.com/watch?v=qLg37SZ0HBw
+                            - link "UXtweak" [ref=f16e24] [cursor=pointer]:
+                              - /url: /channel/UC7wq_6pmOiFNnCkvShNpoFw
+                              - generic [ref=f16e25]: UXtweak
+                          - generic [ref=f16e26]:
+                            - button [ref=f16e27] [cursor=pointer]
+                            - generic [ref=f16e29]:
+                              - generic: UXtweak
+                              - generic: 3.49K subscribers
+                        - generic [ref=f16e30]:
+                          - button "Copy link" [ref=f16e33] [cursor=pointer]:
+                            - generic [ref=f16e37]:
+                              - img
+                          - link "Watch on YouTube" [ref=f16e44] [cursor=pointer]:
+                            - /url: https://www.youtube.com/watch?v=qLg37SZ0HBw
+                            - generic [ref=f16e47]:
+                              - text: Watch on
+                              - img [ref=f16e49]:
+                                - generic [ref=f16e51]:
+                                  - img
+            - heading "שני דברים שבאמת השתנו Link" [level=2] [ref=e245]:
+              - text: שני דברים שבאמת השתנו
+              - button "Link" [ref=e248] [cursor=pointer]:
+                - img [ref=e249]
+            - paragraph [ref=e252]:
+              - strong [ref=e253]: ה-ratio
+              - text: "- עבודת ידיים מכנית ירדה. עבודת judgment עלתה. PM שלא מאמץ/ת AI tools מבלה/ת עכשיו 60% מזמנה בעבודה שהייתה יכולה להיעשות ב-20% מהזמן. זה זמן שמחכה להישקע בדיאלוג אנושי, ב-user proximity, ב-vision."
+            - paragraph [ref=e254]:
+              - strong [ref=e255]: ה-baseline expectations
+              - text: "- ה-output שנחשב “טוב” עלה. PRD שלקח שבוע עכשיו נכתב ביום. זה לא אומר שה-PM עובד/ת פחות שעות, זה אומר שיש עוד עבודה שמצפה לתשומת לב."
+            - heading "הכשרה נדרשת ומה רוב הקורסים מפספסים Link" [level=2] [ref=e256]:
+              - text: הכשרה נדרשת ומה רוב הקורסים מפספסים
+              - button "Link" [ref=e259] [cursor=pointer]:
+                - img [ref=e260]
+            - paragraph [ref=e263]: PMs שלא יודעים/ות לעבוד עם AI tools ב-2026 עובדים/ות ב-disadvantage אמיתי. לא ב”עתיד”, עכשיו. אבל הכשרה שדרושה היא לא “ללמוד לכתוב prompts”. זה נחמד אבל זה surface בלבד.
+            - paragraph [ref=e264]: "ההכשרה הדרושה: להבין מה AI עושה טוב (synthesis, pattern recognition, drafting, challenging assumptions) ומה הוא לא עושה טוב (judgment ב-ambiguity, empathy, פוליטיקה ארגונית, timing). ולבנות workflow שמניח כל tool במקום הנכון שלו."
+            - paragraph [ref=e265]: ה-PM שעושה את זה נהנה/ית מ-leverage אדיר. ה-PM שלא עושה את זה עובד/ת קשה יותר מהנדרש ומייצר/ת פחות.
+            - heading "הכל השתנה, כלום לא השתנה? Link" [level=2] [ref=e266]:
+              - text: הכל השתנה, כלום לא השתנה?
+              - button "Link" [ref=e269] [cursor=pointer]:
+                - img [ref=e270]
+            - paragraph [ref=e273]: אכן.
+            - paragraph [ref=e274]: הדברים שמנהלי/ות מוצר טובים/ות תמיד אהבו - הקרבה למשתמשים/ות, החשיבה על impact, הדיאלוג עם הצוות - אלה גדלו, לא קטנו. הדברים שתמיד הרגישו כסיזיפיים -affinity mapping, PRD drafting, ticket writing, data grinding - אלה הצטמצמו משמעותית.
+            - paragraph [ref=e275]: "אם בניתם career על ה-overhead: הגיע הזמן לשנות. אם בניתם career על ה-thinking: אתם/ן ב-place טוב."
+            - paragraph [ref=e276]: מה הדבר שלקח לכם הכי הרבה זמן החודש שמרגיש כמו overhead שAI היה יכול לעשות? זה המקום להתחיל. 🙏
+          - separator [ref=e277]
+          - generic [ref=e278]:
+            - generic [ref=e279]:
+              - heading "Subscribe to בלוג על מוצר וחוויית משתמש / טל סולומון" [level=4] [ref=e280]
+              - generic [ref=e281]: Launched 5 months ago
+              - generic [ref=e282]: My personal Substack
+            - generic [ref=e283]:
+              - generic [ref=e288]:
+                - textbox "Type your email..." [ref=e291]
+                - button "Subscribe" [disabled] [ref=e292]
+              - generic [ref=e295]:
+                - text: By subscribing, you agree Substack's
+                - link "Terms of Use" [ref=e296] [cursor=pointer]:
+                  - /url: https://substack.com/tos
+                - text: ", and acknowledge its"
+                - link "Information Collection Notice" [ref=e297] [cursor=pointer]:
+                  - /url: https://substack.com/ccpa#personal-data-collected
+                - text: and
+                - link "Privacy Policy" [ref=e298] [cursor=pointer]:
+                  - /url: https://substack.com/privacy
+                - text: .
+          - generic [ref=e300]:
+            - generic [ref=e301]:
+              - button "Like" [ref=e303] [cursor=pointer]:
+                - img [ref=e304]:
+                  - img [ref=e306]
+              - button "View comments (0)" [ref=e308] [cursor=pointer]:
+                - img [ref=e309]:
+                  - img [ref=e311]
+              - button [ref=e313] [cursor=pointer]:
+                - img [ref=e314]
+            - button "Share" [ref=e318] [cursor=pointer]:
+              - generic [ref=e319]: Share
+      - generic [ref=e320]:
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - heading "Discussion about this post" [level=4] [ref=e323]
+            - tablist "Select discussion type" [ref=e327]:
+              - tab "Comments" [selected] [ref=e328] [cursor=pointer]
+              - tab "Restacks" [ref=e329] [cursor=pointer]
+          - generic [ref=e334]:
+            - generic "User" [ref=e336]:
+              - img "User's avatar" [ref=e338]
+            - textbox "Write a comment..." [ref=e341]
+        - region "Top Posts Footer" [ref=e344]:
+          - generic [ref=e345]:
+            - navigation "Archive sort tabs" [ref=e346]:
+              - tablist "Tabs" [ref=e349]:
+                - tab "Top" [selected] [ref=e350] [cursor=pointer]
+                - tab "Latest" [ref=e351] [cursor=pointer]
+              - button "Search" [ref=e353] [cursor=pointer]:
+                - img [ref=e354]
+            - generic [ref=e357]:
+              - generic [ref=e359]:
+                - article "Post preview for [פודקאסט] איך למצוא את המשרה שתמקסם את היכולות שלכםן?" [ref=e360] [cursor=pointer]:
+                  - generic [ref=e362]:
+                    - link "[פודקאסט] איך למצוא את המשרה שתמקסם את היכולות שלכםן?" [ref=e364]:
+                      - /url: https://www.talsolomonux.com/p/5ff
+                    - link "התראיינתי השבוע בפודקאסט המעולה - Radio Button וסיפרתי על הדרך שלי לבנות צוותי UX ועיצוב מוצר." [ref=e366]:
+                      - /url: https://www.talsolomonux.com/p/5ff
+                    - generic [ref=e367]:
+                      - time [ref=e368]: Jan 7
+                      - text: •
+                      - link "בלוג על מוצר וחוויית משתמש" [ref=e371]:
+                        - /url: https://substack.com/@talsolomon
+                    - generic [ref=e373]:
+                      - button "Like (3)" [ref=e375]:
+                        - img [ref=e376]:
+                          - img [ref=e378]
+                        - generic [ref=e380]: "3"
+                      - button "View comments (0)" [ref=e381]:
+                        - img [ref=e382]:
+                          - img [ref=e384]
+                      - button [ref=e386]:
+                        - img [ref=e387]
+                      - button [ref=e390]:
+                        - img [ref=e391]
+                - article "Post preview for ספרי UX שאתםן חייבים לקרוא" [ref=e397] [cursor=pointer]:
+                  - generic [ref=e399]:
+                    - link "ספרי UX שאתםן חייבים לקרוא" [ref=e401]:
+                      - /url: https://www.talsolomonux.com/p/ux
+                    - link "לשמחתי הרבה התחלתי לקבל לאחרונה בקשות רבות להמלצה על ספרי UX מוצלחים, אז הנחתי שהדבר הנכון לעשות יהיה לפרסם רשימת קריאה." [ref=e403]:
+                      - /url: https://www.talsolomonux.com/p/ux
+                    - generic [ref=e404]:
+                      - time [ref=e405]: Jan 7
+                      - text: •
+                      - link "בלוג על מוצר וחוויית משתמש" [ref=e408]:
+                        - /url: https://substack.com/@talsolomon
+                    - generic [ref=e410]:
+                      - button "Like (3)" [ref=e412]:
+                        - img [ref=e413]:
+                          - img [ref=e415]
+                        - generic [ref=e417]: "3"
+                      - button "View comments (0)" [ref=e418]:
+                        - img [ref=e419]:
+                          - img [ref=e421]
+                      - button [ref=e423]:
+                        - img [ref=e424]
+                      - button [ref=e427]:
+                        - img [ref=e428]
+                - article "Post preview for שקוף שזה מה שרציתי - Clear UX" [ref=e434] [cursor=pointer]:
+                  - generic [ref=e436]:
+                    - link "שקוף שזה מה שרציתי - Clear UX" [ref=e438]:
+                      - /url: https://www.talsolomonux.com/p/clear-ux
+                    - link "פסיכואנליטיקאים רבים התייחסו לתופעת האומניפוטניות - תחושת ה”כל-יכול” המלווה את התינוק בשלביו הראשונים שאינו רואה עצמו כנפרד בינו לבין אובייקטים אחרים…" [ref=e440]:
+                      - /url: https://www.talsolomonux.com/p/clear-ux
+                    - generic [ref=e441]:
+                      - time [ref=e442]: Jan 7
+                      - text: •
+                      - link "בלוג על מוצר וחוויית משתמש" [ref=e445]:
+                        - /url: https://substack.com/@talsolomon
+                    - generic [ref=e447]:
+                      - button "Like (3)" [ref=e449]:
+                        - img [ref=e450]:
+                          - img [ref=e452]
+                        - generic [ref=e454]: "3"
+                      - button "View comments (0)" [ref=e455]:
+                        - img [ref=e456]:
+                          - img [ref=e458]
+                      - button [ref=e460]:
+                        - img [ref=e461]
+                      - button [ref=e464]:
+                        - img [ref=e465]
+              - button "See all" [ref=e471] [cursor=pointer]:
+                - text: See all
+                - img [ref=e472]
+        - generic [ref=e476]:
+          - heading "Ready for more?" [level=3] [ref=e477]
+          - generic [ref=e480]:
+            - textbox "Type your email..." [ref=e483]
+            - button "Subscribe" [disabled] [ref=e484]
+    - generic [ref=e487]:
+      - generic [ref=e488]:
+        - generic [ref=e489]: © 2026 Tal Solomon
+        - text: ·
+        - link "Privacy" [ref=e490] [cursor=pointer]:
+          - /url: https://substack.com/privacy
+        - text: ∙
+        - link "Terms" [ref=e491] [cursor=pointer]:
+          - /url: https://substack.com/tos
+        - text: ∙
+        - link "Collection notice" [ref=e492] [cursor=pointer]:
+          - /url: https://substack.com/ccpa#personal-data-collected
+      - generic [ref=e493]:
+        - link "Start your Substack" [ref=e494] [cursor=pointer]:
+          - /url: https://substack.com/signup?utm_source=substack&utm_medium=web&utm_content=footer
+          - img [ref=e495]
+          - text: Start your Substack
+        - link "Get the app" [ref=e500] [cursor=pointer]:
+          - /url: https://substack.com/app/app-store-redirect?utm_campaign=app-marketing&utm_content=web-footer-button
+      - generic [ref=e501]:
+        - link "Substack" [ref=e502] [cursor=pointer]:
+          - /url: https://substack.com
+        - text: is the home for great culture
+  - region "Notifications (F8)":
+    - list

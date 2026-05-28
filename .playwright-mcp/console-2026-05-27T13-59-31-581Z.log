@@ -1,0 +1,2 @@
+[     477ms] [INFO] [O11Y] [DatadogRUM] Initialized {service: claude-ai, env: production, version: 4962be427e} @ https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6eedc03a-iRfVX3a4.js:0
+[    1375ms] [ERROR] Not signed in with the identity provider. @ https://claude.ai/login:0

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בנה אייג׳נט אחד — המדריך השלם</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 24px;
+    color: #1a1a1a;
+    direction: rtl;
+    text-align: right;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 48px;
+    margin-bottom: 12px;
+  }
+  p { margin: 0 0 20px 0; }
+  blockquote {
+    border-right: 3px solid #1a1a1a;
+    margin: 24px 0;
+    padding: 4px 20px 4px 0;
+    color: #333;
+  }
+  pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    direction: rtl;
+    text-align: right;
+    margin: 24px 0;
+  }
+  code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 40px 0;
+  }
+  .youtube-embed {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 28px 0;
+    font-size: 15px;
+    color: #555;
+    direction: ltr;
+    text-align: left;
+  }
+  .youtube-embed a {
+    color: #cc0000;
+    word-break: break-all;
+  }
+  .youtube-embed::before {
+    content: "▶ YouTube — paste this URL into Substack embed: ";
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<p>מישהו בקבוצת ה-Slack שלי שיתף בשבוע שעבר אייג׳נט שהוא בנה שמנהל לו את כל האימיילים. "שולח, מסכם, מסנן, מתעדף," הוא כתב, גאה. שאלתי אותו מה קורה כשהאייג׳נט לא בטוח מה לעשות עם מייל. "אה, הוא מוחק אותו," הוא ענה. "כי בטח זה ספאם."</p>
+
+<p>ניחוש: הוא כבר לא גאה.</p>
+
+<p>בינה מלאכותית נותנת לנו היום את הכוח לבנות דברים שרק לפני שנתיים היו דורשים צוות פיתוח שלם. אבל הכוח הזה בא עם אחריות להבין מה אתם/ן בונות, לא רק להדביק פרומפט ולקוות לטוב.</p>
+
+<p>יאללה, בואו נצלול.</p>
+
+<hr>
+
+<h2>מה זה בכלל אייג׳נט: הגדרה שלא שמעתם בכנסים</h2>
+
+<p>לפני שמתחילים לבנות, בואו נסכים על מה אנחנו בונות.</p>
+
+<blockquote><strong>AI Agent</strong>: תוכנה שמשלבת מודל שפה (LLM) עם יכולת לקחת פעולות בעולם האמיתי. המודל חושב, מחליט מה לעשות, מבצע פעולה, רואה מה קרה, וחושב שוב. זה הלולאה.</blockquote>
+
+<p>זה הכל. Plan → Act → Observe → Plan. שוב ושוב, עד שהמשימה מסתיימת, או עד שמשהו נשבר (ונדבר על זה).</p>
+
+<p>ההבדל בין צ'אטבוט לאייג׳נט הוא פשוט: צ'אטבוט עונה. אייג׳נט עושה. כשאתם/ן שואלות את ChatGPT "מה מזג האוויר בתל אביב?", זה צ'אטבוט. כשאתם/ן נותנות לאייג׳נט גישה לכלי שמושך מידע על מזג האוויר, והוא עושה את זה לבד, זה אייג׳נט.</p>
+
+<p>הכלי הוא המפתח. בלי כלים, אין אייג׳נט. יש רק LLM חכם שחי בתוך חלון הקשר שלו ולא יכול לגעת בשום דבר מחוצה לו.</p>
+
+<pre>עובדה חביבה: מודל שפה גרידא לא יכול לדעת מה השעה עכשיו. אין לו גישה לשעון. אם אתם/ן שואלות "כמה שעות עכשיו?" הוא מנחש, או מסרב. כלי פשוט של get_current_time פותר את זה מיד. זה ההבדל בין LLM לאייג׳נט.</pre>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=gHB4JFG9i3k">https://www.youtube.com/watch?v=gHB4JFG9i3k</a></div>
+
+<hr>
+
+<h2>שלב אפס: לפני שנוגעים בקוד — מה האייג׳נט צריך לעשות?</h2>
+
+<p>זו הטעות הכי שכיחה. כולם מתחילים מ"אני רוצה אייג׳נט ש..." ואף אחד לא מסיים את המשפט הזה בצורה מדויקת מספיק.</p>
+
+<p>בנו אייג׳נט רק אחרי שיש לכם/ן תשובות מדויקות לארבעה דברים:</p>
+
+<p><strong>מה הטריגר?</strong> מה מפעיל את האייג׳נט? לוח זמנים? אירוע ספציפי (מייל חדש, הודעה בסלאק)? פעולה ידנית שלכם/ן? אם אתם/ן לא יודעות מה מפעיל אותו, הוא לא יפעל.</p>
+
+<p><strong>מה ה"עשה"?</strong> פעולה אחת, ברורה. לא "נהל לי את החיים". לא "עזור לי בכל הדברים". משהו כמו: "קרא כל מייל שמגיע לתיבה, בדוק אם הוא דורש פעולה ממני, ואם כן, סכם אותו ב-3 שורות ושמור בקובץ."</p>
+
+<p><strong>מה הגבול?</strong> מה האייג׳נט לא מורשה לעשות. לא מחיק. לא שולח מיילים בלי אישור. לא גישה לתיקיות X. הגבולות לא מגבילים אתכם/ן, הם מונעים מהאייג׳נט לדפוק לכם/ן משהו ב-3 בלילה.</p>
+
+<p><strong>מה ה"סיים"?</strong> איך האייג׳נט יודע שסיים? בלי קריטריון סיום ברור, הוא ממשיך לנסות, ולנסות, ולנסות, ומוציא לכם/ן טוקנים (וכסף) על ניסיונות שלא היה צריך לעשות.</p>
+
+<p>ענו על ארבעת אלה לפני שפותחים כלי כלשהו. אם אינכם/ן יכולות לענות, האייג׳נט עדיין לא בשל לבנייה.</p>
+
+<hr>
+
+<h2>הכלים: הסופרפאוורים של האייג׳נט</h2>
+
+<p>אייג׳נט בלי כלים הוא כמו בכיר בתפקיד בלי תקציב. יכול לחשוב כמה שרוצה, לא יקרה כלום.</p>
+
+<p>כל פעולה שאייג׳נט יכול לעשות בעולם האמיתי עוברת דרך כלי. הנה הקטגוריות הנפוצות:</p>
+
+<blockquote><strong>כלי קריאה</strong>: שולף מידע — web search, קריאת קבצים, API calls (מזג אוויר, מניות, CRM). האייג׳נט לא יודע מה קורה בחוץ בלי אלה.</blockquote>
+
+<blockquote><strong>כלי כתיבה</strong>: משנה מידע — שמירת קבצים, שליחת מיילים, עדכון מסד נתונים, פוסט בסושיאל. אלה הכלים שדורשים גבולות ברורים.</blockquote>
+
+<blockquote><strong>כלי ביצוע</strong>: מריץ קוד — Python scripts, terminal commands, browser automation. עוצמתיים מאוד. גם מסוכנים יותר.</blockquote>
+
+<blockquote><strong>כלי זיכרון</strong>: שומר ושולף הקשר — vector databases, simple file storage, structured logs. בלי אלה, האייג׳נט שוכח הכל בין ריצות.</blockquote>
+
+<p>הרגל טוב: לכל כלי שנותנים לאייג׳נט, שאלו "מה הכי גרוע שיכול לקרות אם הוא ישתמש בזה בטעות?" אם התשובה מפחידה, הוסיפו approval step לפני הביצוע.</p>
+
+<pre>עובדה חביבה: Claude Code של Anthropic מגיע עם מעל 20 כלים מובנים: Bash, Read, Write, Edit, WebSearch, ועוד. אתם/ן לא צריכות לבנות כלים בסיסיים מאפס. רוב הזמן, הפאזל הוא חיבור נכון של כלים קיימים, לא כתיבת כלים חדשים.</pre>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=tDGiWn0flK8">https://www.youtube.com/watch?v=tDGiWn0flK8</a></div>
+
+<hr>
+
+<h2>הזיכרון: החלק שכולם שוכחים לבנות</h2>
+
+<p>כאן נשברים הרוב מהאייג׳נטים "שעובדים".</p>
+
+<p>מודל שפה חי בתוך חלון הקשר שלו. מה שנכנס לחלון, הוא "יודע". מה שיצא, הוא "שכח". זה לא מוגבלות, זו עיצוב. הבעיה היא שרוב האנשים בונות אייג׳נטים בלי לחשוב על מה קורה בין ריצה לריצה.</p>
+
+<p>שלוש שכבות זיכרון שצריך להחליט עליהן לפני הבנייה:</p>
+
+<p><strong>זיכרון בתוך סשן</strong>: מה האייג׳נט זוכר במהלך ריצה אחת. זה פשוט — כל מה שבחלון ההקשר. לא צריך לעשות כלום בשביל זה.</p>
+
+<p><strong>זיכרון בין סשנים</strong>: מה האייג׳נט זוכר מהפעם הקודמת. זה לא קיים אוטומטית. צריך לבנות אותו — קובץ טקסט, מסד נתונים, JSON פשוט. כל ריצה מתחילה בטעינת המצב הקודם, ומסתיימת בשמירת המצב הנוכחי.</p>
+
+<p><strong>זיכרון מובנה</strong>: vector stores שמאפשרים לאייג׳נט "לחפש" בזיכרון לפי משמעות, לא רק לשלוף לפי מפתח. שימושי כשיש הרבה מידע שצריך לפלטר ממנו מה רלוונטי לכל ריצה.</p>
+
+<p>הפתרון הפשוט ביותר לרוב האייג׳נטים: קובץ <code>memory.md</code> שהאייג׳נט קורא בהתחלת כל ריצה ומעדכן בסוף. זה לא סקסי, אבל זה עובד, ו-90% מהמקרים לא צריכים יותר מזה.</p>
+
+<p>(מאמר נפרד בבלוג בנושא שלוש שכבות הזיכרון של AI)</p>
+
+<hr>
+
+<h2>בניית אייג׳נט עם Claude Code: צעד אחר צעד</h2>
+
+<p>בואו נבנה משהו אמיתי. מטרה: אייג׳נט שכל בוקר קורא תיקיית קבצים, מסכם מה נוסף/שונה מאתמול, ושולח לעצמכם/ן סיכום ב-WhatsApp.</p>
+
+<p><strong>שלב 1: הגדירו את ה-CLAUDE.md שלכם</strong></p>
+
+<p><code>CLAUDE.md</code> הוא ה"תדריך" הקבוע שהאייג׳נט מקבל בכל הפעלה. שמים אותו בתיקיית הפרויקט. זה לא קוד, זה טקסט פשוט שמסביר למודל מי הוא, מה הוא עושה, ואיך הוא מתנהג.</p>
+
+<p>דוגמה:</p>
+
+<pre style="direction:ltr; text-align:left;"># Morning Summary Agent
+
+You are a morning briefing agent. Every run, you:
+1. Read all files in /reports/ directory
+2. Compare with yesterday's state (stored in memory.md)
+3. Summarize what changed in plain Hebrew
+4. Send the summary via WhatsApp API
+
+Rules:
+- Never delete files
+- If unsure about a change, flag it as "לא ברור". Don't interpret.
+- Max 5 bullet points in the summary</pre>
+
+<p>שלושה דברים שה-CLAUDE.md חייב לכלול: מה האייג׳נט הוא, מה הוא לא עושה, ומה הוא עושה כשהוא לא בטוח. בלי השלישי, הוא יחליט לבד, ולא תמיד תאהבו את ההחלטות.</p>
+
+<p><strong>שלב 2: הגדירו Permissions</strong></p>
+
+<p>Claude Code מגיע עם מערכת הרשאות מובנית. בקובץ <code>.claude/settings.json</code> אתם/ן מגדירות מה מותר ומה לא:</p>
+
+<pre style="direction:ltr; text-align:left;">{
+  "permissions": {
+    "allow": ["Read", "Write(/reports/*)", "Bash(cat:*)", "Bash(ls:*)"],
+    "deny": ["Bash(rm:*)", "Bash(curl:*)", "Write(/system/*)"]
+  }
+}</pre>
+
+<p>זה לא אופציונלי. זה הגבולות שהגדרתם/ן מקודם, פה אתם/ן מממשות אותם.</p>
+
+<p><strong>שלב 3: בנו את לולאת הזיכרון</strong></p>
+
+<p>בסוף כל ריצה, האייג׳נט צריך לשמור מצב. הנה פרומפט פשוט שמגיע בסוף ה-CLAUDE.md:</p>
+
+<pre style="direction:ltr; text-align:left;">At the end of every run, append to memory.md:
+- Date: [today's date]
+- Files seen: [list of file names]
+- Summary sent: [true/false]
+- Notes: [anything unusual]</pre>
+
+<p>בתחילת ריצה: <code>Read memory.md first. Use it to understand what happened yesterday.</code></p>
+
+<p>פשוט כמו שזה נשמע, וזה עובד.</p>
+
+<p><strong>שלב 4: הפעלה ובדיקה</strong></p>
+
+<p>הריצו את האייג׳נט פעם אחת ב-interactive mode (ידנית, עם עיניים פתוחות). תנו לו לרוץ, תראו כל פעולה שהוא לוקח, ובדקו: האם הוא עושה את מה שביקשתם/ן? האם הוא שואל שאלות כשהוא לא בטוח? האם הזיכרון נשמר נכון?</p>
+
+<p>רק אחרי שריצה ידנית עובדת, הגדירו cron job או scheduler.</p>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=uvs1Igr4u6g">https://www.youtube.com/watch?v=uvs1Igr4u6g</a></div>
+
+<hr>
+
+<h2>בנייה עם n8n: לאלה שלא רוצות לגעת בטרמינל</h2>
+
+<p>Claude Code הוא עוצמתי אבל דורש נוחות בסביבת פיתוח. אם אתם/ן רוצות לבנות אייג׳נטים בלי לגעת בקוד, n8n הוא הכלי.</p>
+
+<blockquote><strong>n8n</strong>: פלטפורמת אוטומציה ויזואלית שמאפשרת לבנות workflows מבוססי AI ב-drag-and-drop. קוד-פתוח, self-hosted, מתחבר לכמעט כל שירות קיים.</blockquote>
+
+<p>הארכיטקטורה ב-n8n פשוטה:</p>
+
+<p><strong>Trigger Node</strong>: מה מפעיל את ה-workflow. Schedule, webhook, Gmail, Slack, כמעט כל מקור.</p>
+
+<p><strong>AI Agent Node</strong>: הלב. תנו לו פרומפט, תחברו כלים. הוא יחשוב ויחליט מה לעשות.</p>
+
+<p><strong>Tool Nodes</strong>: כל action שהאייג׳נט יכול לבצע — search ב-Google, שליחת מייל, קריאה מ-Google Sheets, כתיבה לקובץ.</p>
+
+<p><strong>Memory Node</strong>: window buffer, vector store, או simple key-value, תלוי בכמה הוא צריך לזכור.</p>
+
+<p>הגדרת האייג׳נט ב-n8n נראית בדיוק כמו ב-Claude Code, רק בממשק ויזואלי: פרומפט ב-system message, כלים שמחובר אליהם, הגדרות memory. ההבדל הוא שאין צורך לכתוב CLAUDE.md, הגדרות האייג׳נט נמצאות ב-node configuration.</p>
+
+<p>יתרון משמעותי של n8n: אינטגרציות. יש שם מאות connectors מוכנים — Gmail, Slack, Notion, Airtable, WhatsApp, Linear, Jira. מה שב-Claude Code דורש כתיבת API wrapper, ב-n8n זה גרור וחבר.</p>
+
+<p>חיסרון: פחות שליטה. כשמשהו נשבר ב-n8n, לפעמים קשה יותר להבין למה. ב-Claude Code רואים כל פעולה בזמן אמת.</p>
+
+<pre>עובדה חביבה: ל-n8n יש גרסת cloud וגרסת self-hosted. הגרסה ה-community של self-hosted בחינם לגמרי. אם אתם/ן מטפלות בנתונים רגישים, self-hosted הוא לא בחירה, הוא חובה.</pre>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=GuaKeDS6UKU">https://www.youtube.com/watch?v=GuaKeDS6UKU</a></div>
+
+<hr>
+
+<h2>הטעות הכי שכיחה: אייג׳נט שעושה הכל</h2>
+
+<p>"אני רוצה אייג׳נט שינהל לי את הפרויקטים, ינהל לי את המיילים, יזמין לי פגישות, ויסכם לי ישיבות."</p>
+
+<p>לא. זה לא אייג׳נט. זה ארבעה אייג׳נטים שעדיין לא בנויים.</p>
+
+<p>האנטי-פטרן הזה, ה-"God Agent", מוביל לאייג׳נט שלא טוב בכלום. הוא מבולבל, איטי, וכשהוא נשבר (ויישבר), אין לכם/ן מושג איפה. כל ריצה מלאה בהחלטות שהוא לוקח לבד, חלקן נכונות, חלקן לא.</p>
+
+<p>הגישה הנכונה: <strong>אייג׳נטים מומחים, קטנים, עם מחויבות אחת.</strong></p>
+
+<p>אייג׳נט שמסכם ישיבות עושה רק את זה, עושה את זה מצוין. אייג׳נט שמנהל מיילים, רק מיילים. אם הם צריכים לדבר אחד עם השני, שם נכנסת ארכיטקטורת multi-agent (אבל אל תתחילו משם).</p>
+
+<p>כלל אצבע: אם אי אפשר להסביר מה האייג׳נט עושה במשפט אחד, הוא גדול מדי.</p>
+
+<hr>
+
+<h2>Multi-Agent: כשאייג׳נט אחד באמת לא מספיק</h2>
+
+<p>אחרי שיש לכם/ן כמה אייג׳נטים מומחים, אפשר להתחיל לחשוב על איך הם עובדים יחד.</p>
+
+<p>הפטרן הכי שימושי: Orchestrator + Specialists.</p>
+
+<blockquote><strong>Orchestrator</strong>: אייג׳נט שמקבל את המשימה הגדולה, מפרק אותה, ומחלק לאייג׳נטים המומחים שלו.</blockquote>
+
+<blockquote><strong>Specialist</strong>: אייג׳נט עם מחויבות אחת, כלים ספציפיים, ופרומפט מדויק. מבצע ומחזיר תוצאה.</blockquote>
+
+<p>דוגמה מהחיים: רוצים לבנות weekly briefing אוטומטי לצוות. האורקסטרטור מקבל את ה"תעשה briefing לשבוע שעבר". הוא שולח לאייג׳נט הפגישות "תסכם את כל הישיבות". לאייג׳נט המיילים "מה היו ההחלטות הגדולות". לאייג׳נט ה-KPIs "מה המספרים". מקבל חזרה, מרכיב, שולח.</p>
+
+<p>ה-interface בין אייג׳נטים? טקסט. JSON מובנה. פשוט. אל תסבכו.</p>
+
+<pre>עובדה חביבה: Claude Code תומך ב-agent spawning מובנה. אייג׳נט יכול להפעיל אייג׳נטים אחרים. זה לא feature ניסיוני. זו הדרך הנכונה לבנות משימות מורכבות בלי לנפח חלון הקשר אחד.</pre>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=MbKUeufUZIY">https://www.youtube.com/watch?v=MbKUeufUZIY</a></div>
+
+<hr>
+
+<h2>אחרי שבנית: ה-Loop שאף אחד לא מדבר עליו</h2>
+
+<p>רוב המדריכים מסתיימים ב"הפעל והנה הוא עובד!" בפועל, זה רק ההתחלה.</p>
+
+<p>אייג׳נט שעובד פעם אחת לא בהכרח עובד כל פעם. הסביבה משתנה, ה-API משנה פורמט, הקבצים שהוא קורא זזים, הפרומפט שכתבתם/ן לא מכסה edge case שלא חשבתם עליו.</p>
+
+<p>כמה הרגלים שיחסכו לכם/ן כאב:</p>
+
+<p><strong>תעדו כל ריצה.</strong> לוג פשוט: מה הופעל, מה נעשה, האם הצליח. לא לשום מטרה גדולה, רק כדי שכשמשהו ייקרע בשבוע שלישי, תהיה לכם/ן נקודת ייחוס.</p>
+
+<p><strong>הוסיפו Human-in-the-Loop לפעולות הרסניות.</strong> כל פעולה שאי אפשר לבטל — שליחת מייל, מחיקה, פוסט ציבורי — דרשו approval ידני לפחות בשלב הראשון. אחרי שבדקתם/ן שהוא מתנהג נכון, אפשר להסיר.</p>
+
+<p><strong>בנו fallback ברור.</strong> מה האייג׳נט עושה כשהוא לא יודע? "אל תנחש, שאל" הוא תמיד עדיף על "נסה ממילא". הוסיפו לפרומפט: "If you're unsure about any action, stop and ask for clarification rather than proceeding."</p>
+
+<p><strong>בדקו drift.</strong> פרומפטים מתיישנים. עדכנו את ה-CLAUDE.md כשאתם/ן מגלות שהאייג׳נט פועל בצורה שלא ציפיתם, לא תמיד זה באג, לפעמים זה הפרומפט שכבר לא מדויק.</p>
+
+<hr>
+
+<h2>אז מה בנינו?</h2>
+
+<p>בניתם/ן אייג׳נט שמגדיר מטרה, מצויד בכלים ספציפיים, זוכר בין ריצות, פועל בגבולות ברורים, ויש לו מה לעשות כשהוא לא בטוח.</p>
+
+<p>זה לא מדע-טילים. זה פרונטאלי ושיטתי, ואם עשיתם/ן את זה נכון, האייג׳נט שלכם/ן יעשה עבודה שחסכה לכם/ן שעות בשבוע בלי לפוצץ שום דבר.</p>
+
+<p>הצעד הבא הוא לא "לבנות אייג׳נט יותר גדול". הצעד הבא הוא לתת לזה לרוץ שבוע, לראות היכן הוא מתקל, ולשפר בהדרגה.</p>
+
+<p>אכן.</p>
+
+<hr>
+
+<p>בניתם/ן אייג׳נט? שיתפו מה הוא עושה ואיפה הכי קשה היה לכם/ן, כותבים/ות לי. 🙏</p>
+
+</body>
+</html>

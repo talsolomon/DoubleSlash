@@ -1,0 +1,8 @@
+- generic [ref=e5]:
+  - heading "Ooops... error 404" [level=2] [ref=e7]:
+    - text: Ooops...
+    - generic [ref=e8]: error 404
+  - generic [ref=e9]: Page not found
+  - button "Back to home" [ref=e10] [cursor=pointer]:
+    - generic [ref=e11]: Back to home
+    - img [ref=e12]

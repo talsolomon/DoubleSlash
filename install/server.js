@@ -19,20 +19,24 @@ const NODEMAP_FILE = path.join(PROJECT_DIR, 'node-map.md');
 
 // ─── SSE ──────────────────────────────────────────────────────────────────────
 const clients = new Set();
-function broadcast() {
-  const msg = `data: ${JSON.stringify({ ts: Date.now() })}\n\n`;
+function broadcast(source) {
+  const msg = `data: ${JSON.stringify({ ts: Date.now(), source: source || 'unknown' })}\n\n`;
   for (const res of [...clients]) { try { res.write(msg); } catch { clients.delete(res); } }
 }
 
 // ─── Watchers ─────────────────────────────────────────────────────────────────
-function watchDir(dir, filter) {
+function watchDir(dir, handler) {
   if (!fs.existsSync(dir)) return false;
-  try { fs.watch(dir, { persistent: true }, (_, f) => { if (!f || filter(f)) broadcast(); }); return true; }
+  try { fs.watch(dir, { persistent: true }, (_, f) => { if (f) handler(f); }); return true; }
   catch { return false; }
 }
 function setupWatchers() {
-  watchDir(PROJECT_DIR, f => ['kanban.md', 'node-map.md', 'memory.md'].includes(f));
-  if (!watchDir(MEMORY_DIR, f => f.endsWith('.md'))) setTimeout(setupWatchers, 4000);
+  watchDir(PROJECT_DIR, f => {
+    if (f === 'kanban.md') broadcast('kanban');
+    else if (f === 'node-map.md') broadcast('nodemap');
+    else if (f === 'memory.md') broadcast('memory');
+  });
+  if (!watchDir(MEMORY_DIR, f => { if (f.endsWith('.md')) broadcast('memory'); })) setTimeout(setupWatchers, 4000);
 }
 
 // ─── Parsers ──────────────────────────────────────────────────────────────────
@@ -161,7 +165,7 @@ nav button:hover:not(.active){color:var(--text);background:var(--bg)}
 .updated{font-size:11px;color:var(--dim);margin-left:auto}
 
 /* shell */
-.shell{display:flex;height:calc(100vh - 46px);overflow:hidden}
+.shell{display:flex;height:calc(100vh - 78px);overflow:hidden}
 .view{display:none;flex:1;overflow:auto;padding:20px;min-width:0}
 .view.active{display:block}
 #nodemap-view.active{display:flex;flex-direction:column;padding:0;overflow:hidden}
@@ -246,10 +250,29 @@ nav button:hover:not(.active){color:var(--text);background:var(--bg)}
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* stats bar */
+.stats-bar{display:flex;align-items:center;gap:10px;padding:0 20px;height:32px;background:var(--panel);border-bottom:1px solid var(--border);font-size:11px;color:var(--muted);position:sticky;top:46px;z-index:99;flex-shrink:0}
+.stat{display:flex;align-items:center;gap:5px}
+.stat-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.stat-val{color:var(--text);font-weight:600}
+.stat-sep{color:var(--dim);padding:0 2px}
+
+/* toast */
+.toast-tray{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;flex-direction:column-reverse;gap:8px;pointer-events:none}
+.toast{background:#1a1817;color:#fff;font-size:12px;padding:10px 15px;border-radius:9px;box-shadow:0 4px 24px rgba(0,0,0,.28);display:flex;align-items:center;gap:9px;pointer-events:none;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .22s ease,transform .22s ease;max-width:340px}
+.toast.show{opacity:1;transform:translateY(0) scale(1)}
+.toast-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.toast-msg{line-height:1.4}
+
+/* pulse burst on update */
+@keyframes pulse-burst{0%{opacity:1;transform:scale(2.6);box-shadow:0 0 0 4px rgba(34,197,94,.25)}60%{opacity:1;transform:scale(1.4)}100%{opacity:1;transform:scale(1)}}
+.pulse.burst{animation:pulse-burst .65s ease-out forwards!important}
 </style>
 </head>
 <body>
 <div class="cy-tip" id="cy-tip"></div>
+<div class="toast-tray" id="toast-tray"></div>
 
 <header>
   <span class="logo">// DS LIVE</span>
@@ -262,6 +285,7 @@ nav button:hover:not(.active){color:var(--text);background:var(--bg)}
   </nav>
   <span class="updated" id="updated"></span>
 </header>
+<div class="stats-bar" id="stats-bar"></div>
 
 <div class="shell">
   <div id="kanban-view" class="view active"></div>
@@ -618,8 +642,60 @@ function selectMem(itemJson, id) {
 // ─── Utils ────────────────────────────────────────────────────────────────────
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
+// ─── Stats & Toasts ───────────────────────────────────────────────────────────
+function snapCounts() {
+  if (!state) return null;
+  return {
+    kanban: state.kanban?.reduce((s, c) => s + c.cards.length, 0) || 0,
+    nodes: state.nodeMap?.nodes.length || 0,
+    memory: state.memory?.length || 0,
+  };
+}
+
+function showToast(msg, color) {
+  const tray = document.getElementById('toast-tray');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = \`<div class="toast-dot" style="background:\${color||'#22c55e'}"></div><span class="toast-msg">\${esc(msg)}</span>\`;
+  tray.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
+  setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 280); }, 3800);
+}
+
+function renderStats() {
+  const bar = document.getElementById('stats-bar');
+  if (!bar) return;
+  const d = new Date();
+  const today = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  const nodes = state?.nodeMap?.nodes || [];
+  const todayNodes = nodes.filter(n => n.session?.includes(today) && n.type !== 'session');
+  const counts = {
+    decisions: todayNodes.filter(n => n.type === 'decision').length,
+    artifacts: todayNodes.filter(n => n.type === 'artifact').length,
+    tasks: todayNodes.filter(n => n.type === 'task').length,
+  };
+  const active = state?.kanban?.reduce((s, c) => s + c.cards.filter(x => x.status === 'active').length, 0) || 0;
+  const stats = [
+    counts.decisions && { label: 'decisions', val: counts.decisions, color: '#d97706' },
+    counts.artifacts && { label: 'artifacts', val: counts.artifacts, color: '#15803d' },
+    counts.tasks && { label: 'tasks', val: counts.tasks, color: '#7c3aed' },
+    active && { label: 'open', val: active, color: '#6c53ee' },
+  ].filter(Boolean);
+
+  if (!stats.length) {
+    bar.innerHTML = \`<span style="color:var(--dim)">Session \${today} · no activity yet</span>\`;
+    return;
+  }
+  bar.innerHTML = \`<span style="color:var(--dim);margin-right:2px">Today</span>\` +
+    stats.map((s, i) =>
+      (i > 0 ? \`<span class="stat-sep">·</span>\` : '') +
+      \`<div class="stat"><div class="stat-dot" style="background:\${s.color}"></div><span class="stat-val">\${s.val}</span>&nbsp;\${s.label}</div>\`
+    ).join('');
+}
+
 // ─── Refresh & SSE ────────────────────────────────────────────────────────────
-async function refresh() {
+async function refresh(source) {
+  const prev = snapCounts();
   try {
     const res = await fetch('/data');
     state = await res.json();
@@ -627,12 +703,35 @@ async function refresh() {
     document.getElementById('updated').textContent = 'updated ' + state.updated;
     renderKanban(state.kanban);
     renderMemory(state.memory);
+    renderStats();
     if (activeTab === 'nodemap') renderNodeMap();
+
+    if (prev && source) {
+      const next = snapCounts();
+      const kDelta = next.kanban - prev.kanban;
+      const nDelta = next.nodes - prev.nodes;
+      const mDelta = next.memory - prev.memory;
+      const parts = [];
+      if (kDelta !== 0) parts.push((kDelta > 0 ? '+' : '') + kDelta + ' kanban ' + (Math.abs(kDelta) === 1 ? 'card' : 'cards'));
+      if (nDelta > 0) parts.push('+' + nDelta + ' ' + (nDelta === 1 ? 'node' : 'nodes'));
+      if (mDelta > 0) parts.push('+' + mDelta + ' memory ' + (mDelta === 1 ? 'entry' : 'entries'));
+      const msg = parts.length ? 'DS · ' + parts.join(' · ') :
+        source === 'kanban' ? 'Kanban updated' : source === 'nodemap' ? 'Node Map updated' : 'Memory updated';
+      showToast(msg, '#6c53ee');
+      const dot = document.querySelector('.pulse');
+      dot.classList.remove('burst');
+      void dot.offsetWidth;
+      dot.classList.add('burst');
+      setTimeout(() => dot.classList.remove('burst'), 700);
+    }
   } catch(e) { console.error('refresh failed', e); }
 }
 function connectSSE() {
   const es = new EventSource('/events');
-  es.onmessage = () => refresh();
+  es.onmessage = e => {
+    try { const p = JSON.parse(e.data); if (p.type !== 'connected') refresh(p.source); }
+    catch { refresh(); }
+  };
   es.onerror = () => { es.close(); setTimeout(connectSSE, 3000); };
 }
 

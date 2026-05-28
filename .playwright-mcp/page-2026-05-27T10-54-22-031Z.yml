@@ -1,0 +1,57 @@
+- generic [ref=e2]:
+  - iframe
+  - generic [ref=e3]:
+    - generic [ref=e7]:
+      - link "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e13]
+      - heading "בלוג על מוצר וחוויית משתמש / טל סולומון" [level=1] [ref=e15]:
+        - link "בלוג על מוצר וחוויית משתמש / טל סולומון" [ref=e16] [cursor=pointer]:
+          - /url: /
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - button "Search" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+          - button "Share Publication" [ref=e26] [cursor=pointer]:
+            - img [ref=e27]
+        - button "Subscribe" [ref=e30] [cursor=pointer]
+        - button "Sign in" [ref=e31] [cursor=pointer]
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e37]
+          - generic [ref=e38]:
+            - heading "מה זה אייג׳נט ולמה המילה הזו לא הולכת לשום מקום" [level=2] [ref=e39]
+            - generic [ref=e40]: אז מה זה בכלל Agent?
+            - generic [ref=e41]: By בלוג על מוצר וחוויית משתמש
+        - generic [ref=e42]:
+          - generic [ref=e47]:
+            - textbox "Type your email..." [ref=e50]
+            - button "Subscribe" [disabled] [ref=e51]
+          - generic [ref=e52]: Publishes on May 28th, 2:00pm. Subscribe now and receive the post in your inbox when it’s live
+      - generic [ref=e55]: Available in 1 day, 0 hours, 5 minutes, and 38 seconds
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - generic [ref=e60]: © 2026 Tal Solomon
+        - text: ·
+        - link "Privacy" [ref=e61] [cursor=pointer]:
+          - /url: https://substack.com/privacy
+        - text: ∙
+        - link "Terms" [ref=e62] [cursor=pointer]:
+          - /url: https://substack.com/tos
+        - text: ∙
+        - link "Collection notice" [ref=e63] [cursor=pointer]:
+          - /url: https://substack.com/ccpa#personal-data-collected
+      - generic [ref=e64]:
+        - link "Start your Substack" [ref=e65] [cursor=pointer]:
+          - /url: https://substack.com/signup?utm_source=substack&utm_medium=web&utm_content=footer
+          - img [ref=e66]
+          - text: Start your Substack
+        - link "Get the app" [ref=e71] [cursor=pointer]:
+          - /url: https://substack.com/app/app-store-redirect?utm_campaign=app-marketing&utm_content=web-footer-button
+      - generic [ref=e72]:
+        - link "Substack" [ref=e73] [cursor=pointer]:
+          - /url: https://substack.com
+        - text: is the home for great culture
+  - region "Notifications (F8)":
+    - list

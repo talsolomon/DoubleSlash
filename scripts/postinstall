@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Detect the current GUI user (postinstall runs as root)
+CURRENT_USER=$(stat -f "%Su" /dev/console 2>/dev/null || true)
+[[ -z "$CURRENT_USER" || "$CURRENT_USER" == "root" ]] && CURRENT_USER=$(logname 2>/dev/null || true)
+[[ -z "$CURRENT_USER" || "$CURRENT_USER" == "root" ]] && CURRENT_USER="${SUDO_USER:-}"
+
+if [[ -z "$CURRENT_USER" ]]; then
+  echo "DS Install: could not detect current user" >&2
+  exit 1
+fi
+
+USER_HOME=$(dscl . -read "/Users/$CURRENT_USER" NFSHomeDirectory 2>/dev/null | awk '{print $2}' || echo "/Users/$CURRENT_USER")
+
+DS_PAYLOAD="/Library/Application Support/DS"
+
+echo "DS: installing for $CURRENT_USER ($USER_HOME)"
+
+# Run the installer as the target user
+sudo -u "$CURRENT_USER" HOME="$USER_HOME" bash "$DS_PAYLOAD/install.sh"
+
+# Open ~/DS/ in Finder so the user can see it
+sudo -u "$CURRENT_USER" open "$USER_HOME/DS" 2>/dev/null || true
+
+exit 0

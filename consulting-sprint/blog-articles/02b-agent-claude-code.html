@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בנה אייג׳נט אחד: חלק ב׳ — Claude Code מאפס</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 24px;
+    color: #1a1a1a;
+    direction: rtl;
+    text-align: right;
+  }
+  h2 { font-size: 22px; font-weight: bold; margin-top: 48px; margin-bottom: 12px; }
+  p { margin: 0 0 20px 0; }
+  blockquote {
+    border-right: 3px solid #1a1a1a;
+    margin: 24px 0;
+    padding: 4px 20px 4px 0;
+    color: #333;
+  }
+  pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    direction: rtl;
+    text-align: right;
+    margin: 24px 0;
+  }
+  pre.code-ltr { direction: ltr; text-align: left; }
+  code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    direction: ltr;
+    unicode-bidi: embed;
+  }
+  hr { border: none; border-top: 1px solid #ddd; margin: 40px 0; }
+  img.screenshot {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin: 24px 0;
+    display: block;
+  }
+  figure { margin: 28px 0; }
+  figcaption {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+    text-align: center;
+  }
+  .placeholder {
+    background: #fff8e6;
+    border: 2px dashed #f0b429;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 28px 0;
+    font-size: 14px;
+    direction: ltr;
+    text-align: left;
+  }
+  .placeholder::before {
+    content: "📸 SCREENSHOT NEEDED";
+    display: block;
+    font-weight: bold;
+    font-size: 12px;
+    color: #b7791f;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .placeholder .what { font-weight: bold; color: #1a1a1a; margin-bottom: 4px; }
+  .placeholder .how { color: #555; font-size: 13px; }
+  .youtube-embed {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 28px 0;
+    font-size: 15px;
+    color: #555;
+    direction: ltr;
+    text-align: left;
+  }
+  .youtube-embed a { color: #cc0000; word-break: break-all; }
+  .youtube-embed::before {
+    content: "▶ YouTube — paste this URL into Substack embed: ";
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<p>שמעתי על מישהו שנתן לצ׳אטבוט להכין לו סיכום יומי. הוא הגדיר את הפרומפט בקפידה, הדביק אותו כל בוקר, קרא את התשובה, נאנח, וסגר את הטאב. זה לקח לו ארבע דקות. כל בוקר. כל יום. במשך שלושה חודשים. בגדול, הוא אוטומייט את הדביקה של הפרומפט.</p>
+
+<p>זה בדיוק מה שרוב האנשים עושים עם AI, ומה שהסדרה הזו בנויה לשנות.</p>
+
+<p>יאללה, בואו נצלול.</p>
+
+<hr>
+
+<h2>Claude Code זה לא Claude.ai, ותכלס ההבדל הוא הכל</h2>
+
+<p>לפני שפותחים טרמינל, צריך להבין מה אנחנו בונים בכלל.</p>
+
+<p>Claude.ai, האתר, הוא כמו לשלוח הודעה למישהו חכם. אתם/ן שולחות שאלה, הוא עונה. הוא יושב בצד השני של המסך, לא רואה כלום מהמחשב שלכם, לא יכול לגעת בשום קובץ.</p>
+
+<figure>
+  <img src="screenshots/01-claude-ai-homepage.png" alt="Claude.ai — ממשק הצ׳אט הרגיל" class="screenshot">
+  <figcaption>Claude.ai — ממשק הצ׳אט. שואלים, מקבלים תשובה. לא נוגע במחשב שלכם/ן.</figcaption>
+</figure>
+
+<p>Claude Code זה משהו אחר לגמרי. זה כלי שמותקן על המחשב שלכם, רץ בטרמינל, ויש לו גישה לקבצים שלכם, יכול להריץ פקודות, יכול לקרוא ולכתוב. כמו שמזמינים מישהו לשבת ליד המחשב שלכם ולהריץ דברים בשבילכם.</p>
+
+<blockquote><strong>Claude Code</strong>: כלי CLI מבית Anthropic שמריץ את מודל Claude ישירות על המחשב שלכם, עם גישה לקבצים, לטרמינל ולסביבת העבודה.</blockquote>
+
+<figure>
+  <img src="screenshots/05-claude-code-docs.png" alt="תיעוד Claude Code — האתר הרשמי" class="screenshot">
+  <figcaption>code.claude.com — התיעוד הרשמי של Claude Code.</figcaption>
+</figure>
+
+<hr>
+
+<h2>הלולאה שהופכת "צ׳אטבוט" ל"אייג׳נט"</h2>
+
+<p>אתם/ן נותנות/ים לו מטרה. לא הוראה. לא שאלה. מטרה. "סכם לי את כל הדוחות מהשבוע האחרון ושמור את הסיכום."</p>
+
+<p>המודל מסתכל על מה שיש לו, מתכנן צעדים, מבצע פעולה (קורא קובץ, כותב טקסט, מריץ פקודה), רואה מה קרה, ומתכנן את הצעד הבא. זה לא תשובה אחת. זו סדרה של פעולות שמסתיימת כשהמטרה הושגה.</p>
+
+<pre>עובדה חביבה: Claude Code הוא open source לגמרי.
+הקוד שלו זמין ב-GitHub ואפשר לראות בדיוק מה הוא עושה תחת המכסה.</pre>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=gHB4JFG9i3k">https://www.youtube.com/watch?v=gHB4JFG9i3k</a></div>
+
+<hr>
+
+<h2>מה צריך לפני שמתחילות/ים</h2>
+
+<p><strong>מחשב:</strong> Mac או Windows. המדריך הזה מצולם על Mac, אבל כמעט כל הפקודות זהות.</p>
+
+<p><strong>טרמינל:</strong> תוכנה שבה נותנים למחשב הוראות בטקסט, לא עם עכבר. ב-Mac זה אפליקציה שנקראת Terminal. זה לא מפחיד, זה בדיוק כמו לשלוח הודעות למחשב, רק שהמחשב מבצע אותן מיד.</p>
+
+<div class="placeholder">
+  <div class="what">Terminal פתוח על Mac</div>
+  <div class="how">Cmd+Space → type "Terminal" → Enter. Screenshot the empty terminal window. Shows the $ prompt.</div>
+</div>
+
+<p><strong>Node.js גרסה 18 ומעלה:</strong> runtime שמאפשר להריץ קוד JavaScript על המחשב. Claude Code בנוי על גביו.</p>
+
+<p><strong>חשבון Anthropic ומפתח API:</strong> לא מנוי ל-Claude.ai. חשבון ב-console.anthropic.com שמשתמש ב-pay-per-use. עלות ריצה אחת לאייג׳נט פשוט: בין 0.01 ל-0.05 דולר.</p>
+
+<hr>
+
+<h2>שלב 1: לבדוק אם Node.js מותקן, ואם לא, להתקין</h2>
+
+<p>פותחים Terminal. ב-Mac: לוחצים Cmd+Space, מקלידים "Terminal", לוחצים Enter.</p>
+
+<p>מקלידים:</p>
+
+<pre class="code-ltr">node --version</pre>
+
+<div class="placeholder">
+  <div class="what">Terminal מראה את גרסת Node.js</div>
+  <div class="how">Run: node --version → screenshot showing "v22.x.x" (or similar). If you get "command not found", screenshot that too — it illustrates the problem this step solves.</div>
+</div>
+
+<p>אם רואים משהו כמו <code>v18.17.0</code> או גבוה יותר, מצוין. עוברים לשלב 2.</p>
+
+<p>אם רואים <code>command not found</code>, Node.js לא מותקן. הולכות/ים ל-nodejs.org, מורידות/ים את גרסת ה-LTS:</p>
+
+<figure>
+  <img src="screenshots/03-nodejs-download.png" alt="nodejs.org — הורדת LTS" class="screenshot">
+  <figcaption>nodejs.org — הורידו את גרסת ה-LTS (הכפתור הירוק משמאל). זו הגרסה היציבה המומלצת.</figcaption>
+</figure>
+
+<pre>עובדה חביבה: Node.js שוחרר ב-2009 על ידי Ryan Dahl.
+כיום כמעט 100 מיליון מפתחות/ים משתמשות/ים בו.
+הוא לא הולך לשום מקום.</pre>
+
+<hr>
+
+<h2>שלב 2: להתקין את Claude Code עצמו</h2>
+
+<p>עכשיו שיש Node.js, מתקינות/ים Claude Code. בטרמינל:</p>
+
+<pre class="code-ltr">npm install -g @anthropic-ai/claude-code</pre>
+
+<div class="placeholder">
+  <div class="what">Terminal מראה את ההתקנה רצה</div>
+  <div class="how">Screenshot the terminal while npm install is running — shows the progress output. Then a second screenshot after it finishes showing the success message.</div>
+</div>
+
+<p>אחרי שהסתיים, מוודאות/ים:</p>
+
+<pre class="code-ltr">claude --version</pre>
+
+<div class="placeholder">
+  <div class="what">Terminal מראה גרסת Claude Code</div>
+  <div class="how">Screenshot: claude --version showing the version number (e.g. "1.x.x"). This confirms a successful install.</div>
+</div>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=tDGiWn0flK8">https://www.youtube.com/watch?v=tDGiWn0flK8</a></div>
+
+<hr>
+
+<h2>שלב 3: חשבון Anthropic ומפתח API</h2>
+
+<p>הולכות/ים ל-console.anthropic.com:</p>
+
+<figure>
+  <img src="screenshots/02-anthropic-console.png" alt="Anthropic Console — עמוד ההתחברות" class="screenshot">
+  <figcaption>platform.claude.com — נרשמות/ים או מתחברות/ים לחשבון Anthropic.</figcaption>
+</figure>
+
+<p>בסרגל השמאלי, לוחצות/ים על "API Keys". לוחצות/ים "Create Key". נותנות/ים לו שם, לדוגמה <code>my-agents</code>.</p>
+
+<div class="placeholder">
+  <div class="what">Anthropic console — עמוד ה-API Keys (logged in)</div>
+  <div class="how">Log into platform.claude.com → API Keys section → screenshot showing the "Create Key" button and the API keys list. Blur/hide any existing key values.</div>
+</div>
+
+<div class="placeholder">
+  <div class="what">חלון יצירת API Key חדש + הערת "העתק עכשיו"</div>
+  <div class="how">Screenshot the "Create Key" dialog showing the newly created key (before closing). Add a big red annotation/arrow pointing to the key with the text "העתק עכשיו — לא תראה את זה שוב". Blur the actual key value.</div>
+</div>
+
+<p>ואז, הדבר הכי חשוב במדריך: <strong>מעתיקות/ים את המפתח מיד.</strong> אחרי שסוגרות/ים את החלון, לעולם לא תראו אותו שוב. המפתח נראה כך: <code>sk-ant-api03-...</code></p>
+
+<p>עכשיו בחזרה לטרמינל:</p>
+
+<pre class="code-ltr">export ANTHROPIC_API_KEY="YOUR_KEY_HERE"</pre>
+
+<p>זה עובד, אבל נעלם כשסוגרים Terminal. כדי שיעבוד תמיד:</p>
+
+<pre class="code-ltr">echo 'export ANTHROPIC_API_KEY="YOUR_KEY_HERE"' >> ~/.zshrc
+source ~/.zshrc</pre>
+
+<div class="placeholder">
+  <div class="what">Terminal מראה את הגדרת ה-API key</div>
+  <div class="how">Screenshot terminal after running the export command and source ~/.zshrc. The key value should be blurred/redacted.</div>
+</div>
+
+<hr>
+
+<h2>שלב 4: יצירת הפרויקט</h2>
+
+<p>בטרמינל:</p>
+
+<pre class="code-ltr">cd ~/Desktop
+mkdir morning-agent
+cd morning-agent</pre>
+
+<div class="placeholder">
+  <div class="what">Terminal בתוך תיקיית morning-agent</div>
+  <div class="how">Screenshot terminal after cd morning-agent. The prompt should show ~/Desktop/morning-agent $ (or similar). Finder in background showing the new folder on Desktop is a nice bonus.</div>
+</div>
+
+<hr>
+
+<h2>שלב 5: CLAUDE.md, הקובץ שהופך פרויקט לאייג׳נט</h2>
+
+<blockquote><strong>CLAUDE.md</strong>: קובץ טקסט רגיל בשם CLAUDE.md שיושב בתיקיית הפרויקט. Claude Code קורא אותו אוטומטית בכל הרצה. זה תיאור התפקיד, הכללים, והסמכויות של האייג׳נט.</blockquote>
+
+<p>ליצור את הקובץ:</p>
+
+<pre class="code-ltr">touch CLAUDE.md
+code CLAUDE.md</pre>
+
+<div class="placeholder">
+  <div class="what">VS Code פותח קובץ CLAUDE.md ריק חדש</div>
+  <div class="how">Screenshot VS Code with the empty CLAUDE.md file open. Show the file in the Explorer sidebar on the left and the empty editor on the right. This is the "blank canvas" moment.</div>
+</div>
+
+<p>מדביקות/ים את התוכן הבא:</p>
+
+<pre class="code-ltr"># Morning Briefing Agent
+
+You are a morning briefing assistant. Every time you run, you:
+1. Read all .txt and .md files in the /reports/ folder
+2. Compare what you find with the previous state saved in memory.md
+3. Write a short summary (max 5 bullet points) of what changed since last time
+4. Save the summary to today-summary.md with today's date in the filename
+5. Update memory.md with the current state
+
+Your personality: concise, factual, no fluff. Write in Hebrew.
+
+Rules you must always follow:
+- Never delete any files
+- Never read files outside the /reports/ folder
+- If a file seems corrupted or unreadable, note it and skip it, don't stop
+- If you are not sure what to do, write "לא ברור" and stop. Don't guess.
+
+When you are done, tell me: "סיימתי. הסיכום שמור ב-[filename]"</pre>
+
+<div class="placeholder">
+  <div class="what">VS Code עם CLAUDE.md מלא</div>
+  <div class="how">Screenshot VS Code after pasting the full CLAUDE.md content. Show the complete file — all rules visible. Syntax highlighting on. This is the core artifact of the whole article.</div>
+</div>
+
+<div class="youtube-embed"><a href="https://www.youtube.com/watch?v=uvs1Igr4u6g">https://www.youtube.com/watch?v=uvs1Igr4u6g</a></div>
+
+<hr>
+
+<h2>שלב 6: הרשאות — מה מותר ומה אסור, בכתב</h2>
+
+<pre class="code-ltr">mkdir .claude
+touch .claude/settings.json
+code .claude/settings.json</pre>
+
+<p>מדביקות/ים:</p>
+
+<pre class="code-ltr">{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write(reports/*)",
+      "Write(*.md)",
+      "Bash(ls:*)",
+      "Bash(cat:*)"
+    ],
+    "deny": [
+      "Bash(rm:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)"
+    ]
+  }
+}</pre>
+
+<div class="placeholder">
+  <div class="what">VS Code עם settings.json מלא — מבנה התיקיות גלוי</div>
+  <div class="how">Screenshot VS Code showing settings.json with the full permissions JSON. In the Explorer sidebar, the .claude/ folder and settings.json should be visible. The deny section is the hero — consider annotating "Bash(rm:*)" with a label like "מחיקה חסומה לחלוטין".</div>
+</div>
+
+<pre>עובדה חביבה: הרשאות ב-settings.json חזקות יותר מהוראות ב-CLAUDE.md.
+גם אם תכתבו "delete old files" ב-CLAUDE.md,
+Bash(rm:*) ב-deny תחסום את זה בכל מקרה.
+ה-deny הוא ה-veto הסופי.</pre>
+
+<hr>
+
+<h2>שלב 7: ריצה ראשונה, כן, בפועל</h2>
+
+<pre class="code-ltr">mkdir reports
+echo "Meeting notes: discussed Q3 targets, agreed on roadmap" > reports/2026-05-27-meeting.txt
+claude</pre>
+
+<div class="placeholder">
+  <div class="what">מסך הפתיחה של Claude Code בטרמינל</div>
+  <div class="how">Screenshot the Claude Code welcome screen that appears right after running "claude". Shows the ASCII art logo, version, and the initial prompt. This is what readers are working towards — the payoff moment.</div>
+</div>
+
+<p>מקלידות/ים:</p>
+
+<pre>תריץ את המשימה שלך לפי ה-CLAUDE.md</pre>
+
+<div class="placeholder">
+  <div class="what">Claude Code מבקש אישור לפעולה ראשונה</div>
+  <div class="how">Screenshot the permission prompt — Claude Code asking "Want to run: cat reports/2026-05-27-meeting.txt? [y/n]". This is the critical safety mechanism — readers need to see what it looks like.</div>
+</div>
+
+<div class="placeholder">
+  <div class="what">Claude Code סיים את הריצה, הסיכום נוצר</div>
+  <div class="how">Screenshot terminal after the agent finishes — showing "סיימתי. הסיכום שמור ב-..." message. Then screenshot the created today-summary.md file open in VS Code showing the Hebrew summary.</div>
+</div>
+
+<hr>
+
+<h2>שלב 8: הזיכרון</h2>
+
+<p>מוסיפות/ים שתי הוראות ל-CLAUDE.md. בתחילת הקובץ, אחרי הכותרת:</p>
+
+<pre class="code-ltr">Before starting any task:
+- Check if memory.md exists in this folder
+- If it does, read it. It contains what you found in previous runs.
+- Use it to compare: what changed? what is new? what disappeared?</pre>
+
+<p>ובסוף הקובץ:</p>
+
+<pre class="code-ltr">After completing the task:
+- Write or update memory.md
+- Include: today's date, list of files you read, one-line summary of what you found
+- This file is your memory. Keep it current.</pre>
+
+<div class="placeholder">
+  <div class="what">VS Code מראה את CLAUDE.md המעודכן עם שכבת הזיכרון</div>
+  <div class="how">Screenshot VS Code with the full updated CLAUDE.md — showing both the "Before starting" block at top and the "After completing" block at the bottom. Scroll to show both if needed (two screenshots).</div>
+</div>
+
+<div class="placeholder">
+  <div class="what">הרצה שנייה: Claude Code קורא את memory.md ומשווה</div>
+  <div class="how">Screenshot the second run showing Claude Code reading memory.md and the resulting summary that says "שינויים מאז אתמול:" — this proves the memory is working.</div>
+</div>
+
+<p>אכן.</p>
+
+<hr>
+
+<h2>הפעלה אוטומטית כל בוקר</h2>
+
+<pre class="code-ltr">crontab -e</pre>
+
+<p>מוסיפות/ים:</p>
+
+<pre class="code-ltr">0 8 * * * cd ~/Desktop/morning-agent && claude --print "תריץ את המשימה שלך לפי ה-CLAUDE.md" >> agent-log.txt 2>&1</pre>
+
+<p><code>0 8 * * *</code> אומר: בדיוק ב-8:00 בבוקר, כל יום. הדגל <code>--print</code> מריץ את Claude Code בלי ממשק ובלי שאלות. משתמשים בו רק אחרי שבדקנו שהאייג׳נט ידוע ובטוח.</p>
+
+<hr>
+
+<h2>מה בנינו</h2>
+
+<p>האייג׳נט שבנינו עכשיו הוא פשוט גרידא. הוא קורא קבצים, מסכם, זוכר. אבל המבנה שסביבו, CLAUDE.md, settings.json, memory.md, זה בדיוק אותו מבנה שבונים אייג׳נטים הרבה יותר מורכבים עליו.</p>
+
+<p>ה-CLAUDE.md הוא ה-DNA. ה-settings.json הוא הגבולות. ה-memory.md הוא מה שהופך ריצה חד-פעמית לתהליך שמתפתח עם הזמן.</p>
+
+<p>בחלק השלישי והאחרון של הסדרה, נבנה את אותו האייג׳נט בדיוק, הפעם עם n8n, בלי שורת קוד אחת.</p>
+
+<hr>
+
+<p>אתם/ן כבר בניתם/ן אייג׳נט שרץ על המחשב שלכם/ן? באה לי לשמוע איפה נתקעתם/ן ומה גרם לו לעשות משהו שלא ציפיתם. כותבים/ות לי. 🙏</p>
+
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בנה אייג׳נט אחד: המדריך השלם בשלושה חלקים</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 24px;
+    color: #1a1a1a;
+    direction: rtl;
+    text-align: right;
+    background: #fff;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 48px;
+    margin-bottom: 12px;
+  }
+  .part-header {
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 64px;
+    margin-bottom: 8px;
+    border-right: 4px solid #1a1a1a;
+    padding-right: 16px;
+  }
+  p { margin: 0 0 20px 0; }
+  blockquote {
+    border-right: 3px solid #1a1a1a;
+    margin: 24px 0;
+    padding: 4px 20px 4px 0;
+    color: #333;
+  }
+  blockquote strong {
+    font-weight: bold;
+  }
+  pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    direction: rtl;
+    text-align: right;
+    margin: 24px 0;
+  }
+  pre.ltr-code {
+    direction: ltr;
+    text-align: left;
+  }
+  code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 40px 0;
+  }
+  .youtube-box {
+    background: #fff8f8;
+    border: 1px solid #ffcccc;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 28px 0;
+    font-size: 14px;
+    color: #555;
+    direction: ltr;
+    text-align: left;
+  }
+  .youtube-box::before {
+    content: "▶ ";
+    color: #cc0000;
+  }
+  .youtube-box a {
+    color: #cc0000;
+    word-break: break-all;
+  }
+  .youtube-label {
+    font-weight: bold;
+    color: #cc0000;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 4px;
+    direction: rtl;
+    text-align: right;
+  }
+  .image-placeholder {
+    background: #fffaf3;
+    border: 2px dashed #e8a020;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #7a5000;
+    direction: rtl;
+    text-align: right;
+  }
+  .image-placeholder::before {
+    content: "📸 ";
+  }
+  .image-label {
+    font-weight: bold;
+    font-size: 12px;
+    color: #a06010;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<h1>בנה אייג׳נט אחד: המדריך השלם בשלושה חלקים</h1>
+<p class="subtitle">מה זה, איך בונים, ואיך להפעיל אוטומציה שעובדת בלי שתהיה שם</p>
+
+<hr>
+
+<!-- ===== PART A ===== -->
+
+<h2 class="part-header">חלק א׳: מה זה אייג׳נט ולמה לבנות אחד</h2>
+
+<p>מישהו בקבוצת ה-Slack שלי שיתף בשבוע שעבר אייג׳נט שהוא בנה שמנהל לו את כל האימיילים. "שולח, מסכם, מסנן, מתעדף," הוא כתב, גאה. שאלתי אותו מה קורה כשהאייג׳נט לא בטוח מה לעשות עם מייל. "אה, הוא מוחק אותו," הוא ענה. "כי בטח זה ספאם."</p>
+
+<p>ניחוש: הוא כבר לא גאה.</p>
+
+<p>בינה מלאכותית נותנת לנו היום את הכוח לבנות דברים שרק לפני שנתיים היו דורשים צוות פיתוח שלם. אבל הכוח הזה בא עם אחריות להבין מה אתם/ן בונות, לא רק להדביק פרומפט ולקוות לטוב.</p>
+
+<p>יאללה, בואו נצלול.</p>
+
+<hr>
+
+<h2>מה זה בכלל אייג׳נט: הגדרה שלא שמעתם בכנסים</h2>
+
+<p>רוב ההגדרות שתשמעו על אייג׳נטים מגיעות ממאמרי מחקר או מכנסי טק, ומסבכות מה שהוא בסופו של דבר פשוט מאוד.</p>
+
+<blockquote><strong>AI Agent</strong>: תוכנה שמשלבת מודל שפה עם יכולת לקחת פעולות בעולם האמיתי. המודל חושב, מחליט מה לעשות, מבצע פעולה, רואה מה קרה, וחושב שוב.</blockquote>
+
+<p>זה הכל. Plan, Act, Observe, Plan. שוב ושוב, עד שהמשימה מסתיימת.</p>
+
+<p>ההבדל בין צ׳אטבוט לאייג׳נט הוא פשוט: צ׳אטבוט עונה. אייג׳נט עושה.</p>
+
+<p>כשאתם/ן שואלות את ChatGPT "מה מזג האוויר בתל אביב?", זה צ׳אטבוט. כשיש לכם/ן אייג׳נט שבכל בוקר שולף את מזג האוויר לבד, כותב תקציר, ושולח אותו לווטסאפ שלכם/ן, זה אייג׳נט.</p>
+
+<p>הכלי הוא המפתח. בלי כלים, אין אייג׳נט. יש רק LLM חכם שחי בתוך חלון הקשר שלו ולא יכול לגעת בשום דבר מחוצה לו.</p>
+
+<pre>עובדה חביבה: מודל שפה גרידא לא יכול לדעת מה השעה עכשיו.
+אין לו גישה לשעון. כלי פשוט של get_current_time פותר את זה מיד.
+זה ההבדל בין LLM לאייג׳נט.</pre>
+
+<div class="youtube-box">
+  <span class="youtube-label">סרטון: What is an AI Agent?</span>
+  <a href="https://www.youtube.com/watch?v=gHB4JFG9i3k">https://www.youtube.com/watch?v=gHB4JFG9i3k</a>
+</div>
+
+<hr>
+
+<h2>ארבע שאלות שצריך לענות עליהן לפני שמתחילים</h2>
+
+<p>זו הטעות הכי שכיחה. כולם מתחילים מ"אני רוצה אייג׳נט ש..." ואף אחד לא מסיים את המשפט הזה בצורה מדויקת מספיק.</p>
+
+<p>בנו אייג׳נט רק אחרי שיש לכם/ן תשובות ברורות לארבעה דברים:</p>
+
+<p><strong>מה הטריגר?</strong> מה מפעיל את האייג׳נט? לוח זמנים? אירוע ספציפי (מייל חדש, הודעה בסלאק)? פעולה ידנית שלכם/ן? אם לא יודעות/ים מה מפעיל אותו, הוא לא יפעל.</p>
+
+<p><strong>מה ה"עשה"?</strong> פעולה אחת, ברורה. לא "נהל לי את החיים". משהו כמו: "קרא כל מייל שמגיע, בדוק אם הוא דורש פעולה ממני, ואם כן, סכם אותו בשלוש שורות ושמור בקובץ."</p>
+
+<p><strong>מה הגבול?</strong> מה האייג׳נט לא מורשה לעשות. לא מוחק. לא שולח בשמכם/ן בלי אישור. לא גישה לתיקיות X. הגבולות לא מגבילים אתכם/ן, הם מונעים מהאייג׳נט לדפוק לכם/ן משהו ב-3 בלילה.</p>
+
+<p><strong>מה ה"סיים"?</strong> איך האייג׳נט יודע שסיים? בלי קריטריון סיום ברור, הוא ממשיך לנסות ולנסות, ומוציא לכם/ן כסף על ניסיונות שלא היה צריך לעשות.</p>
+
+<p>ענו על ארבעת אלה לפני שפותחים כלי כלשהו.</p>
+
+<hr>
+
+<h2>הכלים: מה האייג׳נט יכול לעשות בעולם</h2>
+
+<p>כל פעולה שאייג׳נט יכול לעשות בעולם האמיתי עוברת דרך כלי. הנה הקטגוריות:</p>
+
+<blockquote><strong>כלי קריאה</strong>: שולף מידע. web search, קריאת קבצים, שאילתות API. האייג׳נט לא יודע מה קורה בחוץ בלי אלה.</blockquote>
+
+<blockquote><strong>כלי כתיבה</strong>: משנה מידע. שמירת קבצים, שליחת מיילים, עדכון גיליון. אלה הכלים שדורשים גבולות ברורים.</blockquote>
+
+<blockquote><strong>כלי ביצוע</strong>: מריץ פעולות. browser automation, שליחת הודעות, פרסום. עוצמתיים ומסוכנים יותר.</blockquote>
+
+<blockquote><strong>כלי זיכרון</strong>: שומר ושולף הקשר בין ריצות. בלי אלה, האייג׳נט שוכח הכל כל פעם מחדש.</blockquote>
+
+<p>הרגל טוב: לכל כלי שנותנים לאייג׳נט, שאלו "מה הכי גרוע שיכול לקרות אם הוא ישתמש בזה בטעות?" אם התשובה מפחידה, הוסיפו שלב אישור לפני הביצוע.</p>
+
+<hr>
+
+<h2>הזיכרון: החלק שכולם שוכחים לבנות</h2>
+
+<p>מודל שפה חי בתוך חלון הקשר שלו. מה שנכנס לחלון, הוא "יודע". מה שיצא, הוא "שכח". בלי שכבת זיכרון, כל ריצה מתחילה מאפס.</p>
+
+<p>שלוש שכבות שצריך להחליט עליהן:</p>
+
+<p><strong>זיכרון בתוך סשן</strong>: מה האייג׳נט זוכר במהלך ריצה אחת. קיים אוטומטית.</p>
+
+<p><strong>זיכרון בין סשנים</strong>: מה האייג׳נט זוכר מהפעם הקודמת. לא קיים אוטומטית, צריך לבנות. הפתרון הפשוט: קובץ טקסט שהאייג׳נט קורא בהתחלה ומעדכן בסוף.</p>
+
+<p><strong>זיכרון מובנה</strong>: חיפוש חכם בזיכרון לפי משמעות. שימושי כשיש הרבה מידע צבור.</p>
+
+<p>90% מהאייג׳נטים לא צריכים יותר מהפתרון הפשוט.</p>
+
+<p><em>(מאמר נפרד בבלוג בנושא שלוש שכבות הזיכרון של AI)</em></p>
+
+<hr>
+
+<h2>הטעות הכי שכיחה: אייג׳נט שעושה הכל</h2>
+
+<p>"אני רוצה אייג׳נט שינהל לי את הפרויקטים, ינהל לי את המיילים, יזמין לי פגישות, ויסכם לי ישיבות."</p>
+
+<p>לא. זה לא אייג׳נט. זה ארבעה אייג׳נטים שעדיין לא בנויים.</p>
+
+<p>האנטי-פטרן הזה, ה"God Agent", מוביל לאייג׳נט שלא טוב בכלום. הוא מבולבל, איטי, וכשהוא נשבר, אין לכם/ן מושג איפה.</p>
+
+<p>כלל אצבע: אם אי אפשר להסביר מה האייג׳נט עושה במשפט אחד, הוא גדול מדי.</p>
+
+<pre>עובדה חביבה: המחקר מראה שאייג׳נטים קטנים וממוקדים מדויקים ב-40% יותר
+מאייג׳נטים כלליים שמנסים לכסות הרבה תחומים בו-זמנית.</pre>
+
+<hr>
+
+<h2>שני נתיבים לבנייה</h2>
+
+<p>בחלקים הבאים של המאמר נבנה אייג׳נט אמיתי בשתי דרכים, כל אחת מתאימה לצרכים שונים:</p>
+
+<p><strong>חלק ב׳: Claude Desktop</strong> — לאלה שרוצים להתחיל עכשיו, בלי שום הגדרה טכנית. מורידים אפליקציה, מתחברים עם החשבון שכבר יש לכם/ן, מגדירים הוראות. האייג׳נט עובד איתכם/ן בצ׳אט. לא צריך API key, לא צריך טרמינל, לא צריך כלום.</p>
+
+<p><strong>חלק ג׳: n8n</strong> — לאלה שרוצים אוטומציה שרצה לבד, בלי שיהיו שם. בנייה ויזואלית בדפדפן, ללא קוד. האייג׳נט מופעל לבד בלוח זמנים, מבצע פעולות, שולח דוחות. דורש API key פשוט לחיבור ל-Claude, נסביר איך.</p>
+
+<p>אכן.</p>
+
+<hr>
+
+<!-- ===== PART B ===== -->
+
+<h2 class="part-header">חלק ב׳: Claude Desktop, הדרך הפשוטה ביותר</h2>
+
+<p>שמישהו שאל אותי "מה הכי מהיר שאפשר להתחיל לעבוד עם אייג׳נט?" ציפיתי לשאלה טכנית. הוא הפתיע אותי: "האם זה דורש לכתוב קוד?" שאלתי מה מגיע לו. הוא אמר "אני מנהל/ת שיווק." הורדתי אנחה של רווחה.</p>
+
+<p>לא. לא דורש קוד. דורש להוריד אפליקציה.</p>
+
+<p>יאללה, בואו נצלול.</p>
+
+<hr>
+
+<h2>מה זה Claude Desktop ולמה זה לא סתם צ׳אט</h2>
+
+<p>Claude Desktop היא אפליקציה למחשב — Mac ו-Windows — שנראית בהתחלה כמו חלון צ׳אט רגיל. אבל יש בה שתי יכולות שהופכות אותה למשהו אחר לגמרי:</p>
+
+<p><strong>Projects</strong>: קבוצות שיחה עם הוראות קבועות. אתם/ן כותבות/ים פעם אחת "אתה עוזר/ת הכתיבה שלי, אתה מכיר את הסגנון שלי, אתה עונה תמיד בעברית" — ומאותו רגע, כל שיחה ב-Project הזה מתחילה עם ההוראות האלה. הזיכרון נשמר.</p>
+
+<p><strong>MCP Servers</strong>: חיבורים שמאפשרים ל-Claude Desktop לגשת לדברים מחוץ לחלון הצ׳אט. קבצים על המחשב, Google Drive, Notion, Slack, ועוד. זה מה שהופך אותה מצ׳אטבוט לאייג׳נט שיכול לעשות דברים.</p>
+
+<blockquote><strong>Claude Desktop</strong>: אפליקציה של Anthropic שמאפשרת לעבוד עם Claude ישירות מהמחשב, עם Projects לשמירת הקשר קבוע ו-MCP Servers לחיבור לכלים חיצוניים. לא דורש API key.</blockquote>
+
+<p>ההבדל הגדול מ-Claude.ai: הכל נשמר בין שיחות. Claude יודע מי אתם/ן, מה עשיתם/ן אתמול, ומה הסגנון שלכם/ן. זה לא "שיחה חדשה כל פעם" — זה שותף/ה שמכיר אתכם/ן.</p>
+
+<hr>
+
+<h2>התקנה: שלוש דקות מהורדה לשימוש</h2>
+
+<p><strong>שלב 1: הורדה</strong></p>
+
+<p>הולכות/ים ל-claude.ai/download. יש שם כפתור ברור "Download for Mac" או "Download for Windows".</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  claude.ai/download — עמוד ההורדה עם כפתורי "Download for Mac" ו-"Download for Windows" גלויים
+</div>
+
+<p>מורידות/ים, פותחות/ים את הקובץ, גוררות/ים ל-Applications (Mac) או מריצות/ים את ה-installer (Windows). בדיוק כמו כל אפליקציה אחרת.</p>
+
+<p><strong>שלב 2: התחברות</strong></p>
+
+<p>פותחות/ים את Claude Desktop. מוצאות/ים מסך כניסה.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — מסך ההתחברות הראשוני עם האפשרויות "Sign in" ו-"Create account"
+</div>
+
+<p>מתחברות/ים עם חשבון Claude.ai שיש לכם/ן. אם אין, יוצרות/ים חשבון חינמי ב-claude.ai. לשימוש בסיסי החשבון החינמי מספיק. לשימוש כבד, Claude Pro עולה כ-20 דולר בחודש ונותן הרבה יותר שיחות.</p>
+
+<p><strong>שלב 3: ממשק ראשי</strong></p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — ממשק ראשי מחובר: Sidebar בצד שמאל עם "Projects" ו-"Recents", חלון שיחה במרכז, כפתור "New Project" בולט
+</div>
+
+<p>בצד שמאל: Projects שיצרתם/ן (בהתחלה ריק). במרכז: חלון השיחה. בראש: אפשרויות. ממשק נקי ופשוט.</p>
+
+<pre>עובדה חביבה: Claude Desktop מאפשר לעבוד עם קבצים מקומיים ישירות.
+אפשר לגרור קובץ PDF לחלון השיחה ו-Claude יקרא אותו, יסכם, ישאל שאלות.
+ללא העלאה לשרת, ללא שיתוף עם שירות חיצוני.</pre>
+
+<hr>
+
+<h2>Project: הלב של הגדרת האייג׳נט</h2>
+
+<p>Project הוא המקום שבו הופכים שיחה רגילה לאייג׳נט שמכיר אתכם/ן.</p>
+
+<p><strong>ליצור Project חדש:</strong></p>
+
+<p>לוחצות/ים על "New Project" בסיידבר.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — לחיצה על "New Project": חלון עם שדה Name ושדה "Project Instructions" (Custom Instructions) פתוח
+</div>
+
+<p>נותנות/ים לו שם: "Morning Briefing Agent".</p>
+
+<p>עכשיו הדבר הכי חשוב: <strong>Project Instructions</strong>. זה השדה שבו כותבות/ים מי הוא האייג׳נט הזה ומה הוא עושה. כל שיחה ב-Project הזה תתחיל עם ההוראות האלה, אוטומטית.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — שדה "Project Instructions" פתוח ריק, מוכן לכתיבה. מראה את הממשק כולו עם הProject החדש בסיידבר
+</div>
+
+<p>דוגמה להוראות שעובדות:</p>
+
+<pre>אתה אייג׳נט הסיכום הבוקרי שלי.
+
+כל פעם שאני פותח/ת שיחה ב-Project הזה, עשה את הבאות:
+1. שאל אותי "מה יש לך/ך לסכם היום?"
+2. אחרי שאשתף קבצים או טקסט, סכם לי את הנקודות העיקריות
+3. ציין מה דורש פעולה ממני — ורק את זה
+4. שמור את הסיכום בפורמט מסודר שאפשר להעתיק ישר לנוטישן
+
+הסגנון שלך: קצר, ברור, בעברית, ללא בולשיט.
+
+מה שאתה לא עושה: לא שולח שום דבר, לא מוחק שום דבר,
+לא ניגש לקבצים שלא שיתפתי איתך ישירות.</pre>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — Project Instructions מלא עם ההוראות שהועתקו לשדה, לפני לחיצת Save
+</div>
+
+<p>הוראות טובות תמיד כוללות שלושה דברים: מה לעשות, איך לעשות, ומה בטוח לא לעשות.</p>
+
+<hr>
+
+<h2>שיחה ראשונה עם האייג׳נט</h2>
+
+<p>לוחצות/ים "New Chat" בתוך ה-Project. Claude מיד פועל לפי ההוראות.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — שיחה חדשה בתוך ה-Project "Morning Briefing Agent". Claude כבר שולח את ההודעה הראשונה: "מה יש לך לסכם היום?" בהתאם להוראות
+</div>
+
+<p>עכשיו אפשר:</p>
+<ul style="padding-right: 20px; margin: 0 0 20px 0;">
+  <li>לגרור קובץ PDF של פגישה לחלון</li>
+  <li>להדביק תוכן מאימייל</li>
+  <li>לכתוב "סכם לי את הבוקר: X, Y, Z"</li>
+</ul>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — תוצאת סיכום אחרי שהדבקת תוכן. Claude מציג רשימה מסודרת: "דורש פעולה" ו-"לידיעה בלבד" בפורמט ברור
+</div>
+
+<div class="youtube-box">
+  <span class="youtube-label">סרטון: Claude Desktop and MCP Setup</span>
+  <a href="https://www.youtube.com/watch?v=tDGiWn0flK8">https://www.youtube.com/watch?v=tDGiWn0flK8</a>
+</div>
+
+<hr>
+
+<h2>MCP Servers: כשרוצים שהאייג׳נט יגיע לדברים לבד</h2>
+
+<p>Projects הוא הצעד הראשון. MCP Servers הוא הצעד הבא.</p>
+
+<blockquote><strong>MCP (Model Context Protocol)</strong>: תקן פתוח שמאפשר ל-Claude Desktop להתחבר לשירותים חיצוניים. כל חיבור נקרא "MCP Server". Anthropic פרסמה MCP servers מוכנים לשימוש לשירותים הנפוצים.</blockquote>
+
+<p>MCP servers פופולריים שעובדים עם Claude Desktop:</p>
+<ul style="padding-right: 20px; margin: 0 0 20px 0;">
+  <li><strong>Filesystem</strong>: גישה לתיקיות על המחשב שלכם/ן. Claude יכול לקרוא קבצים, לכתוב קבצים, לחפש.</li>
+  <li><strong>Google Drive</strong>: גישה לקבצים ב-Drive.</li>
+  <li><strong>Notion</strong>: קריאה וכתיבה לדפים ב-Notion.</li>
+  <li><strong>Slack</strong>: קריאת הודעות וכתיבה לערוצים.</li>
+  <li><strong>GitHub</strong>: גישה לקוד ולפולים.</li>
+</ul>
+
+<p>הגדרת MCP Server בסיסי (Filesystem) לא דורשת קוד, רק עריכת קובץ הגדרות. נסביר בדיוק איך.</p>
+
+<p><strong>הגדרת MCP Server לקבצים:</strong></p>
+
+<p>ב-Claude Desktop, הולכות/ים ל-Settings (Cmd+, ב-Mac).</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — Settings פתוח. לשונית "Developer" בתפריט הצדדי. כפתור "Edit Config" גלוי
+</div>
+
+<p>לוחצות/ים על "Developer". רואות/ים שדה לעריכת קובץ ה-MCP config. לוחצות/ים "Edit Config".</p>
+
+<p>נפתח קובץ JSON. מחליפות/ים את כל התוכן בזה:</p>
+
+<pre class="ltr-code">{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/YOUR_USERNAME/Documents",
+        "/Users/YOUR_USERNAME/Desktop"
+      ]
+    }
+  }
+}</pre>
+
+<p>מחליפות/ים YOUR_USERNAME בשם המשתמש/ת שלכם/ן ב-Mac. שומרות/ים. מפעילות/ים מחדש את Claude Desktop.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — קובץ claude_desktop_config.json פתוח ב-TextEdit (או VS Code). ה-JSON מלא עם ה-filesystem config כמו בדוגמה
+</div>
+
+<p>עכשיו Claude Desktop יכול לקרוא ולכתוב קבצים מהתיקיות שציינתם/ן.</p>
+
+<pre>עובדה חביבה: MCP הוא תקן פתוח שפרסמה Anthropic בנובמבר 2024.
+מאז, מאות חברות ומפתחות/ים יצרו MCP servers.
+כל שירות עם API יכול להיות MCP Server.</pre>
+
+<hr>
+
+<h2>מה Claude Desktop יכול לעשות עכשיו</h2>
+
+<p>עם Projects ו-Filesystem MCP, האייג׳נט שלכם/ן יכול:</p>
+
+<p><strong>קריאה וסיכום של קבצים:</strong> "תקרא את כל הקבצים בתיקיית הפגישות מהשבוע שעבר ותן לי סיכום"</p>
+
+<p><strong>כתיבה ושמירה:</strong> "צור לי קובץ meeting-notes.md עם סיכום הפגישה הזו ושמור ב-Documents"</p>
+
+<p><strong>חיפוש בין קבצים:</strong> "חפש בכל קבצי ה-PDF בתיקיית Projects את כל מה שקשור ל-Q3"</p>
+
+<p><strong>עריכת קבצים:</strong> "עדכן את ה-roadmap.md שלי עם ההחלטות שהתקבלו היום"</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — שיחה שבה ביקשת "תקרא את הקבצים בתיקיית Documents/Projects". Claude מציג את תוצאות הקריאה: שמות קבצים, תכנים מסוכמים
+</div>
+
+<p><strong>מה Claude Desktop לא יכול:</strong> להפעיל את עצמו אוטומטית. הוא מחכה לכם/ן לפתוח שיחה ולהפעיל אותו. לאוטומציה שרצה לבד בלוח זמנים קבוע, נצטרך את חלק ג׳.</p>
+
+<div class="youtube-box">
+  <span class="youtube-label">סרטון: MCP Servers Explained</span>
+  <a href="https://www.youtube.com/watch?v=uvs1Igr4u6g">https://www.youtube.com/watch?v=uvs1Igr4u6g</a>
+</div>
+
+<hr>
+
+<!-- ===== PART C ===== -->
+
+<h2 class="part-header">חלק ג׳: n8n, האוטומציה שרצה לבד</h2>
+
+<p>"הכנתי אייג׳נט ב-Claude Desktop," כתב מישהו בטוויטר. "הוא מדהים. הוא קורא לי את הדוחות ועושה סיכומים נהדרים. יש רק בעיה אחת קטנה: אני עדיין צריך/ה לפתוח אותו כל בוקר ולכתוב 'תריץ'."</p>
+
+<p>זה לא אייג׳נט. זה כלי מאוד חכם שדורש הפעלה ידנית. אייג׳נט אמיתי רץ לבד.</p>
+
+<p>יאללה, בואו נצלול.</p>
+
+<hr>
+
+<h2>n8n: מה זה ולמה בחרנו בזה</h2>
+
+<blockquote><strong>n8n</strong>: פלטפורמת אוטומציה ויזואלית שמאפשרת לחבר בין שירותים ולהריץ AI agents על לוח זמנים, בלי לכתוב קוד. עובד בדפדפן, אין מה להתקין.</blockquote>
+
+<p>אם Claude Desktop הוא שותף/ה שעובד/ת לידכם/ן כשאתם/ן שם, n8n הוא עובד/ת שמגיע/ה לעבודה לבד בכל בוקר ב-8:00 ושולח/ת לכם/ן דוח עד שתגיעו.</p>
+
+<p>המנגנון הוא workflow: שרשרת של steps שמתחילת ב-trigger (מה מפעיל) ועוברת דרך actions (מה עושים). כל step הוא "node" ויזואלי על קנבס. מחברות/ים אותם בקווים.</p>
+
+<p>n8n בחרנו כי:</p>
+<ul style="padding-right: 20px; margin: 0 0 20px 0;">
+  <li>עובד בדפדפן לגמרי, אין התקנה</li>
+  <li>יש בו AI Agent node מובנה עם תמיכה ב-Claude</li>
+  <li>יש בו מעל 400 integrations מוכנות</li>
+  <li>הגרסה ה-cloud בחינם לטריאל של 14 יום</li>
+  <li>open-source — אם רוצות/ים self-hosted, חינמי לגמרי</li>
+</ul>
+
+<pre>עובדה חביבה: n8n מריצה מעל 100 מיליון workflow executions בחודש.
+זה לא כלי ניסיוני — זה infra שארגונים גדולים מסתמכים עליו.</pre>
+
+<hr>
+
+<h2>הרשמה: שלוש דקות</h2>
+
+<p>הולכות/ים ל-n8n.io. לוחצות/ים "Get started free".</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n.io — עמוד הבית עם כפתור "Get started free" גלוי. לא צריך את כל הדף, רק החלק העליון עם ה-CTA הראשי
+</div>
+
+<p>מכניסות/ים אימייל וסיסמה. לא צריך כרטיס אשראי לטריאל.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n.cloud — טופס הרשמה עם שדות Email ו-Password. כותרת "Get started free" בראש
+</div>
+
+<p>אחרי הכניסה, נחתות/ים ב-dashboard ראשי. זה ה-workspace שלכן/ם. בצד שמאל: רשימת ה-workflows שלכם/ן. במרכז: הקנבס. בראש: כפתורי Run, Save, Activate.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n Dashboard ראשי — workspace פתוח, sidebar שמאלי עם "Workflows" ו-"Executions", כפתור "+ New workflow" גלוי במרכז
+</div>
+
+<hr>
+
+<h2>הקנבס: מה רואים</h2>
+
+<p>לוחצות/ים "New workflow". נפתח קנבס ריק עם node אחד: "When clicking Test workflow". זהו ה-trigger הידני לטסטינג.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n Canvas ריק — node יחיד "When clicking Test workflow" במרכז הקנבס. כפתור "+" מימינו מוכן לחיבור node הבא
+</div>
+
+<p>לפני שממשיכות/ים, שנו את שם ה-workflow. לוחצות/ים על "My workflow" בראש, ורושמות/ים "Morning Briefing Agent".</p>
+
+<p>כל workflow מורכב מ:</p>
+<ul style="padding-right: 20px; margin: 0 0 20px 0;">
+  <li><strong>Trigger</strong>: מה מפעיל. Manual (ידני לטסטינג), Schedule (לוח זמנים), Webhook (אות מחוץ).</li>
+  <li><strong>Nodes</strong>: כל פעולה שה-workflow מבצע. כל node עושה דבר אחד.</li>
+  <li><strong>Connections</strong>: הקווים שמחברים node ל-node. הם קובעים את הסדר.</li>
+</ul>
+
+<hr>
+
+<h2>Node ראשון: ה-AI Agent</h2>
+
+<p>לוחצות/ים על + מימין ל-trigger node. נפתח חיפוש. כותבות/ים "AI Agent". לוחצות/ים.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — חלון חיפוש nodes פתוח עם "AI Agent" בחיפוש. ה-node "AI Agent" מסומן בתוצאות, עם האייקון שלו
+</div>
+
+<p>ה-AI Agent node נוסף לקנבס ומחובר אוטומטית ל-trigger. לוחצות/ים עליו לפתוח את ה-configuration panel בצד ימין.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — AI Agent node על הקנבס, configuration panel פתוח בצד ימין. גלויים: שדה "System Message", dropdown ל-Model, ו-Max Iterations
+</div>
+
+<p><strong>System Message</strong>: זה ה"תדריך" של האייג׳נט. מה הוא עושה, מה הגבולות, מה הפורמט של התוצאה. מדביקות/ים:</p>
+
+<pre>אתה אייג׳נט הסיכום הבוקרי.
+
+כל פעם שמפעילים אותך:
+1. קרא את 10 המיילים האחרונים מ-Gmail שאינם ספאם
+2. לכל מייל שדורש תשובה, כתוב: נושא + פעולה נדרשת + עד מתי
+3. שמור את הרשימה ב-Google Sheets בגיליון "Daily Briefing", עמודה לתאריך
+4. מיילים לידיעה בלבד — סכם בשורה אחת, ללא פעולה
+
+כללים קשיחים:
+- אל תשלח שום מייל בלי אישור מפורש ממני
+- אל תמחק שום מייל
+- אם מייל לא ברור, כתוב "לא ברור" ועבור הלאה</pre>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — AI Agent configuration panel עם System Message מלא כמו בדוגמה. גלוי הטקסט בשדה, ה-node בקנבס ברקע
+</div>
+
+<p><strong>Model</strong>: לוחצות/ים "+ Add credential", בוחרות/ים "Anthropic Claude".</p>
+
+<p>כאן נכנס ה-API key. זה הדבר היחיד שדורש קצת עבודה, אבל זה פשוט:</p>
+
+<p><strong>איך מקבלים API key מ-Anthropic:</strong></p>
+<ul style="padding-right: 20px; margin: 0 0 20px 0;">
+  <li>הולכות/ים ל-platform.claude.com</li>
+  <li>נרשמות/ים (שימו לב: זה שונה מ-claude.ai — זה ה-developer platform)</li>
+  <li>בסיידבר: "API Keys"</li>
+  <li>"Create Key", נותנות/ים שם</li>
+  <li>מעתיקות/ים מיד — מוצג רק פעם אחת</li>
+</ul>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  platform.claude.com — עמוד "API Keys" מחובר. גלוי כפתור "Create Key" וה-interface של ניהול מפתחות. לא המסך הראשי, ספציפית עמוד API Keys
+</div>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Anthropic credential dialog פתוח: שדה "API Key" ריק ומחכה להדבקה. כפתור "Save" בתחתית
+</div>
+
+<p>מכניסות/ים את ה-key, לוחצות/ים Save. עכשיו n8n יכול לדבר עם Claude.</p>
+
+<p><strong>Max Iterations</strong>: שנו ל-10. זה מגביל שהאייג׳נט לא יריץ יותר מ-10 צעדים בריצה אחת.</p>
+
+<hr>
+
+<h2>הוספת כלים: מה האייג׳נט יכול לעשות</h2>
+
+<p>האייג׳נט בלי כלים יכול לחשוב אבל לא לעשות. מוסיפות/ים כלים דרך + ובחירת tool nodes.</p>
+
+<p><strong>Gmail Tool:</strong></p>
+
+<p>לוחצות/ים על + מתחת ל-AI Agent node (לא מהצד, מהתחתית — זה ה-Tools port).</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — AI Agent node עם שלושה ports גלויים: Input (ימין), Output (שמאל), ו-Tools (תחתית). חץ יוצא מה-Tools port כלפי מטה
+</div>
+
+<p>מחפשות/ים "Gmail". מוסיפות/ים. נפתח חלון התחברות עם Google. מתחברות/ים לחשבון ה-Gmail שלכם/ן.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Gmail node מחובר ל-Tools port של AI Agent. Google OAuth popup פתוח עם "Allow access to Gmail"
+</div>
+
+<p><strong>Google Sheets Tool:</strong></p>
+
+<p>מוסיפות/ים tool node נוסף: "Google Sheets". מתחברות/ים לאותו חשבון Google. מגדירות/ים את ה-spreadsheet שאליו הסיכום ייכתב.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Google Sheets node מחובר. Configuration panel פתוח: שדה Spreadsheet ID מלא, Sheet Name "Daily Briefing"
+</div>
+
+<div class="youtube-box">
+  <span class="youtube-label">סרטון: Building an AI Agent with n8n</span>
+  <a href="https://www.youtube.com/watch?v=GuaKeDS6UKU">https://www.youtube.com/watch?v=GuaKeDS6UKU</a>
+</div>
+
+<hr>
+
+<h2>Memory Node: כי אייג׳נט שלא זוכר זה סיזיפי</h2>
+
+<p>בלי זיכרון, כל ריצה מתחילה מאפס. האייג׳נט לא יודע מה סיכם אתמול, לא יכול להגיד "חדש מאתמול", יחזור על אותו עבודה שוב ושוב.</p>
+
+<p>מוסיפות/ים "Simple Memory" node ומחברות/ים אותו ל-Memory port של ה-AI Agent.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Simple Memory node מחובר ל-Memory port של AI Agent (port שונה מה-Tools port). שלושת ה-nodes גלויים: AI Agent במרכז, Gmail ו-Sheets מתחת, Memory מחובר לצד
+</div>
+
+<p>לחלופין, לזיכרון חזק יותר שנשמר בין sessions שונות: מוסיפות/ים שורה ל-Google Sheets בסוף כל ריצה עם סיכום קצר של מה נעשה. בתחילת כל ריצה, קריאת 5 השורות האחרונות. זה persistent memory בלי מסד נתונים.</p>
+
+<hr>
+
+<h2>ה-Workflow השלם</h2>
+
+<p>כך נראה ה-workflow המוגמר:</p>
+
+<pre class="ltr-code">[Manual Trigger]
+       |
+       v
+[AI Agent] &lt;-- Tools port: [Gmail] [Google Sheets]
+    ^
+    |
+    Memory port: [Simple Memory]</pre>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Workflow מלא עם כל ה-nodes מחוברים: Manual Trigger מחובר ל-AI Agent, Gmail ו-Sheets מחוברים ל-Tools port, Simple Memory מחובר ל-Memory port. תצוגת קנבס מלאה
+</div>
+
+<hr>
+
+<h2>ריצה ראשונה</h2>
+
+<p>לוחצות/ים "Test workflow". n8n מריצה את ה-workflow ומראה את ההתקדמות בזמן אמת.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Workflow רץ: nodes מאירים בירוק אחד אחד בסדר הריצה. AI Agent node מראה "Running" עם אנימציה
+</div>
+
+<p>לוחצות/ים על ה-AI Agent node אחרי הריצה לראות מה עשה:</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — AI Agent node output panel: רשימת הצעדים שהאייג׳נט ביצע ("Read Gmail", "Write to Sheets"), תוצאת כל צעד, והפלט הסופי
+</div>
+
+<p>בעיות נפוצות בריצה הראשונה:</p>
+
+<p><strong>API key לא עובד:</strong> חזרו ל-Credentials ב-n8n Settings, ווידאו שה-Anthropic key הועתק נכון בלי רווחים.</p>
+
+<p><strong>Gmail לא מחזיר מיילים:</strong> ווידאו שהרשאות ה-Gmail OAuth כוללות קריאת מיילים. לפעמים צריך לאשר מחדש.</p>
+
+<p><strong>האייג׳נט לא עוצר:</strong> ה-System Message לא ברור מספיק לגבי מה המשמעות של "סיימתי". הוסיפו: "כשסיימת לעבד את כל המיילים, תחזיר סיכום בפורמט X ותפסיק."</p>
+
+<hr>
+
+<h2>הפעלה אוטומטית: ה-Workflow שרץ לבד</h2>
+
+<p>עכשיו להפוך את זה לאוטומציה אמיתית.</p>
+
+<p>לוחצות/ים על ה-Manual Trigger node. לוחצות/ים "Change Trigger". בוחרות/ים "Schedule".</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Schedule Trigger configuration panel פתוח: "Every Day" נבחר, שדה השעה מראה "08:00"
+</div>
+
+<p>בחרות/ים "Every Day" וקבעות/ים 08:00. שומרות/ים.</p>
+
+<p>עכשיו לוחצות/ים על כפתור ה-toggle הגדול בפינה הימנית עליונה: "Inactive" הופך ל-"Active".</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Workflow header עם toggle "Active" מופעל ומאיר בירוק. שם ה-workflow "Morning Briefing Agent" גלוי לצדו
+</div>
+
+<p>זהו. מחר ב-8:00 בבוקר, בלי שתהיו שם, ה-workflow יופעל לבד, יקרא את המיילים, יסכם, ישמור ב-Sheets.</p>
+
+<hr>
+
+<h2>לראות מה קרה: היסטוריית ריצות</h2>
+
+<p>בסיידבר השמאלי: Executions. כאן רואות/ים כל ריצה שהיתה.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  n8n — Executions list: רשימה של ריצות עם תאריך ושעה. ריצות מוצלחות בירוק (Succeeded), ריצות שנכשלו באדום (Failed)
+</div>
+
+<p>לוחצות/ים על ריצה לראות בדיוק מה קרה. כל node מראה מה נכנס אליו ומה יצא ממנו. כשמשהו נשבר, זה המקום הראשון לבדוק.</p>
+
+<hr>
+
+<h2>סיכום הסדרה: מה בנינו</h2>
+
+<p>בחלק א׳: הבנו מה זה אייג׳נט — לא AI שעונה, אלא AI שעושה. למדנו ארבע שאלות שצריך לענות לפני שבונים כל אייג׳נט.</p>
+
+<p>בחלק ב׳: בנינו אייג׳נט עם Claude Desktop שעובד איתנו בצ׳אט, זוכר, ויכול לגשת לקבצים. לא דורש API key. מושלם להתחיל.</p>
+
+<p>בחלק ג׳: בנינו אייג׳נט עם n8n שרץ לבד כל בוקר בלי שנהיה שם. כן דורש API key פשוט. ה-workflow האמיתי.</p>
+
+<p>הכלי לא חשוב. מה שחשוב הן ארבע השאלות שבנינו את האייג׳נט מהן. אלה ארבע השאלות שיבדלו בין אייג׳נט שחוסך לכם/ן שעות לאייג׳נט שמוחק לכם/ן מיילים ב-3 בלילה.</p>
+
+<p>אכן.</p>
+
+<hr>
+
+<p>אתם/ן כבר מריצות/ים אייג׳נט? מה הוא עושה? ואם עדיין לא — מה מונע? כותבים/ות לי. 🙏</p>
+
+</body>
+</html>

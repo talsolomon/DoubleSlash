@@ -102,7 +102,16 @@ else:
     print("  ✓  hooks      →  ~/.claude/settings.json")
 PYEOF
 
-# ── 6. Project brain (--init only) ───────────────────────────────────────────
+# ── 6. DS Workspace ──────────────────────────────────────────────────────────
+DS_HOME="$HOME/DS"
+if [[ ! -d "$DS_HOME" ]]; then
+  mkdir -p "$DS_HOME"
+  echo "  ✓  workspace  →  $DS_HOME"
+else
+  echo "  ·  workspace  $DS_HOME already exists — skipped"
+fi
+
+# ── 7. Project brain (--init only) ───────────────────────────────────────────
 if $INIT; then
   PROJECT_DIR="$(pwd)"
   PROJECT_NAME="$(basename "$PROJECT_DIR")"
@@ -156,7 +165,8 @@ if $INIT; then
   echo "  The viewer starts automatically. Type // to orient."
 else
   echo "  // DS is installed."
-  echo "  Run 'bash install.sh --init' in any project to seed its brain."
+  echo "  Your projects live in: $HOME/DS"
+  echo "  Start a new project:   mkdir ~/DS/my-project && cd ~/DS/my-project && claude"
 fi
 echo "  Viewer:  node ~/.claude/ds-viewer/server.js --project=\$(pwd)"
 echo ""

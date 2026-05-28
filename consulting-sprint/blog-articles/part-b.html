@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>חלק ב׳: Claude Desktop, הסטאפ האמיתי</title>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 24px;
+    color: #1a1a1a;
+    direction: rtl;
+    text-align: right;
+    background: #fff;
+  }
+  h1 { font-size: 28px; font-weight: bold; margin-top: 0; margin-bottom: 8px; line-height: 1.4; }
+  .subtitle { font-size: 16px; color: #555; margin-bottom: 40px; font-style: italic; }
+  h2 { font-size: 22px; font-weight: bold; margin-top: 48px; margin-bottom: 12px; }
+  p { margin: 0 0 20px 0; }
+  blockquote { border-right: 3px solid #1a1a1a; margin: 24px 0; padding: 4px 20px 4px 0; color: #333; }
+  blockquote strong { font-weight: bold; }
+  pre {
+    background: #f4f4f4; border: 1px solid #ddd; padding: 16px 20px; border-radius: 4px;
+    font-family: 'Courier New', monospace; font-size: 15px; line-height: 1.6;
+    white-space: pre-wrap; direction: rtl; text-align: right; margin: 24px 0;
+  }
+  pre.ltr-code { direction: ltr; text-align: left; }
+  ul, ol { padding-right: 20px; margin: 0 0 20px 0; }
+  li { margin-bottom: 8px; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 40px 0; }
+  .youtube-box {
+    background: #fff8f8; border: 1px solid #ffcccc; border-radius: 6px;
+    padding: 14px 18px; margin: 28px 0; font-size: 14px; color: #555;
+    direction: ltr; text-align: left;
+  }
+  .youtube-box a { color: #cc0000; word-break: break-all; }
+  .youtube-label { font-weight: bold; color: #cc0000; font-size: 13px; display: block; margin-bottom: 4px; direction: rtl; text-align: right; }
+  .image-placeholder {
+    background: #fffaf3; border: 2px dashed #e8a020; border-radius: 6px;
+    padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #7a5000;
+    direction: rtl; text-align: right;
+  }
+  .image-label { font-weight: bold; font-size: 12px; color: #a06010; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .step-number {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    margin-left: 10px;
+    font-family: 'Courier New', monospace;
+    direction: ltr;
+  }
+  .checklist { list-style: none; padding-right: 0; }
+  .checklist li::before { content: "☐ "; font-size: 16px; }
+</style>
+</head>
+<body>
+
+<h1>בנה אייג׳נט אחד: חלק ב׳ מתוך שלושה</h1>
+<p class="subtitle">Claude Desktop, הסטאפ האמיתי שבאמת עובד</p>
+
+<hr>
+
+<p>בחלק הקודם הבנו מה זה אייג׳נט, למה כלים הם הלב שלו, ולמה קבצים מקומיים הם הזיכרון האמיתי שלו. עכשיו הגיע הזמן לבנות.</p>
+
+<p>אחת הטעויות הכי נפוצות של אנשים שמתחילים לבנות אייג׳נטים: הם פותחים את claude.ai בדפדפן, כותבים פרומפט ארוך, ומגלים שמחר הכל נשכח. זה לא מערכת. זה שיחה.</p>
+
+<p>מה שנבנה בחלק הזה הוא אחר לגמרי: Claude Desktop עם גישה לתיקיית קבצים מקומית. Claude יקרא קבצים, יכתוב קבצים, ויזכור מה שכתבתם/ן כי הזיכרון שלו הוא הדיסק שלכם/ן.</p>
+
+<hr>
+
+<h2>מה אנחנו בונים: התמונה המלאה</h2>
+
+<p>לפני שמתחילים שלב אחרי שלב, כדאי לראות לאן אנחנו הולכים.</p>
+
+<p>בסוף החלק הזה יהיה לכם/ן סטאפ כזה:</p>
+
+<ul>
+  <li><strong>Claude Desktop</strong>: האפליקציה שמריצה את ה-AI. יש בה שלוש לשוניות בסיידבר. נעבוד בלשונית Code.</li>
+  <li><strong>Obsidian</strong>: תוכנת עריכה חינמית שמציגה את הקבצים שלכם/ן בצורה נוחה. Claude כותב, Obsidian מציג.</li>
+  <li><strong>תיקיית brain</strong>: תיקייה מקומית במחשב עם קבצי ה-AI שלכם/ן. identity.md, agents/, memory.md. Claude קורא ומעדכן אותה.</li>
+  <li><strong>MCP</strong>: חיבור שמאפשר ל-Claude Desktop לגשת לתיקייה. קובץ הגדרות אחד, העתק-הדבק.</li>
+</ul>
+
+<p>ביחד: Claude שמכיר אתכם/ן, שנמצא במחשב שלכם/ן, שעובד על קבצים אמיתיים, ושזוכר בין ריצות. לא צ׳אט. מערכת.</p>
+
+<blockquote><strong>לשונית Code</strong> ב-Claude Desktop: לא "לכתוב קוד". זו הלשונית שמחברת את Claude לתיקיות המחשב שלכם/ן. היא מאפשרת לו לקרוא, לכתוב וליצור קבצים ישר בדיסק.</blockquote>
+
+<hr>
+
+<h2>מה צריך לפני שמתחילים</h2>
+
+<ul class="checklist">
+  <li><strong>מנוי Claude Pro</strong> (20 דולר לחודש). הגרסה החינמית מוגבלת מדי. אם לשונית Code לא זמינה ב-Pro, תצטרכו Max (100 דולר) — Anthropic מגבילים גישה לחלק מהמשתמשים.</li>
+  <li><strong>Obsidian</strong>: חינמי לגמרי. obsidian.md</li>
+  <li><strong>Node.js</strong>: חינמי, דקה להתקנה. nodejs.org</li>
+  <li>30 דקות שקטות לסטאפ ראשוני</li>
+</ul>
+
+<hr>
+
+<h2><span class="step-number">1</span> Obsidian: תיקיית הבסיס</h2>
+
+<p>Obsidian היא תוכנת הערות חינמית שעובדת עם קבצי markdown רגילים על המחשב שלכם/ן. Claude כותב לקבצים, Obsidian מציג אותם בצורה קריאה. אפשר גם בלי Obsidian לגמרי, אבל זה הרבה יותר נוח איתה.</p>
+
+<p>הולכות/ים ל-obsidian.md, מורידות/ים, מתקינות/ים כרגיל.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  obsidian.md — עמוד הורדה עם כפתור "Download" לפי מערכת הפעלה
+</div>
+
+<p>פותחות/ים Obsidian בפעם הראשונה. מוצאות/ים "Create new vault".</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Obsidian — מסך פתיחה ראשוני עם האפשרות "Create new vault"
+</div>
+
+<p>שם ה-vault: <strong>רק אנגלית, בלי רווחים.</strong> לדוגמה: <code>my-brain</code> או <code>tal-workspace</code>.</p>
+
+<p>מיקום: לחצו "Browse" ובחרו Documents. <strong>חשוב מאוד: לא iCloud, לא OneDrive, לא Google Drive.</strong> תיקייה מסונכרנת לענן גורמת לבעיות כשהמחשב ו-Claude כותבים לאותו קובץ בו-זמנית. רק מחשב מקומי.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Obsidian — חלון יצירת vault, שדה "Name" עם שם באנגלית, שדה "Location" מצביע ל-Documents (לא iCloud)
+</div>
+
+<p>שמרו את הנתיב המלא לתיקייה. תצטרכו אותו בשלב 4. לדוגמה:</p>
+
+<pre class="ltr-code">Mac:     /Users/yourname/Documents/my-brain
+Windows: C:\Users\yourname\Documents\my-brain</pre>
+
+<pre>עובדה חביבה: Obsidian שומרת הכל כקבצי .md רגילים.
+אין נעילה לפלטפורמה, אין פורמט קנייני.
+אם מחר תחליטו לעזוב Obsidian, הקבצים נשארים שלכם/ן.</pre>
+
+<hr>
+
+<h2><span class="step-number">2</span> Node.js: כלי שקט שעובד מאחורי הקלעים</h2>
+
+<p>Node.js היא סביבת ריצה שה-MCP server צריך כדי לתקשר עם Claude. לא צריך ללמוד אותה. צריך רק להתקין.</p>
+
+<p>הולכות/ים ל-nodejs.org. מורידות/ים <strong>LTS</strong> (הגרסה היציבה, לא Latest).</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  nodejs.org — עמוד ראשי עם שני כפתורים: "LTS" מסומן, "Current" לידו
+</div>
+
+<p>מתקינות/ים כמו כל תוכנה רגילה. אחרי ההתקנה: פותחות/ים Terminal (Mac: Cmd+Space, כותבות/ים "Terminal") או Command Prompt (Windows: Win+R, כותבות/ים "cmd"), ומקלידות/ים:</p>
+
+<pre class="ltr-code">node --version</pre>
+
+<p>אמורה לצאת גרסה כמו v20.x.x. אם יצאה שגיאה, סגרו את הטרמינל ופתחו מחדש ונסו שוב.</p>
+
+<hr>
+
+<h2><span class="step-number">3</span> Claude Desktop: ולשונית Code</h2>
+
+<p>הולכות/ים ל-claude.ai/download. מורידות/ים לפי מערכת ההפעלה.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  claude.ai/download — עמוד עם כפתורי הורדה ל-Mac ו-Windows
+</div>
+
+<p>מתקינות/ים ופותחות/ים. מתחברות/ים עם חשבון Claude.ai. אחרי הכניסה, מסתכלות/ים על הסיידבר הימני.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — אחרי כניסה, סיידבר עם שלוש לשוניות: Chat, Cowork, Code
+</div>
+
+<p>בסיידבר יש שלוש לשוניות: Chat (צ׳אט רגיל), Cowork (בטא), ו-<strong>Code</strong>. לוחצות/ים על <strong>Code</strong>.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop — לשונית Code פתוחה, ממשק שונה מהצ׳אט הרגיל, שדה בחירת תיקייה גלוי
+</div>
+
+<p>אם לא רואות/ים את לשונית Code: עדכנו לגרסה האחרונה דרך Claude בתפריט → Check for Updates. אם גם אחרי עדכון לא מופיעה, יתכן שתצטרכו לשדרג למנוי Max.</p>
+
+<pre>עובדה חביבה: לשונית Code היא לא "לכתוב Python".
+זו הלשונית שמחברת את Claude לתיקיות המחשב שלכם/ן.
+השם מבלבל. הפונקציה הכרחית.</pre>
+
+<hr>
+
+<h2><span class="step-number">4</span> חיבור MCP: כך Claude יגיע לקבצים שלכם/ן</h2>
+
+<p>MCP (Model Context Protocol) הוא החיבור בין Claude Desktop לתיקיות המחשב. מגדירים אותו פעם אחת בקובץ JSON. זה קצת טכני אבל ישר:</p>
+
+<p><strong>ב-Mac</strong>, פותחות/ים Finder, לוחצות/ים Cmd+Shift+G, ומדביקות/ים:</p>
+<pre class="ltr-code">~/Library/Application Support/Claude</pre>
+
+<p><strong>ב-Windows</strong>, לוחצות/ים Win+R, מדביקות/ים:</p>
+<pre class="ltr-code">%APPDATA%\Claude</pre>
+
+<p>מחפשות/ים קובץ בשם <code>claude_desktop_config.json</code>. אם לא קיים, צרו אחד. פותחות/ים אותו ב-TextEdit (Mac) או Notepad (Windows).</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Finder/Explorer — תיקיית Claude פתוחה, קובץ claude_desktop_config.json מסומן
+</div>
+
+<p>מוחקות/ים את כל התוכן ומדביקות/ים:</p>
+
+<pre class="ltr-code">{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/YOUR_USERNAME/Documents/my-brain"
+      ]
+    }
+  }
+}</pre>
+
+<p><strong>ב-Windows</strong> הנתיב נראה אחרת:</p>
+
+<pre class="ltr-code">{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\YOUR_USERNAME\\Documents\\my-brain"
+      ]
+    }
+  }
+}</pre>
+
+<p>מחליפות/ים <code>YOUR_USERNAME</code> בשם המשתמש/ת שלכם/ן, ו-<code>my-brain</code> בשם ה-vault שבחרתם/ן בשלב 1. שומרות/ים. סוגרות/ים Claude Desktop לגמרי ופותחות/ים מחדש.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  TextEdit/Notepad — קובץ claude_desktop_config.json פתוח עם ה-JSON מלא, נתיב ה-vault גלוי
+</div>
+
+<hr>
+
+<h2><span class="step-number">5</span> בדיקה: ניצור קובץ ראשון</h2>
+
+<p>ב-Claude Desktop, לוחצות/ים על לשונית <strong>Code</strong>. בפינה הימנית-תחתונה יש dropdown. ווידאו שבחרתם/ן <strong>Local</strong> (לא GitHub). לוחצות/ים <strong>Select a folder</strong> ובוחרות/ים את תיקיית ה-vault.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop Code — dropdown מראה "Local" נבחר, כפתור "Select a folder" גלוי
+</div>
+
+<p>בשדה הצ׳אט, כותבות/ים:</p>
+
+<pre class="ltr-code">Create a new file called "test.md" with the content "Hello, Claude is connected!"</pre>
+
+<p>Claude יבקש אישור לביצוע הפעולה. תנו אישור. אחרי שניות אחדות, פתחו את Obsidian. אמור להיות שם קובץ test.md.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Obsidian — קובץ test.md מופיע בסיידבר, התוכן "Hello, Claude is connected!" גלוי בחלון
+</div>
+
+<p>אם הקובץ לא מופיע: סגרו את Obsidian לגמרי ופתחו מחדש. ב-90% מהמקרים זה פותר. אם לא, ווידאו שהנתיב בקובץ ה-JSON זהה בדיוק לנתיב ה-vault שיצרתם/ן.</p>
+
+<hr>
+
+<h2><span class="step-number">6</span> תיקיית המוח: מבנה שעובד</h2>
+
+<p>עכשיו נבנה את מה שהופך את הסטאפ הזה למשהו שעובד כל יום, לא רק בטסט. מבנה התיקיות שנמצא בבסיס של כל מערכת AI אגנטית שעובדת:</p>
+
+<pre class="ltr-code">my-brain/
+  brain/
+    identity.md      ← מי אתם/ן
+    projects.md      ← מה עובד עכשיו
+    memory.md        ← מה האייג׳נט למד
+  agents/
+    briefing.md      ← הוראות לאייג׳נט הבריפינג
+    content.md       ← הוראות לאייג׳נט התוכן</pre>
+
+<p>צרו את המבנה הזה: תיקיית <code>brain</code> ותיקיית <code>agents</code> בתוך ה-vault. ניתן לעשות את זה ישירות ב-Obsidian או לבקש מ-Claude ליצור אותן.</p>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Obsidian — סיידבר עם המבנה: תיקיות brain/ ו-agents/ גלויות, קבצי .md בתוכן
+</div>
+
+<p>עכשיו נכתוב את שלושת הקבצים הראשונים. <strong>אלה הקבצים שקובעים מה האייג׳נט שלכם/ן יודע.</strong></p>
+
+<p><strong>brain/identity.md</strong> — מי אתם/ן:</p>
+
+<pre>שמי/שמי [השם שלך].
+אני [התפקיד שלך — מנהל מוצר / יועצת / כותב תוכן / וכו׳].
+הסגנון שלי: [ישיר / חם / מקצועי / שמור / תכליתי].
+אני עובד/ת בעיקר על: [נושאי עבודה עיקריים].
+כלים שאני משתמש/ת בהם יום-יום: [Gmail, Notion, Slack, וכו׳].
+שפת עבודה: עברית. פורמט פלט מועדף: רשימות קצרות.
+מה שאני לא רוצה מ-AI: הסברים מיותרים, מחמאות, "בוודאי!"</pre>
+
+<p><strong>brain/projects.md</strong> — מה עובד עכשיו:</p>
+
+<pre>פרויקטים פעילים כרגע:
+- [שם פרויקט]: [מה זה, מה השלב, מה הבלוק]
+- [שם פרויקט]: [מה זה, מה השלב, מה הבלוק]
+
+פגישות קרובות:
+- [תאריך]: [עם מי, נושא]
+
+החלטות שהתקבלו לאחרונה:
+- [תאריך]: [ההחלטה]</pre>
+
+<p><strong>brain/memory.md</strong> — יתחיל ריק. האייג׳נט יוסיף לכם/ן לאחר כל ריצה מה למד.</p>
+
+<hr>
+
+<h2><span class="step-number">7</span> האייג׳נט הראשון: קובץ ההוראות</h2>
+
+<p>עכשיו לכתוב את ה-agents/briefing.md, קובץ ההוראות לאייג׳נט הבריפינג הבוקרי. זה המסמך שאנחנו מביאים לכל שיחה. Claude יקרא אותו וידע בדיוק מה לעשות.</p>
+
+<pre>אתה אייג׳נט הבריפינג הבוקרי.
+
+**לפני כל ריצה:** קרא את brain/identity.md ואת brain/projects.md.
+**בסוף כל ריצה:** עדכן את brain/memory.md עם מה שגילית היום.
+
+**מה לעשות כשמפעילים אותך:**
+1. בקש ממני לשתף את תוכן האימייל או היומן של הבוקר
+   (או: אם יש גישה ל-Gmail, קרא 10 מיילים חדשים)
+2. לכל פריט: קטגוריה (תשובה נדרשת / לידיעה / לא רלוונטי)
+3. סכם בפורמט ברור: "דורש ממני פעולה" ו"לידיעה בלבד"
+4. שמור את הסיכום ב-brain/memory.md עם תאריך
+
+**מה שאתה לא עושה:**
+- לא שולח שום דבר
+- לא מוחק כלום
+- לא ניגש לקבצים מחוץ ל-brain/ ו-agents/
+- אם משהו לא ברור, שואל לפני שפועל
+
+**פורמט פלט:**
+קצר. עברית. רשימות. בלי מחמאות.</pre>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Obsidian — agents/briefing.md פתוח עם ההוראות, פורמט markdown גלוי
+</div>
+
+<hr>
+
+<h2><span class="step-number">8</span> שיחה ראשונה עם האייג׳נט</h2>
+
+<p>חוזרות/ים ל-Claude Desktop, לשונית Code. ווידאו שה-vault שלכם/ן עדיין נבחר (פינה ימנית-תחתונה).</p>
+
+<p>כותבות/ים:</p>
+
+<pre class="ltr-code">Read agents/briefing.md and brain/identity.md, then introduce yourself based on those instructions.</pre>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop Code — Claude קורא את הקבצים ומציג תוצאה: "קראתי את ההוראות. אני אייג׳נט הבריפינג..."
+</div>
+
+<p>Claude קרא את הקבצים שכתבתם/ן, הבין מי אתם/ן ומה הוא עושה, והציג את עצמו בהתאם. זה לא "פרומפט חכם". זה AI שמכיר אתכם/ן כי כתבתם/ן לו את עצמו.</p>
+
+<p>עכשיו תוכלו לכתוב:</p>
+
+<pre class="ltr-code">Here are my emails from this morning: [הדביקו תוכן מאימייל]
+Run the briefing.</pre>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop Code — אחרי הרצה, Claude מציג סיכום מסודר: "דורש פעולה: X, Y. לידיעה: Z"
+</div>
+
+<p>בדקו ב-Obsidian: אמורה להיות עכשיו כניסה חדשה ב-brain/memory.md עם תאריך וסיכום הריצה.</p>
+
+<div class="youtube-box">
+  <span class="youtube-label">סרטון: Claude Desktop and MCP Setup</span>
+  <a href="https://www.youtube.com/watch?v=tDGiWn0flK8">https://www.youtube.com/watch?v=tDGiWn0flK8</a>
+</div>
+
+<hr>
+
+<h2>מה Claude Desktop יכול לעשות עכשיו</h2>
+
+<p>עם הסטאפ הזה ברשותכם/ן:</p>
+
+<ul>
+  <li><strong>לקרוא ולכתוב קבצים</strong> מהתיקיות שהגדרתם/ן</li>
+  <li><strong>לזכור בין שיחות</strong> דרך קבצי brain/</li>
+  <li><strong>לעקוב אחר פרויקטים</strong> דרך brain/projects.md שמתעדכן</li>
+  <li><strong>לכתוב בסגנון שלכם/ן</strong> כי קרא את identity.md</li>
+  <li><strong>להפעיל אייג׳נטים שונים</strong> לפי קבצי agents/ שונים</li>
+  <li><strong>לחפש בקבצים</strong>: "חפש בכל הקבצים שלי משהו על לקוח X"</li>
+</ul>
+
+<div class="image-placeholder">
+  <span class="image-label">📸 צלם/י</span>
+  Claude Desktop Code — שיחה שבה Claude קורא קבצים ומציג תוצאה: "מצאתי את הדברים הבאים הקשורים ל..."
+</div>
+
+<p><strong>מה Claude Desktop עדיין לא יכול:</strong> להפעיל את עצמו אוטומטית. הוא מחכה לכם/ן לפתוח שיחה ולבקש. אין trigger בלוח זמנים, אין "כל בוקר ב-8:00". לאוטומציה שרצה לבד בלי שתהיו שם, נצטרך את חלק ג׳.</p>
+
+<div class="youtube-box">
+  <span class="youtube-label">סרטון: MCP Servers Explained</span>
+  <a href="https://www.youtube.com/watch?v=uvs1Igr4u6g">https://www.youtube.com/watch?v=uvs1Igr4u6g</a>
+</div>
+
+<hr>
+
+<p>אתם/ן כבר מריצות/ים אייג׳נט? מה הוא עושה? ואם עדיין לא — מה מונע? כותבים/ות לי. 🙏</p>
+
+</body>
+</html>

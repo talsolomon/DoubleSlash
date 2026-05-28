@@ -1,0 +1,269 @@
+- generic [ref=e2]:
+  - iframe
+  - generic [ref=e3]:
+    - generic [ref=e7]:
+      - heading "agents&me" [level=1] [ref=e11]:
+        - link "agents&me" [ref=e12] [cursor=pointer]:
+          - /url: /
+      - generic [ref=e16]:
+        - button "Home" [ref=e18] [cursor=pointer]:
+          - generic [ref=e19]: Home
+        - button "Notes" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Notes
+        - button "My toolkit" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: My toolkit
+        - button "Setup guide" [ref=e27] [cursor=pointer]:
+          - generic [ref=e28]: Setup guide
+        - button "Archive" [ref=e30] [cursor=pointer]:
+          - generic [ref=e31]: Archive
+        - button "About" [ref=e33] [cursor=pointer]:
+          - generic [ref=e34]: About
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - button "Search" [ref=e40] [cursor=pointer]:
+            - img [ref=e41]
+          - button "Share Publication" [ref=e44] [cursor=pointer]:
+            - img [ref=e45]
+        - button "Subscribe" [ref=e48] [cursor=pointer]
+        - button "Sign in" [ref=e49] [cursor=pointer]
+    - main "Post" [ref=e52]:
+      - article [ref=e56]:
+        - region "Post header" [ref=e57]:
+          - heading "my toolkit" [level=1] [ref=e58]
+        - generic [ref=e60]:
+          - button "Table of Contents" [ref=e61] [cursor=pointer]
+          - generic [ref=e80]:
+            - paragraph [ref=e81]: People ask me what tools I use.
+            - paragraph [ref=e82]: "Here’s the honest answer: not that many. I spent years chasing “the best” productivity stack. Tried everything. Most of it was noise."
+            - paragraph [ref=e83]: What’s left is what actually works. Every day. No exceptions.
+            - paragraph [ref=e84]:
+              - text: 12 public
+              - link "workshops" [ref=e85] [cursor=pointer]:
+                - /url: https://getagents.today/
+              - text: a month. Private training for startups and companies. A weekly
+              - link "newsletter" [ref=e86] [cursor=pointer]:
+                - /url: https://agentsandme.com/
+              - text: . One person running it all (plus a team of AI agents who never sleep).
+            - paragraph [ref=e87]: The best productivity stack is the smallest one that actually works.
+            - paragraph [ref=e88]: (Some links are affiliate links. I’ll be upfront about it. I only recommend stuff I actually use, and I’ll tell you which ones give me a cut.)
+            - paragraph [ref=e89]: "---"
+            - heading "⚡ The Core Link" [level=2] [ref=e90]:
+              - text: ⚡ The Core
+              - button "Link" [ref=e93] [cursor=pointer]:
+                - img [ref=e94]
+            - heading "Claude Max + Claude Code Link" [level=3] [ref=e97]:
+              - text: Claude Max + Claude Code
+              - button "Link" [ref=e100] [cursor=pointer]:
+                - img [ref=e101]
+            - paragraph [ref=e104]: This is the whole thing.
+            - paragraph [ref=e105]: My entire AI team. All the writing. All the editing. All the planning. Everything runs on Claude.
+            - paragraph [ref=e106]:
+              - text: I tried GPT. I tried Gemini. I kept coming back. Claude just
+              - strong [ref=e107]: thinks
+              - text: differently. More like a collaborator, less like a search engine.
+            - paragraph [ref=e108]: The magic happens through Claude Code. It’s how I actually run the agents, deploy the website, manage files. All from one terminal. I use it almost 24/7.
+            - paragraph [ref=e109]: Without this, there’s no team. There’s no system. There’s just me, doing everything manually again.
+            - paragraph [ref=e110]:
+              - strong [ref=e111]: "What I pay:"
+              - text: $100/mo for Max (worth every penny). $20/mo Pro is great to get started.
+            - paragraph [ref=e112]:
+              - text: 👉
+              - link "claude.ai" [ref=e113] [cursor=pointer]:
+                - /url: https://claude.ai
+              - text: (no affiliate, Anthropic doesn’t have one)
+            - paragraph [ref=e114]: "---"
+            - heading "Obsidian Link" [level=3] [ref=e115]:
+              - text: Obsidian
+              - button "Link" [ref=e118] [cursor=pointer]:
+                - img [ref=e119]
+            - paragraph [ref=e122]: The brain.
+            - paragraph [ref=e123]: Every prompt. Every agent instruction. Every piece of content I’ve ever written. It all lives in one folder on my computer.
+            - paragraph [ref=e124]: I tried Notion. Too slow. Tried Roam. Too complicated. Obsidian is just markdown files. Simple. Fast. Mine.
+            - paragraph [ref=e125]: The app is free. I pay $4/mo for Sync so I don’t lose everything if my laptop dies. Worth it.
+            - paragraph [ref=e126]:
+              - strong [ref=e127]: "What I pay:"
+              - text: $4/mo for Sync
+            - paragraph [ref=e128]:
+              - text: 👉
+              - link "obsidian.md" [ref=e129] [cursor=pointer]:
+                - /url: https://obsidian.md
+              - text: (no affiliate)
+            - paragraph [ref=e130]: "---"
+            - heading "✅ Productivity Link" [level=2] [ref=e131]:
+              - text: ✅ Productivity
+              - button "Link" [ref=e134] [cursor=pointer]:
+                - img [ref=e135]
+            - heading "Wispr Flow Link" [level=3] [ref=e138]:
+              - text: Wispr Flow
+              - button "Link" [ref=e141] [cursor=pointer]:
+                - img [ref=e142]
+            - paragraph [ref=e145]: This one changed how I work.
+            - paragraph [ref=e146]: I talk. The computer writes. Hebrew, English, switching mid-sentence. It just figures it out.
+            - paragraph [ref=e147]: I used to type everything. Now I talk through ideas while walking. I dictated parts of this page on my phone.
+            - paragraph [ref=e148]: Took me embarrassingly long to try voice typing. Now I can’t go back.
+            - paragraph [ref=e149]:
+              - strong [ref=e150]: "What I pay:"
+              - text: $10/mo
+            - paragraph [ref=e151]:
+              - text: 🎁
+              - link "Get a free month of Pro →" [ref=e152] [cursor=pointer]:
+                - /url: https://ref.wisprflow.ai/tom-even
+              - text: (affiliate link, gives you a free month, gives me a cut)
+            - paragraph [ref=e153]: "---"
+            - heading "Todoist Link" [level=3] [ref=e154]:
+              - text: Todoist
+              - button "Link" [ref=e157] [cursor=pointer]:
+                - img [ref=e158]
+            - paragraph [ref=e161]: Where ideas stop being ideas and start being tasks.
+            - paragraph [ref=e162]: Everything the agents produce eventually ends up here. Newsletter draft done? Task to review it. Workshop feedback in? Task to process it.
+            - paragraph [ref=e163]: I’ve tried fancy project management tools. Notion databases. Trello boards. I always come back to a simple list.
+            - paragraph [ref=e164]:
+              - strong [ref=e165]: "What I pay:"
+              - text: Free tier works fine. Pro is $4/mo if you want API, labels and filters.
+            - paragraph [ref=e166]:
+              - text: 👉
+              - link "Try Todoist →" [ref=e167] [cursor=pointer]:
+                - /url: https://get.todoist.io/4recj00c249l
+              - text: (affiliate link)
+            - paragraph [ref=e168]: "---"
+            - heading "Timeless Link" [level=3] [ref=e169]:
+              - strong [ref=e170]: Timeless
+              - button "Link" [ref=e173] [cursor=pointer]:
+                - img [ref=e174]
+            - paragraph [ref=e177]: Every meeting goes through it. Every workshop. Every sales call.
+            - paragraph [ref=e178]: It records, transcribes, builds a full summary with action items when we’re done. The Hebrew transcription is actually good. Not “surprisingly decent for Hebrew.” Actually good.
+            - paragraph [ref=e179]: After each session I get an AI breakdown of how I ran it. What questions landed. Where people disconnected. I’ve changed how I facilitate workshops because of it.
+            - paragraph [ref=e180]: It also connects to Claude. One prompt installs a set of skills. Then Claude can search your meetings, pull exact quotes, write from what was actually said. Your conversations become memory your agents can actually use.
+            - paragraph [ref=e181]: I’ve tried other tools that promised Hebrew. They fumble it mid-sentence. This one doesn’t.
+            - paragraph [ref=e182]:
+              - strong [ref=e183]: "What I pay:"
+              - text: $29/mo
+            - paragraph [ref=e184]:
+              - text: 🎁
+              - strong [ref=e185]:
+                - link "Get a free month →" [ref=e186] [cursor=pointer]:
+                  - /url: https://my.timeless.day/?via=tom-even
+              - text: (affiliate link, gives you a free month, gives me a cut) * Please use the code “
+              - strong [ref=e187]: agents-me
+              - text: ” on checkout page
+            - paragraph [ref=e188]: "---"
+            - heading "🎨 Creation Link" [level=2] [ref=e189]:
+              - text: 🎨 Creation
+              - button "Link" [ref=e192] [cursor=pointer]:
+                - img [ref=e193]
+            - heading "Replicate Link" [level=3] [ref=e196]:
+              - text: Replicate
+              - button "Link" [ref=e199] [cursor=pointer]:
+                - img [ref=e200]
+            - paragraph [ref=e203]: API for running AI image models. Sounds technical. It’s not.
+            - paragraph [ref=e204]: All the illustrations in my newsletter? Made here. I describe what I want, pick a model (I use Nano Banana for the playful style), and it generates options.
+            - paragraph [ref=e205]: No subscriptions. Pay per image. A few cents each. I’ve spent maybe $15 total in six months.
+            - paragraph [ref=e206]:
+              - strong [ref=e207]: "What I pay:"
+              - text: Pay per use (usually $0.01-0.05 per image)
+            - paragraph [ref=e208]:
+              - text: 👉
+              - link "replicate.com" [ref=e209] [cursor=pointer]:
+                - /url: https://replicate.com
+              - text: (no affiliate)
+            - paragraph [ref=e210]: "---"
+            - heading "Eleven Labs Link" [level=3] [ref=e211]:
+              - text: Eleven Labs
+              - button "Link" [ref=e214] [cursor=pointer]:
+                - img [ref=e215]
+            - paragraph [ref=e218]: AI voice synthesis.
+            - paragraph [ref=e219]:
+              - text: The English voiceovers in my my
+              - link "podcast" [ref=e220] [cursor=pointer]:
+                - /url: https://open.spotify.com/show/4oOXhVQZ4M6LlMlG1aqaTb?si=2f2574cf295243fe
+              - text: "? That’s Eleven Labs. Not my voice. (My English accent is... fine. This is better.)"
+            - paragraph [ref=e221]: The quality is scary good. First time I heard it, I did a double-take.
+            - paragraph [ref=e222]:
+              - strong [ref=e223]: "What I pay:"
+              - text: $22/mo, but you can also start with the free plan
+            - paragraph [ref=e224]:
+              - text: 👉
+              - link "elevenlabs.io" [ref=e225] [cursor=pointer]:
+                - /url: https://try.elevenlabs.io/mtutchktswlq
+              - text: (affiliate link)
+            - paragraph [ref=e226]: "---"
+            - heading "🌐 Infrastructure Link" [level=2] [ref=e227]:
+              - text: 🌐 Infrastructure
+              - button "Link" [ref=e230] [cursor=pointer]:
+                - img [ref=e231]
+            - heading "Netlify Link" [level=3] [ref=e234]:
+              - text: Netlify
+              - button "Link" [ref=e237] [cursor=pointer]:
+                - img [ref=e238]
+            - paragraph [ref=e241]: Where my website lives.
+            - paragraph [ref=e242]: Free hosting. Connects to my files. When I tell Claude “deploy the website,” it pushes to Netlify and the site is live in 10 seconds.
+            - paragraph [ref=e243]: I used to think I needed a developer for this stuff. Turns out I needed a free account and one integration.
+            - paragraph [ref=e244]:
+              - strong [ref=e245]: "What I pay:"
+              - text: Free
+            - paragraph [ref=e246]:
+              - text: 👉
+              - link "netlify.com" [ref=e247] [cursor=pointer]:
+                - /url: https://www.netlify.com
+              - text: (no affiliate)
+            - paragraph [ref=e248]: "---"
+            - heading "📬 Distribution Link" [level=2] [ref=e249]:
+              - text: 📬 Distribution
+              - button "Link" [ref=e252] [cursor=pointer]:
+                - img [ref=e253]
+            - heading "Substack Link" [level=3] [ref=e256]:
+              - text: Substack
+              - button "Link" [ref=e259] [cursor=pointer]:
+                - img [ref=e260]
+            - paragraph [ref=e263]: You’re reading this on it.
+            - paragraph [ref=e264]: "Simple. Free. Does one thing well: sends emails and hosts a blog."
+            - paragraph [ref=e265]: I don’t need fancy automation or complex funnels. I need to write and send. This does that.
+            - paragraph [ref=e266]:
+              - strong [ref=e267]: "What I pay:"
+              - text: Free
+            - paragraph [ref=e268]:
+              - text: 👉
+              - link "substack.com" [ref=e269] [cursor=pointer]:
+                - /url: http://(https://substack.com)
+              - text: (no affiliate)
+            - paragraph [ref=e270]: "---"
+            - paragraph [ref=e271]:
+              - strong [ref=e272]: That’s it. 9 tools.
+            - paragraph [ref=e273]: Not 47 “essential” apps. Not a complicated stack that takes a month to set up.
+            - paragraph [ref=e274]: "Total cost: ~$120/month. (Less if you start with Pro instead of Max.)"
+            - paragraph [ref=e275]: That’s cheaper than one freelancer for one hour. And it runs 24/7.
+            - paragraph [ref=e276]: "---"
+            - heading "Want to see how these tools actually work together? Link" [level=3] [ref=e277]:
+              - text: Want to see how these tools actually work together?
+              - button "Link" [ref=e280] [cursor=pointer]:
+                - img [ref=e281]
+            - paragraph [ref=e284]: I run a 2-hour live workshop where I show the entire system. Not just slides. Not only the theory. You’ll leave with a working system, not just notes.
+            - paragraph [ref=e285]: 300+ people have done this workshop. Most leave with their first agent running before the session ends.
+            - paragraph [ref=e286]:
+              - link "Check the next workshop date →" [ref=e287] [cursor=pointer]:
+                - /url: https://getagents.today
+    - generic [ref=e291]:
+      - generic [ref=e293]:
+        - generic [ref=e294]: © 2026 Tom Even
+        - text: ·
+        - link "Privacy" [ref=e295] [cursor=pointer]:
+          - /url: https://substack.com/privacy
+        - text: ∙
+        - link "Terms" [ref=e296] [cursor=pointer]:
+          - /url: https://substack.com/tos
+        - text: ∙
+        - link "Collection notice" [ref=e297] [cursor=pointer]:
+          - /url: https://substack.com/ccpa#personal-data-collected
+      - generic [ref=e299]:
+        - link "Start your Substack" [ref=e300] [cursor=pointer]:
+          - /url: https://substack.com/signup?utm_source=substack&utm_medium=web&utm_content=footer
+          - img [ref=e301]
+          - text: Start your Substack
+        - link "Get the app" [ref=e306] [cursor=pointer]:
+          - /url: https://substack.com/app/app-store-redirect?utm_campaign=app-marketing&utm_content=web-footer-button
+      - generic [ref=e308]:
+        - link "Substack" [ref=e309] [cursor=pointer]:
+          - /url: https://substack.com
+        - text: is the home for great culture
+  - region "Notifications (F8)":
+    - list

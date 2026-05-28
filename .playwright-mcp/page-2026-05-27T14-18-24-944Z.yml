@@ -1,0 +1,460 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - navigation "Global navigation" [ref=e5]:
+      - link "n8n.io" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e8]: n8n.io
+        - img [ref=e9]
+      - menubar [ref=e12]:
+        - menuitem "Product" [ref=e13] [cursor=pointer]:
+          - text: Product
+          - img [ref=e14]
+        - menuitem "Use cases" [ref=e16] [cursor=pointer]:
+          - text: Use cases
+          - img [ref=e17]
+        - menuitem "Docs" [ref=e19] [cursor=pointer]:
+          - text: Docs
+          - img [ref=e20]
+        - menuitem "Community" [ref=e22] [cursor=pointer]:
+          - text: Community
+          - img [ref=e23]
+        - menuitem "Enterprise" [ref=e25] [cursor=pointer]
+        - menuitem "Pricing" [ref=e26] [cursor=pointer]
+      - generic [ref=e27]:
+        - link "189,867" [ref=e28] [cursor=pointer]:
+          - /url: https://github.com/n8n-io/n8n
+          - generic [ref=e29]:
+            - img [ref=e30]
+            - text: 189,867
+        - link "Sign in" [ref=e32] [cursor=pointer]:
+          - /url: https://app.n8n.cloud/login
+        - link "Get Started" [ref=e33] [cursor=pointer]:
+          - /url: https://app.n8n.cloud/register
+  - status [ref=e34]: Discover 9751 Automation Workflows from the n8n's Community
+  - generic [ref=e38]:
+    - heading "9751 Workflow Automation Templates" [level=1] [ref=e39]
+    - generic [ref=e40]:
+      - generic [ref=e42]:
+        - textbox "Search apps, roles, usecases..." [ref=e43]
+        - button "Search" [disabled] [ref=e44]:
+          - img [ref=e45]
+      - generic [ref=e47]:
+        - link "AI" [ref=e48] [cursor=pointer]:
+          - /url: /workflows/categories/ai/
+        - link "Sales" [ref=e49] [cursor=pointer]:
+          - /url: /workflows/categories/sales/
+        - link "IT Ops" [ref=e50] [cursor=pointer]:
+          - /url: /workflows/categories/it-ops/
+        - link "Marketing" [ref=e51] [cursor=pointer]:
+          - /url: /workflows/categories/marketing/
+        - link "Document Ops" [ref=e52] [cursor=pointer]:
+          - /url: /workflows/categories/document-ops/
+        - link "Other" [ref=e53] [cursor=pointer]:
+          - /url: /workflows/categories/other/
+        - link "Support" [ref=e54] [cursor=pointer]:
+          - /url: /workflows/categories/support/
+  - 'heading "Newcomer essentials: learn by doing" [level=2] [ref=e58]'
+  - generic [ref=e60]:
+    - heading "Trending AI templates" [level=2] [ref=e62]:
+      - text: Trending
+      - link "AI" [ref=e63] [cursor=pointer]:
+        - /url: /workflows/categories/ai/
+      - text: templates
+    - paragraph [ref=e65]:
+      - text: Explore more
+      - link "AI" [ref=e66] [cursor=pointer]:
+        - /url: /workflows/categories/ai/
+      - text: templates
+  - generic [ref=e68]:
+    - heading "Browse by category" [level=2] [ref=e70]
+    - generic [ref=e71]:
+      - link "Marketing" [ref=e72] [cursor=pointer]:
+        - /url: /workflows/categories/marketing/
+        - generic [ref=e75]: Marketing
+      - link "Sales" [ref=e76] [cursor=pointer]:
+        - /url: /workflows/categories/sales/
+        - generic [ref=e79]: Sales
+      - link "Support" [ref=e80] [cursor=pointer]:
+        - /url: /workflows/categories/support/
+        - generic [ref=e83]: Support
+      - link "IT Ops" [ref=e84] [cursor=pointer]:
+        - /url: /workflows/categories/it-ops/
+        - generic [ref=e87]: IT Ops
+      - link "Document Ops" [ref=e88] [cursor=pointer]:
+        - /url: /workflows/categories/document-ops/
+        - generic [ref=e91]: Document Ops
+      - link "Other" [ref=e92] [cursor=pointer]:
+        - /url: /workflows/categories/other/
+        - generic [ref=e95]: Other
+  - heading "Featured templates" [level=2] [ref=e99]
+  - heading "Community challenge" [level=2] [ref=e103]
+  - heading "Recently added" [level=2] [ref=e107]
+  - generic [ref=e109]:
+    - heading "Need inspiration? What’s in your stack?" [level=2] [ref=e111]
+    - generic [ref=e112]:
+      - button "Google Sheets Google Sheets - integration" [ref=e113] [cursor=pointer]:
+        - text: Google Sheets
+        - img "Google Sheets - integration" [ref=e115]
+      - button "OpenAI OpenAI - integration" [ref=e116] [cursor=pointer]:
+        - text: OpenAI
+        - img "OpenAI - integration" [ref=e118]
+      - button "Telegram Telegram - integration" [ref=e119] [cursor=pointer]:
+        - text: Telegram
+        - img "Telegram - integration" [ref=e121]
+      - button "Gmail Gmail - integration" [ref=e122] [cursor=pointer]:
+        - text: Gmail
+        - img "Gmail - integration" [ref=e124]
+      - button "MySQL MySQL - integration" [ref=e125] [cursor=pointer]:
+        - text: MySQL
+        - img "MySQL - integration" [ref=e127]
+      - button "Postgres Postgres - integration" [ref=e128] [cursor=pointer]:
+        - text: Postgres
+        - img "Postgres - integration" [ref=e130]
+      - button "Discord Discord - integration" [ref=e131] [cursor=pointer]:
+        - text: Discord
+        - img "Discord - integration" [ref=e133]
+      - button "Google Drive Google Drive - integration" [ref=e134] [cursor=pointer]:
+        - text: Google Drive
+        - img "Google Drive - integration" [ref=e136]
+      - button "Slack Slack - integration" [ref=e137] [cursor=pointer]:
+        - text: Slack
+        - img "Slack - integration" [ref=e139]
+      - button "Notion Notion - integration" [ref=e140] [cursor=pointer]:
+        - text: Notion
+        - img "Notion - integration" [ref=e142]
+      - button "Microsoft Outlook Microsoft Outlook - integration" [ref=e143] [cursor=pointer]:
+        - text: Microsoft Outlook
+        - img "Microsoft Outlook - integration" [ref=e145]
+      - button "Show more apps" [ref=e146] [cursor=pointer]:
+        - text: Show more apps
+        - img [ref=e147]
+  - generic [ref=e150]:
+    - heading "Verified Creators" [level=2] [ref=e152]
+    - generic [ref=e153]:
+      - link "YungCEO 5 workflow templates Workflow templates from mryungceo" [ref=e155] [cursor=pointer]:
+        - /url: /creators/mryungceo/
+        - generic [ref=e156]:
+          - generic [ref=e157]:
+            - heading "YungCEO" [level=3] [ref=e158]
+            - img [ref=e160]
+          - paragraph [ref=e163]: 5 workflow templates
+        - img "Workflow templates from mryungceo" [ref=e165]
+      - link "Thomas Janssen 3 workflow templates Workflow templates from thomasjanssen-tech" [ref=e167] [cursor=pointer]:
+        - /url: /creators/thomasjanssen-tech/
+        - generic [ref=e168]:
+          - generic [ref=e169]:
+            - heading "Thomas Janssen" [level=3] [ref=e170]
+            - img [ref=e172]
+          - paragraph [ref=e175]: 3 workflow templates
+        - img "Workflow templates from thomasjanssen-tech" [ref=e177]
+      - link "Become a creator Submit your template to the n8n template library, get featured, and earn via our affiliates program. Submit a template" [ref=e178] [cursor=pointer]:
+        - /url: https://creators.n8n.io/hub
+        - generic [ref=e179]:
+          - paragraph [ref=e180]: Become a creator
+          - paragraph [ref=e181]: Submit your template to the n8n template library, get featured, and earn via our affiliates program.
+        - button "Submit a template" [ref=e182]:
+          - text: Submit a template
+          - img [ref=e183]
+  - contentinfo [ref=e185]:
+    - generic [ref=e186]:
+      - list [ref=e190]:
+        - listitem [ref=e191]:
+          - paragraph [ref=e195]:
+            - strong [ref=e196]: Build complex workflows that other tools can't
+            - text: ". I used other tools before. I got to know the N8N and I say it properly: it is better to do everything on the n8n! Congratulations on your work, you are a star!"
+          - generic [ref=e198]:
+            - paragraph [ref=e199]: Igor Fediczko
+            - paragraph [ref=e203]:
+              - link "@igordisco" [ref=e204] [cursor=pointer]:
+                - /url: https://x.com/@igordisco
+        - listitem [ref=e205]:
+          - paragraph [ref=e209]:
+            - strong [ref=e210]: Thank you to the n8n community
+            - text: . I did the beginners course and promptly took an automation WAY beyond my skill level.
+          - generic [ref=e211]:
+            - img "neutral-avatar-purple.PNG" [ref=e212]
+            - generic [ref=e213]:
+              - paragraph [ref=e214]: Robin Tindall
+              - paragraph [ref=e218]:
+                - link "@robm" [ref=e219] [cursor=pointer]:
+                  - /url: https://x.com/@robm
+        - listitem [ref=e220]:
+          - paragraph [ref=e224]:
+            - strong [ref=e225]: n8n is a beast for automation.
+            - text: self-hosting and low-code make it a dev’s dream. if you’re not automating yet, you’re working too hard.
+          - generic [ref=e227]:
+            - paragraph [ref=e228]: Anderoav
+            - paragraph [ref=e232]:
+              - link "@Anderoav" [ref=e233] [cursor=pointer]:
+                - /url: https://x.com/anderoav
+        - listitem [ref=e234]:
+          - paragraph [ref=e238]:
+            - strong [ref=e239]: n8n accelerated our development
+            - text: ", we were able to release the solution before the rest of the market even realized what we were building."
+          - generic [ref=e241]:
+            - paragraph [ref=e242]: Luiza Vidal
+            - paragraph [ref=e246]:
+              - link "@Luiza Vidal" [ref=e247] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/luiza-vidal-po/
+        - listitem [ref=e248]:
+          - paragraph [ref=e252]:
+            - strong [ref=e253]: I've said it many times. But I'll say it again. n8n is the GOAT
+            - text: . Anything is possible with n8n. You just need some technical knowledge + imagination. I'm actually looking to start a side project. Just to have an excuse to use n8n more 😅
+          - generic [ref=e255]:
+            - paragraph [ref=e256]: Maxim Poulsen
+            - paragraph [ref=e260]:
+              - link "@maximpoulsen" [ref=e261] [cursor=pointer]:
+                - /url: https://x.com/@maximpoulsen
+        - listitem [ref=e262]:
+          - paragraph [ref=e266]:
+            - strong [ref=e267]: n8n was the big unlock.
+            - text: Tools like ChatGPT and Claude are great, but n8n is the thing that allows you to integrate AI into your work and your processes in a safe and controlled way.
+          - generic [ref=e269]:
+            - paragraph [ref=e270]: Ollie Scheers
+            - paragraph [ref=e274]:
+              - link "@olliescheers" [ref=e275] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/olliescheers/
+        - listitem [ref=e276]:
+          - paragraph [ref=e280]:
+            - strong [ref=e281]: It blows my mind.
+            - text: I was hating on no-code tools my whole life, but n8n changed everything. Made a Slack agent that can basically do everything, in half an hour.
+          - generic [ref=e283]:
+            - paragraph [ref=e284]: Felix Leber
+            - paragraph [ref=e288]:
+              - link "@felixleber" [ref=e289] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/felixleber/
+        - listitem [ref=e290]:
+          - paragraph [ref=e294]:
+            - text: I just have to say,
+            - strong [ref=e295]: n8n's integration with third-party services is absolutely mind-blowing
+            - text: . It's like having a Swiss Army knife for automation. So many tasks become a breeze, and I can quickly validate and implement my ideas without any hassle.
+          - generic [ref=e297]:
+            - paragraph [ref=e298]: Nanbing
+            - paragraph [ref=e302]:
+              - link "@1ronben" [ref=e303] [cursor=pointer]:
+                - /url: https://x.com/1ronben
+        - listitem [ref=e304]:
+          - paragraph [ref=e308]:
+            - strong [ref=e309]: Found the holy grail of automation yesterday...
+            - text: Yesterday I tried n8n and it blew my mind 🤯 What would've taken me 3 days to code from scratch? Done in 2 hours. The best part? If you still want to get your hands dirty with code (because let's be honest, we developers can't help ourselves 😅), you can just drop in custom code nodes. Zero restrictions.
+          - generic [ref=e311]:
+            - paragraph [ref=e312]: Francois Laßl
+            - paragraph [ref=e316]:
+              - link "@francois-laßl" [ref=e317] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/francois-la%C3%9Fl-817937243/
+        - listitem [ref=e318]:
+          - paragraph [ref=e322]:
+            - strong [ref=e323]: Anything is possible with n8n
+            - text: . I think @n8n_io Cloud version is great, they are doing amazing stuff and I love that everything is available to look at on Github.
+          - generic [ref=e324]:
+            - img "neutral-avatar-purple.PNG" [ref=e325]
+            - generic [ref=e326]:
+              - paragraph [ref=e327]: Jodie M
+              - paragraph [ref=e331]:
+                - link "@jodiem" [ref=e332] [cursor=pointer]:
+                  - /url: https://x.com/@jodiem
+      - generic [ref=e334]:
+        - generic [ref=e335]:
+          - heading "Simple enough to see. Powerful enough to ship." [level=2] [ref=e336]:
+            - text: Simple enough to see.
+            - text: Powerful enough to ship.
+          - paragraph [ref=e337]: Join the teams building AI automation they can actually explain.
+        - link "Start building" [ref=e339] [cursor=pointer]:
+          - /url: https://app.n8n.cloud/register
+          - generic [ref=e340]: Start building
+          - img [ref=e341]
+    - generic [ref=e344]:
+      - generic [ref=e345]:
+        - img "Stars"
+      - generic [ref=e346]:
+        - generic [ref=e347]:
+          - generic [ref=e348]:
+            - generic [ref=e349]:
+              - link "n8n.io" [ref=e350] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e351]: n8n.io
+                - img [ref=e352]
+              - strong [ref=e355]: Automate without limits
+            - list [ref=e356]:
+              - listitem [ref=e357]:
+                - link "Twitter" [ref=e358] [cursor=pointer]:
+                  - /url: https://twitter.com/n8n_io
+                  - img "Twitter" [ref=e359]
+              - listitem [ref=e360]:
+                - link "GitHub" [ref=e361] [cursor=pointer]:
+                  - /url: https://github.com/n8n-io/n8n
+                  - img "GitHub" [ref=e362]
+              - listitem [ref=e363]:
+                - link "Discord" [ref=e364] [cursor=pointer]:
+                  - /url: https://discord.gg/n8n
+                  - img "Discord" [ref=e365]
+              - listitem [ref=e366]:
+                - link "Linkedin" [ref=e367] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/company/n8n/
+                  - img "Linkedin" [ref=e368]
+              - listitem [ref=e369]:
+                - link "youtube" [ref=e370] [cursor=pointer]:
+                  - /url: https://www.youtube.com/c/n8n-io
+                  - img "youtube" [ref=e371]
+          - generic [ref=e372]:
+            - generic [ref=e373]:
+              - link "Careers Hiring" [ref=e374] [cursor=pointer]:
+                - /url: /careers/
+                - text: Careers
+                - generic [ref=e375]: Hiring
+              - link "Contact" [ref=e376] [cursor=pointer]:
+                - /url: /contact/
+              - link "Merch" [ref=e377] [cursor=pointer]:
+                - /url: https://merch.n8n.io
+              - link "Press" [ref=e378] [cursor=pointer]:
+                - /url: /press/
+              - link "Legal" [ref=e379] [cursor=pointer]:
+                - /url: /legal/
+              - link "Tools" [ref=e380] [cursor=pointer]:
+                - /url: /tools/
+            - generic [ref=e381]:
+              - link "Case Studies" [ref=e382] [cursor=pointer]:
+                - /url: /case-studies/
+              - link "AI agent report" [ref=e383] [cursor=pointer]:
+                - /url: /reports/ai-agent-development-tools/
+              - link "AI benchmark" [ref=e384] [cursor=pointer]:
+                - /url: /ai-benchmark/
+              - link "n8n alternatives" [ref=e385] [cursor=pointer]:
+                - /url: /vs/
+              - link "Events" [ref=e386] [cursor=pointer]:
+                - /url: https://luma.com/n8n-events
+              - link "n8n on SAP" [ref=e387] [cursor=pointer]:
+                - /url: /sap-partnership/
+            - generic [ref=e388]:
+              - link "Partners" [ref=e389] [cursor=pointer]:
+                - /url: /partners/
+              - link "Affiliate program" [ref=e390] [cursor=pointer]:
+                - /url: /affiliates/
+              - link "Hire an expert" [ref=e391] [cursor=pointer]:
+                - /url: https://experts.n8n.io
+              - link "Join user tests, get a gift" [ref=e392] [cursor=pointer]:
+                - /url: https://internal.users.n8n.cloud/form/n8n-usability-test-signup
+              - link "Brand guidelines" [ref=e393] [cursor=pointer]:
+                - /url: /brandguidelines/
+        - generic [ref=e395]:
+          - generic [ref=e396]:
+            - strong [ref=e397]: Popular integrations
+            - list [ref=e398]:
+              - listitem [ref=e399]:
+                - link "Google Sheets" [ref=e400] [cursor=pointer]:
+                  - /url: /integrations/google-sheets/
+              - listitem [ref=e401]:
+                - link "Telegram" [ref=e402] [cursor=pointer]:
+                  - /url: /integrations/telegram/
+              - listitem [ref=e403]:
+                - link "MySQL" [ref=e404] [cursor=pointer]:
+                  - /url: /integrations/mysql/
+              - listitem [ref=e405]:
+                - link "Slack" [ref=e406] [cursor=pointer]:
+                  - /url: /integrations/slack/
+              - listitem [ref=e407]:
+                - link "Discord" [ref=e408] [cursor=pointer]:
+                  - /url: /integrations/discord/
+              - listitem [ref=e409]:
+                - link "Postgres" [ref=e410] [cursor=pointer]:
+                  - /url: /integrations/postgres/
+            - generic [ref=e412] [cursor=pointer]: Show more
+          - generic [ref=e413]:
+            - strong [ref=e414]: Trending combinations
+            - list [ref=e415]:
+              - listitem [ref=e416]:
+                - link "HubSpot and Salesforce" [ref=e417] [cursor=pointer]:
+                  - /url: /integrations/hubspot/and/salesforce/
+              - listitem [ref=e418]:
+                - link "Twilio and WhatsApp" [ref=e419] [cursor=pointer]:
+                  - /url: /integrations/twilio/and/whatsapp-business-cloud/
+              - listitem [ref=e420]:
+                - link "GitHub and Jira" [ref=e421] [cursor=pointer]:
+                  - /url: /integrations/github/and/jira-software/
+              - listitem [ref=e422]:
+                - link "Asana and Slack" [ref=e423] [cursor=pointer]:
+                  - /url: /integrations/asana/and/slack/
+              - listitem [ref=e424]:
+                - link "Asana and Salesforce" [ref=e425] [cursor=pointer]:
+                  - /url: /integrations/asana/and/salesforce/
+              - listitem [ref=e426]:
+                - link "Jira and Slack" [ref=e427] [cursor=pointer]:
+                  - /url: /integrations/jira-software/and/slack/
+            - generic [ref=e429] [cursor=pointer]: Show more
+          - generic [ref=e430]:
+            - strong [ref=e431]: Top integration categories
+            - list [ref=e432]:
+              - listitem [ref=e433]:
+                - link "Communication" [ref=e434] [cursor=pointer]:
+                  - /url: /integrations/categories/communication/
+              - listitem [ref=e435]:
+                - link "Development" [ref=e436] [cursor=pointer]:
+                  - /url: /integrations/categories/development/
+              - listitem [ref=e437]:
+                - link "Cybersecurity" [ref=e438] [cursor=pointer]:
+                  - /url: /integrations/categories/cybersecurity/
+              - listitem [ref=e439]:
+                - link "AI" [ref=e440] [cursor=pointer]:
+                  - /url: /integrations/categories/ai/
+              - listitem [ref=e441]:
+                - link "Data & Storage" [ref=e442] [cursor=pointer]:
+                  - /url: /integrations/categories/data-and-storage/
+              - listitem [ref=e443]:
+                - link "Marketing" [ref=e444] [cursor=pointer]:
+                  - /url: /integrations/categories/marketing/
+            - generic [ref=e446] [cursor=pointer]: Show more
+          - generic [ref=e447]:
+            - strong [ref=e448]: Trending templates
+            - list [ref=e449]:
+              - listitem [ref=e450]:
+                - link "Creating an API endpoint" [ref=e451] [cursor=pointer]:
+                  - /url: /workflows/1750-creating-an-api-endpoint/
+              - listitem [ref=e452]:
+                - link "AI agent chat" [ref=e453] [cursor=pointer]:
+                  - /url: /workflows/1954-ai-agent-chat/
+              - listitem [ref=e454]:
+                - link "Scrape and summarize webpages with AI" [ref=e455] [cursor=pointer]:
+                  - /url: /workflows/1951-scrape-and-summarize-webpages-with-ai/
+              - listitem [ref=e456]:
+                - link "Joining different datasets" [ref=e457] [cursor=pointer]:
+                  - /url: /workflows/1747-joining-different-datasets/
+              - listitem [ref=e458]:
+                - link "Back Up Your n8n Workflows To Github" [ref=e459] [cursor=pointer]:
+                  - /url: /workflows/1534-back-up-your-n8n-workflows-to-github/
+              - listitem [ref=e460]:
+                - link "Very quick quickstart" [ref=e461] [cursor=pointer]:
+                  - /url: /workflows/1700-very-quick-quickstart/
+            - generic [ref=e463] [cursor=pointer]: Show more
+          - generic [ref=e464]:
+            - strong [ref=e465]: Top guides
+            - list [ref=e466]:
+              - listitem [ref=e467]:
+                - link "Telegram bots" [ref=e468] [cursor=pointer]:
+                  - /url: https://blog.n8n.io/telegram-bots/
+              - listitem [ref=e469]:
+                - link "Open-source chatbot" [ref=e470] [cursor=pointer]:
+                  - /url: https://blog.n8n.io/open-source-chatbot/
+              - listitem [ref=e471]:
+                - link "Open-source LLM" [ref=e472] [cursor=pointer]:
+                  - /url: https://blog.n8n.io/open-source-llm/
+              - listitem [ref=e473]:
+                - link "Open-source low-code platforms" [ref=e474] [cursor=pointer]:
+                  - /url: https://blog.n8n.io/open-source-low-code-platforms/
+              - listitem [ref=e475]:
+                - link "Zapier alternatives" [ref=e476] [cursor=pointer]:
+                  - /url: https://blog.n8n.io/free-zapier-alternatives/
+              - listitem [ref=e477]:
+                - link "Make vs Zapier" [ref=e478] [cursor=pointer]:
+                  - /url: https://blog.n8n.io/make-vs-zapier/
+            - generic [ref=e480] [cursor=pointer]: Show more
+        - generic [ref=e481]:
+          - generic [ref=e482]:
+            - link "Imprint" [ref=e483] [cursor=pointer]:
+              - /url: /imprint/
+            - link "| Security" [ref=e484] [cursor=pointer]:
+              - /url: /legal/security/
+            - link "| Privacy" [ref=e485] [cursor=pointer]:
+              - /url: /legal/privacy/
+            - link "| Report a vulnerability" [ref=e486] [cursor=pointer]:
+              - /url: /report-a-vulnerability/
+          - paragraph [ref=e489]: © 2026 n8n | All rights reserved.
