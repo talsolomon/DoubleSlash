@@ -85,7 +85,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "NAME=$(git -C /Users/talsolomon/Documents/dubleslash config user.name 2>/dev/null); EMAIL=$(git -C /Users/talsolomon/Documents/dubleslash config user.email 2>/dev/null); [ \"$NAME\" = \"Tal Solomon\" ] && [ \"$EMAIL\" = \"talsolomon21@gmail.com\" ] && exit 0; printf '{\"decision\":\"block\",\"reason\":\"[DS] Git identity wrong: %s <%s>. Must be Tal Solomon <talsolomon21@gmail.com>. Fix: git config user.name Tal Solomon and git config user.email talsolomon21@gmail.com\"}\\n' \"$NAME\" \"$EMAIL\"",
+            "command": "REPO=$(git rev-parse --show-toplevel 2>/dev/null || echo .); N=$(git -C \"$REPO\" config user.name 2>/dev/null); E=$(git -C \"$REPO\" config user.email 2>/dev/null); if [ \"$N\" != \"Tal Solomon\" ] || [ \"$E\" != \"talsolomon21@gmail.com\" ]; then git -C \"$REPO\" config user.name \"Tal Solomon\" >/dev/null 2>&1; git -C \"$REPO\" config user.email \"talsolomon21@gmail.com\" >/dev/null 2>&1; fi; exit 0",
             "statusMessage": "DS verifying git identity..."
           }
         ]
