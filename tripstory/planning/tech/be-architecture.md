@@ -14,9 +14,9 @@ The car is a moving point. This pipeline keeps the queue full for the corridor i
 2. **Discover.** Find POIs / features inside that corridor from grounded sources.
 3. **Rank & schedule.** Score each candidate (salience, visibility, distance, worth-telling), assign a trigger point (where the car should hear it), and dedup against what has already been said this session.
 4. **Ground.** Fetch verified facts + story seeds for the top upcoming candidates. Accuracy insurance: nothing is narrated that isn't sourced.
-5. **Write.** LLM composes the Hebrew segment from the grounded material, sized to the time window before the car passes, with left / right / ahead computed from heading and bearing. Story-teller tone, age-tuned. Only sourced facts.
-6. **Voice.** TTS renders Hebrew audio. Cache by text hash.
-7. **Queue & serve.** The finished segment waits in the queue with its trigger point. The client plays it when the car arrives.
+5. **Write.** LLM composes the Hebrew segment as a **beat sequence** (see narration-design.md): attention -> prompt -> pause -> reveal -> story -> hook, sized to the time window before the car passes, with left / right / ahead from heading and bearing, plus the temporal layer ("what was here 100 years ago") where sourced. Story-teller tone, age-tuned. Only sourced facts.
+6. **Voice.** TTS renders Hebrew audio for each spoken beat (pause beats carry no audio, just a duration). Cache by text hash.
+7. **Queue & serve.** The finished multi-beat segment waits in the queue with its trigger point. The client plays the beats in order, inserting the pauses, when the car arrives.
 
 Stages 2-6 run ahead of the car for the corridor. Stage 7 (playback) is therefore always instant. That is the whole trick.
 
@@ -33,7 +33,7 @@ Stages 2-6 run ahead of the car for the corridor. Stage 7 (playback) is therefor
 - **DriveSession**: id, startedAt, current {lat, lng, heading, speed, ts}, trail[], deliveredSegmentIds[].
 - **Candidate**: id, name, coords, category, source, salienceScore.
 - **KnowledgeItem**: candidateId, facts[], sources[], lang.
-- **Segment**: id, candidateId, textHe, audioUrl, relation (left/right/ahead), triggerPoint {lat,lng}, distanceM, status (queued/playing/done), createdAt.
+- **Segment**: id, candidateId, relation (left/right/ahead), triggerPoint {lat,lng}, distanceM, status (queued/playing/done), createdAt, **beats[]** = [{role in (attention|prompt|pause|reveal|story|hook), textHe, audioUrl, pauseMs}]. A segment is a sequence of beats with pauses, not one audio blob (see narration-design.md).
 - **(deferred) FamilyMemory**: familyId, heardSegments[], learned[], preferences. Not built in MVP, but the schema is anticipated so it slots in.
 
 ## The device/backend boundary (matters for BE even though FE is later)
