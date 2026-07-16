@@ -32,8 +32,16 @@ Engine #3 is the moat. Engines #1 and #2 are copyable. The **memory relationship
 3. **Frame: standalone product first, exit as outcome.** Nobody buys a GPS trigger. Acquirers would buy the content engine + memory graph + a loyal audience. Optimize retention and content quality; treat a Google/Waze exit as a side effect, never the roadmap.
 
 ## Current state
-- **Phase:** 0 — Sharpen the concept. No build. Capturing the plan.
-- **Session 2026-07-16:** Project scaffolded as an isolated folder under the DubleSlash workspace. Concept, architecture, competitive read, phased plan, and the three forking decisions captured. Owner recommendations logged (Israel / 8-12 / standalone-first) pending explicit lock.
+- **Phase:** 0 -> 1 boundary. MVP scope locked. Now planning the backend (owner: "plan the BE first, don't run to the FE").
+- **Session 2026-07-16 (3):** Backend architecture drafted (`planning/tech/be-architecture.md`). Central idea locked: the backend runs AHEAD of the car via a 7-stage look-ahead pipeline that pre-builds audio segments into a queue with trigger points. Components, data model, device/backend boundary, hard problems, and 7 open BE decisions captured. FE explicitly parked.
+- **Session 2026-07-16 (2):** MVP v0.1 scope locked (`planning/product/mvp-spec.md`). Owner decided: no more research, build an MVP. Core loop = one-tap, automatic, constant, stable, Hebrew, story-teller narration of what kids see out the window, parent operates. Key correction: Waze/Google Maps do NOT expose "what's out the window"; MVP uses phone GPS + POI/knowledge and computes left/right/ahead ourselves. Memory/trivia/payments deferred.
+- **Session 2026-07-16 (1):** Project scaffolded as an isolated folder under the DubleSlash workspace. Concept, architecture, competitive read, phased plan, and the three forking decisions captured. Owner recommendations logged (Israel / 8-12 / standalone-first) pending explicit lock.
+
+### Locked (2026-07-16)
+- Language: Hebrew (MVP). Operator: parent, one-tap. Audience: kids. Market ground: Israel.
+- No more upfront research before MVP.
+- Location source: phone GPS + our own POI/knowledge lookup, NOT Waze/Maps.
+- Plan the backend before the frontend.
 
 ## What's open
 1. **OD-01:** First market — Israel vs US vs global. (Recommended: Israel.)
