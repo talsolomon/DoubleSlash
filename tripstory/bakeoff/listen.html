@@ -1,0 +1,367 @@
+<title>TripStory — Latrun voice bench</title>
+<style>
+  :root {
+    --road:    #f4efe6;
+    --panel:   #fbf8f2;
+    --edge:    #e4dccc;
+    --ink:     #241f19;
+    --ink-soft:#5f574a;
+    --amber:   #c9761a;
+    --amber-2: #e0912f;
+    --sky:     #3f7089;
+    --good:    #4b7a3f;
+    --shadow:  0 1px 2px rgba(40,30,15,.06), 0 8px 24px rgba(40,30,15,.07);
+    --radius:  14px;
+    --maxw:    1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --road:    #191c21;
+      --panel:   #21252c;
+      --edge:    #333a44;
+      --ink:     #efe9df;
+      --ink-soft:#a49b8c;
+      --amber:   #e8a33d;
+      --amber-2: #f2b45a;
+      --sky:     #7aa9c2;
+      --good:    #7bb56a;
+      --shadow:  0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --road:#f4efe6; --panel:#fbf8f2; --edge:#e4dccc; --ink:#241f19; --ink-soft:#5f574a;
+    --amber:#c9761a; --amber-2:#e0912f; --sky:#3f7089; --good:#4b7a3f;
+    --shadow:0 1px 2px rgba(40,30,15,.06), 0 8px 24px rgba(40,30,15,.07);
+  }
+  :root[data-theme="dark"] {
+    --road:#191c21; --panel:#21252c; --edge:#333a44; --ink:#efe9df; --ink-soft:#a49b8c;
+    --amber:#e8a33d; --amber-2:#f2b45a; --sky:#7aa9c2; --good:#7bb56a;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--road);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: clamp(20px, 4vw, 44px); }
+
+  /* Header */
+  header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 26px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--amber); font-weight: 700;
+  }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(26px, 4.5vw, 40px); line-height: 1.1; margin: 0;
+    letter-spacing: -.01em; text-wrap: balance; font-weight: 700;
+  }
+  .sub { color: var(--ink-soft); max-width: 60ch; font-size: 15px; }
+
+  /* Control panel */
+  .panel {
+    background: var(--panel); border: 1px solid var(--edge); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 18px; margin-bottom: 22px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px 22px;
+    align-items: end;
+  }
+  .field { display: flex; flex-direction: column; gap: 7px; }
+  .field label {
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 700;
+  }
+  select, input[type=range] { width: 100%; }
+  select {
+    padding: 9px 10px; border-radius: 9px; border: 1px solid var(--edge);
+    background: var(--road); color: var(--ink); font-size: 14px;
+  }
+  .rangeval { font-variant-numeric: tabular-nums; color: var(--amber); font-weight: 700; }
+  input[type=range] { accent-color: var(--amber); }
+
+  .banner {
+    grid-column: 1 / -1; display: none; gap: 10px; align-items: flex-start;
+    background: color-mix(in srgb, var(--amber) 12%, var(--panel));
+    border: 1px solid color-mix(in srgb, var(--amber) 40%, var(--edge));
+    border-radius: 10px; padding: 12px 14px; font-size: 13.5px; color: var(--ink);
+  }
+  .banner.show { display: flex; }
+  .banner b { color: var(--amber); }
+
+  .toggle-row { grid-column: 1 / -1; display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .chk { display: inline-flex; gap: 8px; align-items: center; font-size: 13.5px; color: var(--ink-soft); cursor: pointer; }
+  .chk input { accent-color: var(--amber); width: 16px; height: 16px; }
+
+  /* Variant cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--edge); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 18px; display: flex; flex-direction: column; gap: 14px;
+    transition: border-color .2s;
+  }
+  .card.active { border-color: var(--amber); }
+  .card h2 { margin: 0; font-size: 18px; letter-spacing: -.01em; }
+  .card .tone { color: var(--ink-soft); font-size: 13px; margin-top: -8px; }
+
+  .play {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 11px 16px; border-radius: 10px; border: none; cursor: pointer;
+    background: var(--amber); color: #fff; font-size: 14.5px; font-weight: 700;
+    letter-spacing: .01em; transition: background .15s, transform .05s; align-self: flex-start;
+  }
+  .play:hover { background: var(--amber-2); }
+  .play:active { transform: translateY(1px); }
+  .play.playing { background: var(--sky); }
+  .play svg { width: 16px; height: 16px; }
+
+  /* Beats */
+  .beats { display: flex; flex-direction: column; gap: 8px; }
+  .beat {
+    display: grid; grid-template-columns: 78px 1fr; gap: 12px; align-items: start;
+    padding: 9px 10px; border-radius: 10px; border: 1px solid transparent;
+    transition: background .18s, border-color .18s;
+  }
+  .beat .role {
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+    color: var(--ink-soft); padding-top: 3px;
+  }
+  .beat .he {
+    direction: rtl; text-align: right; font-size: 16.5px; line-height: 1.6; color: var(--ink);
+  }
+  .beat .gloss { direction: ltr; text-align: left; font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; display: none; }
+  .show-gloss .beat .gloss { display: block; }
+  .beat.current { background: color-mix(in srgb, var(--amber) 12%, var(--panel)); border-color: color-mix(in srgb, var(--amber) 35%, var(--edge)); }
+  .beat.pause .he { color: var(--sky); font-weight: 700; }
+  .beat.pause.current { background: color-mix(in srgb, var(--sky) 14%, var(--panel)); border-color: color-mix(in srgb, var(--sky) 40%, var(--edge)); }
+  .lookout { display: inline-flex; align-items: center; gap: 8px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--sky); }
+  @media (prefers-reduced-motion: no-preference) {
+    .beat.pause.current .dot { animation: pulse 1s ease-in-out infinite; }
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(1.5); } }
+
+  footer { margin-top: 30px; color: var(--ink-soft); font-size: 13px; max-width: 70ch; }
+  footer code { background: var(--panel); border: 1px solid var(--edge); padding: 1px 6px; border-radius: 5px; font-size: 12px; }
+  a { color: var(--amber); }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">TripStory · Hebrew voice + story bake-off</div>
+    <h1>Latrun, out the right window</h1>
+    <p class="sub">The first time TripStory makes a sound. Three story tones for the same landmark on Route 1, spoken by your device's Hebrew voice. Pick the tone and the pace that feel like a friend in the car. Premium voices come next, this is the fast, free first listen.</p>
+  </header>
+
+  <div class="panel">
+    <div class="field">
+      <label for="voice">Hebrew voice</label>
+      <select id="voice"><option>Loading voices…</option></select>
+    </div>
+    <div class="field">
+      <label for="rate">Pace <span class="rangeval" id="rateVal">0.95</span></label>
+      <input type="range" id="rate" min="0.6" max="1.3" step="0.05" value="0.95">
+    </div>
+    <div class="field">
+      <label for="pitch">Pitch <span class="rangeval" id="pitchVal">1.05</span></label>
+      <input type="range" id="pitch" min="0.6" max="1.5" step="0.05" value="1.05">
+    </div>
+    <div class="toggle-row">
+      <label class="chk"><input type="checkbox" id="glossToggle"> Show English</label>
+      <label class="chk"><input type="checkbox" id="pauseToggle" checked> Keep the "look out the window" pauses</label>
+    </div>
+    <div class="banner" id="banner"></div>
+  </div>
+
+  <div class="cards" id="cards"></div>
+
+  <footer>
+    <p><strong>What you're hearing:</strong> your device's built-in Hebrew text-to-speech. It's free and instant but robotic, this test is for judging <em>tone, rhythm, and the pause</em>, not final voice quality. If the dropdown says no Hebrew voice was found, the story will sound wrong: on iPhone add one under Settings → Accessibility → Spoken Content → Voices → Hebrew; desktop Chrome usually has "Google עברית".</p>
+    <p>Next step locks the premium voice: run <code>bakeoff/tts-bakeoff.mjs</code> with API keys to hear ElevenLabs, Azure, and Google speak these same scripts.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var VARIANTS = [
+    {
+      id: "A", name: "The Playful Explorer", tone: "High energy, hunt-and-spot, a little silly",
+      beats: [
+        { role: "look right", he: "היי חברים! עוד רגע קורה כאן משהו מגניב. תסתכלו טוב טוב ימינה, מהחלון של צד ימין.", gloss: "Hey friends! Something cool is about to happen. Look right, out the right window." },
+        { role: "hunt", he: "אתם רואים על הגבעה בניין גדול מאבן, שנראה כמו טירה עם מגדל? נסו למצוא אותו. מי מוצא ראשון?", gloss: "See the big stone building on the hill, like a castle with a tower? Find it, who's first?" },
+        { role: "pause", he: "מחפשים... מי רואה?", gloss: "(pause ~3s, kids look and call out)", ms: 3000 },
+        { role: "reveal", he: "מצאתם? כל הכבוד! זה המבצר של לטרון.", gloss: "Found it? Well done! That's the Latrun fortress." },
+        { role: "story", he: "לפני הרבה מאוד שנים בנו כאן מבצר חזק כדי לשמור על הדרך לירושלים. והנה הפתעה: ממש לידו יש היום מוזיאון עם טנקים אמיתיים! תסתכלו, אולי תצליחו לספור כמה טנקים אתם רואים.", gloss: "Long ago they built a strong fort here to guard the road to Jerusalem. Surprise: right next to it there's a museum with real tanks! Can you count them?" },
+        { role: "hook", he: "עוד מעט, קצת אחרי המבצר, אני אראה לכם עמק שבו קרה סיפור מדהים על השמש. תישארו איתי!", gloss: "Soon, just past the fort, I'll show you a valley with an amazing story about the sun. Stay with me!" }
+      ]
+    },
+    {
+      id: "B", name: "The Warm Storyteller", tone: "Gentle, cozy, narrative",
+      beats: [
+        { role: "look right", he: "אה, אני מכיר את המקום הזה. חברים, תעיפו מבט עדין ימינה, אל מעבר לחלון.", gloss: "Ah, I know this place. Friends, take a gentle look right, past the window." },
+        { role: "hunt", he: "שם, על הגבעה השקטה, מסתתר בניין אבן גדול. אתם רואים אותו?", gloss: "There, on the quiet hill, a big stone building hides. Do you see it?" },
+        { role: "pause", he: "בשקט... מסתכלים.", gloss: "(pause ~3s)", ms: 3000 },
+        { role: "reveal", he: "יפה מאוד. זה המבצר של לטרון, והוא עומד כאן שנים רבות מאוד.", gloss: "Lovely. That's the Latrun fortress, standing here for many years." },
+        { role: "story", he: "פעם, מזמן מזמן, אנשים בנו את המבצר הזה כדי לשמור על כל מי שנסע בדרך הזאת לירושלים, בדיוק כמונו עכשיו. ובימים שבהם סבא וסבתא היו ילדים, היו כאן קרבות גדולים על הדרך הזאת. היום, ממש ליד, נחים טנקים ישנים במוזיאון, שקטים ורגועים.", gloss: "Once, long ago, people built this fort to protect everyone traveling to Jerusalem, like us. When grandma and grandpa were children there were big battles here. Today, nearby, old tanks rest in a museum, quiet and calm." },
+        { role: "hook", he: "תכף נמשיך, ואני אספר לכם על עמק מיוחד שנמצא ממש קרוב. יהיה יפה.", gloss: "We'll continue soon, and I'll tell you about a special valley close by. It'll be lovely." }
+      ]
+    },
+    {
+      id: "C", name: "The Adventure / Mystery", tone: "Suspense, secrets, treasure",
+      beats: [
+        { role: "look right", he: "רגע... שקט לרגע. יש כאן סוד, ורק מי שמסתכל ימינה עכשיו יגלה אותו.", gloss: "Wait... quiet a second. There's a secret here, only whoever looks right now will find it." },
+        { role: "hunt", he: "על הגבעה, מחכה בניין אבן ענק ומסתורי. מי מכם מוצא אותו ראשון?", gloss: "On the hill, a huge mysterious stone building waits. Who finds it first?" },
+        { role: "pause", he: "מי מגלה את הסוד?", gloss: "(pause ~3s)", ms: 3000 },
+        { role: "reveal", he: "מצאתם אותו! זה המבצר של לטרון, שומר הדרך.", gloss: "You found it! The Latrun fortress, guardian of the road." },
+        { role: "story", he: "המבצר הזה שמר במשך שנים על הדרך לירושלים, וראה המון דברים. אבירים עברו כאן פעם, ואחר כך היו כאן קרבות אמיתיים. וכמו אוצר חבוי, ממש לצידו, מחכים לכם טנקים אמיתיים במוזיאון. כמה מהם אתם מספיקים לראות?", gloss: "This fort guarded the road for years and saw so much. Knights passed here once, later there were real battles. And like hidden treasure, beside it, real tanks wait in a museum. How many can you spot?" },
+        { role: "hook", he: "אבל הסוד הכי גדול עוד לפנינו: עמק שבו, מספרים, השמש עצרה מלכת. עוד רגע נגיע אליו.", gloss: "But the biggest secret is still ahead: a valley where, they say, the sun stopped. We'll reach it soon." }
+      ]
+    }
+  ];
+
+  var synth = window.speechSynthesis;
+  var voices = [];
+  var hebVoices = [];
+  var state = { playing: null, timer: null, idx: -1 };
+
+  var cardsEl = document.getElementById("cards");
+  var voiceSel = document.getElementById("voice");
+  var banner = document.getElementById("banner");
+  var rate = document.getElementById("rate"), pitch = document.getElementById("pitch");
+  var rateVal = document.getElementById("rateVal"), pitchVal = document.getElementById("pitchVal");
+  var glossToggle = document.getElementById("glossToggle");
+  var pauseToggle = document.getElementById("pauseToggle");
+
+  function isHebrew(v) {
+    return /^he\b/i.test(v.lang) || /-IL$/i.test(v.lang) || /hebrew|עברית/i.test(v.name);
+  }
+
+  function loadVoices() {
+    voices = synth.getVoices() || [];
+    hebVoices = voices.filter(isHebrew);
+    voiceSel.innerHTML = "";
+    if (hebVoices.length) {
+      hebVoices.forEach(function (v, i) {
+        var o = document.createElement("option");
+        o.value = String(i); o.textContent = v.name + " (" + v.lang + ")";
+        voiceSel.appendChild(o);
+      });
+      banner.classList.remove("show");
+    } else {
+      var o = document.createElement("option");
+      o.value = "-1"; o.textContent = voices.length ? "No Hebrew voice — using default" : "No voices available";
+      voiceSel.appendChild(o);
+      banner.innerHTML = "<span>⚠️</span><span><b>No Hebrew voice found on this device.</b> The scripts will sound wrong. On iPhone: Settings → Accessibility → Spoken Content → Voices → add <b>Hebrew</b>. Desktop Chrome usually ships <b>Google עברית</b>. You can still preview the rhythm and pauses meanwhile.</span>";
+      banner.classList.add("show");
+    }
+  }
+
+  function chosenVoice() {
+    if (!hebVoices.length) return null;
+    var i = parseInt(voiceSel.value, 10);
+    return hebVoices[i] || hebVoices[0];
+  }
+
+  function clearHighlights() {
+    var all = document.querySelectorAll(".beat.current");
+    for (var i = 0; i < all.length; i++) all[i].classList.remove("current");
+  }
+
+  function stopAll() {
+    if (state.timer) { clearTimeout(state.timer); state.timer = null; }
+    synth.cancel();
+    clearHighlights();
+    document.querySelectorAll(".play.playing").forEach(function (b) {
+      b.classList.remove("playing"); b.querySelector(".label").textContent = "Play";
+    });
+    document.querySelectorAll(".card.active").forEach(function (c) { c.classList.remove("active"); });
+    state.playing = null; state.idx = -1;
+  }
+
+  function playVariant(vi) {
+    var wasPlaying = state.playing === vi;
+    stopAll();
+    if (wasPlaying) return;
+    state.playing = vi; state.idx = -1;
+    var card = document.getElementById("card-" + vi);
+    card.classList.add("active");
+    var btn = card.querySelector(".play");
+    btn.classList.add("playing"); btn.querySelector(".label").textContent = "Stop";
+    step(vi);
+  }
+
+  function step(vi) {
+    state.idx++;
+    var beats = VARIANTS[vi].beats;
+    clearHighlights();
+    if (state.idx >= beats.length) { stopAll(); return; }
+    var beat = beats[state.idx];
+    var beatEl = document.getElementById("beat-" + vi + "-" + state.idx);
+    if (beatEl) beatEl.classList.add("current");
+
+    if (beat.role === "pause") {
+      var ms = pauseToggle.checked ? (beat.ms || 3000) : 400;
+      state.timer = setTimeout(function () { step(vi); }, ms);
+      return;
+    }
+    var u = new SpeechSynthesisUtterance(beat.he);
+    var v = chosenVoice();
+    if (v) { u.voice = v; u.lang = v.lang; } else { u.lang = "he-IL"; }
+    u.rate = parseFloat(rate.value);
+    u.pitch = parseFloat(pitch.value);
+    u.onend = function () { if (state.playing === vi) step(vi); };
+    u.onerror = function () { if (state.playing === vi) step(vi); };
+    synth.speak(u);
+  }
+
+  function render() {
+    VARIANTS.forEach(function (V, vi) {
+      var card = document.createElement("div");
+      card.className = "card"; card.id = "card-" + vi;
+      var beatsHtml = V.beats.map(function (b, bi) {
+        var isPause = b.role === "pause";
+        var heHtml = isPause
+          ? '<div class="he lookout"><span class="dot"></span>' + b.he + '</div>'
+          : '<div class="he">' + b.he + '</div>';
+        return '<div class="beat ' + (isPause ? "pause" : "") + '" id="beat-' + vi + '-' + bi + '">' +
+                 '<div class="role">' + b.role + '</div>' +
+                 '<div>' + heHtml + '<div class="gloss">' + b.gloss + '</div></div>' +
+               '</div>';
+      }).join("");
+      card.innerHTML =
+        '<div>' +
+          '<h2>' + V.id + ' · ' + V.name + '</h2>' +
+          '<div class="tone">' + V.tone + '</div>' +
+        '</div>' +
+        '<button class="play" data-vi="' + vi + '">' +
+          '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
+          '<span class="label">Play</span>' +
+        '</button>' +
+        '<div class="beats">' + beatsHtml + '</div>';
+      cardsEl.appendChild(card);
+    });
+    cardsEl.addEventListener("click", function (e) {
+      var btn = e.target.closest(".play");
+      if (!btn) return;
+      playVariant(parseInt(btn.getAttribute("data-vi"), 10));
+    });
+  }
+
+  rate.addEventListener("input", function () { rateVal.textContent = parseFloat(rate.value).toFixed(2); });
+  pitch.addEventListener("input", function () { pitchVal.textContent = parseFloat(pitch.value).toFixed(2); });
+  glossToggle.addEventListener("change", function () {
+    document.querySelector(".wrap").classList.toggle("show-gloss", glossToggle.checked);
+  });
+  window.addEventListener("beforeunload", function () { synth.cancel(); });
+
+  render();
+  loadVoices();
+  if (typeof synth.onvoiceschanged !== "undefined") synth.onvoiceschanged = loadVoices;
+  setTimeout(loadVoices, 400);
+})();
+</script>
